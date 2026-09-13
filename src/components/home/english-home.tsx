@@ -11,6 +11,7 @@ import {
   ShoppingCart,
   Workflow,
 } from "lucide-react";
+import Image from "next/image";
 
 import { Link } from "@/i18n/navigation";
 import { Container, MetaLabel } from "@/components/site/primitives";
@@ -160,31 +161,53 @@ const commonQuestions = [
 export function EnglishHome() {
   return (
     <>
-      <section className="grain relative overflow-hidden border-b border-border py-24 sm:py-36">
+      <section className="grain relative overflow-hidden border-b border-border py-20 sm:py-28">
         <div className="grid-field absolute inset-0 opacity-40 [mask-image:radial-gradient(75%_80%_at_100%_0%,black,transparent)]" />
         <Container className="relative">
-          <MetaLabel index={1}>RYCODE / SOFTWARE ENGINEERING</MetaLabel>
-          <h1 className="display-1 mt-14 max-w-[13ch]">
-            From idea to execution. From problem to <span className="text-brand">solution.</span>
-          </h1>
-          <div className="mt-14 grid gap-8 border-t border-hairline pt-8 lg:grid-cols-2 lg:items-end">
-            <p className="max-w-xl text-lg leading-8 text-muted-foreground">
-              RYCODE designs, builds and improves web platforms, ecommerce systems, custom software
-              and integrations for organisations that need a dependable technical partner.
-            </p>
-            <div className="flex flex-wrap gap-3 lg:justify-end">
-              <Link
-                href="/start-project"
-                className="inline-flex h-12 items-center gap-3 rounded-[6px] bg-brand px-7 text-sm font-bold text-brand-foreground"
-              >
-                Start a project <ArrowRight className="size-4" aria-hidden />
-              </Link>
-              <Link
-                href="/services"
-                className="inline-flex h-12 items-center rounded-[6px] border border-foreground/25 px-7 text-sm font-bold"
-              >
-                Explore services
-              </Link>
+          <div className="grid gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-end lg:gap-20">
+            <div>
+              <MetaLabel index={1}>RYCODE / SOFTWARE ENGINEERING</MetaLabel>
+              <h1 className="display-1 mt-12 max-w-[13ch]">
+                From idea to execution. From problem to{" "}
+                <span className="text-brand">solution.</span>
+              </h1>
+              <p className="mt-10 max-w-xl text-lg leading-8 text-muted-foreground">
+                RYCODE designs, builds and improves web platforms, ecommerce systems, custom
+                software and integrations for organisations that need a dependable technical
+                partner.
+              </p>
+              <div className="mt-9 flex flex-wrap gap-3">
+                <Link
+                  href="/start-project"
+                  className="inline-flex h-12 items-center gap-3 rounded-[6px] bg-brand px-7 text-sm font-bold text-brand-foreground"
+                >
+                  Start a project <ArrowRight className="size-4" aria-hidden />
+                </Link>
+                <Link
+                  href="/services"
+                  className="inline-flex h-12 items-center rounded-[6px] border border-foreground/25 px-7 text-sm font-bold"
+                >
+                  Explore services
+                </Link>
+              </div>
+            </div>
+            <div className="visual-card relative overflow-hidden bg-ink p-3 text-white">
+              <div className="relative aspect-[4/3] overflow-hidden rounded-[0.9rem]">
+                <Image
+                  src="/images/rycode-hero-structure.png"
+                  alt="Abstract connected product architecture"
+                  fill
+                  sizes="(min-width: 1024px) 42vw, 100vw"
+                  className="object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-transparent to-transparent" />
+                <div className="absolute inset-x-5 bottom-5">
+                  <MetaLabel className="text-brand">BUILD / RESCUE / GROW</MetaLabel>
+                  <p className="mt-2 max-w-xs text-sm leading-6 text-white/70">
+                    A visual system for the decisions behind the product.
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </Container>

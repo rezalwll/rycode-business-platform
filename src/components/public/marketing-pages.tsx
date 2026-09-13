@@ -1,4 +1,5 @@
 import { CheckCircle2, ShieldCheck } from "lucide-react";
+import Image from "next/image";
 
 import { Container } from "@/components/site/primitives";
 import type { LeadKind } from "@/features/leads/schema";
@@ -409,29 +410,51 @@ export function PublicLeadPage({
         <Container>
           <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_20rem] lg:items-start">
             <LeadForm locale={locale} kind={kind} sourcePath={sourcePath} />
-            <aside className="border border-hairline bg-surface p-6 lg:sticky lg:top-28">
-              <ShieldCheck className="size-6 text-brand" aria-hidden />
-              <h2 className="mt-5 text-lg font-bold">
-                {locale === "fa" ? "شفافیت و امنیت" : "Clarity and security"}
-              </h2>
-              <p className="mt-3 text-sm leading-7 text-muted-foreground">{t(page.note, locale)}</p>
-              {kind === "contact" && (
-                <div className="mt-6 border-t border-hairline pt-6">
-                  <p className="text-sm leading-7 text-muted-foreground">
-                    {locale === "fa"
-                      ? "برای درخواست تخصصی مسیر مناسب را انتخاب کنید:"
-                      : "For a scoped request, choose the relevant path:"}
-                  </p>
-                  <div className="mt-4 flex flex-col items-start gap-3">
-                    <ActionLink locale={locale} href="/start-project" secondary>
-                      {locale === "fa" ? "شروع پروژه" : "Start a project"}
-                    </ActionLink>
-                    <ActionLink locale={locale} href="/technical-review" secondary>
-                      {locale === "fa" ? "بررسی فنی" : "Technical review"}
-                    </ActionLink>
+            <aside className="overflow-hidden border border-hairline bg-surface lg:sticky lg:top-28">
+              <div className="relative aspect-[4/3] overflow-hidden bg-ink">
+                <Image
+                  src={
+                    kind === "technical_review"
+                      ? "/images/rycode-project-rescue.png"
+                      : "/images/rycode-product-system.png"
+                  }
+                  alt=""
+                  fill
+                  sizes="(min-width: 1024px) 20rem, 100vw"
+                  className="object-cover opacity-80"
+                  aria-hidden
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-ink via-transparent to-transparent" />
+                <span className="meta-label absolute inset-x-5 bottom-5 text-white/75">
+                  RYCODE / NEXT STEP
+                </span>
+              </div>
+              <div className="p-6">
+                <ShieldCheck className="size-6 text-brand" aria-hidden />
+                <h2 className="mt-5 text-lg font-bold">
+                  {locale === "fa" ? "شفافیت و امنیت" : "Clarity and security"}
+                </h2>
+                <p className="mt-3 text-sm leading-7 text-muted-foreground">
+                  {t(page.note, locale)}
+                </p>
+                {kind === "contact" && (
+                  <div className="mt-6 border-t border-hairline pt-6">
+                    <p className="text-sm leading-7 text-muted-foreground">
+                      {locale === "fa"
+                        ? "برای درخواست تخصصی مسیر مناسب را انتخاب کنید:"
+                        : "For a scoped request, choose the relevant path:"}
+                    </p>
+                    <div className="mt-4 flex flex-col items-start gap-3">
+                      <ActionLink locale={locale} href="/start-project" secondary>
+                        {locale === "fa" ? "شروع پروژه" : "Start a project"}
+                      </ActionLink>
+                      <ActionLink locale={locale} href="/technical-review" secondary>
+                        {locale === "fa" ? "بررسی فنی" : "Technical review"}
+                      </ActionLink>
+                    </div>
                   </div>
-                </div>
-              )}
+                )}
+              </div>
             </aside>
           </div>
         </Container>

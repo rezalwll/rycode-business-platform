@@ -114,7 +114,7 @@ async function withDatabase<T>(
   try {
     return await operation(db);
   } catch (error) {
-    if (process.env.NODE_ENV !== "production") {
+    if (process.env.NODE_ENV === "development") {
       console.warn(
         "RYCODE local preview is using static content because the database is unavailable.",
         error,

@@ -30,6 +30,7 @@ export function PageHero({
         src="/images/rycode-connected-world.png"
         alt=""
         fill
+        sizes="100vw"
         className="object-cover object-center opacity-25"
         aria-hidden
       />
@@ -47,6 +48,7 @@ export function PageHero({
                 src="/images/rycode-product-system.png"
                 alt="نمایی انتزاعی از سیستم‌های دیجیتال و داده‌های متصل"
                 fill
+                sizes="(min-width: 1024px) 40vw, 100vw"
                 className="object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-transparent to-transparent" />
@@ -106,6 +108,7 @@ export function FinalBand({ locale }: { locale: Locale }) {
         src="/images/rycode-connected-world.png"
         alt=""
         fill
+        sizes="100vw"
         className="object-cover opacity-20"
         aria-hidden
       />
