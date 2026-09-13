@@ -48,12 +48,12 @@ export function SiteFooter({ locale }: { locale: Locale }) {
 
   return (
     <footer className="border-t border-white/12 bg-ink text-ink-foreground">
-      <Container className="pt-16 pb-10">
+      <Container className="pt-14 pb-10">
         <div
           dir="ltr"
           className="flex items-end justify-between gap-6 border-b border-white/12 pb-10"
         >
-          <span className="text-[clamp(3rem,13vw,11rem)] leading-[0.85] font-extrabold tracking-[-0.04em]">
+          <span className="text-[clamp(3rem,10vw,8rem)] leading-[0.85] font-extrabold tracking-[-0.04em]">
             <span className="text-ink-foreground">RY</span>
             <span className="text-brand">CODE</span>
           </span>

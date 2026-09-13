@@ -109,9 +109,20 @@ async function withDatabase<T>(
     }
     return fallback;
   }
-  // A configured database is authoritative. Errors must reach the error boundary;
-  // falling back here could republish content that an editor has withdrawn.
-  return operation(db);
+  // Keep the local preview usable when the optional development database is offline.
+  // Production still fails loudly so CMS outages cannot silently publish stale content.
+  try {
+    return await operation(db);
+  } catch (error) {
+    if (process.env.NODE_ENV !== "production") {
+      console.warn(
+        "RYCODE local preview is using static content because the database is unavailable.",
+        error,
+      );
+      return fallback;
+    }
+    throw error;
+  }
 }
 
 function isRecord(value: unknown): value is Record<string, unknown> {

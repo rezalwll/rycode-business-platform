@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { Link } from "@/i18n/navigation";
 import {
   ArrowSquare,
@@ -29,13 +30,31 @@ export function CapabilityStrip() {
   ];
   return (
     <div className="border-b border-border bg-surface">
-      <Container className="flex flex-wrap items-baseline gap-x-12 gap-y-6 py-10">
-        {items.map((item) => (
-          <span key={item.en} className="flex flex-col gap-1.5">
-            <span className="text-base font-bold">{item.fa}</span>
-            <MetaLabel className="text-muted-foreground">{item.en}</MetaLabel>
-          </span>
-        ))}
+      <Container className="grid gap-8 py-8 lg:grid-cols-[0.75fr_1.5fr_0.75fr] lg:items-center">
+        <div>
+          <MetaLabel className="text-muted-foreground">WHAT WE SHIP</MetaLabel>
+          <p className="mt-2 text-sm text-muted-foreground">از یک صفحه‌ی ساده تا یک سیستم کامل.</p>
+        </div>
+        <div className="flex flex-wrap gap-2">
+          {items.map((item, i) => (
+            <span
+              key={item.en}
+              className="group inline-flex items-center gap-2 rounded-full border border-border bg-background px-3 py-2 transition-colors hover:border-brand hover:bg-brand-soft"
+            >
+              <span className="grid size-5 place-items-center rounded-full bg-foreground text-[0.6rem] font-bold text-background transition-colors group-hover:bg-brand group-hover:text-brand-foreground">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <span className="text-sm font-bold">{item.fa}</span>
+            </span>
+          ))}
+        </div>
+        <div className="hidden justify-self-end text-end lg:block">
+          <MetaLabel className="text-brand">SYSTEM STATUS</MetaLabel>
+          <div className="mt-2 flex items-center gap-2 text-xs text-muted-foreground">
+            <span className="size-2 rounded-full bg-emerald-500" />
+            آماده‌ی شروع یک پروژه
+          </div>
+        </div>
       </Container>
     </div>
   );
@@ -46,21 +65,21 @@ export function CapabilityStrip() {
 const paths = [
   {
     key: "build",
-    title: "می‌خواهم چیزی بسازم",
-    body: "سایت، فروشگاه یا نرم‌افزاری در ذهن دارید و می‌خواهید از صفر ساخته شود. با شناخت مسئله شروع می‌کنیم و مسیر اجرا را روشن می‌کنیم.",
-    cta: { label: "شروع پروژه", to: "/start-project" as const },
+    title: "می‌خوام یه چیز درست‌وحسابی بسازم",
+    body: "ایده‌تان سایت، فروشگاه یا نرم‌افزار است؟ کمک می‌کنیم از دل ایده به یک محصول قابل استفاده برسید.",
+    cta: { label: "بریم سراغش", to: "/start-project" as const },
   },
   {
     key: "fix",
-    title: "چیزی دارم که درست کار نمی‌کند",
-    body: "سایت یا نرم‌افزار فعلی خطا دارد، کند است یا نیمه‌کاره رها شده. وضعیت فعلی را بررسی می‌کنیم و مسیر ادامه را می‌گوییم.",
-    cta: { label: "درخواست بررسی فنی", to: "/technical-review" as const },
+    title: "پروژه‌مون یه جایی گیر کرده",
+    body: "سایت کند شده، خطا می‌دهد یا برنامه‌نویس قبلی رفته؟ اول می‌بینیم چه چیزی قابل نجات است، بعد تصمیم می‌گیریم.",
+    cta: { label: "بررسیش کنیم", to: "/technical-review" as const },
   },
   {
     key: "grow",
-    title: "می‌خواهم بیشتر دیده شوم",
-    body: "محصول یا خدمات دارید ولی ترافیک و فروش ارگانیک کافی نیست. رشد را از سئوی تکنیکال و ساختار محتوا شروع می‌کنیم.",
-    cta: { label: "مشاهده خدمات سئو", to: "/services" as const },
+    title: "می‌خوام مشتری بیشتری پیدامون کنه",
+    body: "محصول خوبی دارید اما در جست‌وجو دیده نمی‌شوید؟ از سئوی فنی و محتوایی شروع می‌کنیم و قدم‌به‌قدم جلو می‌رویم.",
+    cta: { label: "ببینیم چه می‌شود کرد", to: "/services" as const },
   },
 ];
 
@@ -70,12 +89,17 @@ export function PathSelector() {
   return (
     <Section className="grain">
       <Container>
-        <Eyebrow>مسیر شما</Eyebrow>
-        <SectionTitle>امروز برای چه چیزی به رای‌کد نیاز دارید؟</SectionTitle>
-        <Lead>
-          لازم نیست اسم راه‌حل فنی را بدانید. از چیزی که می‌خواهید بسازید یا مشکلی که دارید شروع
-          کنید.
-        </Lead>
+        <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-end lg:gap-20">
+          <div>
+            <Eyebrow>مسیر شما</Eyebrow>
+            <SectionTitle>از کجا شروع کنیم؟</SectionTitle>
+            <Lead>
+              لازم نیست اسم فنی مسئله‌تان را بدانید؛ فقط بگویید چه می‌خواهید بسازید یا کجای کار گیر
+              کرده‌اید.
+            </Lead>
+          </div>
+          <PathVisual />
+        </div>
       </Container>
 
       <div className="mt-16 border-t border-border">
@@ -112,33 +136,58 @@ export function PathSelector() {
   );
 }
 
+function PathVisual() {
+  return (
+    <div className="relative overflow-hidden rounded-[1.5rem] border border-border bg-ink p-3 text-ink-foreground shadow-xl">
+      <div className="relative aspect-[16/7] overflow-hidden rounded-[1rem]">
+        <Image
+          src="/images/rycode-project-rescue.png"
+          alt="ساختار بصری مسیر حل مسئله و ساخت محصول"
+          fill
+          className="object-cover object-center opacity-75"
+        />
+        <div className="absolute inset-0 bg-gradient-to-br from-ink/80 via-transparent to-brand/20" />
+        <div className="absolute inset-x-4 bottom-4 flex items-end justify-between gap-4">
+          <div>
+            <MetaLabel className="text-brand">ONE CLEAR PATH</MetaLabel>
+            <p className="mt-1 text-sm text-white/80">هر پروژه، مسیر خودش را دارد.</p>
+          </div>
+          <span className="grid size-10 place-items-center rounded-full bg-brand text-brand-foreground">
+            ↗
+          </span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 /* 4. SERVICES INDEX ----------------------------------------------------- */
 
 const pillars = [
   {
     title: "طراحی و توسعه وب",
-    body: "سایت شرکتی، فروشگاه اینترنتی و وب‌اپلیکیشن اختصاصی با ساختار فنی و سئوی درست از روز اول.",
+    body: "سایت شرکتی، فروشگاه یا وب‌اپی که از روز اول درست، سریع و آماده رشد ساخته شود.",
   },
   {
     title: "نرم‌افزار اختصاصی",
-    body: "وقتی نرم‌افزار آماده جواب نمی‌دهد: پنل، سامانه و ابزار داخلی متناسب با فرآیند واقعی شما.",
+    body: "وقتی نرم‌افزار آماده کارتان را راه نمی‌اندازد، پنل و ابزار خودتان را می‌سازیم.",
   },
   {
     title: "نجات و توسعه پروژه",
-    body: "ادامه دادن پروژه‌ای که متوقف شده، بدون شروع دوباره از صفر.",
+    body: "پروژه‌ای را که رها شده تحویل می‌گیریم و از همان‌جایی که مانده جلو می‌رویم.",
   },
   {
     title: "API و یکپارچه‌سازی",
-    body: "اتصال سیستم‌ها، انبار، حسابداری و سرویس‌های داخلی به یکدیگر.",
+    body: "سیستم‌های پراکنده‌تان را به هم وصل می‌کنیم تا اطلاعات دوباره‌کاری نشود.",
   },
-  { title: "سئو و رشد", body: "سئوی تکنیکال، ساختار محتوا و بهبود Core Web Vitals." },
+  { title: "سئو و رشد", body: "کمک می‌کنیم آدم‌هایی که دنبال شما هستند، راحت‌تر پیدایتان کنند." },
   {
     title: "داده و ابزارهای کسب‌وکار",
-    body: "داشبورد، گزارش‌گیری و ابزارهایی که تصمیم‌گیری را ساده می‌کنند.",
+    body: "داده‌ها را از چند فایل و سیستم جمع می‌کنیم تا تصمیم‌گیری راحت‌تر شود.",
   },
   {
     title: "پشتیبانی و توسعه مستمر",
-    body: "رابطه‌ای که بعد از تحویل ادامه دارد: نگهداری، بهبود و توسعه تدریجی.",
+    body: "بعد از تحویل هم برای نگهداری و بهتر شدن محصول کنار شما می‌مانیم.",
   },
 ];
 
@@ -151,8 +200,24 @@ export function ServicesEditorial() {
             <MetaLabel className="text-muted-foreground">SERVICES / 07</MetaLabel>
             <h2 className="display-2 mt-6">خدمات رای‌کد</h2>
             <p className="mt-6 max-w-sm text-base leading-8 text-muted-foreground">
-              هفت حوزه کاری که می‌توانند جدا یا کنار هم اجرا شوند.
+              هر کدام از این خدمات را می‌توانید جداگانه بردارید یا کنار هم پیش ببرید؛ بستگی دارد
+              الان کجای مسیر باشید.
             </p>
+            <div className="visual-card relative mt-8 aspect-[1.5/1] overflow-hidden bg-ink">
+              <Image
+                src="/images/rycode-product-system.png"
+                alt="ترکیب چند لایه‌ی طراحی و توسعه برای ساخت محصول"
+                fill
+                className="object-cover opacity-80 transition-transform duration-700 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-ink via-transparent to-transparent" />
+              <div className="absolute inset-x-4 bottom-4 flex items-end justify-between">
+                <MetaLabel className="text-brand">STACK / 07</MetaLabel>
+                <span className="rounded-full bg-white/10 px-3 py-1 text-xs text-white/70 backdrop-blur-sm">
+                  یک تیم، چند تخصص
+                </span>
+              </div>
+            </div>
             <div className="mt-8">
               <TextLink to="/services">همه خدمات</TextLink>
             </div>
@@ -188,18 +253,21 @@ export function ServicesEditorial() {
 const systems = [
   {
     name: "فروشگاه اینترنتی",
-    body: "فروش آنلاین با مدیریت محصول، سفارش و پرداخت متناسب کسب‌وکار.",
+    body: "فروش آنلاین با مدیریت محصول، سفارش و پرداختی که با کار شما جور باشد.",
   },
-  { name: "CRM", body: "مدیریت سرنخ، مشتری و پیگیری فروش در یک جای واحد." },
-  { name: "سامانه سفارش‌گیری", body: "ثبت و پیگیری سفارش برای تیم فروش، نمایندگان یا مشتریان." },
-  { name: "پنل مشتری", body: "دسترسی مشتری به سفارش‌ها، صورتحساب‌ها و درخواست‌ها." },
-  { name: "Dashboard", body: "نمای واحد از داده‌های عملیاتی و شاخص‌های کسب‌وکار." },
-  { name: "نوبت‌دهی", body: "زمان‌بندی مراجعه و مدیریت ظرفیت برای کلینیک و خدمات." },
-  { name: "رزرو", body: "رزرو آنلاین منابع، خدمات یا فضا با قوانین اختصاصی." },
-  { name: "Marketplace", body: "پلتفرم چندفروشندگی با مدیریت فروشنده و تسویه." },
-  { name: "سامانه گارانتی", body: "ثبت محصول، پیگیری گارانتی و درخواست خدمات." },
-  { name: "پنل نمایندگان", body: "قیمت‌گذاری، سفارش و گزارش اختصاصی برای شبکه فروش." },
-  { name: "LMS", body: "دوره، آزمون و مسیر یادگیری برای آموزش آنلاین." },
+  { name: "CRM", body: "سرنخ‌ها و مشتری‌ها را یک‌جا ببینید و هیچ پیگیری‌ای جا نماند." },
+  { name: "سامانه سفارش‌گیری", body: "سفارش‌های تیم فروش، نماینده‌ها یا مشتری‌ها را منظم کنید." },
+  { name: "پنل مشتری", body: "مشتری از یک جا سفارش‌ها، فاکتورها و درخواست‌هایش را ببیند." },
+  { name: "Dashboard", body: "عددهای مهم کسب‌وکارتان را یک‌جا و قابل فهم ببینید." },
+  {
+    name: "نوبت‌دهی",
+    body: "نوبت‌ها و ظرفیت مراجعه را بدون تماس و هماهنگی‌های تکراری مدیریت کنید.",
+  },
+  { name: "رزرو", body: "رزرو آنلاین خدمات، منابع یا فضا با قوانینی که خودتان تعیین می‌کنید." },
+  { name: "Marketplace", body: "فروشنده‌ها، سفارش‌ها و تسویه‌ها را در یک پلتفرم مدیریت کنید." },
+  { name: "سامانه گارانتی", body: "ثبت محصول و پیگیری گارانتی را برای مشتری ساده کنید." },
+  { name: "پنل نمایندگان", body: "قیمت، سفارش و گزارش هر نماینده را شفاف و در دسترس کنید." },
+  { name: "LMS", body: "دوره، آزمون و مسیر یادگیری را برای آموزش آنلاین کنار هم بچینید." },
 ];
 
 export function SolutionExplorer() {
@@ -210,7 +278,7 @@ export function SolutionExplorer() {
     <section className="bg-ink py-24 text-ink-foreground sm:py-32">
       <Container>
         <MetaLabel className="text-brand">SOLUTIONS</MetaLabel>
-        <h2 className="display-2 mt-6 max-w-3xl">چه چیزی می‌توانیم برای شما بسازیم؟</h2>
+        <h2 className="display-2 mt-6 max-w-3xl">برای کسب‌وکارتان چه چیزی لازم دارید؟</h2>
 
         <div className="mt-14 grid gap-0 border-t border-white/12 lg:grid-cols-[1fr_1fr]">
           <ul className="lg:border-e lg:border-white/12 lg:pe-10">
@@ -238,14 +306,46 @@ export function SolutionExplorer() {
 
           <div className="border-b border-white/12 px-0 py-12 lg:ps-14">
             <div className="lg:sticky lg:top-28">
-              <div className="relative aspect-[4/3] w-full border border-white/12">
+              <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[1.25rem] border border-white/12 bg-white/[0.04] p-4">
                 <div className="grid-field absolute inset-0 opacity-20" />
-                <div className="absolute top-8 right-8 h-16 w-16 bg-brand" />
-                <div className="absolute top-8 right-8 h-16 w-16 translate-x-[-28px] translate-y-[28px] border border-white/40" />
-                <div className="absolute bottom-8 left-8 h-px w-1/2 bg-white/25" />
-                <MetaLabel className="absolute bottom-6 left-8 text-white/40">
-                  PREVIEW / {String(active + 1).padStart(2, "0")}
-                </MetaLabel>
+                <div className="relative h-full rounded-[0.9rem] border border-white/10 bg-ink/60 p-4 backdrop-blur-sm">
+                  <div className="flex items-center justify-between border-b border-white/10 pb-3">
+                    <MetaLabel className="text-white/40">
+                      PREVIEW / {String(active + 1).padStart(2, "0")}
+                    </MetaLabel>
+                    <span className="size-2 rounded-full bg-brand shadow-[0_0_12px_var(--color-brand)]" />
+                  </div>
+                  <div className="mt-6 grid grid-cols-[1.2fr_0.8fr] gap-3">
+                    <div className="rounded-lg border border-white/10 bg-white/[0.06] p-3">
+                      <div className="flex h-24 items-end gap-1.5">
+                        {[32, 48, 25, 64, 52, 78, 58].map((height, i) => (
+                          <span
+                            key={i}
+                            className="flex-1 rounded-t-sm bg-brand/80"
+                            style={{ height: `${height}%` }}
+                          />
+                        ))}
+                      </div>
+                      <span className="mt-3 block text-[0.65rem] text-white/45">
+                        ACTIVITY / THIS WEEK
+                      </span>
+                    </div>
+                    <div className="space-y-3">
+                      <div className="rounded-lg border border-white/10 bg-white/[0.06] p-3">
+                        <span className="block text-2xl font-bold text-white">۸۶٪</span>
+                        <span className="text-[0.65rem] text-white/45">HEALTH SCORE</span>
+                      </div>
+                      <div className="rounded-lg border border-white/10 bg-brand p-3 text-brand-foreground">
+                        <span className="block text-lg font-bold">+۱۲</span>
+                        <span className="text-[0.65rem]">NEW SIGNALS</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="mt-3 flex gap-2">
+                    <span className="h-2 flex-1 rounded-full bg-white/10" />
+                    <span className="h-2 w-1/4 rounded-full bg-white/10" />
+                  </div>
+                </div>
               </div>
               <h3 className="mt-8 text-2xl font-bold">{current.name}</h3>
               <p className="mt-4 text-base leading-8 text-ink-foreground/70">{current.body}</p>
@@ -270,7 +370,20 @@ export function ProjectRescue() {
     <section className="bg-brand py-24 text-brand-foreground sm:py-32">
       <Container>
         <MetaLabel>PROJECT RESCUE</MetaLabel>
-        <h2 className="display-1 mt-8 max-w-[14ch]">پروژه‌ای دارید که جایی در مسیر متوقف شده؟</h2>
+        <h2 className="display-1 mt-8 max-w-[14ch]">پروژه‌تان وسط راه مانده؟</h2>
+
+        <figure className="mt-12 overflow-hidden border border-brand-foreground/25 bg-ink shadow-[12px_12px_0_hsl(var(--brand-foreground)/0.16)] lg:ms-auto lg:max-w-xl">
+          <Image
+            src="/images/rycode-project-rescue.png"
+            alt="تبدیل یک ساختار پراکنده و شکسته به سیستمی منظم و پایدار"
+            width={1248}
+            height={1248}
+            className="aspect-square w-full object-cover"
+          />
+          <figcaption className="border-t border-brand-foreground/20 px-4 py-3 text-xs tracking-[0.14em] opacity-70">
+            UNTANGLE / REBUILD / MOVE FORWARD
+          </figcaption>
+        </figure>
 
         <div className="mt-16 grid gap-10 border-t border-brand-foreground/25 pt-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
           <ol className="grid gap-0 sm:grid-cols-3">
@@ -291,7 +404,7 @@ export function ProjectRescue() {
                 to="/technical-review"
                 className="bg-brand-foreground text-brand hover:bg-brand-foreground/90"
               >
-                ارسال پروژه برای بررسی
+                بفرستید بررسی‌اش کنیم
               </CtaLink>
             </div>
           </div>
@@ -307,32 +420,47 @@ const projects = [
   {
     name: "سامانه سفارش‌گیری نمایندگان",
     industry: "تولید و کارخانه",
-    problem: "ثبت سفارش نمایندگان به‌صورت تلفنی و اکسل انجام می‌شد و پیگیری آن دشوار بود.",
-    solution: "پنل اختصاصی نمایندگان با قیمت‌گذاری پلکانی، ثبت سفارش و گزارش وضعیت.",
+    problem: "نماینده‌ها سفارش را تلفنی و با اکسل می‌فرستادند و پیگیری‌اش سخت بود.",
+    solution: "یک پنل اختصاصی برای قیمت‌گذاری، ثبت سفارش و دیدن وضعیت هر سفارش.",
   },
   {
     name: "بازطراحی فروشگاه اینترنتی",
     industry: "خودرو و لوازم یدکی",
-    problem: "ساختار دسته‌بندی و سرعت سایت مانع رشد ترافیک ارگانیک بود.",
-    solution: "بازسازی معماری اطلاعات، بهبود Core Web Vitals و سئوی فروشگاهی.",
+    problem: "دسته‌بندی‌ها نامرتب بود و کندی سایت جلوی رشد در گوگل را گرفته بود.",
+    solution: "مرتب‌کردن ساختار سایت، سریع‌تر کردن صفحات و تقویت سئوی فروشگاهی.",
   },
   {
     name: "پرتال خدمات پس از فروش",
     industry: "تجهیزات صنعتی",
-    problem: "درخواست‌های گارانتی و پشتیبانی در کانال‌های پراکنده گم می‌شد.",
-    solution: "سامانه ثبت محصول، گارانتی و تیکتینگ با داشبورد داخلی.",
+    problem: "درخواست‌های گارانتی بین تماس، پیام و کانال‌های مختلف گم می‌شد.",
+    solution: "سامانه‌ای برای ثبت محصول، گارانتی و پیگیری همه درخواست‌ها در یک جا.",
   },
 ];
 
 function CaseVisual({ index }: { index: number }) {
+  const source = [
+    "/images/rycode-product-system.png",
+    "/images/rycode-project-rescue.png",
+    "/images/rycode-connected-world.png",
+  ][(index - 1) % 3]!;
   return (
-    <div className="relative aspect-[16/10] w-full overflow-hidden border border-border bg-surface-2">
-      <div className="grid-field absolute inset-0 opacity-60" />
-      <div className="absolute top-10 right-10 h-28 w-28 bg-brand transition-transform duration-500 group-hover:scale-105" />
-      <div className="absolute top-10 right-10 h-28 w-28 translate-x-[-44px] translate-y-[44px] border border-foreground/30" />
+    <div className="relative aspect-[16/10] w-full overflow-hidden rounded-[1.25rem] border border-border bg-surface-2">
+      <Image
+        src={source}
+        alt="تصویر مفهومی از یک پروژه‌ی دیجیتال رای‌کد"
+        fill
+        className={cn(
+          "object-cover transition-transform duration-700 group-hover:scale-105",
+          index === 2 ? "object-center" : "object-left",
+        )}
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-transparent to-transparent opacity-80" />
+      <div className="absolute top-4 right-4 rounded-full border border-white/20 bg-ink/35 px-3 py-1 text-[0.65rem] tracking-[0.14em] text-white/70 backdrop-blur-sm">
+        RYCODE / CASE
+      </div>
       <span
         dir="ltr"
-        className="absolute bottom-4 left-6 text-[5rem] leading-none font-extrabold text-foreground/8"
+        className="absolute bottom-3 left-5 text-[4.5rem] leading-none font-extrabold text-white/20"
       >
         {String(index).padStart(2, "0")}
       </span>
@@ -355,7 +483,7 @@ export function SelectedProjects() {
           <div>
             <MetaLabel className="text-muted-foreground">SELECTED WORK</MetaLabel>
             <h2 className="display-2 mt-6 max-w-3xl">
-              پروژه فقط چیزی نیست که ساختیم؛ مسئله‌ای است که حل کردیم.
+              چند نمونه از مسئله‌هایی که برایشان راه‌حل ساخته‌ایم.
             </h2>
           </div>
           <TextLink to="/projects">همه پروژه‌ها</TextLink>
@@ -423,8 +551,8 @@ export function SelectedProjects() {
 
         {published.length === 0 && (
           <p className="mt-6 text-xs text-muted-foreground">
-            نمونه‌های بالا پروژه‌های مفهومی برای نمایش نوع مسئله و راه‌حل هستند و شامل نام مشتری یا
-            آمار واقعی نیستند.
+            این‌ها نمونه‌های مفهومی‌اند تا ببینید برای چه جور مسئله‌هایی می‌توانیم راه‌حل بسازیم؛
+            نام مشتری یا آمار واقعی در آن‌ها نیست.
           </p>
         )}
       </Container>
@@ -454,11 +582,44 @@ export function IndustriesSection() {
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
             <MetaLabel className="text-brand">INDUSTRIES</MetaLabel>
-            <h2 className="display-2 mt-6 max-w-2xl">تکنولوژی باید با مدل کسب‌وکار هماهنگ باشد.</h2>
+            <h2 className="display-2 mt-6 max-w-2xl">راه‌حل خوب باید به کسب‌وکار شما بخورد.</h2>
           </div>
           <TextLink to="/industries" className="text-ink-foreground">
             همه صنایع
           </TextLink>
+        </div>
+
+        <div className="mt-12 grid gap-3 sm:grid-cols-4">
+          {[
+            { label: "WEB", value: "۰۸", tone: "bg-brand text-brand-foreground" },
+            { label: "SOFTWARE", value: "۰۵", tone: "bg-white/10 text-white" },
+            { label: "SEO", value: "۰۶", tone: "bg-white/10 text-white" },
+            { label: "DATA", value: "۰۴", tone: "bg-white/10 text-white" },
+          ].map((item) => (
+            <div key={item.label} className={cn("rounded-2xl p-4", item.tone)}>
+              <MetaLabel className="opacity-65">{item.label}</MetaLabel>
+              <div className="mt-5 flex items-end justify-between">
+                <span className="text-3xl font-bold">{item.value}</span>
+                <span className="text-xs opacity-60">مسیر فعال</span>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="relative mt-4 min-h-[240px] overflow-hidden rounded-2xl border border-white/12">
+          <Image
+            src="/images/rycode-connected-world.png"
+            alt="شبکه‌ای از سیستم‌های متصل برای صنایع مختلف"
+            fill
+            className="object-cover opacity-65"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/35 to-transparent" />
+          <div className="absolute inset-y-0 left-0 flex max-w-sm flex-col justify-end p-6 sm:p-8">
+            <MetaLabel className="text-brand">CONNECTED BUSINESS</MetaLabel>
+            <p className="mt-3 text-xl font-bold leading-8">
+              هر ابزار وقتی ارزش دارد که به بقیه‌ی کسب‌وکار وصل باشد.
+            </p>
+          </div>
         </div>
 
         <div className="mt-14 hidden border-t border-white/12 lg:block">
@@ -522,21 +683,24 @@ export function IndustriesSection() {
 
 const whyItems = [
   {
-    title: "مسئله قبل از ابزار.",
-    body: "اول مسئله کسب‌وکار را می‌فهمیم، بعد درباره تکنولوژی تصمیم می‌گیریم.",
+    title: "اول می‌فهمیم مشکل کجاست.",
+    body: "قبل از اینکه ابزار و تکنولوژی پیشنهاد بدهیم، می‌نشینیم ببینیم دقیقاً چه چیزی قرار است بهتر شود.",
   },
   {
-    title: "همیشه لازم نیست از صفر شروع کنید.",
-    body: "اگر پروژه فعلی قابل نجات باشد، همان را توسعه می‌دهیم.",
+    title: "لازم نیست همه‌چیز را از نو بسازید.",
+    body: "اگر پروژه فعلی قابل نجات باشد، همان را مرتب و قوی‌تر می‌کنیم؛ بازنویسی فقط وقتی که واقعاً لازم باشد.",
   },
   {
-    title: "توسعه و سئو در یک مسیر.",
-    body: "ساختار فنی و دیده‌شدن در جستجو از ابتدا کنار هم دیده می‌شوند.",
+    title: "سئو را آخر کار یادمان نمی‌افتد.",
+    body: "ساختار فنی و دیده‌شدن در گوگل را از همان اول کنار هم جلو می‌بریم.",
   },
-  { title: "مالکیت روشن.", body: "کد، دسترسی‌ها و داده‌ها متعلق به شماست." },
   {
-    title: "رابطه بعد از تحویل.",
-    body: "تحویل پایان کار نیست؛ نقطه شروع نگهداری و توسعه است.",
+    title: "کد و دسترسی‌ها برای خودتان می‌ماند.",
+    body: "همه‌چیز شفاف تحویل شما می‌شود؛ کد، داده‌ها، دامنه و دسترسی‌ها.",
+  },
+  {
+    title: "بعد از تحویل هم تنها نمی‌مانید.",
+    body: "اگر خواستید، نگهداری، رفع مشکل و توسعه‌های بعدی را هم کنار شما ادامه می‌دهیم.",
   },
 ];
 
@@ -545,6 +709,29 @@ export function WhyRycode() {
     <Section className="grain bg-surface">
       <Container>
         <MetaLabel className="text-muted-foreground">WHY RYCODE</MetaLabel>
+        <div className="mt-10 grid gap-4 lg:grid-cols-[1.3fr_0.7fr]">
+          <div className="relative min-h-[180px] overflow-hidden rounded-[1.25rem] bg-ink">
+            <Image
+              src="/images/rycode-product-system.png"
+              alt="لایه‌های مختلف یک سیستم منسجم و قابل رشد"
+              fill
+              className="object-cover object-right opacity-70"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/30 to-transparent" />
+            <div className="absolute inset-y-0 left-0 flex max-w-xs flex-col justify-center p-6 text-white">
+              <MetaLabel className="text-brand">THE RYCODE METHOD</MetaLabel>
+              <p className="mt-2 text-lg font-bold leading-7">
+                شفاف، قابل توسعه، ساخته‌شده برای فردا.
+              </p>
+            </div>
+          </div>
+          <div className="visual-card flex items-end justify-between bg-brand p-6 text-brand-foreground">
+            <span className="text-6xl font-extrabold tracking-[-0.08em]">۰۵</span>
+            <span className="max-w-[8rem] text-sm font-bold leading-6">
+              دلیل برای اینکه پروژه را درست شروع کنیم.
+            </span>
+          </div>
+        </div>
         <div className="mt-14 border-t border-border">
           {whyItems.map((item, i) => (
             <div
@@ -587,9 +774,40 @@ export function ProcessSection() {
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
             <MetaLabel className="text-muted-foreground">PROCESS</MetaLabel>
-            <h2 className="display-2 mt-6">مسیری که هر پروژه طی می‌کند.</h2>
+            <h2 className="display-2 mt-6">
+              از اولین گفت‌وگو تا تحویل، قدم‌به‌قدم کنار شما هستیم.
+            </h2>
           </div>
           <TextLink to="/process">جزئیات فرآیند</TextLink>
+        </div>
+
+        <div className="relative mt-12 overflow-hidden rounded-[1.25rem] border border-border bg-surface-2 p-6 sm:p-8">
+          <div className="absolute inset-0 soft-grid opacity-50" />
+          <div className="relative flex flex-wrap items-center justify-between gap-5">
+            {stages.map((stage, i) => (
+              <div key={stage.en} className="flex items-center gap-3">
+                <span
+                  className={cn(
+                    "grid size-10 place-items-center rounded-full border text-sm font-bold",
+                    i === 0
+                      ? "border-brand bg-brand text-brand-foreground"
+                      : "border-border bg-background",
+                  )}
+                >
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                {i < stages.length - 1 && (
+                  <span className="hidden h-px w-8 bg-border sm:block lg:w-12" />
+                )}
+              </div>
+            ))}
+          </div>
+          <div className="relative mt-6 flex items-center justify-between gap-4 text-xs text-muted-foreground">
+            <span>از شناخت مسئله تا بهبود مداوم</span>
+            <span dir="ltr" className="tracking-[0.14em]">
+              DISCOVER → IMPROVE
+            </span>
+          </div>
         </div>
 
         <ol className="mt-16 border-t border-border">
@@ -618,17 +836,32 @@ export function PaymentSection() {
     <Section className="bg-brand-soft">
       <Container>
         <div className="grid gap-12 lg:grid-cols-[1.2fr_1fr] lg:items-end">
-          <h2 className="display-2 max-w-[14ch]">
-            پرداخت پروژه می‌تواند با مراحل اجرا هماهنگ باشد.
-          </h2>
+          <h2 className="display-2 max-w-[14ch]">لازم نیست همه هزینه را یک‌جا پرداخت کنید.</h2>
           <div className="text-base leading-9 text-muted-foreground">
             <p>
-              در پروژه‌های واجد شرایط، هزینه به مراحل مشخص اجرا تقسیم می‌شود؛ هر مرحله پس از تحویل و
-              تایید خروجی همان مرحله تسویه می‌شود.
+              برای پروژه‌های واجد شرایط، هزینه را به چند مرحله تقسیم می‌کنیم. هر مرحله که تحویل و
+              تأیید شد، سراغ مرحله بعد می‌رویم.
             </p>
             <div className="mt-8">
-              <TextLink to="/start-project">بررسی شرایط پرداخت مرحله‌ای</TextLink>
+              <TextLink to="/start-project">درباره پرداخت مرحله‌ای بپرسید</TextLink>
             </div>
+          </div>
+        </div>
+        <div className="relative mt-14 overflow-hidden rounded-[1.5rem] border border-brand/25 bg-background p-5 sm:p-8">
+          <div className="absolute inset-0 soft-grid opacity-40" />
+          <div className="relative grid gap-3 sm:grid-cols-4">
+            {["شروع", "طراحی", "ساخت", "رشد"].map((label, i) => (
+              <div key={label} className="rounded-xl border border-border bg-surface p-4">
+                <MetaLabel index={i + 1} className="text-brand" />
+                <p className="mt-6 text-sm font-bold">{label}</p>
+                <div className="mt-5 h-1.5 overflow-hidden rounded-full bg-border">
+                  <span
+                    className="block h-full rounded-full bg-brand"
+                    style={{ width: `${[28, 52, 76, 100][i]}%` }}
+                  />
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </Container>
@@ -655,7 +888,7 @@ export function BlogSection() {
           <div>
             <MetaLabel className="text-muted-foreground">JOURNAL</MetaLabel>
             <h2 className="display-2 mt-6 max-w-3xl">
-              درباره ساخت، رشد و نگهداری محصولات دیجیتال می‌نویسیم.
+              از چیزهایی می‌نویسیم که در مسیر ساخت و رشد یاد می‌گیریم.
             </h2>
           </div>
           <TextLink to="/blog">همه مقاله‌ها</TextLink>
@@ -685,11 +918,26 @@ export function BlogSection() {
             </div>
           </Link>
         ) : (
-          <div className="mt-14 border-y border-dashed border-border py-16">
-            <MetaLabel className="text-muted-foreground">FEATURED</MetaLabel>
-            <p className="mt-5 max-w-xl text-base leading-8 text-muted-foreground">
-              هنوز مقاله‌ای منتشر نشده است. پس از انتشار، مقاله شاخص در این بخش نمایش داده می‌شود.
-            </p>
+          <div className="mt-14 grid gap-8 overflow-hidden rounded-[1.5rem] border border-border bg-surface-2 p-5 sm:p-8 lg:grid-cols-[1fr_0.9fr] lg:items-center">
+            <div>
+              <MetaLabel className="text-muted-foreground">FEATURED / SOON</MetaLabel>
+              <p className="mt-5 max-w-xl text-base leading-8 text-muted-foreground">
+                هنوز مقاله‌ای منتشر نکرده‌ایم؛ به‌زودی تجربه‌ها و نکته‌های کاربردی تیم را اینجا
+                می‌گذاریم.
+              </p>
+            </div>
+            <div className="relative aspect-[16/8] overflow-hidden rounded-xl bg-ink">
+              <Image
+                src="/images/rycode-product-system.png"
+                alt="تصویر انتزاعی دفترچه‌ی یادداشت و ساخت محصول"
+                fill
+                className="object-cover opacity-75"
+              />
+              <div className="absolute inset-0 bg-gradient-to-tr from-ink/70 via-transparent to-brand/20" />
+              <span className="absolute right-4 bottom-4 rounded-full bg-brand px-3 py-1 text-xs font-bold text-brand-foreground">
+                یادداشت‌های تیم
+              </span>
+            </div>
           </div>
         )}
 
@@ -718,20 +966,20 @@ export function BlogSection() {
 
 const faqs = [
   {
-    q: "پروژه نیمه‌کاره من را هم قبول می‌کنید؟",
-    a: "بله. ابتدا وضعیت فعلی کد، دسترسی‌ها و زیرساخت بررسی می‌شود و بعد مشخص می‌کنیم ادامه دادن مسیر فعلی به‌صرفه است یا بازسازی بخشی از آن.",
+    q: "پروژه‌ای که نیمه‌کاره مانده را هم قبول می‌کنید؟",
+    a: "بله. اول کد، دسترسی‌ها و زیرساخت را بررسی می‌کنیم؛ بعد صادقانه می‌گوییم ادامه دادن همین مسیر بهتر است یا باید بخشی از آن را دوباره ساخت.",
   },
   {
-    q: "هزینه پروژه چطور مشخص می‌شود؟",
-    a: "بعد از جلسه شناخت و مشخص شدن دامنه کار، برآورد زمان و هزینه ارائه می‌شود. پروژه‌های بزرگ‌تر می‌توانند مرحله‌ای اجرا و تسویه شوند.",
+    q: "هزینه پروژه را چطور حساب می‌کنید؟",
+    a: "بعد از اینکه درباره نیاز و دامنه کار به جمع‌بندی رسیدیم، زمان و هزینه را شفاف اعلام می‌کنیم. پروژه‌های بزرگ‌تر را هم می‌شود مرحله‌ای جلو برد.",
   },
   {
-    q: "مالکیت کد با چه کسی است؟",
-    a: "کد، دسترسی‌ها، دیتابیس و دامنه متعلق به کارفرماست و در پایان پروژه به‌صورت کامل تحویل داده می‌شود.",
+    q: "کد و دسترسی‌ها برای چه کسی است؟",
+    a: "برای شماست. کد، دسترسی‌ها، دیتابیس و دامنه در پایان پروژه کامل و شفاف تحویل داده می‌شود.",
   },
   {
-    q: "بعد از تحویل پشتیبانی وجود دارد؟",
-    a: "بله. نگهداری، رفع مشکل و توسعه مستمر به‌صورت قرارداد جداگانه یا درخواست موردی ادامه پیدا می‌کند.",
+    q: "بعد از تحویل هم کمک می‌کنید؟",
+    a: "بله. می‌توانیم نگهداری، رفع مشکل و توسعه‌های بعدی را به‌صورت مستمر یا موردی کنار شما ادامه بدهیم.",
   },
 ];
 
@@ -787,19 +1035,29 @@ export function FaqSection() {
 
 export function FinalCta() {
   return (
-    <section className="bg-ink py-28 text-ink-foreground sm:py-40">
+    <section className="relative overflow-hidden bg-ink py-24 text-ink-foreground sm:py-32">
+      <Image
+        src="/images/rycode-connected-world.png"
+        alt=""
+        fill
+        className="object-cover object-right opacity-20"
+        aria-hidden
+      />
+      <div className="absolute inset-0 bg-gradient-to-l from-ink/40 via-ink/85 to-ink" />
       <Container>
-        <MetaLabel className="text-brand">START HERE</MetaLabel>
-        <h2 className="display-1 mt-8 max-w-[15ch]">
-          پروژه‌ای در ذهن دارید؟
-          <br />
-          یا <span className="text-brand">مشکلی</span> که باید حل شود؟
-        </h2>
-        <div className="mt-14 flex flex-wrap items-center gap-8 border-t border-white/12 pt-10">
-          <CtaLink to="/start-project">شروع پروژه</CtaLink>
-          <TextLink to="/technical-review" className="text-ink-foreground">
-            درخواست بررسی فنی
-          </TextLink>
+        <div className="relative">
+          <MetaLabel className="text-brand">START HERE</MetaLabel>
+          <h2 className="display-1 mt-8 max-w-[15ch]">
+            یه پروژه توی ذهنتونه؟
+            <br />
+            یا یه <span className="text-brand">مشکل</span> که باید حل بشه؟
+          </h2>
+          <div className="mt-14 flex flex-wrap items-center gap-8 border-t border-white/12 pt-10">
+            <CtaLink to="/start-project">با هم شروع کنیم</CtaLink>
+            <TextLink to="/technical-review" className="text-ink-foreground">
+              پروژه‌تان را بررسی کنیم
+            </TextLink>
+          </div>
         </div>
       </Container>
     </section>

@@ -35,7 +35,7 @@ export async function generateMetadata({
       ? "توسعه نرم‌افزار، طراحی سایت و رشد دیجیتال"
       : "Software engineering and digital growth",
     description: isFa
-      ? "از ایده تا اجرا و از مشکل تا راه‌حل؛ طراحی وب، فروشگاه اینترنتی، نرم‌افزار اختصاصی، یکپارچه‌سازی و سئو."
+      ? "سایت، فروشگاه، نرم‌افزار یا سئوی کسب‌وکارتان را با رای‌کد جلو ببرید؛ حتی اگر پروژه‌تان وسط راه مانده باشد."
       : "From idea to execution: web platforms, ecommerce, custom software, integrations and technical SEO.",
     alternates: {
       canonical: isFa ? "/" : "/en",

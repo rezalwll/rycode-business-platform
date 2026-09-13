@@ -20,25 +20,25 @@ const pages: Record<CompanyPageSlug, PageCopy> = {
   about: {
     eyebrow: { fa: "درباره رای‌کد", en: "About RYCODE" },
     title: {
-      fa: "شریک فنی برای تصمیم‌های روشن و اجرای قابل اتکا",
+      fa: "یک تیم فنی که کنار کسب‌وکارتان می‌ایستد",
       en: "An engineering partner for clear decisions and dependable delivery",
     },
     lead: {
-      fa: "رای‌کد برای طراحی، ساخت و بهبود محصولات دیجیتال کنار کسب‌وکارها قرار می‌گیرد؛ از صورت‌بندی مسئله تا نگهداری پس از انتشار.",
+      fa: "از اولین گفت‌وگو درباره مسئله تا روزی که محصولتان راه می‌افتد و بعد از آن، کنار شما هستیم.",
       en: "RYCODE works alongside organisations to design, build and improve digital products—from problem framing through post-release care.",
     },
     sections: [
       {
         title: { fa: "نگاه ما", en: "Our perspective" },
         body: {
-          fa: "فناوری زمانی ارزش دارد که تصمیم، عملیات یا تجربه مشتری را بهتر کند. به همین دلیل کار را با شناخت فرآیند و محدودیت شروع می‌کنیم، نه با تحمیل یک ابزار.",
+          fa: "فناوری وقتی ارزش دارد که کارتان را راحت‌تر کند یا مشتری‌تان تجربه بهتری داشته باشد. برای همین قبل از حرف‌زدن از ابزار، اول می‌فهمیم چه چیزی قرار است بهتر شود.",
           en: "Technology matters when it improves a decision, an operation or a customer experience. Work therefore begins with the workflow and constraints, not a predetermined tool.",
         },
       },
       {
         title: { fa: "شیوه همکاری", en: "How we work" },
         body: {
-          fa: "دامنه، مسئولیت‌ها، معیار پذیرش و ریسک‌ها مکتوب می‌شوند. پیشرفت در قطعه‌های قابل بررسی تحویل داده می‌شود تا تصمیم‌ها زود و بر اساس شواهد گرفته شوند.",
+          fa: "از اول مشخص می‌کنیم قرار است چه چیزی تحویل بگیرید، چه کسی مسئول کدام بخش است و موفقیت را چطور می‌سنجیم. کار را هم مرحله‌به‌مرحله نشان می‌دهیم تا غافلگیر نشوید.",
           en: "Scope, responsibilities, acceptance criteria and risks are written down. Work ships in reviewable increments so decisions happen early and on evidence.",
         },
         items: [
@@ -50,7 +50,7 @@ const pages: Record<CompanyPageSlug, PageCopy> = {
       {
         title: { fa: "صداقت در ارائه", en: "Honest presentation" },
         body: {
-          fa: "این نسخه از سایت ادعای مشتری، نتیجه یا عدد ساختگی ندارد. مطالعات پروژه تا زمان انتشار نمونه واقعی، صریحاً به‌عنوان سناریوی مفهومی معرفی می‌شوند.",
+          fa: "قرار نیست برای جلب اعتماد، عدد و داستان ساختگی تعریف کنیم. هر وقت نمونه واقعی قابل انتشار داشته باشیم، با جزئیات خودش نشانش می‌دهیم.",
           en: "This site makes no invented client, outcome or performance claims. Project studies remain explicitly labelled concepts until real work is approved for publication.",
         },
       },
@@ -59,39 +59,39 @@ const pages: Record<CompanyPageSlug, PageCopy> = {
   "why-rycode": {
     eyebrow: { fa: "چرا رای‌کد", en: "Why RYCODE" },
     title: {
-      fa: "مهندسی باید ابهام را کم کند، نه فقط کد تولید کند",
+      fa: "قرار است کارتان راحت‌تر شود، نه فقط چند خط کد بیشتر داشته باشید",
       en: "Engineering should reduce uncertainty, not merely produce code",
     },
     lead: {
-      fa: "تصمیم فنی خوب باید برای تیم کسب‌وکار قابل توضیح، برای توسعه‌دهنده قابل نگهداری و برای کاربر قابل لمس باشد.",
+      fa: "تصمیم فنی خوب باید برای شما قابل فهم، برای تیم قابل نگهداری و برای مشتری قابل لمس باشد.",
       en: "A sound technical decision should be explainable to the business, maintainable by engineers and tangible to users.",
     },
     sections: [
       {
         title: { fa: "مسئله پیش از راهکار", en: "Problem before solution" },
         body: {
-          fa: "قبل از برآورد یا پیشنهاد معماری، وضعیت موجود، نقش‌ها، داده و معیار موفقیت را روشن می‌کنیم.",
+          fa: "قبل از اینکه قیمت یا راهکار بدهیم، می‌فهمیم الان کجا هستید، چه چیزی اذیتتان می‌کند و آخر کار قرار است چه چیزی بهتر شده باشد.",
           en: "Before estimating or proposing architecture, we clarify the current state, roles, data and success criteria.",
         },
       },
       {
         title: { fa: "امنیت و مالکیت از ابتدا", en: "Security and ownership from the start" },
         body: {
-          fa: "کنترل دسترسی، مدیریت رازها، ثبت رخداد و مسیر بازیابی بخشی از طراحی‌اند؛ نه کارهایی که به انتهای پروژه منتقل شوند.",
+          fa: "امنیت و مالکیت را نمی‌گذاریم برای آخر کار. از همان ابتدا معلوم است چه کسی به چه چیزی دسترسی دارد و اگر مشکلی پیش آمد چطور برمی‌گردیم.",
           en: "Access control, secret management, auditability and recovery are design concerns—not tasks postponed until the end.",
         },
       },
       {
         title: { fa: "تحویل قابل بررسی", en: "Reviewable delivery" },
         body: {
-          fa: "هر مرحله باید خروجی قابل اجرا، معیار پذیرش و توضیح تصمیم‌ها داشته باشد تا ریسک در طول مسیر دیده شود.",
+          fa: "هر مرحله یک خروجی قابل دیدن و قابل تست دارد؛ پس اگر چیزی نیاز به تغییر داشته باشد، همان موقع می‌فهمیم.",
           en: "Each increment should have a runnable outcome, acceptance criteria and recorded decisions so risk stays visible.",
         },
       },
       {
         title: { fa: "پایه قابل ادامه", en: "A foundation others can continue" },
         body: {
-          fa: "کد، استقرار و مستندات طوری ساخته می‌شوند که تیم بعدی برای ادامه به حدس‌زدن یا وابستگی پنهان نیاز نداشته باشد.",
+          fa: "کد و مستندات را طوری تحویل می‌دهیم که بعداً برای ادامه کار مجبور نباشید دنبال آدم قبلی بگردید.",
           en: "Code, deployment and documentation are structured so the next team can continue without guesswork or hidden dependency.",
         },
       },
@@ -100,39 +100,39 @@ const pages: Record<CompanyPageSlug, PageCopy> = {
   process: {
     eyebrow: { fa: "فرآیند همکاری", en: "Engagement process" },
     title: {
-      fa: "از تشخیص تا انتشار، با دروازه‌های تصمیم روشن",
+      fa: "از اولین گفت‌وگو تا انتشار، قدم‌به‌قدم با هم جلو می‌رویم",
       en: "From diagnosis to release, with explicit decision gates",
     },
     lead: {
-      fa: "فرآیند بسته به اندازه و ریسک پروژه تنظیم می‌شود، اما شناخت، دامنه روشن و اعتبارسنجی مرحله‌ای حذف نمی‌شوند.",
+      fa: "روند کار را با اندازه پروژه شما تنظیم می‌کنیم؛ اما شناخت مسئله، توافق روی دامنه و تحویل مرحله‌ای همیشه سر جایشان هستند.",
       en: "The process adapts to size and risk, while discovery, explicit scope and incremental verification remain non-negotiable.",
     },
     sections: [
       {
         title: { fa: "۱. شناخت", en: "1. Discovery" },
         body: {
-          fa: "هدف، کاربران، فرآیند فعلی، محدودیت و دسترسی‌های لازم ثبت می‌شوند. اگر پروژه موجود باشد، اجرای فعلی و ریسک‌های آن را بررسی می‌کنیم.",
+          fa: "با یک گفت‌وگو شروع می‌کنیم: چه می‌خواهید، برای چه کسی و الان کجای کار هستید؟ اگر پروژه‌ای دارید، همان را هم دقیق بررسی می‌کنیم.",
           en: "Goals, users, current workflow, constraints and required access are recorded. For an existing product, we inspect its runtime state and risks.",
         },
       },
       {
         title: { fa: "۲. تعریف مسیر", en: "2. Shape the path" },
         body: {
-          fa: "دامنه نسخه اول، معیار پذیرش، معماری اولیه، وابستگی‌ها و برآورد به زبان روشن ارائه می‌شوند.",
+          fa: "بعد با هم تصمیم می‌گیریم نسخه اول دقیقاً چه چیزهایی داشته باشد، چقدر زمان ببرد و از کجا شروع کنیم.",
           en: "The first scope, acceptance criteria, initial architecture, dependencies and estimate are presented in plain language.",
         },
       },
       {
         title: { fa: "۳. ساخت و بازبینی", en: "3. Build and review" },
         body: {
-          fa: "کار در بخش‌های کوچک اجرا، تست و نمایش داده می‌شود. تغییر دامنه و تصمیم‌های فنی ثبت می‌شوند.",
+          fa: "کار را تکه‌تکه می‌سازیم، تست می‌کنیم و به شما نشان می‌دهیم؛ تغییرها هم شفاف با هم تصمیم‌گیری می‌شوند.",
           en: "Work is implemented, tested and demonstrated in small slices. Scope changes and technical decisions are recorded.",
         },
       },
       {
         title: { fa: "۴. انتشار و تداوم", en: "4. Release and continue" },
         body: {
-          fa: "استقرار با چک‌لیست، پایش و مسیر بازگشت انجام می‌شود؛ سپس نگهداری یا توسعه بعدی بر اساس داده واقعی اولویت می‌گیرد.",
+          fa: "محصول را با خیال راحت منتشر می‌کنیم و بعد با توجه به استفاده واقعی، برای بهتر کردنش تصمیم می‌گیریم.",
           en: "Deployment uses a checklist, monitoring and rollback path; ongoing work is then prioritised from real operating data.",
         },
       },
@@ -141,11 +141,11 @@ const pages: Record<CompanyPageSlug, PageCopy> = {
   technologies: {
     eyebrow: { fa: "تکنولوژی‌ها", en: "Technologies" },
     title: {
-      fa: "ابزارها بر اساس عمر محصول انتخاب می‌شوند",
+      fa: "ابزار درست را برای کار درست انتخاب می‌کنیم",
       en: "Tools are selected for the product’s working life",
     },
     lead: {
-      fa: "استک این پلتفرم نمونه‌ای از رویکرد ماست: Server-first، تایپ‌محور، قابل استقرار روی زیرساخت استاندارد و بدون وابستگی غیرضروری.",
+      fa: "هر پروژه ابزار خودش را می‌خواهد. چیزی را انتخاب می‌کنیم که امروز جواب بدهد و فردا هم نگهداری و توسعه‌اش دردسر نشود.",
       en: "This platform reflects the approach: server-first, type-safe, deployable on standard infrastructure and free of unnecessary lock-in.",
     },
     sections: [
@@ -187,11 +187,11 @@ const pages: Record<CompanyPageSlug, PageCopy> = {
   faq: {
     eyebrow: { fa: "سوالات متداول", en: "Frequently asked questions" },
     title: {
-      fa: "پیش از شروع، ابهام‌های اصلی را روشن کنیم",
+      fa: "قبل از شروع، جواب سؤال‌هایتان را بگیریم",
       en: "Resolve the important unknowns before starting",
     },
     lead: {
-      fa: "پاسخ‌های زیر سیاست کلی همکاری‌اند؛ برآورد دقیق فقط بعد از شناخت مسئله ارائه می‌شود.",
+      fa: "چند سؤال رایج را اینجا جواب داده‌ایم؛ برای برآورد دقیق، اول باید درباره خود پروژه‌تان صحبت کنیم.",
       en: "These answers describe the general engagement model; an exact estimate follows discovery.",
     },
     sections: [
@@ -277,30 +277,35 @@ export async function CompanyPage({ locale, slug }: { locale: Locale; slug: Comp
         title={t(page.title, locale)}
         lead={t(page.lead, locale)}
       />
-      <section className="py-16 sm:py-24">
+      <section className="bg-background py-16 sm:py-24">
         <Container>
-          <div className="border-t border-hairline">
+          <div className="grid gap-4 lg:grid-cols-2">
             {sections.map((section, index) => (
               <article
                 key={section.title}
-                className="grid gap-8 border-b border-hairline py-12 lg:grid-cols-[14rem_minmax(0,1fr)] lg:py-16"
+                className="group rounded-[1.25rem] border border-border bg-surface p-6 transition-[transform,box-shadow,border-color] duration-300 hover:-translate-y-1 hover:border-brand/45 hover:shadow-xl sm:p-8"
               >
-                <span className="meta-label text-muted-foreground">
-                  {String(index + 1).padStart(2, "0")} / RYCODE
-                </span>
-                <div className="max-w-3xl">
+                <div className="flex items-center justify-between gap-4">
+                  <span className="meta-label text-muted-foreground">
+                    {String(index + 1).padStart(2, "0")} / RYCODE
+                  </span>
+                  <span className="grid size-9 place-items-center rounded-full bg-brand-soft text-brand transition-transform duration-300 group-hover:rotate-12">
+                    <CheckCircle2 className="size-4" aria-hidden />
+                  </span>
+                </div>
+                <div className="mt-12 max-w-3xl">
                   <h2 className="display-3">{section.title}</h2>
-                  <p className="mt-6 text-base leading-8 text-muted-foreground sm:text-lg sm:leading-9">
+                  <p className="mt-5 text-base leading-8 text-muted-foreground sm:text-lg sm:leading-9">
                     {section.body}
                   </p>
                   {section.items && (
-                    <ul className="mt-8 grid gap-3 sm:grid-cols-2">
+                    <ul className="mt-7 grid gap-2">
                       {section.items.map((item) => (
                         <li
                           key={item}
-                          className="flex gap-3 border border-hairline bg-surface p-4 text-sm leading-7"
+                          className="flex gap-3 rounded-lg border border-border bg-background p-3 text-sm leading-7"
                         >
-                          <CheckCircle2 className="mt-1 size-4 shrink-0 text-brand" aria-hidden />
+                          <span className="mt-1 size-1.5 shrink-0 rounded-full bg-brand" />
                           {item}
                         </li>
                       ))}

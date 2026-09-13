@@ -1,4 +1,5 @@
 import { ArrowLeft, ArrowRight } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
 
@@ -24,21 +25,46 @@ export function PageHero({
   aside?: ReactNode;
 }) {
   return (
-    <section className="grid-field grain border-b border-hairline py-20 sm:py-28 lg:py-36">
-      <Container>
-        <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_18rem] lg:items-end">
+    <section className="relative overflow-hidden border-b border-white/10 bg-ink text-ink-foreground">
+      <Image
+        src="/images/rycode-connected-world.png"
+        alt=""
+        fill
+        className="object-cover object-center opacity-25"
+        aria-hidden
+      />
+      <div className="absolute inset-0 bg-gradient-to-l from-ink/45 via-ink/85 to-ink" />
+      <Container className="relative py-20 sm:py-28 lg:py-32">
+        <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-end lg:gap-20">
           <div className="reveal">
             <Eyebrow>{eyebrow}</Eyebrow>
-            <h1 className="display-1 mt-8 max-w-6xl">{title}</h1>
-            <p className="mt-8 max-w-3xl text-lg leading-9 text-muted-foreground sm:text-xl">
-              {lead}
-            </p>
+            <h1 className="display-1 mt-8 max-w-4xl text-white">{title}</h1>
+            <p className="mt-8 max-w-2xl text-lg leading-9 text-white/65 sm:text-xl">{lead}</p>
           </div>
-          <div className="border-s border-hairline ps-6 text-sm leading-7 text-muted-foreground">
-            {aside ??
-              (locale === "fa"
-                ? "هر پیشنهاد پس از شناخت مسئله، محدودیت‌ها و معیار موفقیت شکل می‌گیرد."
-                : "Every recommendation follows an understanding of the problem, constraints and success criteria.")}
+          <div className="relative overflow-hidden rounded-[1.5rem] border border-white/15 bg-white/[0.06] p-3 shadow-2xl backdrop-blur-sm">
+            <div className="relative aspect-[4/3] overflow-hidden rounded-[1.1rem]">
+              <Image
+                src="/images/rycode-product-system.png"
+                alt="نمایی انتزاعی از سیستم‌های دیجیتال و داده‌های متصل"
+                fill
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-transparent to-transparent" />
+              <div className="absolute inset-x-4 bottom-4">
+                <span className="meta-label text-brand">RYCODE / FIELD NOTE</span>
+                <p className="mt-2 text-sm leading-6 text-white/80">
+                  {locale === "fa"
+                    ? "از مسئله‌ی واقعی شروع می‌کنیم."
+                    : "Start with the real problem."}
+                </p>
+              </div>
+            </div>
+            <div className="mt-3 rounded-xl border border-white/10 bg-ink/60 p-4 text-sm leading-7 text-white/60">
+              {aside ??
+                (locale === "fa"
+                  ? "هر پیشنهاد پس از شناخت مسئله، محدودیت‌ها و معیار موفقیت شکل می‌گیرد."
+                  : "Every recommendation follows an understanding of the problem, constraints and success criteria.")}
+            </div>
           </div>
         </div>
       </Container>
@@ -75,8 +101,16 @@ export function ActionLink({
 
 export function FinalBand({ locale }: { locale: Locale }) {
   return (
-    <section className="bg-ink py-20 text-ink-foreground sm:py-28">
-      <Container>
+    <section className="relative overflow-hidden bg-ink py-20 text-ink-foreground sm:py-28">
+      <Image
+        src="/images/rycode-connected-world.png"
+        alt=""
+        fill
+        className="object-cover opacity-20"
+        aria-hidden
+      />
+      <div className="absolute inset-0 bg-gradient-to-l from-ink/35 via-ink/85 to-ink" />
+      <Container className="relative">
         <div className="grid gap-10 lg:grid-cols-[1fr_auto] lg:items-end">
           <div>
             <p className="meta-label text-brand">RYCODE / START</p>

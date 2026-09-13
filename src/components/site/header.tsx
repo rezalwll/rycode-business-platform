@@ -119,14 +119,16 @@ export function SiteHeader({ locale }: { locale: Locale }) {
   return (
     <header
       className={cn(
-        "sticky top-0 z-50 border-b transition-[background-color,border-color] duration-300",
-        scrolled
-          ? "border-border bg-background/90 backdrop-blur-md"
-          : "border-transparent bg-background/70",
+        "sticky top-3 z-50 px-3 transition-[background-color,border-color] duration-300",
       )}
       onMouseLeave={() => setOpen(null)}
     >
-      <Container className="flex h-[76px] items-center justify-between gap-6">
+      <Container
+        className={cn(
+          "flex h-[68px] items-center justify-between gap-6 rounded-full border px-4 shadow-lg backdrop-blur-xl transition-colors sm:px-6",
+          scrolled ? "border-border bg-background/90" : "border-border/70 bg-background/75",
+        )}
+      >
         <div className="flex items-center gap-8">
           <Link href="/" aria-label="RYCODE" className="shrink-0">
             <Logo />
@@ -207,7 +209,7 @@ export function SiteHeader({ locale }: { locale: Locale }) {
       </Container>
 
       {open && (
-        <div className="absolute inset-x-0 top-full hidden border-y border-border bg-surface shadow-sm lg:block">
+        <div className="absolute inset-x-3 top-[calc(100%+0.75rem)] hidden rounded-[1.5rem] border border-border bg-surface/95 shadow-2xl backdrop-blur-xl lg:block">
           <Container className="py-10">
             {open === "services" && <MegaColumns groups={services} />}
             {open === "solutions" && <MegaColumns groups={solutions} />}

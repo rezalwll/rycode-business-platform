@@ -1,4 +1,5 @@
 import { ArrowUpLeft, ArrowUpRight } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 
 import { Container } from "@/components/site/primitives";
@@ -48,6 +49,12 @@ export function CatalogHub({ locale, kind }: { locale: Locale; kind: CatalogKind
   const copy = kindCopy[kind];
   const entries = getCatalogEntries(kind);
   const Arrow = locale === "fa" ? ArrowUpLeft : ArrowUpRight;
+  const cardImages = [
+    "/images/rycode-product-system.png",
+    "/images/rycode-hero-structure.png",
+    "/images/rycode-connected-world.png",
+    "/images/rycode-project-rescue.png",
+  ];
 
   return (
     <>
@@ -69,32 +76,43 @@ export function CatalogHub({ locale, kind }: { locale: Locale; kind: CatalogKind
           </>
         }
       />
-      <section className="py-16 sm:py-24">
+      <section className="bg-background py-16 sm:py-24">
         <Container>
-          <div className="grid border-t border-s border-hairline md:grid-cols-2 xl:grid-cols-3">
+          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
             {entries.map((entry, index) => (
               <Link
                 key={entry.slug}
                 href={localizedHref(locale, `/${kind}/${entry.slug}`)}
-                className="group relative min-h-80 border-e border-b border-hairline bg-background p-7 transition-colors hover:bg-surface sm:p-9"
+                className="group relative overflow-hidden rounded-[1.35rem] border border-border bg-surface p-3 transition-[transform,box-shadow,border-color] duration-300 hover:-translate-y-1 hover:border-brand/45 hover:shadow-xl"
               >
-                <div className="flex items-start justify-between gap-6">
-                  <span className="meta-label text-muted-foreground">
-                    {String(index + 1).padStart(2, "0")} / {labels[kind][locale].item}
-                  </span>
-                  <span className="grid size-10 place-items-center rounded-[5px] border border-foreground/20 transition-colors group-hover:border-brand group-hover:bg-brand group-hover:text-brand-foreground">
-                    <Arrow className="size-4" aria-hidden />
-                  </span>
+                <div className="relative aspect-[16/9] overflow-hidden rounded-[1rem] bg-ink">
+                  <Image
+                    src={cardImages[index % cardImages.length]!}
+                    alt=""
+                    fill
+                    className="object-cover opacity-80 transition-transform duration-700 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-transparent to-transparent" />
+                  <div className="absolute inset-x-3 bottom-3 flex items-end justify-between gap-4">
+                    <span className="meta-label text-white/70">
+                      {String(index + 1).padStart(2, "0")} / {labels[kind][locale].item}
+                    </span>
+                    <span className="grid size-9 place-items-center rounded-full border border-white/25 bg-ink/30 text-white backdrop-blur-sm transition-colors group-hover:border-brand group-hover:bg-brand group-hover:text-brand-foreground">
+                      <Arrow className="size-4" aria-hidden />
+                    </span>
+                  </div>
                 </div>
-                <h2 className="display-3 mt-16">{localize(entry.title, locale)}</h2>
-                <p className="mt-5 max-w-md text-sm leading-7 text-muted-foreground">
-                  {localize(entry.summary, locale)}
-                </p>
-                {entry.conceptual && (
-                  <span className="mt-7 inline-flex rounded-full border border-brand/35 bg-brand-soft px-3 py-1 text-xs font-semibold text-brand">
-                    {locale === "fa" ? "مطالعه مفهومی" : "Concept study"}
-                  </span>
-                )}
+                <div className="p-4 sm:p-5">
+                  <h2 className="display-3">{localize(entry.title, locale)}</h2>
+                  <p className="mt-4 max-w-md text-sm leading-7 text-muted-foreground">
+                    {localize(entry.summary, locale)}
+                  </p>
+                  {entry.conceptual && (
+                    <span className="mt-5 inline-flex rounded-full border border-brand/35 bg-brand-soft px-3 py-1 text-xs font-semibold text-brand">
+                      {locale === "fa" ? "مطالعه مفهومی" : "Concept study"}
+                    </span>
+                  )}
+                </div>
               </Link>
             ))}
           </div>
@@ -140,7 +158,7 @@ export function CatalogDetail({ locale, entry }: { locale: Locale; entry: Catalo
           </>
         }
       />
-      <section className="py-16 sm:py-24">
+      <section className="bg-background py-16 sm:py-24">
         <Container>
           <Link
             href={localizedHref(locale, `/${entry.kind}`)}
@@ -148,11 +166,11 @@ export function CatalogDetail({ locale, entry }: { locale: Locale; entry: Catalo
           >
             {kindLabel.back}
           </Link>
-          <div className="mt-12 border-t border-hairline">
+          <div className="mt-12 grid gap-4">
             {entry.sections.map((section, index) => (
               <section
                 key={`${entry.slug}-${index}`}
-                className="grid gap-8 border-b border-hairline py-12 lg:grid-cols-[15rem_minmax(0,1fr)] lg:py-16"
+                className="grid gap-8 rounded-[1.25rem] border border-border bg-surface p-6 sm:p-8 lg:grid-cols-[15rem_minmax(0,1fr)] lg:p-10"
               >
                 <div className="meta-label text-muted-foreground">
                   {String(index + 1).padStart(2, "0")} / {kindLabel.item}
