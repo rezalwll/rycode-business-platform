@@ -1,7 +1,5 @@
 @import "tailwindcss" source(none);
 @source "../src";
-@import "tw-animate-css";
-
 @custom-variant dark (&:is(.dark *));
 
 /* Local IranYekan — no external font service. */
@@ -9,6 +7,33 @@
   font-family: "IRANYekan";
   src: url("/fonts/iranyekan/iranyekan.ttf") format("truetype");
   font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+  /* Keep Latin glyphs on Space Grotesk, including inside Persian sentences. */
+  unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF;
+}
+
+/* Local Space Grotesk — English interface and RYCODE wordmark only. */
+@font-face {
+  font-family: "Space Grotesk";
+  src: url("/fonts/space-grotesk/space-grotesk-400.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Space Grotesk";
+  src: url("/fonts/space-grotesk/space-grotesk-500.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Space Grotesk";
+  src: url("/fonts/space-grotesk/space-grotesk-700.woff2") format("woff2");
+  font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
@@ -28,14 +53,13 @@
   --radius-4xl: calc(var(--radius) + 16px);
 
   --font-sans:
-    "IRANYekan", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, ui-sans-serif, system-ui,
-    sans-serif;
+    "IRANYekan", "Space Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    ui-sans-serif, system-ui, sans-serif;
   --font-display:
-    "IRANYekan", -apple-system, BlinkMacSystemFont, "Segoe UI Semibold", Roboto, ui-sans-serif,
-    sans-serif;
-  --font-latin:
-    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, ui-sans-serif,
-    sans-serif;
+    "IRANYekan", "Space Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI Semibold", Roboto,
+    ui-sans-serif, sans-serif;
+  --font-logo: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-latin: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -185,8 +209,35 @@
     border-color: var(--color-border);
   }
 
+  button:not(:disabled),
+  a[href],
+  summary,
+  select:not(:disabled),
+  input[type="checkbox"]:not(:disabled),
+  input[type="radio"]:not(:disabled),
+  input[type="file"]:not(:disabled),
+  label[for],
+  label:has(input:not(:disabled)),
+  [role="button"]:not([aria-disabled="true"]),
+  [role="tab"]:not([aria-disabled="true"]),
+  [role="menuitem"]:not([aria-disabled="true"]) {
+    cursor: pointer;
+  }
+
+  button:disabled,
+  select:disabled,
+  input:disabled,
+  [aria-disabled="true"] {
+    cursor: not-allowed;
+  }
+
   html {
     -webkit-font-smoothing: antialiased;
+  }
+
+  html[lang="en"] {
+    --font-sans: var(--font-latin);
+    --font-display: var(--font-latin);
   }
 
   body {
@@ -204,6 +255,10 @@
   [lang="en"] body {
     font-family: var(--font-latin);
     letter-spacing: -0.01em;
+  }
+
+  [dir="rtl"] [dir="ltr"] {
+    font-family: var(--font-latin);
   }
 
   h1,
@@ -245,30 +300,30 @@
   background-size: 72px 72px;
 }
 
-/* Editorial display scale — typography is the primary design element. */
+/* Calm display scale — the interface leaves room for the work and imagery. */
 @utility display-1 {
-  font-size: clamp(2.9rem, 7.4vw, 7rem);
-  line-height: 1.06;
+  font-size: clamp(2.35rem, 5.2vw, 5.25rem);
+  line-height: 1.08;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+}
+
+@utility display-2 {
+  font-size: clamp(1.75rem, 3.5vw, 3.25rem);
+  line-height: 1.13;
   font-weight: 800;
   letter-spacing: -0.02em;
 }
 
-@utility display-2 {
-  font-size: clamp(2rem, 4.4vw, 4.25rem);
-  line-height: 1.15;
-  font-weight: 800;
-  letter-spacing: -0.015em;
-}
-
 @utility display-3 {
-  font-size: clamp(1.5rem, 2.6vw, 2.4rem);
-  line-height: 1.25;
+  font-size: clamp(1.25rem, 2.1vw, 2rem);
+  line-height: 1.3;
   font-weight: 700;
 }
 
 /* Small technical metadata language: 01 / BUILD */
 @utility meta-label {
-  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  font-family: var(--font-latin);
   font-size: 0.7rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
@@ -290,6 +345,47 @@
   }
 }
 
+@utility soft-grid {
+  background-image:
+    linear-gradient(
+      to right,
+      color-mix(in oklch, var(--color-foreground) 8%, transparent) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      to bottom,
+      color-mix(in oklch, var(--color-foreground) 8%, transparent) 1px,
+      transparent 1px
+    );
+  background-size: 46px 46px;
+}
+
+@utility visual-card {
+  border: 1px solid var(--color-border);
+  border-radius: 1.25rem;
+  background: color-mix(in oklch, var(--color-surface) 88%, transparent);
+  box-shadow: 0 20px 60px color-mix(in oklch, var(--color-foreground) 8%, transparent);
+}
+
+@keyframes rycode-float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-1deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(1deg);
+  }
+}
+
+@utility float-slow {
+  animation: rycode-float 7s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .float-slow {
+    animation: none;
+  }
+}
 
 @utility reveal {
   animation: rycode-reveal 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;

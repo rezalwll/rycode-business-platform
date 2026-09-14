@@ -1,0 +1,20 @@
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+
+import { AuthPage } from "@/components/auth/auth-page";
+import { isLocale } from "@/i18n/routing";
+
+export const metadata: Metadata = {
+  title: "بازیابی گذرواژه",
+  robots: { index: false, follow: false },
+};
+
+export default async function ForgotPasswordPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  if (!isLocale(locale)) notFound();
+  return <AuthPage locale={locale} mode="forgot" />;
+}

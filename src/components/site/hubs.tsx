@@ -1,4 +1,4 @@
-import { Link } from "@tanstack/react-router";
+import { Link } from "@/i18n/navigation";
 import {
   ArrowLeft,
   Boxes,
@@ -15,7 +15,14 @@ import {
 } from "lucide-react";
 import type { ReactNode } from "react";
 
-import { Container, CtaLink, Eyebrow, Lead, Section, SectionTitle } from "@/components/site/primitives";
+import {
+  Container,
+  CtaLink,
+  Eyebrow,
+  Lead,
+  Section,
+  SectionTitle,
+} from "@/components/site/primitives";
 import type { AppPath } from "@/lib/nav-content";
 
 /* ------------------------------------------------------------------ */
@@ -51,11 +58,31 @@ const servicePaths: { label: string; hint: string; to: AppPath; icon: typeof Roc
 ];
 
 const pillars: { n: string; title: string; body: string }[] = [
-  { n: "01", title: "طراحی و ساخت وب", body: "سایت شرکتی، فروشگاه اینترنتی و سایت اختصاصی با ساختار قابل توسعه." },
-  { n: "02", title: "نرم‌افزار اختصاصی", body: "پنل، داشبورد و سیستم داخلی متناسب با فرآیند واقعی کسب‌وکار." },
-  { n: "03", title: "توسعه پروژه موجود", body: "ادامه دادن سیستمی که هست، به‌جای شروع دوباره از صفر." },
-  { n: "04", title: "یکپارچه‌سازی و API", body: "اتصال سیستم‌ها به هم و پایان‌دادن به کارهای دستی تکراری." },
-  { n: "05", title: "حل مشکل فنی", body: "رفع باگ، افزایش سرعت، مهاجرت و نجات پروژه‌های متوقف‌شده." },
+  {
+    n: "01",
+    title: "طراحی و ساخت وب",
+    body: "سایت شرکتی، فروشگاه اینترنتی و سایت اختصاصی با ساختار قابل توسعه.",
+  },
+  {
+    n: "02",
+    title: "نرم‌افزار اختصاصی",
+    body: "پنل، داشبورد و سیستم داخلی متناسب با فرآیند واقعی کسب‌وکار.",
+  },
+  {
+    n: "03",
+    title: "توسعه پروژه موجود",
+    body: "ادامه دادن سیستمی که هست، به‌جای شروع دوباره از صفر.",
+  },
+  {
+    n: "04",
+    title: "یکپارچه‌سازی و API",
+    body: "اتصال سیستم‌ها به هم و پایان‌دادن به کارهای دستی تکراری.",
+  },
+  {
+    n: "05",
+    title: "حل مشکل فنی",
+    body: "رفع باگ، افزایش سرعت، مهاجرت و نجات پروژه‌های متوقف‌شده.",
+  },
   { n: "06", title: "سئو و رشد", body: "سئو تکنیکال، معماری محتوا و بهبود مسیر تبدیل کاربر." },
   { n: "07", title: "پشتیبانی و نگهداری", body: "پایداری، به‌روزرسانی و توسعه در بازه‌های مشخص." },
 ];
@@ -75,7 +102,7 @@ export function ServicesHubIntro() {
         {servicePaths.map((p) => (
           <li key={p.label} className="bg-background">
             <Link
-              to={p.to}
+              href={p.to}
               className="flex h-full flex-col gap-3 p-6 transition-colors hover:bg-secondary/60"
             >
               <p.icon className="size-5 text-brand" aria-hidden />
@@ -94,7 +121,10 @@ export function ServicesHubIntro() {
         </div>
         <ol className="grid gap-0">
           {pillars.map((p) => (
-            <li key={p.n} className="grid gap-2 border-t border-border py-6 sm:grid-cols-[3rem_minmax(0,16rem)_minmax(0,1fr)] sm:gap-6">
+            <li
+              key={p.n}
+              className="grid gap-2 border-t border-border py-6 sm:grid-cols-[3rem_minmax(0,16rem)_minmax(0,1fr)] sm:gap-6"
+            >
               <span dir="ltr" className="font-display text-xs font-bold text-brand">
                 {p.n}
               </span>
@@ -207,7 +237,7 @@ export function ProblemsHubIntro() {
         {symptoms.map((s) => (
           <li key={s.label}>
             <Link
-              to="/technical-review"
+              href="/technical-review"
               className="flex flex-wrap items-center gap-x-6 gap-y-2 px-6 py-5 transition-colors hover:bg-secondary/60"
             >
               <span className="flex items-center gap-3 text-sm font-bold sm:min-w-[15rem]">
@@ -223,7 +253,7 @@ export function ProblemsHubIntro() {
 
       <p className="mt-6 text-sm leading-7 text-muted-foreground">
         هیچ‌کدام دقیقاً مشکل شما نیست؟{" "}
-        <Link to="/contact" className="brand-underline font-semibold text-foreground">
+        <Link href="/contact" className="brand-underline font-semibold text-foreground">
           وضعیت‌تان را توضیح دهید
         </Link>
         .
@@ -355,7 +385,9 @@ export function HubOutro({ children }: { children?: ReactNode }) {
     <Section className="border-t border-border bg-surface">
       <Container>
         <SectionTitle className="mt-0">مطمئن نیستید از کجا شروع کنید؟</SectionTitle>
-        <Lead>{children ?? "وضعیت فعلی‌تان را بنویسید؛ مسیر پیشنهادی را برایتان مشخص می‌کنیم."}</Lead>
+        <Lead>
+          {children ?? "وضعیت فعلی‌تان را بنویسید؛ مسیر پیشنهادی را برایتان مشخص می‌کنیم."}
+        </Lead>
         <div className="mt-8 flex flex-wrap gap-3">
           <CtaLink to="/start-project">شروع پروژه</CtaLink>
           <CtaLink to="/contact" variant="outline">

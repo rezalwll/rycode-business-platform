@@ -1,0 +1,32 @@
+packages:
+  - "."
+
+overrides:
+  "@hono/node-server": 1.19.15
+  deepmerge-ts: 8.0.0
+  mysql2: 3.23.1
+  valibot: 1.4.2
+
+allowBuilds:
+  "@parcel/watcher": true
+  "@prisma/engines": true
+  "@swc/core": true
+  esbuild: true
+  prisma: true
+  sharp: true
+  unrs-resolver: true
+
+onlyBuiltDependencies:
+  - "@parcel/watcher"
+  - "@prisma/engines"
+  - "@swc/core"
+  - esbuild
+  - prisma
+  - sharp
+  - unrs-resolver
+
+minimumReleaseAgeExclude:
+  - "@hono/node-server@1.19.15"
+  - mysql2@3.23.1
+  - nodemailer@10.0.1
+  - valibot@1.4.2

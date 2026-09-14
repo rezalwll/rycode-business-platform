@@ -1,16 +1,10 @@
-import { Link } from "@tanstack/react-router";
 import { ArrowLeft } from "lucide-react";
 import type { ReactNode } from "react";
+import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 import type { AppPath } from "@/lib/nav-content";
 
-export function Container({
-  className,
-  children,
-}: {
-  className?: string;
-  children: ReactNode;
-}) {
+export function Container({ className, children }: { className?: string; children: ReactNode }) {
   return (
     <div className={cn("mx-auto w-full max-w-[1440px] px-5 sm:px-8 lg:px-12", className)}>
       {children}
@@ -28,7 +22,7 @@ export function Section({
   id?: string;
 }) {
   return (
-    <section id={id} className={cn("py-24 sm:py-32", className)}>
+    <section id={id} className={cn("py-20 sm:py-28", className)}>
       {children}
     </section>
   );
@@ -64,13 +58,7 @@ export function Eyebrow({ children }: { children: ReactNode }) {
   );
 }
 
-export function SectionTitle({
-  children,
-  className,
-}: {
-  children: ReactNode;
-  className?: string;
-}) {
+export function SectionTitle({ children, className }: { children: ReactNode; className?: string }) {
   return <h2 className={cn("display-2 mt-7 max-w-4xl", className)}>{children}</h2>;
 }
 
@@ -98,7 +86,7 @@ export function CtaLink({
 }) {
   return (
     <Link
-      to={to}
+      href={to}
       className={cn(
         base,
         variant === "primary" &&
@@ -126,7 +114,7 @@ export function TextLink({
 }) {
   return (
     <Link
-      to={to}
+      href={to}
       className={cn(
         "group inline-flex items-center gap-3 text-sm font-bold text-foreground",
         className,

@@ -1,0 +1,1451 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum ClientKind {
+  INDIVIDUAL   @map("individual")
+  ORGANIZATION @map("organization")
+
+  @@map("client_kind")
+}
+
+enum ClientMemberRole {
+  OWNER   @map("owner")
+  ADMIN   @map("admin")
+  MEMBER  @map("member")
+  BILLING @map("billing")
+  VIEWER  @map("viewer")
+
+  @@map("client_member_role")
+}
+
+enum LeadType {
+  CONTACT      @map("contact")
+  CONSULTATION @map("consultation")
+  QUOTE        @map("quote")
+  AUDIT        @map("audit")
+  SUPPORT      @map("support")
+
+  @@map("lead_type")
+}
+
+enum LeadStatus {
+  NEW       @map("new")
+  QUALIFIED @map("qualified")
+  CONTACTED @map("contacted")
+  PROPOSAL  @map("proposal")
+  WON       @map("won")
+  LOST      @map("lost")
+  SPAM      @map("spam")
+  ARCHIVED  @map("archived")
+
+  @@map("lead_status")
+}
+
+enum LeadActivityType {
+  CREATED         @map("created")
+  STATUS_CHANGED  @map("status_changed")
+  NOTE_ADDED      @map("note_added")
+  CONTACT_ATTEMPT @map("contact_attempt")
+  ASSIGNED        @map("assigned")
+  CONVERTED       @map("converted")
+  FILE_ATTACHED   @map("file_attached")
+
+  @@map("lead_activity_type")
+}
+
+enum ProjectStatus {
+  DRAFT     @map("draft")
+  PLANNED   @map("planned")
+  ACTIVE    @map("active")
+  ON_HOLD   @map("on_hold")
+  COMPLETED @map("completed")
+  CANCELLED @map("cancelled")
+  ARCHIVED  @map("archived")
+
+  @@map("project_status")
+}
+
+enum ProjectMemberRole {
+  OWNER           @map("owner")
+  MANAGER         @map("manager")
+  CONTRIBUTOR     @map("contributor")
+  CLIENT_APPROVER @map("client_approver")
+  CLIENT_VIEWER   @map("client_viewer")
+
+  @@map("project_member_role")
+}
+
+enum MilestoneKind {
+  DISCOVERY   @map("discovery")
+  DESIGN      @map("design")
+  DEVELOPMENT @map("development")
+  REVIEW      @map("review")
+  DELIVERY    @map("delivery")
+  CUSTOM      @map("custom")
+
+  @@map("milestone_kind")
+}
+
+enum MilestoneStatus {
+  PENDING           @map("pending")
+  IN_PROGRESS       @map("in_progress")
+  AWAITING_APPROVAL @map("awaiting_approval")
+  CHANGES_REQUESTED @map("changes_requested")
+  APPROVED          @map("approved")
+  COMPLETED         @map("completed")
+  BLOCKED           @map("blocked")
+  CANCELLED         @map("cancelled")
+
+  @@map("milestone_status")
+}
+
+enum MilestoneApprovalDecision {
+  APPROVED          @map("approved")
+  REJECTED          @map("rejected")
+  CHANGES_REQUESTED @map("changes_requested")
+
+  @@map("milestone_approval_decision")
+}
+
+enum ActivityVisibility {
+  INTERNAL @map("internal")
+  CLIENT   @map("client")
+
+  @@map("activity_visibility")
+}
+
+enum FileStorageProvider {
+  LOCAL @map("local")
+  S3    @map("s3")
+
+  @@map("file_storage_provider")
+}
+
+enum FileCategory {
+  GENERAL           @map("general")
+  LEAD_ATTACHMENT   @map("lead_attachment")
+  PROJECT_ASSET     @map("project_asset")
+  TICKET_ATTACHMENT @map("ticket_attachment")
+  INVOICE_DOCUMENT  @map("invoice_document")
+  PAYMENT_RECEIPT   @map("payment_receipt")
+  CMS_MEDIA         @map("cms_media")
+
+  @@map("file_category")
+}
+
+enum FileStatus {
+  UPLOADING   @map("uploading")
+  QUARANTINED @map("quarantined")
+  READY       @map("ready")
+  REJECTED    @map("rejected")
+  DELETED     @map("deleted")
+
+  @@map("file_status")
+}
+
+enum FileScanStatus {
+  PENDING  @map("pending")
+  CLEAN    @map("clean")
+  INFECTED @map("infected")
+  FAILED   @map("failed")
+
+  @@map("file_scan_status")
+}
+
+enum FileVisibility {
+  INTERNAL        @map("internal")
+  PROJECT_MEMBERS @map("project_members")
+  CLIENT_MEMBERS  @map("client_members")
+
+  @@map("file_visibility")
+}
+
+enum TicketStatus {
+  OPEN              @map("open")
+  WAITING_ON_STAFF  @map("waiting_on_staff")
+  WAITING_ON_CLIENT @map("waiting_on_client")
+  RESOLVED          @map("resolved")
+  CLOSED            @map("closed")
+
+  @@map("ticket_status")
+}
+
+enum TicketCategory {
+  GENERAL   @map("general")
+  TECHNICAL @map("technical")
+  BILLING   @map("billing")
+  PROJECT   @map("project")
+
+  @@map("ticket_category")
+}
+
+enum TicketPriority {
+  LOW    @map("low")
+  NORMAL @map("normal")
+  HIGH   @map("high")
+  URGENT @map("urgent")
+
+  @@map("ticket_priority")
+}
+
+enum TicketMessageVisibility {
+  PUBLIC   @map("public")
+  INTERNAL @map("internal")
+
+  @@map("ticket_message_visibility")
+}
+
+enum InvoiceStatus {
+  DRAFT          @map("draft")
+  ISSUED         @map("issued")
+  PARTIALLY_PAID @map("partially_paid")
+  PAID           @map("paid")
+  OVERDUE        @map("overdue")
+  VOID           @map("void")
+
+  @@map("invoice_status")
+}
+
+enum InstallmentStatus {
+  PENDING        @map("pending")
+  PARTIALLY_PAID @map("partially_paid")
+  PAID           @map("paid")
+  OVERDUE        @map("overdue")
+  WAIVED         @map("waived")
+
+  @@map("installment_status")
+}
+
+enum PaymentStatus {
+  PENDING   @map("pending")
+  SUCCEEDED @map("succeeded")
+  FAILED    @map("failed")
+  REFUNDED  @map("refunded")
+  VOID      @map("void")
+
+  @@map("payment_status")
+}
+
+enum PaymentMethod {
+  BANK_TRANSFER @map("bank_transfer")
+  CARD          @map("card")
+  CASH          @map("cash")
+  CHEQUE        @map("cheque")
+  GATEWAY       @map("gateway")
+  OTHER         @map("other")
+
+  @@map("payment_method")
+}
+
+enum NotificationKind {
+  SYSTEM    @map("system")
+  PROJECT   @map("project")
+  MILESTONE @map("milestone")
+  TICKET    @map("ticket")
+  INVOICE   @map("invoice")
+  PAYMENT   @map("payment")
+  CONTENT   @map("content")
+
+  @@map("notification_kind")
+}
+
+enum ContentKind {
+  ARTICLE     @map("article")
+  SERVICE     @map("service")
+  SOLUTION    @map("solution")
+  PROBLEM     @map("problem")
+  INDUSTRY    @map("industry")
+  INTEGRATION @map("integration")
+  CASE_STUDY  @map("case_study")
+
+  @@map("content_kind")
+}
+
+enum ContentStatus {
+  DRAFT     @map("draft")
+  REVIEW    @map("review")
+  SCHEDULED @map("scheduled")
+  PUBLISHED @map("published")
+  ARCHIVED  @map("archived")
+
+  @@map("content_status")
+}
+
+enum TranslationState {
+  DRAFT    @map("draft")
+  REVIEWED @map("reviewed")
+  APPROVED @map("approved")
+
+  @@map("translation_state")
+}
+
+enum ContentRelationKind {
+  RELATED       @map("related")
+  SOLVES        @map("solves")
+  USES          @map("uses")
+  FOR_INDUSTRY  @map("for_industry")
+  CASE_STUDY_OF @map("case_study_of")
+
+  @@map("content_relation_kind")
+}
+
+enum AuthorRole {
+  PRIMARY     @map("primary")
+  COAUTHOR    @map("coauthor")
+  CONTRIBUTOR @map("contributor")
+  REVIEWER    @map("reviewer")
+
+  @@map("author_role")
+}
+
+enum SiteSettingVisibility {
+  PUBLIC  @map("public")
+  PRIVATE @map("private")
+  SECRET  @map("secret")
+
+  @@map("site_setting_visibility")
+}
+
+enum ConsentState {
+  UNKNOWN @map("unknown")
+  GRANTED @map("granted")
+  DENIED  @map("denied")
+
+  @@map("consent_state")
+}
+
+enum AnalyticsEventName {
+  PAGE_VIEW      @map("page_view")
+  CTA_CLICK      @map("cta_click")
+  FORM_STARTED   @map("form_started")
+  FORM_SUBMITTED @map("form_submitted")
+  SEARCH         @map("search")
+  DOWNLOAD       @map("download")
+  LOGIN          @map("login")
+  CUSTOM         @map("custom")
+
+  @@map("analytics_event_name")
+}
+
+enum AnalyticsPageType {
+  MARKETING @map("marketing")
+  ARTICLE   @map("article")
+  SERVICE   @map("service")
+  PORTAL    @map("portal")
+  ADMIN     @map("admin")
+  OTHER     @map("other")
+
+  @@map("analytics_page_type")
+}
+
+model User {
+  id            String   @id
+  name          String   @db.VarChar(160)
+  email         String   @unique @db.VarChar(320)
+  emailVerified Boolean  @default(false) @map("email_verified")
+  image         String?
+  createdAt     DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt     DateTime @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  accounts            Account[]
+  sessions            Session[]
+  profile             Profile?
+  roles               UserRole[]          @relation("UserRoleUser")
+  assignedRoles       UserRole[]          @relation("UserRoleAssignedBy")
+  clientMemberships   ClientMember[]
+  submittedLeads      Lead[]              @relation("LeadSubmittedBy")
+  ownedLeads          Lead[]              @relation("LeadOwner")
+  leadActivities      LeadActivity[]
+  projectMemberships  ProjectMember[]
+  milestoneApprovals  MilestoneApproval[]
+  projectActivities   ProjectActivity[]
+  uploadedFiles       FileAsset[]
+  openedTickets       Ticket[]            @relation("TicketOpenedBy")
+  assignedTickets     Ticket[]            @relation("TicketAssignedTo")
+  ticketMessages      TicketMessage[]
+  recordedPayments    Payment[]
+  notifications       Notification[]
+  createdContentItems ContentItem[]       @relation("ContentCreatedBy")
+  updatedContentItems ContentItem[]       @relation("ContentUpdatedBy")
+  authorProfile       Author?             @relation("AuthorUser")
+  updatedSiteSettings SiteSetting[]
+  analyticsSessions   AnalyticsSession[]
+  analyticsEvents     AnalyticsEvent[]
+  auditLogs           AuditLog[]
+
+  @@map("users")
+}
+
+model Account {
+  id                    String    @id
+  userId                String    @map("user_id")
+  accountId             String    @map("account_id")
+  providerId            String    @map("provider_id")
+  accessToken           String?   @map("access_token")
+  refreshToken          String?   @map("refresh_token")
+  accessTokenExpiresAt  DateTime? @map("access_token_expires_at") @db.Timestamptz(3)
+  refreshTokenExpiresAt DateTime? @map("refresh_token_expires_at") @db.Timestamptz(3)
+  scope                 String?
+  idToken               String?   @map("id_token")
+  password              String?
+  createdAt             DateTime  @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt             DateTime  @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([providerId, accountId])
+  @@index([userId])
+  @@map("accounts")
+}
+
+model Session {
+  id        String   @id
+  userId    String   @map("user_id")
+  token     String   @unique
+  expiresAt DateTime @map("expires_at") @db.Timestamptz(3)
+  ipAddress String?  @map("ip_address") @db.VarChar(64)
+  userAgent String?  @map("user_agent")
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([expiresAt])
+  @@map("sessions")
+}
+
+model Verification {
+  id         String   @id
+  identifier String
+  value      String
+  expiresAt  DateTime @map("expires_at") @db.Timestamptz(3)
+  createdAt  DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt  DateTime @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  @@index([identifier])
+  @@index([expiresAt])
+  @@map("verifications")
+}
+
+model Profile {
+  userId      String   @id @map("user_id")
+  displayName String?  @map("display_name") @db.VarChar(160)
+  phone       String?  @db.VarChar(32)
+  company     String?  @db.VarChar(200)
+  locale      String   @default("fa") @db.VarChar(10)
+  timezone    String   @default("Asia/Tehran") @db.VarChar(64)
+  bio         String?
+  createdAt   DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt   DateTime @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("profiles")
+}
+
+model Role {
+  id          String   @id @default(uuid()) @db.Uuid
+  key         String   @unique @db.VarChar(80)
+  name        String   @db.VarChar(120)
+  description String?
+  isSystem    Boolean  @default(true) @map("is_system")
+  createdAt   DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt   DateTime @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  users       UserRole[]
+  permissions RolePermission[]
+
+  @@map("roles")
+}
+
+model Permission {
+  id          String   @id @default(uuid()) @db.Uuid
+  key         String   @unique @db.VarChar(120)
+  description String?
+  createdAt   DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+
+  roles RolePermission[]
+
+  @@map("permissions")
+}
+
+model UserRole {
+  userId       String   @map("user_id")
+  roleId       String   @map("role_id") @db.Uuid
+  assignedById String?  @map("assigned_by_id")
+  assignedAt   DateTime @default(now()) @map("assigned_at") @db.Timestamptz(3)
+
+  user       User  @relation("UserRoleUser", fields: [userId], references: [id], onDelete: Cascade)
+  role       Role  @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  assignedBy User? @relation("UserRoleAssignedBy", fields: [assignedById], references: [id], onDelete: SetNull)
+
+  @@id([userId, roleId])
+  @@index([roleId])
+  @@index([assignedById])
+  @@map("user_roles")
+}
+
+model RolePermission {
+  roleId       String @map("role_id") @db.Uuid
+  permissionId String @map("permission_id") @db.Uuid
+
+  role       Role       @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  permission Permission @relation(fields: [permissionId], references: [id], onDelete: Cascade)
+
+  @@id([roleId, permissionId])
+  @@index([permissionId])
+  @@map("role_permissions")
+}
+
+model Client {
+  id             String     @id @default(uuid()) @db.Uuid
+  kind           ClientKind @default(ORGANIZATION)
+  displayName    String     @map("display_name") @db.VarChar(200)
+  legalName      String?    @map("legal_name") @db.VarChar(240)
+  email          String?    @db.VarChar(320)
+  phone          String?    @db.VarChar(32)
+  taxId          String?    @map("tax_id") @db.VarChar(64)
+  billingAddress Json?      @map("billing_address") @db.JsonB
+  isActive       Boolean    @default(true) @map("is_active")
+  createdAt      DateTime   @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt      DateTime   @updatedAt @map("updated_at") @db.Timestamptz(3)
+  archivedAt     DateTime?  @map("archived_at") @db.Timestamptz(3)
+
+  members  ClientMember[]
+  leads    Lead[]
+  projects Project[]
+  tickets  Ticket[]
+  invoices Invoice[]
+  payments Payment[]
+
+  @@index([displayName])
+  @@index([isActive, archivedAt])
+  @@map("clients")
+}
+
+model ClientMember {
+  clientId  String           @map("client_id") @db.Uuid
+  userId    String           @map("user_id")
+  role      ClientMemberRole @default(MEMBER)
+  isPrimary Boolean          @default(false) @map("is_primary")
+  createdAt DateTime         @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt DateTime         @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  client Client @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([clientId, userId])
+  @@index([userId])
+  @@index([clientId, role])
+  @@map("client_members")
+}
+
+model Lead {
+  id                 String     @id @default(uuid()) @db.Uuid
+  clientId           String?    @map("client_id") @db.Uuid
+  analyticsSessionId String?    @map("analytics_session_id") @db.Uuid
+  submittedById      String?    @map("submitted_by_id")
+  ownerId            String?    @map("owner_id")
+  type               LeadType   @default(CONTACT)
+  status             LeadStatus @default(NEW)
+  name               String     @db.VarChar(160)
+  company            String?    @db.VarChar(200)
+  email              String?    @db.VarChar(320)
+  phone              String?    @db.VarChar(32)
+  source             String?    @db.VarChar(120)
+  landingPath        String?    @map("landing_path")
+  service            String?    @db.VarChar(160)
+  problem            String?    @db.VarChar(160)
+  industry           String?    @db.VarChar(160)
+  budget             String?    @db.VarChar(120)
+  summary            String?
+  formPayload        Json?      @map("form_payload") @db.JsonB
+  createdAt          DateTime   @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt          DateTime   @updatedAt @map("updated_at") @db.Timestamptz(3)
+  archivedAt         DateTime?  @map("archived_at") @db.Timestamptz(3)
+
+  client           Client?           @relation(fields: [clientId], references: [id], onDelete: SetNull)
+  analyticsSession AnalyticsSession? @relation(fields: [analyticsSessionId], references: [id], onDelete: SetNull)
+  submittedBy      User?             @relation("LeadSubmittedBy", fields: [submittedById], references: [id], onDelete: SetNull)
+  owner            User?             @relation("LeadOwner", fields: [ownerId], references: [id], onDelete: SetNull)
+  activities       LeadActivity[]
+  files            LeadFile[]
+  convertedProject Project?
+
+  @@index([status, createdAt])
+  @@index([type, createdAt])
+  @@index([clientId])
+  @@index([analyticsSessionId])
+  @@index([ownerId, status])
+  @@index([email])
+  @@map("leads")
+}
+
+model LeadActivity {
+  id         String           @id @default(uuid()) @db.Uuid
+  leadId     String           @map("lead_id") @db.Uuid
+  actorId    String?          @map("actor_id")
+  type       LeadActivityType
+  fromStatus LeadStatus?      @map("from_status")
+  toStatus   LeadStatus?      @map("to_status")
+  note       String?
+  metadata   Json?            @db.JsonB
+  createdAt  DateTime         @default(now()) @map("created_at") @db.Timestamptz(3)
+
+  lead  Lead  @relation(fields: [leadId], references: [id], onDelete: Cascade)
+  actor User? @relation(fields: [actorId], references: [id], onDelete: SetNull)
+
+  @@index([leadId, createdAt])
+  @@index([actorId, createdAt])
+  @@map("lead_activities")
+}
+
+model Project {
+  id              String        @id @default(uuid()) @db.Uuid
+  clientId        String        @map("client_id") @db.Uuid
+  originLeadId    String?       @unique @map("origin_lead_id") @db.Uuid
+  number          String        @unique @db.VarChar(48)
+  slug            String?       @unique @db.VarChar(180)
+  name            String        @db.VarChar(220)
+  scope           String?
+  status          ProjectStatus @default(DRAFT)
+  progress        Int           @default(0)
+  startDate       DateTime?     @map("start_date") @db.Date
+  expectedEndDate DateTime?     @map("expected_end_date") @db.Date
+  completedAt     DateTime?     @map("completed_at") @db.Timestamptz(3)
+  latestUpdate    String?       @map("latest_update")
+  clientAction    String?       @map("client_action")
+  internalNote    String?       @map("internal_note")
+  createdAt       DateTime      @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt       DateTime      @updatedAt @map("updated_at") @db.Timestamptz(3)
+  archivedAt      DateTime?     @map("archived_at") @db.Timestamptz(3)
+
+  client     Client            @relation(fields: [clientId], references: [id], onDelete: Restrict)
+  originLead Lead?             @relation(fields: [originLeadId], references: [id], onDelete: SetNull)
+  members    ProjectMember[]
+  milestones Milestone[]
+  activities ProjectActivity[]
+  files      ProjectFile[]
+  tickets    Ticket[]
+  invoices   Invoice[]
+
+  @@index([clientId, status])
+  @@index([status, updatedAt])
+  @@index([archivedAt])
+  @@map("projects")
+}
+
+model ProjectMember {
+  projectId      String            @map("project_id") @db.Uuid
+  userId         String            @map("user_id")
+  role           ProjectMemberRole @default(CONTRIBUTOR)
+  canViewFinance Boolean           @default(false) @map("can_view_finance")
+  createdAt      DateTime          @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt      DateTime          @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([projectId, userId])
+  @@index([userId])
+  @@index([projectId, role])
+  @@map("project_members")
+}
+
+model Milestone {
+  id               String          @id @default(uuid()) @db.Uuid
+  projectId        String          @map("project_id") @db.Uuid
+  kind             MilestoneKind   @default(CUSTOM)
+  title            String          @db.VarChar(220)
+  description      String?
+  status           MilestoneStatus @default(PENDING)
+  position         Int
+  progress         Int             @default(0)
+  startDate        DateTime?       @map("start_date") @db.Date
+  expectedEndDate  DateTime?       @map("expected_end_date") @db.Date
+  completedAt      DateTime?       @map("completed_at") @db.Timestamptz(3)
+  deliverables     Json?           @db.JsonB
+  approvalRequired Boolean         @default(false) @map("approval_required")
+  createdAt        DateTime        @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt        DateTime        @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  project   Project             @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  approvals MilestoneApproval[]
+
+  @@unique([projectId, position])
+  @@index([projectId, status])
+  @@map("milestones")
+}
+
+model MilestoneApproval {
+  id          String                    @id @default(uuid()) @db.Uuid
+  milestoneId String                    @map("milestone_id") @db.Uuid
+  userId      String                    @map("user_id")
+  decision    MilestoneApprovalDecision
+  note        String?
+  createdAt   DateTime                  @default(now()) @map("created_at") @db.Timestamptz(3)
+
+  milestone Milestone @relation(fields: [milestoneId], references: [id], onDelete: Cascade)
+  user      User      @relation(fields: [userId], references: [id], onDelete: Restrict)
+
+  @@index([milestoneId, createdAt])
+  @@index([userId, createdAt])
+  @@map("milestone_approvals")
+}
+
+model ProjectActivity {
+  id          String             @id @default(uuid()) @db.Uuid
+  projectId   String             @map("project_id") @db.Uuid
+  actorId     String?            @map("actor_id")
+  type        String             @db.VarChar(80)
+  description String
+  visibility  ActivityVisibility @default(CLIENT)
+  metadata    Json?              @db.JsonB
+  createdAt   DateTime           @default(now()) @map("created_at") @db.Timestamptz(3)
+
+  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  actor   User?   @relation(fields: [actorId], references: [id], onDelete: SetNull)
+
+  @@index([projectId, visibility, createdAt])
+  @@index([actorId, createdAt])
+  @@map("project_activities")
+}
+
+model FileAsset {
+  id              String              @id @default(uuid()) @db.Uuid
+  storageProvider FileStorageProvider @default(LOCAL) @map("storage_provider")
+  bucket          String              @default("private") @db.VarChar(100)
+  objectKey       String              @unique @map("object_key")
+  originalName    String              @map("original_name")
+  mimeType        String              @map("mime_type") @db.VarChar(255)
+  sizeBytes       BigInt              @map("size_bytes")
+  checksumSha256  String?             @map("checksum_sha256") @db.Char(64)
+  category        FileCategory        @default(GENERAL)
+  status          FileStatus          @default(UPLOADING)
+  scanStatus      FileScanStatus      @default(PENDING) @map("scan_status")
+  uploadedById    String?             @map("uploaded_by_id")
+  readyAt         DateTime?           @map("ready_at") @db.Timestamptz(3)
+  deletedAt       DateTime?           @map("deleted_at") @db.Timestamptz(3)
+  createdAt       DateTime            @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt       DateTime            @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  uploadedBy          User?               @relation(fields: [uploadedById], references: [id], onDelete: SetNull)
+  projectLinks        ProjectFile[]
+  leadLinks           LeadFile[]
+  ticketMessageLinks  TicketMessageFile[]
+  invoiceLinks        InvoiceFile[]
+  paymentReceiptLinks PaymentReceipt[]
+  media               Media?
+
+  @@index([uploadedById, createdAt])
+  @@index([status, scanStatus])
+  @@index([category, createdAt])
+  @@map("files")
+}
+
+model ProjectFile {
+  projectId  String         @map("project_id") @db.Uuid
+  fileId     String         @map("file_id") @db.Uuid
+  visibility FileVisibility @default(PROJECT_MEMBERS)
+  label      String?        @db.VarChar(200)
+  createdAt  DateTime       @default(now()) @map("created_at") @db.Timestamptz(3)
+
+  project Project   @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  file    FileAsset @relation(fields: [fileId], references: [id], onDelete: Restrict)
+
+  @@id([projectId, fileId])
+  @@index([fileId])
+  @@index([projectId, visibility])
+  @@map("project_files")
+}
+
+model LeadFile {
+  leadId     String         @map("lead_id") @db.Uuid
+  fileId     String         @map("file_id") @db.Uuid
+  visibility FileVisibility @default(INTERNAL)
+  createdAt  DateTime       @default(now()) @map("created_at") @db.Timestamptz(3)
+
+  lead Lead      @relation(fields: [leadId], references: [id], onDelete: Cascade)
+  file FileAsset @relation(fields: [fileId], references: [id], onDelete: Restrict)
+
+  @@id([leadId, fileId])
+  @@index([fileId])
+  @@map("lead_files")
+}
+
+model Ticket {
+  id           String         @id @default(uuid()) @db.Uuid
+  clientId     String         @map("client_id") @db.Uuid
+  projectId    String?        @map("project_id") @db.Uuid
+  openedById   String         @map("opened_by_id")
+  assignedToId String?        @map("assigned_to_id")
+  number       String         @unique @db.VarChar(48)
+  subject      String         @db.VarChar(240)
+  category     TicketCategory @default(GENERAL)
+  priority     TicketPriority @default(NORMAL)
+  status       TicketStatus   @default(OPEN)
+  lastReplyAt  DateTime?      @map("last_reply_at") @db.Timestamptz(3)
+  closedAt     DateTime?      @map("closed_at") @db.Timestamptz(3)
+  createdAt    DateTime       @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt    DateTime       @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  client     Client          @relation(fields: [clientId], references: [id], onDelete: Restrict)
+  project    Project?        @relation(fields: [projectId], references: [id], onDelete: SetNull)
+  openedBy   User            @relation("TicketOpenedBy", fields: [openedById], references: [id], onDelete: Restrict)
+  assignedTo User?           @relation("TicketAssignedTo", fields: [assignedToId], references: [id], onDelete: SetNull)
+  messages   TicketMessage[]
+
+  @@index([clientId, status, updatedAt])
+  @@index([projectId, status])
+  @@index([openedById, createdAt])
+  @@index([assignedToId, status])
+  @@map("tickets")
+}
+
+model TicketMessage {
+  id         String                  @id @default(uuid()) @db.Uuid
+  ticketId   String                  @map("ticket_id") @db.Uuid
+  authorId   String?                 @map("author_id")
+  visibility TicketMessageVisibility @default(PUBLIC)
+  body       String
+  isSystem   Boolean                 @default(false) @map("is_system")
+  createdAt  DateTime                @default(now()) @map("created_at") @db.Timestamptz(3)
+  editedAt   DateTime?               @map("edited_at") @db.Timestamptz(3)
+
+  ticket      Ticket              @relation(fields: [ticketId], references: [id], onDelete: Cascade)
+  author      User?               @relation(fields: [authorId], references: [id], onDelete: SetNull)
+  attachments TicketMessageFile[]
+
+  @@index([ticketId, createdAt])
+  @@index([authorId, createdAt])
+  @@map("ticket_messages")
+}
+
+model TicketMessageFile {
+  messageId String   @map("message_id") @db.Uuid
+  fileId    String   @map("file_id") @db.Uuid
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+
+  message TicketMessage @relation(fields: [messageId], references: [id], onDelete: Cascade)
+  file    FileAsset     @relation(fields: [fileId], references: [id], onDelete: Restrict)
+
+  @@id([messageId, fileId])
+  @@index([fileId])
+  @@map("ticket_message_files")
+}
+
+model Invoice {
+  id             String        @id @default(uuid()) @db.Uuid
+  clientId       String        @map("client_id") @db.Uuid
+  projectId      String?       @map("project_id") @db.Uuid
+  number         String        @unique @db.VarChar(64)
+  title          String        @db.VarChar(240)
+  currency       String        @db.VarChar(3)
+  subtotalAmount BigInt        @default(0) @map("subtotal_amount")
+  discountAmount BigInt        @default(0) @map("discount_amount")
+  taxAmount      BigInt        @default(0) @map("tax_amount")
+  totalAmount    BigInt        @map("total_amount")
+  status         InvoiceStatus @default(DRAFT)
+  issuedAt       DateTime?     @map("issued_at") @db.Timestamptz(3)
+  dueDate        DateTime?     @map("due_date") @db.Date
+  voidedAt       DateTime?     @map("voided_at") @db.Timestamptz(3)
+  notes          String?
+  createdAt      DateTime      @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt      DateTime      @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  client       Client              @relation(fields: [clientId], references: [id], onDelete: Restrict)
+  project      Project?            @relation(fields: [projectId], references: [id], onDelete: SetNull)
+  items        InvoiceItem[]
+  installments Installment[]
+  allocations  PaymentAllocation[]
+  files        InvoiceFile[]
+
+  @@index([clientId, status, dueDate])
+  @@index([projectId, status])
+  @@index([status, issuedAt])
+  @@map("invoices")
+}
+
+model InvoiceItem {
+  id          String   @id @default(uuid()) @db.Uuid
+  invoiceId   String   @map("invoice_id") @db.Uuid
+  description String
+  quantity    Decimal  @db.Decimal(18, 4)
+  unitAmount  BigInt   @map("unit_amount")
+  totalAmount BigInt   @map("total_amount")
+  position    Int
+  createdAt   DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt   DateTime @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  invoice Invoice @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
+
+  @@unique([invoiceId, position])
+  @@map("invoice_items")
+}
+
+model Installment {
+  id        String            @id @default(uuid()) @db.Uuid
+  invoiceId String            @map("invoice_id") @db.Uuid
+  label     String            @db.VarChar(160)
+  amount    BigInt
+  dueDate   DateTime?         @map("due_date") @db.Date
+  status    InstallmentStatus @default(PENDING)
+  position  Int
+  paidAt    DateTime?         @map("paid_at") @db.Timestamptz(3)
+  createdAt DateTime          @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt DateTime          @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  invoice     Invoice             @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
+  allocations PaymentAllocation[]
+
+  @@unique([invoiceId, position])
+  @@index([status, dueDate])
+  @@map("installments")
+}
+
+model Payment {
+  id                String        @id @default(uuid()) @db.Uuid
+  clientId          String        @map("client_id") @db.Uuid
+  recordedById      String?       @map("recorded_by_id")
+  status            PaymentStatus @default(PENDING)
+  method            PaymentMethod
+  amount            BigInt
+  currency          String        @db.VarChar(3)
+  provider          String?       @db.VarChar(120)
+  providerReference String?       @unique @map("provider_reference") @db.VarChar(255)
+  idempotencyKey    String?       @unique @map("idempotency_key") @db.VarChar(180)
+  paidAt            DateTime?     @map("paid_at") @db.Timestamptz(3)
+  metadata          Json?         @db.JsonB
+  createdAt         DateTime      @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt         DateTime      @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  client      Client              @relation(fields: [clientId], references: [id], onDelete: Restrict)
+  recordedBy  User?               @relation(fields: [recordedById], references: [id], onDelete: SetNull)
+  allocations PaymentAllocation[]
+  receipts    PaymentReceipt[]
+
+  @@index([clientId, status, createdAt])
+  @@index([recordedById, createdAt])
+  @@index([paidAt])
+  @@map("payments")
+}
+
+model PaymentAllocation {
+  id            String   @id @default(uuid()) @db.Uuid
+  paymentId     String   @map("payment_id") @db.Uuid
+  invoiceId     String   @map("invoice_id") @db.Uuid
+  installmentId String?  @map("installment_id") @db.Uuid
+  amount        BigInt
+  createdAt     DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+
+  payment     Payment      @relation(fields: [paymentId], references: [id], onDelete: Restrict)
+  invoice     Invoice      @relation(fields: [invoiceId], references: [id], onDelete: Restrict)
+  installment Installment? @relation(fields: [installmentId], references: [id], onDelete: Restrict)
+
+  @@unique([paymentId, invoiceId, installmentId])
+  @@index([invoiceId])
+  @@index([installmentId])
+  @@map("payment_allocations")
+}
+
+model InvoiceFile {
+  invoiceId String   @map("invoice_id") @db.Uuid
+  fileId    String   @map("file_id") @db.Uuid
+  label     String?  @db.VarChar(200)
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+
+  invoice Invoice   @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
+  file    FileAsset @relation(fields: [fileId], references: [id], onDelete: Restrict)
+
+  @@id([invoiceId, fileId])
+  @@index([fileId])
+  @@map("invoice_files")
+}
+
+model PaymentReceipt {
+  paymentId String   @map("payment_id") @db.Uuid
+  fileId    String   @map("file_id") @db.Uuid
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+
+  payment Payment   @relation(fields: [paymentId], references: [id], onDelete: Cascade)
+  file    FileAsset @relation(fields: [fileId], references: [id], onDelete: Restrict)
+
+  @@id([paymentId, fileId])
+  @@index([fileId])
+  @@map("payment_receipts")
+}
+
+model Notification {
+  id        String           @id @default(uuid()) @db.Uuid
+  userId    String           @map("user_id")
+  kind      NotificationKind @default(SYSTEM)
+  title     String           @db.VarChar(220)
+  body      String?
+  link      String?
+  readAt    DateTime?        @map("read_at") @db.Timestamptz(3)
+  createdAt DateTime         @default(now()) @map("created_at") @db.Timestamptz(3)
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, readAt, createdAt])
+  @@map("notifications")
+}
+
+model ContentItem {
+  id              String        @id @default(uuid()) @db.Uuid
+  kind            ContentKind
+  slug            String        @db.VarChar(200)
+  status          ContentStatus @default(DRAFT)
+  noIndex         Boolean       @default(false) @map("no_index")
+  position        Int           @default(0)
+  scheduledAt     DateTime?     @map("scheduled_at") @db.Timestamptz(3)
+  publishedAt     DateTime?     @map("published_at") @db.Timestamptz(3)
+  archivedAt      DateTime?     @map("archived_at") @db.Timestamptz(3)
+  featuredMediaId String?       @map("featured_media_id") @db.Uuid
+  createdById     String?       @map("created_by_id")
+  updatedById     String?       @map("updated_by_id")
+  createdAt       DateTime      @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt       DateTime      @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  featuredMedia     Media?               @relation("ContentFeaturedMedia", fields: [featuredMediaId], references: [id], onDelete: SetNull)
+  createdBy         User?                @relation("ContentCreatedBy", fields: [createdById], references: [id], onDelete: SetNull)
+  updatedBy         User?                @relation("ContentUpdatedBy", fields: [updatedById], references: [id], onDelete: SetNull)
+  translations      ContentTranslation[]
+  categories        ContentCategory[]
+  tags              ContentTag[]
+  authors           ContentAuthor[]
+  outgoingRelations ContentRelation[]    @relation("ContentRelationFrom")
+  incomingRelations ContentRelation[]    @relation("ContentRelationTo")
+  faqs              ContentFaq[]
+  article           Article?
+  service           Service?
+  solution          Solution?
+  problem           Problem?
+  industry          Industry?
+  integration       Integration?
+  caseStudy         CaseStudy?
+
+  @@unique([kind, slug])
+  @@index([status, publishedAt])
+  @@index([kind, status, position])
+  @@index([featuredMediaId])
+  @@map("content_items")
+}
+
+model ContentTranslation {
+  contentId      String           @map("content_id") @db.Uuid
+  locale         String           @db.VarChar(10)
+  title          String           @db.VarChar(240)
+  summary        String?
+  body           Json?            @db.JsonB
+  bodyText       String?          @map("body_text")
+  state          TranslationState @default(DRAFT)
+  seoTitle       String?          @map("seo_title") @db.VarChar(240)
+  seoDescription String?          @map("seo_description")
+  canonicalUrl   String?          @map("canonical_url")
+  ogTitle        String?          @map("og_title") @db.VarChar(240)
+  ogDescription  String?          @map("og_description")
+  createdAt      DateTime         @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt      DateTime         @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  content ContentItem @relation(fields: [contentId], references: [id], onDelete: Cascade)
+
+  @@id([contentId, locale])
+  @@index([locale, state])
+  @@map("content_translations")
+}
+
+model Article {
+  contentId      String  @id @map("content_id") @db.Uuid
+  readingMinutes Int?    @map("reading_minutes")
+  featured       Boolean @default(false)
+  sourceUrl      String? @map("source_url")
+
+  content ContentItem @relation(fields: [contentId], references: [id], onDelete: Cascade)
+
+  @@map("articles")
+}
+
+model Service {
+  contentId           String  @id @map("content_id") @db.Uuid
+  serviceCode         String? @unique @map("service_code") @db.VarChar(80)
+  startingPriceAmount BigInt? @map("starting_price_amount")
+  currency            String? @db.VarChar(3)
+
+  content ContentItem @relation(fields: [contentId], references: [id], onDelete: Cascade)
+
+  @@map("services")
+}
+
+model Solution {
+  contentId String @id @map("content_id") @db.Uuid
+  priority  Int    @default(0)
+
+  content ContentItem @relation(fields: [contentId], references: [id], onDelete: Cascade)
+
+  @@map("solutions")
+}
+
+model Problem {
+  contentId String @id @map("content_id") @db.Uuid
+  priority  Int    @default(0)
+
+  content ContentItem @relation(fields: [contentId], references: [id], onDelete: Cascade)
+
+  @@map("problems")
+}
+
+model Industry {
+  contentId String @id @map("content_id") @db.Uuid
+  priority  Int    @default(0)
+
+  content ContentItem @relation(fields: [contentId], references: [id], onDelete: Cascade)
+
+  @@map("industries")
+}
+
+model Integration {
+  contentId        String  @id @map("content_id") @db.Uuid
+  vendor           String? @db.VarChar(180)
+  documentationUrl String? @map("documentation_url")
+
+  content ContentItem @relation(fields: [contentId], references: [id], onDelete: Cascade)
+
+  @@map("integrations")
+}
+
+model CaseStudy {
+  contentId     String    @id @map("content_id") @db.Uuid
+  clientName    String?   @map("client_name") @db.VarChar(200)
+  completedAt   DateTime? @map("completed_at") @db.Date
+  resultMetrics Json?     @map("result_metrics") @db.JsonB
+
+  content ContentItem @relation(fields: [contentId], references: [id], onDelete: Cascade)
+
+  @@map("case_studies")
+}
+
+model Category {
+  id        String   @id @default(uuid()) @db.Uuid
+  slug      String   @unique @db.VarChar(160)
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  translations CategoryTranslation[]
+  content      ContentCategory[]
+
+  @@map("categories")
+}
+
+model CategoryTranslation {
+  categoryId  String  @map("category_id") @db.Uuid
+  locale      String  @db.VarChar(10)
+  name        String  @db.VarChar(180)
+  description String?
+
+  category Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  @@id([categoryId, locale])
+  @@index([locale, name])
+  @@map("category_translations")
+}
+
+model ContentCategory {
+  contentId  String @map("content_id") @db.Uuid
+  categoryId String @map("category_id") @db.Uuid
+  position   Int    @default(0)
+
+  content  ContentItem @relation(fields: [contentId], references: [id], onDelete: Cascade)
+  category Category    @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  @@id([contentId, categoryId])
+  @@index([categoryId, position])
+  @@map("content_categories")
+}
+
+model Tag {
+  id        String   @id @default(uuid()) @db.Uuid
+  slug      String   @unique @db.VarChar(160)
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  translations TagTranslation[]
+  content      ContentTag[]
+
+  @@map("tags")
+}
+
+model TagTranslation {
+  tagId  String @map("tag_id") @db.Uuid
+  locale String @db.VarChar(10)
+  name   String @db.VarChar(180)
+
+  tag Tag @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  @@id([tagId, locale])
+  @@index([locale, name])
+  @@map("tag_translations")
+}
+
+model ContentTag {
+  contentId String @map("content_id") @db.Uuid
+  tagId     String @map("tag_id") @db.Uuid
+
+  content ContentItem @relation(fields: [contentId], references: [id], onDelete: Cascade)
+  tag     Tag         @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  @@id([contentId, tagId])
+  @@index([tagId])
+  @@map("content_tags")
+}
+
+model Author {
+  id            String   @id @default(uuid()) @db.Uuid
+  userId        String?  @unique @map("user_id")
+  slug          String   @unique @db.VarChar(160)
+  avatarMediaId String?  @map("avatar_media_id") @db.Uuid
+  createdAt     DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt     DateTime @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  user         User?               @relation("AuthorUser", fields: [userId], references: [id], onDelete: SetNull)
+  avatarMedia  Media?              @relation("AuthorAvatarMedia", fields: [avatarMediaId], references: [id], onDelete: SetNull)
+  translations AuthorTranslation[]
+  content      ContentAuthor[]
+
+  @@index([avatarMediaId])
+  @@map("authors")
+}
+
+model AuthorTranslation {
+  authorId String  @map("author_id") @db.Uuid
+  locale   String  @db.VarChar(10)
+  name     String  @db.VarChar(180)
+  bio      String?
+
+  author Author @relation(fields: [authorId], references: [id], onDelete: Cascade)
+
+  @@id([authorId, locale])
+  @@map("author_translations")
+}
+
+model ContentAuthor {
+  contentId String     @map("content_id") @db.Uuid
+  authorId  String     @map("author_id") @db.Uuid
+  role      AuthorRole @default(PRIMARY)
+  position  Int        @default(0)
+
+  content ContentItem @relation(fields: [contentId], references: [id], onDelete: Cascade)
+  author  Author      @relation(fields: [authorId], references: [id], onDelete: Cascade)
+
+  @@id([contentId, authorId])
+  @@index([authorId])
+  @@index([contentId, position])
+  @@map("content_authors")
+}
+
+model ContentRelation {
+  fromContentId String              @map("from_content_id") @db.Uuid
+  toContentId   String              @map("to_content_id") @db.Uuid
+  kind          ContentRelationKind @default(RELATED)
+  position      Int                 @default(0)
+
+  fromContent ContentItem @relation("ContentRelationFrom", fields: [fromContentId], references: [id], onDelete: Cascade)
+  toContent   ContentItem @relation("ContentRelationTo", fields: [toContentId], references: [id], onDelete: Cascade)
+
+  @@id([fromContentId, toContentId, kind])
+  @@index([toContentId, kind])
+  @@index([fromContentId, kind, position])
+  @@map("content_relations")
+}
+
+model Faq {
+  id        String        @id @default(uuid()) @db.Uuid
+  status    ContentStatus @default(DRAFT)
+  createdAt DateTime      @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt DateTime      @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  translations FaqTranslation[]
+  content      ContentFaq[]
+  pages        PageFaq[]
+
+  @@index([status, updatedAt])
+  @@map("faqs")
+}
+
+model FaqTranslation {
+  faqId    String @map("faq_id") @db.Uuid
+  locale   String @db.VarChar(10)
+  question String
+  answer   Json   @db.JsonB
+
+  faq Faq @relation(fields: [faqId], references: [id], onDelete: Cascade)
+
+  @@id([faqId, locale])
+  @@map("faq_translations")
+}
+
+model ContentFaq {
+  contentId String @map("content_id") @db.Uuid
+  faqId     String @map("faq_id") @db.Uuid
+  position  Int    @default(0)
+
+  content ContentItem @relation(fields: [contentId], references: [id], onDelete: Cascade)
+  faq     Faq         @relation(fields: [faqId], references: [id], onDelete: Cascade)
+
+  @@id([contentId, faqId])
+  @@index([faqId])
+  @@index([contentId, position])
+  @@map("content_faqs")
+}
+
+model PageFaq {
+  path     String @db.VarChar(500)
+  faqId    String @map("faq_id") @db.Uuid
+  position Int    @default(0)
+
+  faq Faq @relation(fields: [faqId], references: [id], onDelete: Cascade)
+
+  @@id([path, faqId])
+  @@index([faqId])
+  @@index([path, position])
+  @@map("page_faqs")
+}
+
+model Media {
+  id          String   @id @default(uuid()) @db.Uuid
+  fileId      String   @unique @map("file_id") @db.Uuid
+  key         String   @unique @db.VarChar(180)
+  focalPointX Decimal? @map("focal_point_x") @db.Decimal(5, 4)
+  focalPointY Decimal? @map("focal_point_y") @db.Decimal(5, 4)
+  createdAt   DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt   DateTime @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  file            FileAsset          @relation(fields: [fileId], references: [id], onDelete: Restrict)
+  translations    MediaTranslation[]
+  featuredContent ContentItem[]      @relation("ContentFeaturedMedia")
+  authorAvatars   Author[]           @relation("AuthorAvatarMedia")
+
+  @@map("media")
+}
+
+model MediaTranslation {
+  mediaId String  @map("media_id") @db.Uuid
+  locale  String  @db.VarChar(10)
+  altText String  @map("alt_text")
+  caption String?
+
+  media Media @relation(fields: [mediaId], references: [id], onDelete: Cascade)
+
+  @@id([mediaId, locale])
+  @@map("media_translations")
+}
+
+model Redirect {
+  id            String   @id @default(uuid()) @db.Uuid
+  sourcePath    String   @unique @map("source_path") @db.VarChar(500)
+  destination   String   @db.VarChar(1000)
+  statusCode    Int      @default(301) @map("status_code")
+  preserveQuery Boolean  @default(true) @map("preserve_query")
+  isActive      Boolean  @default(true) @map("is_active")
+  createdAt     DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt     DateTime @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  @@index([isActive, sourcePath])
+  @@map("redirects")
+}
+
+model SiteSetting {
+  key         String                @id @db.VarChar(120)
+  value       Json                  @db.JsonB
+  visibility  SiteSettingVisibility @default(PRIVATE)
+  updatedById String?               @map("updated_by_id")
+  updatedAt   DateTime              @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  updatedBy User? @relation(fields: [updatedById], references: [id], onDelete: SetNull)
+
+  @@index([visibility])
+  @@index([updatedById])
+  @@map("site_settings")
+}
+
+model AnalyticsSession {
+  id              String       @id @default(uuid()) @db.Uuid
+  userId          String?      @map("user_id")
+  sessionKeyHash  String       @unique @map("session_key_hash") @db.Char(64)
+  anonymousIdHash String       @map("anonymous_id_hash") @db.Char(64)
+  consent         ConsentState @default(UNKNOWN)
+  locale          String?      @db.VarChar(10)
+  landingPath     String?      @map("landing_path")
+  referrer        String?
+  utmSource       String?      @map("utm_source") @db.VarChar(255)
+  utmMedium       String?      @map("utm_medium") @db.VarChar(255)
+  utmCampaign     String?      @map("utm_campaign") @db.VarChar(255)
+  ipHash          String?      @map("ip_hash") @db.Char(64)
+  userAgentHash   String?      @map("user_agent_hash") @db.Char(64)
+  firstSeenAt     DateTime     @default(now()) @map("first_seen_at") @db.Timestamptz(3)
+  lastSeenAt      DateTime     @default(now()) @map("last_seen_at") @db.Timestamptz(3)
+
+  user   User?            @relation(fields: [userId], references: [id], onDelete: SetNull)
+  events AnalyticsEvent[]
+  leads  Lead[]
+
+  @@index([anonymousIdHash, firstSeenAt])
+  @@index([userId, firstSeenAt])
+  @@index([lastSeenAt])
+  @@map("analytics_sessions")
+}
+
+model AnalyticsEvent {
+  id         BigInt             @id @default(autoincrement())
+  sessionId  String             @map("session_id") @db.Uuid
+  userId     String?            @map("user_id")
+  name       AnalyticsEventName
+  customName String?            @map("custom_name") @db.VarChar(120)
+  path       String?
+  pageType   AnalyticsPageType? @map("page_type")
+  entityType String?            @map("entity_type") @db.VarChar(80)
+  entityId   String?            @map("entity_id") @db.VarChar(128)
+  label      String?            @db.VarChar(240)
+  value      Decimal?           @db.Decimal(18, 4)
+  metadata   Json?              @db.JsonB
+  createdAt  DateTime           @default(now()) @map("created_at") @db.Timestamptz(3)
+
+  session AnalyticsSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  user    User?            @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([sessionId, createdAt])
+  @@index([name, createdAt])
+  @@index([userId, createdAt])
+  @@index([path, createdAt])
+  @@index([entityType, entityId, createdAt])
+  @@map("analytics_events")
+}
+
+model AuditLog {
+  id          BigInt   @id @default(autoincrement())
+  actorUserId String?  @map("actor_user_id")
+  action      String   @db.VarChar(120)
+  entityType  String   @map("entity_type") @db.VarChar(80)
+  entityId    String?  @map("entity_id") @db.VarChar(128)
+  requestId   String?  @map("request_id") @db.Uuid
+  before      Json?    @map("before_data") @db.JsonB
+  after       Json?    @map("after_data") @db.JsonB
+  metadata    Json?    @db.JsonB
+  ipHash      String?  @map("ip_hash") @db.Char(64)
+  createdAt   DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+
+  actor User? @relation(fields: [actorUserId], references: [id], onDelete: SetNull)
+
+  @@index([actorUserId, createdAt])
+  @@index([entityType, entityId, createdAt])
+  @@index([action, createdAt])
+  @@index([requestId])
+  @@map("audit_logs")
+}

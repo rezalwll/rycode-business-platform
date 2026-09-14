@@ -11,10 +11,35 @@ node_modules
 dist
 dist-ssr
 .output
+.next
+out
 .vinxi
 .tanstack/**
 .nitro
 *.local
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+
+# Tests and generated artifacts
+coverage
+playwright-report
+test-results
+*.tsbuildinfo
+
+# Runtime data
+storage/private/**
+!storage/private/.gitkeep
+backups/**
+!backups/.gitkeep
+
+# Prisma generated client
+src/generated/prisma
+
+# Next.js generated declarations
+next-env.d.ts
 
 # Wrangler / Cloudflare
 .wrangler/

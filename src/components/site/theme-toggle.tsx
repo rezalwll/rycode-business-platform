@@ -1,5 +1,8 @@
-import { useEffect, useState } from "react";
+"use client";
+
 import { Monitor, Moon, Sun } from "lucide-react";
+import { useEffect, useState } from "react";
+
 import { cn } from "@/lib/utils";
 
 type Mode = "light" | "dark" | "system";
@@ -16,13 +19,15 @@ function apply(mode: Mode) {
 }
 
 export function ThemeToggle({ className }: { className?: string }) {
-  const [mode, setMode] = useState<Mode>("system");
+  const [mode, setMode] = useState<Mode>(() => {
+    if (typeof window === "undefined") return "system";
+    const stored = localStorage.getItem(KEY);
+    return stored === "light" || stored === "dark" || stored === "system" ? stored : "system";
+  });
 
   useEffect(() => {
-    const stored = (localStorage.getItem(KEY) as Mode | null) ?? "system";
-    setMode(stored);
-    apply(stored);
-  }, []);
+    apply(mode);
+  }, [mode]);
 
   const set = (next: Mode) => {
     setMode(next);
