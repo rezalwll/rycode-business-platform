@@ -168,8 +168,7 @@ export function EnglishHome() {
             <div>
               <MetaLabel index={1}>RYCODE / SOFTWARE ENGINEERING</MetaLabel>
               <h1 className="display-1 mt-12 max-w-[13ch]">
-                From idea to execution. From problem to{" "}
-                <span className="text-brand">solution.</span>
+                From idea to execution. From problem to <span className="text-brand">solution</span>
               </h1>
               <p className="mt-10 max-w-xl text-lg leading-8 text-muted-foreground">
                 RYCODE designs, builds and improves web platforms, ecommerce systems, custom
@@ -213,12 +212,10 @@ export function EnglishHome() {
         </Container>
       </section>
 
-      <section className="py-24 sm:py-32">
+      <section className="py-16 sm:py-20">
         <Container>
           <MetaLabel>CAPABILITIES / 05</MetaLabel>
-          <h2 className="display-2 mt-7 max-w-3xl">
-            Engineering outcomes, not technology theatre.
-          </h2>
+          <h2 className="display-2 mt-7 max-w-3xl">Engineering outcomes, not technology theatre</h2>
           <div className="mt-14 border-t border-border">
             {capabilities.map((item, index) => (
               <article
@@ -237,10 +234,10 @@ export function EnglishHome() {
         </Container>
       </section>
 
-      <section className="border-y border-border bg-surface py-24 sm:py-32">
+      <section className="border-y border-border bg-surface py-16 sm:py-20">
         <Container>
           <MetaLabel>STARTING POINT / 03</MetaLabel>
-          <h2 className="display-2 mt-7 max-w-3xl">Start from the situation you have today.</h2>
+          <h2 className="display-2 mt-7 max-w-3xl">Start from the situation you have today</h2>
           <div className="mt-14 grid gap-px overflow-hidden border border-border bg-border lg:grid-cols-3">
             {paths.map((path) => (
               <Link
@@ -264,13 +261,13 @@ export function EnglishHome() {
         </Container>
       </section>
 
-      <section className="py-24 sm:py-32">
+      <section className="py-16 sm:py-20">
         <Container>
           <div className="flex flex-wrap items-end justify-between gap-6">
             <div>
               <MetaLabel>SERVICES / 05</MetaLabel>
               <h2 className="display-2 mt-7 max-w-3xl">
-                One engineering partner across the product lifecycle.
+                One engineering partner across the product lifecycle
               </h2>
             </div>
             <Link href="/services" className="text-sm font-bold text-brand hover:underline">
@@ -295,10 +292,10 @@ export function EnglishHome() {
         </Container>
       </section>
 
-      <section className="bg-brand-soft py-24 sm:py-32">
+      <section className="bg-brand-soft py-16 sm:py-20">
         <Container>
           <MetaLabel>SOLUTIONS / OPERATIONS</MetaLabel>
-          <h2 className="display-2 mt-7 max-w-3xl">Connect the product to the work around it.</h2>
+          <h2 className="display-2 mt-7 max-w-3xl">Connect the product to the work around it</h2>
           <div className="mt-14 grid gap-5 md:grid-cols-2">
             {solutions.map(([title, text], index) => (
               <article key={title} className="border border-border bg-background p-7 sm:p-9">
@@ -314,17 +311,17 @@ export function EnglishHome() {
         </Container>
       </section>
 
-      <section className="bg-ink py-24 text-ink-foreground sm:py-32">
+      <section className="bg-surface py-16 text-foreground dark:bg-ink dark:text-ink-foreground sm:py-20">
         <Container>
           <div className="grid gap-12 lg:grid-cols-[1fr_0.9fr] lg:items-end">
             <div>
               <MetaLabel className="text-brand">PROJECT RESCUE</MetaLabel>
               <h2 className="display-2 mt-7 max-w-[14ch]">
-                A stalled product needs evidence before another rewrite.
+                A stalled product needs evidence before another rewrite
               </h2>
             </div>
             <div>
-              <p className="text-base leading-8 text-white/70">
+              <p className="text-base leading-8 text-muted-foreground dark:text-white/70">
                 We inspect the running system, code, data, security and deployment path. The result
                 is a bounded recommendation: continue, repair deliberately, or rebuild only what the
                 evidence justifies.
@@ -340,11 +337,11 @@ export function EnglishHome() {
         </Container>
       </section>
 
-      <section className="py-24 sm:py-32">
+      <section className="py-16 sm:py-20">
         <Container>
           <MetaLabel>SELECTED DIRECTIONS / CONCEPTS</MetaLabel>
           <h2 className="display-2 mt-7 max-w-3xl">
-            Examples of the problems the platform is designed to solve.
+            Examples of the problems the platform is designed to solve
           </h2>
           <p className="mt-5 max-w-2xl text-sm leading-7 text-muted-foreground">
             These are transparent concept briefs, not invented client claims or fabricated outcomes.
@@ -382,12 +379,12 @@ export function EnglishHome() {
         </Container>
       </section>
 
-      <section className="border-y border-border bg-surface py-24 sm:py-32">
+      <section className="border-y border-border bg-surface py-16 sm:py-20">
         <Container>
           <div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr]">
             <div>
               <MetaLabel>INDUSTRIES / CONTEXT</MetaLabel>
-              <h2 className="display-2 mt-7">Industry context changes the right answer.</h2>
+              <h2 className="display-2 mt-7">Industry context changes the right answer</h2>
             </div>
             <div className="grid gap-px border border-border bg-border sm:grid-cols-2">
               {industries.map((industry, index) => (
@@ -404,10 +401,10 @@ export function EnglishHome() {
         </Container>
       </section>
 
-      <section className="py-24 sm:py-32">
+      <section className="py-16 sm:py-20">
         <Container>
           <MetaLabel>WHY RYCODE / PRINCIPLES</MetaLabel>
-          <h2 className="display-2 mt-7 max-w-3xl">Engineering should reduce uncertainty.</h2>
+          <h2 className="display-2 mt-7 max-w-3xl">Engineering should reduce uncertainty</h2>
           <div className="mt-14 grid gap-8 md:grid-cols-2">
             {principles.map(([title, text]) => (
               <article key={title} className="border-t border-border pt-6">
@@ -420,12 +417,12 @@ export function EnglishHome() {
         </Container>
       </section>
 
-      <section className="bg-surface py-24 sm:py-32">
+      <section className="bg-surface py-16 sm:py-20">
         <Container>
           <div className="flex flex-wrap items-end justify-between gap-6">
             <div>
               <MetaLabel>PROCESS / 07</MetaLabel>
-              <h2 className="display-2 mt-7">A clear path through every project.</h2>
+              <h2 className="display-2 mt-7">A clear path through every project</h2>
             </div>
             <Link href="/process" className="text-sm font-bold text-brand hover:underline">
               See the process
@@ -448,11 +445,11 @@ export function EnglishHome() {
         </Container>
       </section>
 
-      <section className="bg-brand-soft py-24 sm:py-32">
+      <section className="bg-brand-soft py-16 sm:py-20">
         <Container>
           <div className="grid gap-12 lg:grid-cols-[1.2fr_1fr] lg:items-end">
             <h2 className="display-2 max-w-[14ch]">
-              Commercial milestones can follow delivery milestones.
+              Commercial milestones can follow delivery milestones
             </h2>
             <div>
               <p className="text-base leading-8 text-muted-foreground">
@@ -471,13 +468,13 @@ export function EnglishHome() {
         </Container>
       </section>
 
-      <section className="py-24 sm:py-32">
+      <section className="py-16 sm:py-20">
         <Container>
           <div className="flex flex-wrap items-end justify-between gap-6">
             <div>
               <MetaLabel>JOURNAL</MetaLabel>
               <h2 className="display-2 mt-7 max-w-3xl">
-                Notes on building, operating and improving digital products.
+                Notes on building, operating and improving digital products
               </h2>
             </div>
             <Link href="/blog" className="text-sm font-bold text-brand hover:underline">
@@ -493,10 +490,10 @@ export function EnglishHome() {
         </Container>
       </section>
 
-      <section className="border-y border-border bg-surface py-24 sm:py-32">
+      <section className="border-y border-border bg-surface py-16 sm:py-20">
         <Container>
           <MetaLabel>FAQ / 04</MetaLabel>
-          <h2 className="display-2 mt-7">Common questions before starting.</h2>
+          <h2 className="display-2 mt-7">Common questions before starting</h2>
           <div className="mt-14 border-t border-border">
             {commonQuestions.map(([question, answer]) => (
               <details key={question} className="group border-b border-border py-7">
@@ -516,13 +513,13 @@ export function EnglishHome() {
         </Container>
       </section>
 
-      <section className="bg-ink py-24 text-ink-foreground sm:py-32">
+      <section className="bg-surface py-16 text-foreground dark:bg-ink dark:text-ink-foreground sm:py-20">
         <Container>
           <MetaLabel className="text-brand">START HERE</MetaLabel>
           <h2 className="display-2 mt-7 max-w-3xl">
-            Tell us what should be built, fixed or improved.
+            Tell us what should be built, fixed or improved
           </h2>
-          <div className="mt-10 flex flex-wrap gap-3 border-t border-white/12 pt-9">
+          <div className="mt-10 flex flex-wrap gap-3 border-t border-border pt-9 dark:border-white/12">
             <Link
               href="/start-project"
               className="inline-flex h-12 items-center gap-3 rounded-[6px] bg-brand px-7 text-sm font-bold text-brand-foreground"
@@ -531,7 +528,7 @@ export function EnglishHome() {
             </Link>
             <Link
               href="/technical-review"
-              className="inline-flex h-12 items-center rounded-[6px] border border-white/25 px-7 text-sm font-bold"
+              className="inline-flex h-12 items-center rounded-[6px] border border-border px-7 text-sm font-bold dark:border-white/25"
             >
               Request a technical review
             </Link>

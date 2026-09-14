@@ -44,7 +44,7 @@ export default async function SearchPage({ params, searchParams }: Props) {
             : "Find services, solutions and articles from RYCODE."
         }
       />
-      <section className="py-16 sm:py-24">
+      <section className="py-12 sm:py-18">
         <Container>
           {ready && <SearchTracker queryLength={query.length} resultCount={entries.length} />}
           <form

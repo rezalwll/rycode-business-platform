@@ -2,6 +2,17 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import {
+  ArrowUpLeft,
+  Blocks,
+  Database,
+  Headphones,
+  Search,
+  ShoppingBag,
+  Waypoints,
+  Webhook,
+  Wrench,
+} from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import {
   ArrowSquare,
@@ -21,42 +32,121 @@ import { cn } from "@/lib/utils";
 
 export function CapabilityStrip() {
   const items = [
-    { fa: "طراحی وب", en: "WEB" },
-    { fa: "فروشگاه اینترنتی", en: "ECOMMERCE" },
-    { fa: "نرم‌افزار اختصاصی", en: "SOFTWARE" },
-    { fa: "یکپارچه‌سازی", en: "INTEGRATION" },
-    { fa: "سئو", en: "SEO" },
-    { fa: "پشتیبانی", en: "SUPPORT" },
+    {
+      fa: "طراحی وب",
+      en: "WEB",
+      description: "سریع، روشن و آماده رشد",
+      href: "/services/web-development" as const,
+      icon: Waypoints,
+      tone: "text-sky-600 border-sky-500/25 bg-sky-500/10 dark:text-sky-300",
+      rail: "bg-sky-500",
+    },
+    {
+      fa: "فروشگاه اینترنتی",
+      en: "ECOMMERCE",
+      description: "فروش و عملیات یکپارچه",
+      href: "/services/ecommerce" as const,
+      icon: ShoppingBag,
+      tone: "text-emerald-600 border-emerald-500/25 bg-emerald-500/10 dark:text-emerald-300",
+      rail: "bg-emerald-500",
+    },
+    {
+      fa: "نرم‌افزار اختصاصی",
+      en: "SOFTWARE",
+      description: "متناسب با فرآیند واقعی شما",
+      href: "/services/custom-software" as const,
+      icon: Blocks,
+      tone: "text-violet-600 border-violet-500/25 bg-violet-500/10 dark:text-violet-300",
+      rail: "bg-violet-500",
+    },
+    {
+      fa: "یکپارچه‌سازی",
+      en: "INTEGRATION",
+      description: "اتصال سیستم‌ها و داده‌ها",
+      href: "/services/api-integration" as const,
+      icon: Webhook,
+      tone: "text-cyan-600 border-cyan-500/25 bg-cyan-500/10 dark:text-cyan-300",
+      rail: "bg-cyan-500",
+    },
+    {
+      fa: "سئو و رشد",
+      en: "SEO",
+      description: "دیده‌شدن با پایه فنی درست",
+      href: "/services/seo-growth" as const,
+      icon: Search,
+      tone: "text-lime-700 border-lime-500/30 bg-lime-500/10 dark:text-lime-300",
+      rail: "bg-lime-500",
+    },
+    {
+      fa: "پشتیبانی",
+      en: "SUPPORT",
+      description: "نگهداری و توسعه مستمر",
+      href: "/services/ongoing-support" as const,
+      icon: Headphones,
+      tone: "text-rose-600 border-rose-500/25 bg-rose-500/10 dark:text-rose-300",
+      rail: "bg-rose-500",
+    },
   ];
+
   return (
-    <div className="border-b border-border bg-surface">
-      <Container className="grid gap-8 py-8 lg:grid-cols-[0.75fr_1.5fr_0.75fr] lg:items-center">
+    <section className="border-y border-border bg-surface">
+      <Container className="py-10 sm:py-12">
         <div>
-          <MetaLabel className="text-muted-foreground">WHAT WE SHIP</MetaLabel>
-          <p className="mt-2 text-sm text-muted-foreground">از یک صفحه‌ی ساده تا یک سیستم کامل.</p>
-        </div>
-        <div className="flex flex-wrap gap-2">
-          {items.map((item, i) => (
-            <span
-              key={item.en}
-              className="group inline-flex items-center gap-2 rounded-full border border-border bg-background px-3 py-2 transition-colors hover:border-brand hover:bg-brand-soft"
-            >
-              <span className="grid size-5 place-items-center rounded-full bg-foreground text-[0.6rem] font-bold text-background transition-colors group-hover:bg-brand group-hover:text-brand-foreground">
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <span className="text-sm font-bold">{item.fa}</span>
-            </span>
-          ))}
-        </div>
-        <div className="hidden justify-self-end text-end lg:block">
-          <MetaLabel className="text-brand">SYSTEM STATUS</MetaLabel>
-          <div className="mt-2 flex items-center gap-2 text-xs text-muted-foreground">
-            <span className="size-2 rounded-full bg-emerald-500" />
-            آماده‌ی شروع یک پروژه
+          <div className="max-w-xl">
+            <MetaLabel className="text-brand">WHAT WE SHIP / 06</MetaLabel>
+            <h2 className="mt-3 text-xl font-bold tracking-[-0.02em] sm:text-2xl">
+              از یک صفحه‌ی دقیق تا یک سیستم کامل
+            </h2>
+            <p className="mt-2 text-sm leading-7 text-muted-foreground">
+              هر توانمندی مستقل است؛ ترکیب درستشان یک محصول قابل اتکا می‌سازد.
+            </p>
           </div>
         </div>
+
+        <div className="mt-7 grid gap-px overflow-hidden rounded-xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
+          {items.map((item, i) => (
+            <Link
+              key={item.en}
+              href={item.href}
+              className="group relative flex min-h-40 flex-col justify-between bg-surface p-5 hover:z-10 focus-visible:z-10 focus-visible:outline-2 focus-visible:outline-brand"
+            >
+              <span
+                className={cn(
+                  "absolute inset-x-0 bottom-0 h-0.5 origin-right scale-x-0 transition-transform duration-300 group-hover:scale-x-100 group-focus-visible:scale-x-100",
+                  item.rail,
+                )}
+              />
+              <span className="flex items-start justify-between gap-3">
+                <span
+                  className={cn(
+                    "grid size-9 place-items-center rounded-lg border transition-transform duration-300 group-hover:-translate-y-0.5",
+                    item.tone,
+                  )}
+                >
+                  <item.icon className="size-4" aria-hidden />
+                </span>
+                <span className="font-latin text-[0.62rem] tracking-[0.16em] text-muted-foreground">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+              </span>
+
+              <span className="mt-8 block">
+                <span className="flex items-center justify-between gap-3">
+                  <strong className="text-sm font-bold">{item.fa}</strong>
+                  <ArrowUpLeft className="size-3.5 text-muted-foreground transition-[color,transform] group-hover:-translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-brand" />
+                </span>
+                <span className="mt-2 block text-xs leading-6 text-muted-foreground">
+                  {item.description}
+                </span>
+                <span className="mt-3 block font-latin text-[0.58rem] tracking-[0.14em] text-brand">
+                  {item.en}
+                </span>
+              </span>
+            </Link>
+          ))}
+        </div>
       </Container>
-    </div>
+    </section>
   );
 }
 
@@ -65,99 +155,97 @@ export function CapabilityStrip() {
 const paths = [
   {
     key: "build",
-    title: "می‌خوام یه چیز درست‌وحسابی بسازم",
-    body: "ایده‌تان سایت، فروشگاه یا نرم‌افزار است؟ کمک می‌کنیم از دل ایده به یک محصول قابل استفاده برسید.",
-    cta: { label: "بریم سراغش", to: "/start-project" as const },
+    kicker: "ساخت از صفر",
+    title: "یه پروژه تازه توی ذهنمونه",
+    body: "ایده‌تان هرچقدر خام باشد، کمک می‌کنیم تبدیلش کنید به یک سایت، فروشگاه یا نرم‌افزار واقعی و قابل استفاده",
+    cta: { label: "ایده‌ام را تعریف کنم", to: "/start-project" as const },
+    accent: "text-sky-600 dark:text-sky-300",
+    wash: "group-hover:bg-sky-500/[0.045] dark:group-hover:bg-sky-400/[0.035]",
   },
   {
     key: "fix",
+    kicker: "نجات و ادامه",
     title: "پروژه‌مون یه جایی گیر کرده",
-    body: "سایت کند شده، خطا می‌دهد یا برنامه‌نویس قبلی رفته؟ اول می‌بینیم چه چیزی قابل نجات است، بعد تصمیم می‌گیریم.",
-    cta: { label: "بررسیش کنیم", to: "/technical-review" as const },
+    body: "کند شده، خطا می‌دهد یا نیمه‌کاره مانده؟ اول می‌بینیم چه چیزی سالم است، بعد کوتاه‌ترین راه ادامه را پیدا می‌کنیم",
+    cta: { label: "پروژه را بررسی کنیم", to: "/technical-review" as const },
+    accent: "text-violet-600 dark:text-violet-300",
+    wash: "group-hover:bg-violet-500/[0.045] dark:group-hover:bg-violet-400/[0.035]",
   },
   {
     key: "grow",
-    title: "می‌خوام مشتری بیشتری پیدامون کنه",
-    body: "محصول خوبی دارید اما در جست‌وجو دیده نمی‌شوید؟ از سئوی فنی و محتوایی شروع می‌کنیم و قدم‌به‌قدم جلو می‌رویم.",
-    cta: { label: "ببینیم چه می‌شود کرد", to: "/services" as const },
+    kicker: "رشد و دیده‌شدن",
+    title: "می‌خوایم مشتری‌های بیشتری پیدامون کنند",
+    body: "محصول خوبی دارید اما کم دیده می‌شوید؟ سایت، محتوا و مسیر ورود مشتری را کنار هم بررسی می‌کنیم",
+    cta: { label: "برای رشد از کجا شروع کنیم؟", to: "/services/seo-growth" as const },
+    accent: "text-emerald-600 dark:text-emerald-300",
+    wash: "group-hover:bg-emerald-500/[0.045] dark:group-hover:bg-emerald-400/[0.035]",
   },
 ];
 
 export function PathSelector() {
-  const [active, setActive] = useState<number | null>(null);
-
   return (
-    <Section className="grain">
+    <Section className="grain overflow-hidden bg-surface-2/45">
       <Container>
-        <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-end lg:gap-20">
-          <div>
-            <Eyebrow>مسیر شما</Eyebrow>
-            <SectionTitle>از کجا شروع کنیم؟</SectionTitle>
+        <div className="grid items-end gap-6 border-b border-border pb-7 lg:grid-cols-[1fr_auto]">
+          <div className="max-w-2xl">
+            <Eyebrow>انتخاب مسیر شروع</Eyebrow>
+            <SectionTitle>الان کجای مسیر هستید؟</SectionTitle>
             <Lead>
-              لازم نیست اسم فنی مسئله‌تان را بدانید؛ فقط بگویید چه می‌خواهید بسازید یا کجای کار گیر
-              کرده‌اید.
+              لازم نیست اسم فنی چیزی را بدانید؛ نزدیک‌ترین گزینه به وضعیت امروزتان را انتخاب کنید
             </Lead>
           </div>
-          <PathVisual />
+          <div className="hidden items-baseline gap-2 pb-1 lg:flex" aria-hidden>
+            <span className="font-latin text-4xl font-semibold tracking-[-0.08em]">03</span>
+            <span className="text-xs font-bold text-muted-foreground">راه برای شروع</span>
+          </div>
+        </div>
+
+        <div className="mt-5">
+          {paths.map((path, index) => (
+            <Link
+              key={path.key}
+              href={path.cta.to}
+              className={cn(
+                "group relative grid min-h-36 grid-cols-[4.5rem_minmax(0,1fr)_2.5rem] items-center gap-x-4 overflow-hidden border-b border-border px-2 py-6 transition-[background-color,transform,box-shadow,padding] duration-200 focus-visible:z-10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand sm:grid-cols-[6rem_minmax(0,1fr)_3rem] sm:px-4 lg:min-h-40 lg:grid-cols-[8.5rem_minmax(220px,0.8fr)_minmax(280px,1.2fr)_3.5rem] lg:gap-x-7 lg:px-6 lg:hover:z-10 lg:hover:scale-[1.008] lg:hover:px-8 lg:hover:shadow-[0_14px_36px_rgba(15,23,42,0.07)]",
+                path.wash,
+              )}
+            >
+              <span
+                className={cn(
+                  "font-latin text-[3.6rem] font-semibold leading-none tracking-[-0.09em] opacity-[0.08] transition-opacity duration-200 group-hover:opacity-20 sm:text-[4.8rem] lg:text-[6rem]",
+                  path.accent,
+                )}
+                aria-hidden
+              >
+                0{index + 1}
+              </span>
+
+              <span>
+                <span className={cn("text-[0.68rem] font-bold", path.accent)}>{path.kicker}</span>
+                <h3 className="mt-2 max-w-md text-lg font-bold leading-8 tracking-[-0.02em] sm:text-xl">
+                  {path.title}
+                </h3>
+              </span>
+
+              <span className="col-span-2 col-start-2 mt-3 self-center lg:col-span-1 lg:col-start-auto lg:mt-0">
+                <p className="max-w-xl text-sm leading-7 text-muted-foreground">{path.body}</p>
+                <span className="mt-2 block text-xs font-bold text-foreground/75">
+                  {path.cta.label}
+                </span>
+              </span>
+
+              <ArrowUpLeft
+                className={cn(
+                  "size-5 justify-self-end transition-transform duration-200 group-hover:-translate-x-1.5 group-hover:-translate-y-1.5",
+                  path.accent,
+                )}
+                aria-hidden
+              />
+            </Link>
+          ))}
         </div>
       </Container>
-
-      <div className="mt-16 border-t border-border">
-        {paths.map((p, i) => (
-          <Link
-            key={p.key}
-            href={p.cta.to}
-            onMouseEnter={() => setActive(i)}
-            onMouseLeave={() => setActive(null)}
-            onFocus={() => setActive(i)}
-            onBlur={() => setActive(null)}
-            className={cn(
-              "group block border-b border-border transition-colors duration-300",
-              active === i ? "bg-surface" : "bg-transparent",
-            )}
-          >
-            <Container className="flex flex-col gap-5 py-10 sm:py-14 lg:flex-row lg:items-center lg:gap-12">
-              <MetaLabel index={i + 1} className="text-muted-foreground lg:w-20" />
-              <h3 className="display-3 flex-1">{p.title}</h3>
-              <p
-                className={cn(
-                  "max-w-md text-sm leading-8 text-muted-foreground transition-opacity duration-300 lg:opacity-0",
-                  active === i && "lg:opacity-100",
-                )}
-              >
-                {p.body}
-              </p>
-              <ArrowSquare active={active === i} />
-            </Container>
-          </Link>
-        ))}
-      </div>
     </Section>
-  );
-}
-
-function PathVisual() {
-  return (
-    <div className="relative overflow-hidden rounded-[1.5rem] border border-border bg-ink p-3 text-ink-foreground shadow-xl">
-      <div className="relative aspect-[16/7] overflow-hidden rounded-[1rem]">
-        <Image
-          src="/images/rycode-project-rescue.png"
-          alt="ساختار بصری مسیر حل مسئله و ساخت محصول"
-          fill
-          className="object-cover object-center opacity-75"
-        />
-        <div className="absolute inset-0 bg-gradient-to-br from-ink/80 via-transparent to-brand/20" />
-        <div className="absolute inset-x-4 bottom-4 flex items-end justify-between gap-4">
-          <div>
-            <MetaLabel className="text-brand">ONE CLEAR PATH</MetaLabel>
-            <p className="mt-1 text-sm text-white/80">هر پروژه، مسیر خودش را دارد.</p>
-          </div>
-          <span className="grid size-10 place-items-center rounded-full bg-brand text-brand-foreground">
-            ↗
-          </span>
-        </div>
-      </div>
-    </div>
   );
 }
 
@@ -167,27 +255,73 @@ const pillars = [
   {
     title: "طراحی و توسعه وب",
     body: "سایت شرکتی، فروشگاه یا وب‌اپی که از روز اول درست، سریع و آماده رشد ساخته شود.",
+    icon: Waypoints,
+    tone: "text-sky-600 dark:text-sky-300",
+    iconTone: "bg-sky-500/10",
+    rail: "bg-sky-500",
+    image: "/images/rycode-hero-structure.png",
+    imageAlt: "ساختار بصری یک محصول دیجیتال مدرن",
+    layout: "lg:col-span-7 lg:min-h-[360px]",
   },
   {
     title: "نرم‌افزار اختصاصی",
     body: "وقتی نرم‌افزار آماده کارتان را راه نمی‌اندازد، پنل و ابزار خودتان را می‌سازیم.",
+    icon: Blocks,
+    tone: "text-violet-600 dark:text-violet-300",
+    iconTone: "bg-violet-500/10",
+    rail: "bg-violet-500",
+    image: "/images/rycode-product-system.png",
+    imageAlt: "لایه‌های مختلف یک نرم‌افزار اختصاصی",
+    layout: "lg:col-span-5 lg:min-h-[360px]",
   },
   {
     title: "نجات و توسعه پروژه",
     body: "پروژه‌ای را که رها شده تحویل می‌گیریم و از همان‌جایی که مانده جلو می‌رویم.",
+    icon: Wrench,
+    tone: "text-amber-600 dark:text-amber-300",
+    iconTone: "bg-amber-500/10",
+    rail: "bg-amber-500",
+    image: "/images/rycode-project-rescue.png",
+    imageAlt: "بازسازی و منظم‌کردن یک پروژه نرم‌افزاری",
+    layout: "lg:col-span-4 lg:min-h-[280px]",
   },
   {
     title: "API و یکپارچه‌سازی",
     body: "سیستم‌های پراکنده‌تان را به هم وصل می‌کنیم تا اطلاعات دوباره‌کاری نشود.",
+    icon: Webhook,
+    tone: "text-cyan-600 dark:text-cyan-300",
+    iconTone: "bg-cyan-500/10",
+    rail: "bg-cyan-500",
+    image: "/images/rycode-connected-world.png",
+    imageAlt: "اتصال سرویس‌ها و داده‌ها به یکدیگر",
+    layout: "lg:col-span-4 lg:min-h-[280px]",
   },
-  { title: "سئو و رشد", body: "کمک می‌کنیم آدم‌هایی که دنبال شما هستند، راحت‌تر پیدایتان کنند." },
+  {
+    title: "سئو و رشد",
+    body: "کمک می‌کنیم آدم‌هایی که دنبال شما هستند، راحت‌تر پیدایتان کنند.",
+    icon: Search,
+    tone: "text-emerald-600 dark:text-emerald-300",
+    iconTone: "bg-emerald-500/10",
+    rail: "bg-emerald-500",
+    layout: "lg:col-span-4 lg:min-h-[280px]",
+  },
   {
     title: "داده و ابزارهای کسب‌وکار",
     body: "داده‌ها را از چند فایل و سیستم جمع می‌کنیم تا تصمیم‌گیری راحت‌تر شود.",
+    icon: Database,
+    tone: "text-rose-600 dark:text-rose-300",
+    iconTone: "bg-rose-500/10",
+    rail: "bg-rose-500",
+    layout: "lg:col-span-7 lg:min-h-[280px]",
   },
   {
     title: "پشتیبانی و توسعه مستمر",
     body: "بعد از تحویل هم برای نگهداری و بهتر شدن محصول کنار شما می‌مانیم.",
+    icon: Headphones,
+    tone: "text-orange-600 dark:text-orange-300",
+    iconTone: "bg-orange-500/10",
+    rail: "bg-orange-500",
+    layout: "lg:col-span-5 lg:min-h-[280px]",
   },
 ];
 
@@ -195,54 +329,132 @@ export function ServicesEditorial() {
   return (
     <Section className="bg-surface">
       <Container>
-        <div className="grid gap-10 lg:grid-cols-[0.9fr_1.6fr] lg:items-start">
-          <div className="lg:sticky lg:top-28">
+        <div className="flex flex-col gap-7 border-b border-border pb-8 sm:flex-row sm:items-end sm:justify-between">
+          <div className="max-w-2xl">
             <MetaLabel className="text-muted-foreground">SERVICES / 07</MetaLabel>
             <h2 className="display-2 mt-6">خدمات رای‌کد</h2>
-            <p className="mt-6 max-w-sm text-base leading-8 text-muted-foreground">
+            <p className="mt-5 max-w-2xl text-base leading-8 text-muted-foreground">
               هر کدام از این خدمات را می‌توانید جداگانه بردارید یا کنار هم پیش ببرید؛ بستگی دارد
               الان کجای مسیر باشید.
             </p>
-            <div className="visual-card relative mt-8 aspect-[1.5/1] overflow-hidden bg-ink">
-              <Image
-                src="/images/rycode-product-system.png"
-                alt="ترکیب چند لایه‌ی طراحی و توسعه برای ساخت محصول"
-                fill
-                className="object-cover opacity-80 transition-transform duration-700 group-hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-ink via-transparent to-transparent" />
-              <div className="absolute inset-x-4 bottom-4 flex items-end justify-between">
-                <MetaLabel className="text-brand">STACK / 07</MetaLabel>
-                <span className="rounded-full bg-white/10 px-3 py-1 text-xs text-white/70 backdrop-blur-sm">
-                  یک تیم، چند تخصص
-                </span>
-              </div>
-            </div>
-            <div className="mt-8">
-              <TextLink to="/services">همه خدمات</TextLink>
-            </div>
           </div>
-
-          <ul className="border-t border-border">
-            {pillars.map((p, i) => (
-              <li key={p.title}>
-                <Link
-                  href="/services"
-                  className="group flex items-center gap-6 border-b border-border py-8 transition-colors hover:bg-background"
-                >
-                  <MetaLabel index={i + 1} className="text-muted-foreground" />
-                  <span className="flex-1">
-                    <span className="block text-xl font-bold sm:text-2xl">{p.title}</span>
-                    <span className="mt-2 block max-w-lg text-sm leading-7 text-muted-foreground">
-                      {p.body}
-                    </span>
-                  </span>
-                  <ArrowSquare />
-                </Link>
-              </li>
-            ))}
-          </ul>
+          <TextLink to="/services">همه خدمات</TextLink>
         </div>
+
+        <ul className="mt-10 grid grid-cols-12 gap-3">
+          {pillars.map((pillar, index) => (
+            <li
+              key={pillar.title}
+              className={cn(
+                "col-span-12 md:col-span-6",
+                index === pillars.length - 1 && "sm:col-span-12",
+                pillar.layout,
+              )}
+            >
+              <Link
+                href="/services"
+                className={cn(
+                  "group relative flex h-full min-h-64 flex-col overflow-hidden rounded-xl border border-border bg-surface p-6 transition-[transform,box-shadow,border-color] duration-300 hover:-translate-y-0.5 hover:shadow-xl sm:p-7",
+                  "image" in pillar && "border-white/15 bg-ink text-white",
+                )}
+              >
+                {"image" in pillar && (
+                  <>
+                    <Image
+                      src={pillar.image}
+                      alt={pillar.imageAlt ?? ""}
+                      fill
+                      className="object-cover opacity-80 transition-transform duration-700 group-hover:scale-[1.035]"
+                    />
+                    <span
+                      className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/45 to-black/10"
+                      aria-hidden
+                    />
+                  </>
+                )}
+
+                {index === 5 && (
+                  <span
+                    className="pointer-events-none absolute inset-x-7 bottom-5 flex h-28 items-end gap-2 opacity-[0.11]"
+                    aria-hidden
+                  >
+                    {[36, 68, 48, 88, 58, 76, 100, 64, 82].map((height) => (
+                      <span
+                        key={height}
+                        className="flex-1 rounded-t-sm bg-rose-500"
+                        style={{ height: `${height}%` }}
+                      />
+                    ))}
+                  </span>
+                )}
+
+                {index === 6 && (
+                  <span
+                    className="pointer-events-none absolute -bottom-28 -left-20 size-72 rounded-full border border-orange-500/15 shadow-[0_0_0_38px_rgba(249,115,22,0.04),0_0_0_76px_rgba(249,115,22,0.025)]"
+                    aria-hidden
+                  />
+                )}
+
+                <span
+                  className={cn(
+                    "absolute inset-x-0 top-0 z-10 h-0.5 origin-right scale-x-0 transition-transform duration-200 group-hover:scale-x-100 group-focus-visible:scale-x-100",
+                    pillar.rail,
+                  )}
+                  aria-hidden
+                />
+
+                <span className="relative z-10 flex items-start justify-between gap-4">
+                  <span
+                    className={cn(
+                      "grid size-10 place-items-center rounded-[0.65rem] backdrop-blur-sm",
+                      "image" in pillar ? "bg-white/12 text-white" : pillar.iconTone,
+                      !("image" in pillar) && pillar.tone,
+                    )}
+                  >
+                    <pillar.icon className="size-[1.1rem]" aria-hidden />
+                  </span>
+                  <span
+                    className={cn(
+                      "font-latin text-[0.62rem] tracking-[0.18em]",
+                      "image" in pillar ? "text-white/65" : "text-muted-foreground/70",
+                    )}
+                  >
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                </span>
+
+                <span className="relative z-10 mt-auto pt-16">
+                  <h3
+                    className={cn(
+                      "font-bold leading-8",
+                      "image" in pillar ? "text-2xl" : "text-xl",
+                    )}
+                  >
+                    {pillar.title}
+                  </h3>
+                  <p
+                    className={cn(
+                      "mt-3 max-w-xl text-sm leading-7",
+                      "image" in pillar ? "text-white/72" : "text-muted-foreground",
+                    )}
+                  >
+                    {pillar.body}
+                  </p>
+                </span>
+
+                <span
+                  className={cn(
+                    "relative z-10 flex items-center gap-2 pt-5 text-xs font-bold opacity-70 transition-opacity group-hover:opacity-100",
+                    "image" in pillar ? "text-white" : pillar.tone,
+                  )}
+                >
+                  بیشتر ببینید
+                  <ArrowUpLeft className="size-3.5 transition-transform group-hover:-translate-x-1 group-hover:-translate-y-1" />
+                </span>
+              </Link>
+            </li>
+          ))}
+        </ul>
       </Container>
     </Section>
   );
@@ -275,13 +487,13 @@ export function SolutionExplorer() {
   const current = systems[active]!;
 
   return (
-    <section className="bg-ink py-24 text-ink-foreground sm:py-32">
+    <section className="bg-surface py-16 text-foreground dark:bg-ink dark:text-ink-foreground sm:py-20">
       <Container>
         <MetaLabel className="text-brand">SOLUTIONS</MetaLabel>
         <h2 className="display-2 mt-6 max-w-3xl">برای کسب‌وکارتان چه چیزی لازم دارید؟</h2>
 
-        <div className="mt-14 grid gap-0 border-t border-white/12 lg:grid-cols-[1fr_1fr]">
-          <ul className="lg:border-e lg:border-white/12 lg:pe-10">
+        <div className="mt-14 grid gap-0 border-t border-border dark:border-white/12 lg:grid-cols-[1fr_1fr]">
+          <ul className="lg:border-e lg:border-border lg:pe-10 dark:lg:border-white/12">
             {systems.map((s, i) => (
               <li key={s.name}>
                 <button
@@ -291,10 +503,10 @@ export function SolutionExplorer() {
                   onClick={() => setActive(i)}
                   aria-pressed={active === i}
                   className={cn(
-                    "flex w-full items-center gap-5 border-b border-white/10 py-5 text-start transition-colors duration-200",
+                    "flex w-full items-center gap-5 border-b border-border py-5 text-start transition-colors duration-200 dark:border-white/10",
                     active === i
                       ? "text-brand"
-                      : "text-ink-foreground/70 hover:text-ink-foreground",
+                      : "text-muted-foreground hover:text-foreground dark:text-ink-foreground/70 dark:hover:text-ink-foreground",
                   )}
                 >
                   <MetaLabel index={i + 1} className="opacity-60" />
@@ -304,7 +516,7 @@ export function SolutionExplorer() {
             ))}
           </ul>
 
-          <div className="border-b border-white/12 px-0 py-12 lg:ps-14">
+          <div className="border-b border-border px-0 py-12 dark:border-white/12 lg:ps-14">
             <div className="lg:sticky lg:top-28">
               <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[1.25rem] border border-white/12 bg-white/[0.04] p-4">
                 <div className="grid-field absolute inset-0 opacity-20" />
@@ -348,9 +560,11 @@ export function SolutionExplorer() {
                 </div>
               </div>
               <h3 className="mt-8 text-2xl font-bold">{current.name}</h3>
-              <p className="mt-4 text-base leading-8 text-ink-foreground/70">{current.body}</p>
+              <p className="mt-4 text-base leading-8 text-muted-foreground dark:text-ink-foreground/70">
+                {current.body}
+              </p>
               <div className="mt-8">
-                <TextLink to="/solutions" className="text-ink-foreground">
+                <TextLink to="/solutions" className="text-foreground dark:text-ink-foreground">
                   جزئیات راهکارها
                 </TextLink>
               </div>
@@ -367,7 +581,7 @@ export function SolutionExplorer() {
 export function ProjectRescue() {
   const steps = ["بررسی", "تصمیم", "ادامه"];
   return (
-    <section className="bg-brand py-24 text-brand-foreground sm:py-32">
+    <section className="bg-brand py-16 text-brand-foreground sm:py-20">
       <Container>
         <MetaLabel>PROJECT RESCUE</MetaLabel>
         <h2 className="display-1 mt-8 max-w-[14ch]">پروژه‌تان وسط راه مانده؟</h2>
@@ -483,7 +697,7 @@ export function SelectedProjects() {
           <div>
             <MetaLabel className="text-muted-foreground">SELECTED WORK</MetaLabel>
             <h2 className="display-2 mt-6 max-w-3xl">
-              چند نمونه از مسئله‌هایی که برایشان راه‌حل ساخته‌ایم.
+              چند نمونه از مسئله‌هایی که برایشان راه‌حل ساخته‌ایم
             </h2>
           </div>
           <TextLink to="/projects">همه پروژه‌ها</TextLink>
@@ -577,14 +791,14 @@ function capabilitiesFor(index: number): boolean[] {
 
 export function IndustriesSection() {
   return (
-    <section className="bg-ink py-24 text-ink-foreground sm:py-32">
+    <section className="bg-surface py-16 text-foreground dark:bg-ink dark:text-ink-foreground sm:py-20">
       <Container>
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
             <MetaLabel className="text-brand">INDUSTRIES</MetaLabel>
-            <h2 className="display-2 mt-6 max-w-2xl">راه‌حل خوب باید به کسب‌وکار شما بخورد.</h2>
+            <h2 className="display-2 mt-6 max-w-2xl">راه‌حل خوب باید به کسب‌وکار شما بخورد</h2>
           </div>
-          <TextLink to="/industries" className="text-ink-foreground">
+          <TextLink to="/industries" className="text-foreground dark:text-ink-foreground">
             همه صنایع
           </TextLink>
         </div>
@@ -592,9 +806,21 @@ export function IndustriesSection() {
         <div className="mt-12 grid gap-3 sm:grid-cols-4">
           {[
             { label: "WEB", value: "۰۸", tone: "bg-brand text-brand-foreground" },
-            { label: "SOFTWARE", value: "۰۵", tone: "bg-white/10 text-white" },
-            { label: "SEO", value: "۰۶", tone: "bg-white/10 text-white" },
-            { label: "DATA", value: "۰۴", tone: "bg-white/10 text-white" },
+            {
+              label: "SOFTWARE",
+              value: "۰۵",
+              tone: "border border-border bg-background text-foreground dark:border-transparent dark:bg-white/10 dark:text-white",
+            },
+            {
+              label: "SEO",
+              value: "۰۶",
+              tone: "border border-border bg-background text-foreground dark:border-transparent dark:bg-white/10 dark:text-white",
+            },
+            {
+              label: "DATA",
+              value: "۰۴",
+              tone: "border border-border bg-background text-foreground dark:border-transparent dark:bg-white/10 dark:text-white",
+            },
           ].map((item) => (
             <div key={item.label} className={cn("rounded-2xl p-4", item.tone)}>
               <MetaLabel className="opacity-65">{item.label}</MetaLabel>
@@ -606,7 +832,7 @@ export function IndustriesSection() {
           ))}
         </div>
 
-        <div className="relative mt-4 min-h-[240px] overflow-hidden rounded-2xl border border-white/12">
+        <div className="relative mt-4 min-h-[240px] overflow-hidden rounded-2xl border border-border bg-ink text-white dark:border-white/12">
           <Image
             src="/images/rycode-connected-world.png"
             alt="شبکه‌ای از سیستم‌های متصل برای صنایع مختلف"
@@ -617,16 +843,16 @@ export function IndustriesSection() {
           <div className="absolute inset-y-0 left-0 flex max-w-sm flex-col justify-end p-6 sm:p-8">
             <MetaLabel className="text-brand">CONNECTED BUSINESS</MetaLabel>
             <p className="mt-3 text-xl font-bold leading-8">
-              هر ابزار وقتی ارزش دارد که به بقیه‌ی کسب‌وکار وصل باشد.
+              هر ابزار وقتی ارزش دارد که به بقیه‌ی کسب‌وکار وصل باشد
             </p>
           </div>
         </div>
 
-        <div className="mt-14 hidden border-t border-white/12 lg:block">
-          <div className="grid grid-cols-[1.6fr_repeat(4,minmax(0,1fr))] border-b border-white/12 py-4">
+        <div className="mt-14 hidden border-t border-border dark:border-white/12 lg:block">
+          <div className="grid grid-cols-[1.6fr_repeat(4,minmax(0,1fr))] border-b border-border py-4 dark:border-white/12">
             <span />
             {capabilityColumns.map((c) => (
-              <MetaLabel key={c} className="text-white/45">
+              <MetaLabel key={c} className="text-muted-foreground dark:text-white/45">
                 {c}
               </MetaLabel>
             ))}
@@ -635,7 +861,7 @@ export function IndustriesSection() {
             <Link
               key={name}
               href="/industries"
-              className="grid grid-cols-[1.6fr_repeat(4,minmax(0,1fr))] items-center border-b border-white/10 py-5 transition-colors hover:bg-white/5"
+              className="grid grid-cols-[1.6fr_repeat(4,minmax(0,1fr))] items-center border-b border-border py-5 transition-colors hover:bg-brand-soft dark:border-white/10 dark:hover:bg-white/5"
             >
               <span className="text-base font-semibold">{name}</span>
               {capabilitiesFor(i).map((on, j) => (
@@ -643,7 +869,7 @@ export function IndustriesSection() {
                   {on ? (
                     <span className="inline-block size-2 rounded-full bg-brand" />
                   ) : (
-                    <span className="inline-block size-2 rounded-full bg-white/15" />
+                    <span className="inline-block size-2 rounded-full bg-border dark:bg-white/15" />
                   )}
                 </span>
               ))}
@@ -651,12 +877,12 @@ export function IndustriesSection() {
           ))}
         </div>
 
-        <ul className="mt-12 border-t border-white/12 lg:hidden">
+        <ul className="mt-12 border-t border-border dark:border-white/12 lg:hidden">
           {industries.map((name, i) => (
             <li key={name}>
               <Link
                 href="/industries"
-                className="flex items-center justify-between gap-4 border-b border-white/10 py-5"
+                className="flex items-center justify-between gap-4 border-b border-border py-5 dark:border-white/10"
               >
                 <span className="text-base font-semibold">{name}</span>
                 <span className="flex items-center gap-1.5">
@@ -665,7 +891,7 @@ export function IndustriesSection() {
                       key={capabilityColumns[j]}
                       className={cn(
                         "inline-block size-1.5 rounded-full",
-                        on ? "bg-brand" : "bg-white/15",
+                        on ? "bg-brand" : "bg-border dark:bg-white/15",
                       )}
                     />
                   ))}
@@ -683,23 +909,23 @@ export function IndustriesSection() {
 
 const whyItems = [
   {
-    title: "اول می‌فهمیم مشکل کجاست.",
+    title: "اول می‌فهمیم مشکل کجاست",
     body: "قبل از اینکه ابزار و تکنولوژی پیشنهاد بدهیم، می‌نشینیم ببینیم دقیقاً چه چیزی قرار است بهتر شود.",
   },
   {
-    title: "لازم نیست همه‌چیز را از نو بسازید.",
+    title: "لازم نیست همه‌چیز را از نو بسازید",
     body: "اگر پروژه فعلی قابل نجات باشد، همان را مرتب و قوی‌تر می‌کنیم؛ بازنویسی فقط وقتی که واقعاً لازم باشد.",
   },
   {
-    title: "سئو را آخر کار یادمان نمی‌افتد.",
+    title: "سئو را آخر کار یادمان نمی‌افتد",
     body: "ساختار فنی و دیده‌شدن در گوگل را از همان اول کنار هم جلو می‌بریم.",
   },
   {
-    title: "کد و دسترسی‌ها برای خودتان می‌ماند.",
+    title: "کد و دسترسی‌ها برای خودتان می‌ماند",
     body: "همه‌چیز شفاف تحویل شما می‌شود؛ کد، داده‌ها، دامنه و دسترسی‌ها.",
   },
   {
-    title: "بعد از تحویل هم تنها نمی‌مانید.",
+    title: "بعد از تحویل هم تنها نمی‌مانید",
     body: "اگر خواستید، نگهداری، رفع مشکل و توسعه‌های بعدی را هم کنار شما ادامه می‌دهیم.",
   },
 ];
@@ -721,14 +947,14 @@ export function WhyRycode() {
             <div className="absolute inset-y-0 left-0 flex max-w-xs flex-col justify-center p-6 text-white">
               <MetaLabel className="text-brand">THE RYCODE METHOD</MetaLabel>
               <p className="mt-2 text-lg font-bold leading-7">
-                شفاف، قابل توسعه، ساخته‌شده برای فردا.
+                شفاف، قابل توسعه، ساخته‌شده برای فردا
               </p>
             </div>
           </div>
           <div className="visual-card flex items-end justify-between bg-brand p-6 text-brand-foreground">
             <span className="text-6xl font-extrabold tracking-[-0.08em]">۰۵</span>
             <span className="max-w-[8rem] text-sm font-bold leading-6">
-              دلیل برای اینکه پروژه را درست شروع کنیم.
+              دلیل برای اینکه پروژه را درست شروع کنیم
             </span>
           </div>
         </div>
@@ -774,9 +1000,7 @@ export function ProcessSection() {
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
             <MetaLabel className="text-muted-foreground">PROCESS</MetaLabel>
-            <h2 className="display-2 mt-6">
-              از اولین گفت‌وگو تا تحویل، قدم‌به‌قدم کنار شما هستیم.
-            </h2>
+            <h2 className="display-2 mt-6">از اولین گفت‌وگو تا تحویل، قدم‌به‌قدم کنار شما هستیم</h2>
           </div>
           <TextLink to="/process">جزئیات فرآیند</TextLink>
         </div>
@@ -836,7 +1060,7 @@ export function PaymentSection() {
     <Section className="bg-brand-soft">
       <Container>
         <div className="grid gap-12 lg:grid-cols-[1.2fr_1fr] lg:items-end">
-          <h2 className="display-2 max-w-[14ch]">لازم نیست همه هزینه را یک‌جا پرداخت کنید.</h2>
+          <h2 className="display-2 max-w-[14ch]">لازم نیست همه هزینه را یک‌جا پرداخت کنید</h2>
           <div className="text-base leading-9 text-muted-foreground">
             <p>
               برای پروژه‌های واجد شرایط، هزینه را به چند مرحله تقسیم می‌کنیم. هر مرحله که تحویل و
@@ -888,7 +1112,7 @@ export function BlogSection() {
           <div>
             <MetaLabel className="text-muted-foreground">JOURNAL</MetaLabel>
             <h2 className="display-2 mt-6 max-w-3xl">
-              از چیزهایی می‌نویسیم که در مسیر ساخت و رشد یاد می‌گیریم.
+              از چیزهایی می‌نویسیم که در مسیر ساخت و رشد یاد می‌گیریم
             </h2>
           </div>
           <TextLink to="/blog">همه مقاله‌ها</TextLink>
@@ -1035,15 +1259,15 @@ export function FaqSection() {
 
 export function FinalCta() {
   return (
-    <section className="relative overflow-hidden bg-ink py-24 text-ink-foreground sm:py-32">
+    <section className="relative overflow-hidden bg-surface-2 py-16 text-foreground dark:bg-ink dark:text-ink-foreground sm:py-20">
       <Image
         src="/images/rycode-connected-world.png"
         alt=""
         fill
-        className="object-cover object-right opacity-20"
+        className="object-cover object-right opacity-10 dark:opacity-20"
         aria-hidden
       />
-      <div className="absolute inset-0 bg-gradient-to-l from-ink/40 via-ink/85 to-ink" />
+      <div className="absolute inset-0 bg-gradient-to-l from-background/40 via-background/85 to-background dark:from-ink/40 dark:via-ink/85 dark:to-ink" />
       <Container>
         <div className="relative">
           <MetaLabel className="text-brand">START HERE</MetaLabel>
@@ -1052,9 +1276,9 @@ export function FinalCta() {
             <br />
             یا یه <span className="text-brand">مشکل</span> که باید حل بشه؟
           </h2>
-          <div className="mt-14 flex flex-wrap items-center gap-8 border-t border-white/12 pt-10">
+          <div className="mt-14 flex flex-wrap items-center gap-8 border-t border-border pt-10 dark:border-white/12">
             <CtaLink to="/start-project">با هم شروع کنیم</CtaLink>
-            <TextLink to="/technical-review" className="text-ink-foreground">
+            <TextLink to="/technical-review" className="text-foreground dark:text-ink-foreground">
               پروژه‌تان را بررسی کنیم
             </TextLink>
           </div>

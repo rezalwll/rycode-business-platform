@@ -11,8 +11,36 @@ import {
   type CatalogKind,
 } from "@/content/catalog";
 import type { Locale } from "@/i18n/routing";
+import { cn } from "@/lib/utils";
 
 import { ActionLink, FinalBand, JsonLd, localizedHref, PageHero } from "./shared";
+
+const contentTones = [
+  {
+    card: "border-sky-500/20 bg-gradient-to-bl from-sky-500/8 via-surface to-surface hover:border-sky-500/45",
+    rail: "border-s-sky-500/70",
+    label: "text-sky-600 dark:text-sky-300",
+  },
+  {
+    card: "border-emerald-500/20 bg-gradient-to-bl from-emerald-500/8 via-surface to-surface hover:border-emerald-500/45",
+    rail: "border-s-emerald-500/70",
+    label: "text-emerald-600 dark:text-emerald-300",
+  },
+  {
+    card: "border-violet-500/20 bg-gradient-to-bl from-violet-500/8 via-surface to-surface hover:border-violet-500/45",
+    rail: "border-s-violet-500/70",
+    label: "text-violet-600 dark:text-violet-300",
+  },
+  {
+    card: "border-rose-500/20 bg-gradient-to-bl from-rose-500/8 via-surface to-surface hover:border-rose-500/45",
+    rail: "border-s-rose-500/70",
+    label: "text-rose-600 dark:text-rose-300",
+  },
+] as const;
+
+function contentTone(index: number) {
+  return contentTones[index % contentTones.length] ?? contentTones[0];
+}
 
 const labels: Record<
   CatalogKind,
@@ -70,20 +98,23 @@ export function CatalogHub({ locale, kind }: { locale: Locale; kind: CatalogKind
             </span>
             <span className="mt-3 block">
               {locale === "fa"
-                ? "این فهرست بر اساس مسئله و خروجی دسته‌بندی شده است."
+                ? "از چیزی که لازم دارید شروع کنید؛ اسم فنی‌اش مهم نیست."
                 : "This collection is organised around problems and outcomes."}
             </span>
           </>
         }
       />
-      <section className="bg-background py-16 sm:py-24">
+      <section className="bg-background py-12 sm:py-18">
         <Container>
           <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
             {entries.map((entry, index) => (
               <Link
                 key={entry.slug}
                 href={localizedHref(locale, `/${kind}/${entry.slug}`)}
-                className="group relative overflow-hidden rounded-[1.35rem] border border-border bg-surface p-3 transition-[transform,box-shadow,border-color] duration-300 hover:-translate-y-1 hover:border-brand/45 hover:shadow-xl"
+                className={cn(
+                  "group relative overflow-hidden rounded-xl border bg-surface p-3 transition-[transform,box-shadow,border-color] duration-300 hover:-translate-y-1 hover:shadow-xl",
+                  contentTone(index).card,
+                )}
               >
                 <div className="relative aspect-[16/9] overflow-hidden rounded-[1rem] bg-ink">
                   <Image
@@ -109,7 +140,7 @@ export function CatalogHub({ locale, kind }: { locale: Locale; kind: CatalogKind
                   </p>
                   {entry.conceptual && (
                     <span className="mt-5 inline-flex rounded-full border border-brand/35 bg-brand-soft px-3 py-1 text-xs font-semibold text-brand">
-                      {locale === "fa" ? "مطالعه مفهومی" : "Concept study"}
+                      {locale === "fa" ? "یک نمونه فرضی" : "Concept study"}
                     </span>
                   )}
                 </div>
@@ -149,16 +180,18 @@ export function CatalogDetail({ locale, entry }: { locale: Locale; entry: Catalo
           <>
             {entry.conceptual && (
               <strong className="mb-4 block text-brand">
-                {locale === "fa" ? "این یک سناریوی مفهومی است." : "This is a concept scenario."}
+                {locale === "fa"
+                  ? "این صفحه یک مثال فرضی است، نه پروژه واقعی."
+                  : "This is a concept scenario."}
               </strong>
             )}
             {locale === "fa"
-              ? "دامنه و زمان اجرا پس از بررسی وضعیت فعلی مشخص می‌شود."
+              ? "بعد از اینکه وضعیت فعلی را دیدیم، درباره زمان و مسیر اجرا دقیق‌تر حرف می‌زنیم."
               : "Scope and timing are determined after reviewing the current state."}
           </>
         }
       />
-      <section className="bg-background py-16 sm:py-24">
+      <section className="bg-background py-12 sm:py-18">
         <Container>
           <Link
             href={localizedHref(locale, `/${entry.kind}`)}
@@ -170,9 +203,12 @@ export function CatalogDetail({ locale, entry }: { locale: Locale; entry: Catalo
             {entry.sections.map((section, index) => (
               <section
                 key={`${entry.slug}-${index}`}
-                className="grid gap-8 rounded-[1.25rem] border border-border bg-surface p-6 sm:p-8 lg:grid-cols-[15rem_minmax(0,1fr)] lg:p-10"
+                className={cn(
+                  "grid gap-8 rounded-xl border border-s-[3px] bg-surface p-6 sm:p-8 lg:grid-cols-[15rem_minmax(0,1fr)] lg:p-10",
+                  contentTone(index).rail,
+                )}
               >
-                <div className="meta-label text-muted-foreground">
+                <div className={cn("meta-label", contentTone(index).label)}>
                   {String(index + 1).padStart(2, "0")} / {kindLabel.item}
                 </div>
                 <div className="max-w-3xl">

@@ -6,12 +6,35 @@ export const LOGO_SRC = "/brand/rycode-logo.jpg";
 /**
  * RYCODE logo: official mark + wordmark (RY graphite, CODE orange).
  */
-export function Logo({ className }: { className?: string }) {
+export function Logo({
+  className,
+  variant = "default",
+}: {
+  className?: string;
+  variant?: "default" | "light" | "adaptive";
+}) {
   return (
     <span dir="ltr" className={cn("inline-flex select-none items-center gap-2", className)}>
-      <img src={LOGO_SRC} alt="RYCODE" width={40} height={30} className="h-[1.4em] w-auto" />
+      <img
+        src={LOGO_SRC}
+        alt="RYCODE"
+        width={40}
+        height={30}
+        className={cn(
+          "h-[1.4em] w-auto",
+          variant === "light" && "brightness-0 invert",
+          variant === "adaptive" && "dark:brightness-0 dark:invert",
+        )}
+      />
       <span className="font-logo text-[1.35rem] font-extrabold leading-none tracking-[-0.04em]">
-        <span className="text-foreground">RY</span>
+        <span
+          className={cn(
+            variant === "light" ? "text-white" : "text-foreground",
+            variant === "adaptive" && "dark:text-white",
+          )}
+        >
+          RY
+        </span>
         <span className="text-brand">CODE</span>
       </span>
     </span>

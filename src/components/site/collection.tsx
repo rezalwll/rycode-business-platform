@@ -171,7 +171,7 @@ export function PageHeader({
 
 export function PageShell({ className, children }: { className?: string; children: ReactNode }) {
   return (
-    <div className={cn("py-16 sm:py-24", className)}>
+    <div className={cn("py-12 sm:py-18", className)}>
       <Container>{children}</Container>
     </div>
   );

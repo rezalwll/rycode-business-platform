@@ -6,7 +6,7 @@ import type { AppPath } from "@/lib/nav-content";
 
 export function Container({ className, children }: { className?: string; children: ReactNode }) {
   return (
-    <div className={cn("mx-auto w-full max-w-[1440px] px-5 sm:px-8 lg:px-12", className)}>
+    <div className={cn("mx-auto w-full max-w-[1280px] px-5 sm:px-7 lg:px-9", className)}>
       {children}
     </div>
   );
@@ -22,7 +22,7 @@ export function Section({
   id?: string;
 }) {
   return (
-    <section id={id} className={cn("py-20 sm:py-28", className)}>
+    <section id={id} className={cn("py-14 sm:py-20", className)}>
       {children}
     </section>
   );
@@ -59,12 +59,12 @@ export function Eyebrow({ children }: { children: ReactNode }) {
 }
 
 export function SectionTitle({ children, className }: { children: ReactNode; className?: string }) {
-  return <h2 className={cn("display-2 mt-7 max-w-4xl", className)}>{children}</h2>;
+  return <h2 className={cn("display-2 mt-5 max-w-3xl", className)}>{children}</h2>;
 }
 
 export function Lead({ children, className }: { children: ReactNode; className?: string }) {
   return (
-    <p className={cn("mt-6 max-w-2xl text-lg leading-9 text-muted-foreground", className)}>
+    <p className={cn("mt-4 max-w-2xl text-base leading-8 text-muted-foreground", className)}>
       {children}
     </p>
   );
@@ -90,9 +90,9 @@ export function CtaLink({
       className={cn(
         base,
         variant === "primary" &&
-          "h-12 rounded-[6px] bg-brand px-7 text-brand-foreground hover:bg-brand/90",
+          "h-10 rounded-[5px] bg-brand px-5 text-brand-foreground hover:bg-brand/90",
         variant === "outline" &&
-          "h-12 rounded-[6px] border border-foreground/25 px-7 text-foreground hover:border-foreground hover:bg-foreground/5",
+          "h-10 rounded-[5px] border border-foreground/25 px-5 text-foreground hover:border-foreground hover:bg-foreground/5",
         variant === "ghost" && "text-foreground hover:text-brand",
         className,
       )}
@@ -138,7 +138,7 @@ export function ArrowSquare({
     <span
       aria-hidden
       className={cn(
-        "grid size-9 shrink-0 place-items-center rounded-[5px] border transition-[background-color,border-color,color] duration-200",
+        "grid size-8 shrink-0 place-items-center rounded-[4px] border transition-[background-color,border-color,color] duration-200",
         active
           ? "border-brand bg-brand text-brand-foreground"
           : "border-current/25 text-current group-hover:border-brand group-hover:bg-brand group-hover:text-brand-foreground",
