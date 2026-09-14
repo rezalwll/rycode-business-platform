@@ -25,25 +25,29 @@ export function PageHero({
   aside?: ReactNode;
 }) {
   return (
-    <section className="relative overflow-hidden border-b border-white/10 bg-ink text-ink-foreground">
+    <section className="relative overflow-hidden border-b border-border bg-surface text-foreground dark:border-white/10 dark:bg-ink dark:text-ink-foreground">
       <Image
         src="/images/rycode-connected-world.png"
         alt=""
         fill
         sizes="100vw"
-        className="object-cover object-center opacity-25"
+        className="object-cover object-center opacity-10 dark:opacity-25"
         aria-hidden
       />
-      <div className="absolute inset-0 bg-gradient-to-l from-ink/45 via-ink/85 to-ink" />
-      <Container className="relative py-20 sm:py-28 lg:py-32">
-        <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-end lg:gap-20">
+      <div className="absolute inset-0 bg-gradient-to-l from-background/45 via-background/85 to-background dark:from-ink/45 dark:via-ink/85 dark:to-ink" />
+      <div className="absolute -top-28 right-[8%] size-72 rounded-full bg-sky-400/15 blur-3xl dark:bg-sky-400/10" />
+      <div className="absolute -bottom-32 left-[28%] size-80 rounded-full bg-violet-400/12 blur-3xl dark:bg-violet-400/8" />
+      <Container className="relative py-10 sm:py-12 lg:py-14">
+        <div className="grid gap-7 lg:grid-cols-[1.35fr_0.65fr] lg:items-center lg:gap-10">
           <div className="reveal">
             <Eyebrow>{eyebrow}</Eyebrow>
-            <h1 className="display-1 mt-8 max-w-4xl text-white">{title}</h1>
-            <p className="mt-8 max-w-2xl text-lg leading-9 text-white/65 sm:text-xl">{lead}</p>
+            <h1 className="display-1 mt-5 max-w-3xl text-foreground dark:text-white">{title}</h1>
+            <p className="mt-5 max-w-2xl text-base leading-8 text-muted-foreground dark:text-white/65 sm:text-lg">
+              {lead}
+            </p>
           </div>
-          <div className="relative overflow-hidden rounded-[1.5rem] border border-white/15 bg-white/[0.06] p-3 shadow-2xl backdrop-blur-sm">
-            <div className="relative aspect-[4/3] overflow-hidden rounded-[1.1rem]">
+          <div className="relative overflow-hidden rounded-xl border border-border bg-background/70 p-2 shadow-lg backdrop-blur-sm dark:border-white/15 dark:bg-white/[0.06]">
+            <div className="relative aspect-[16/10] overflow-hidden rounded-lg">
               <Image
                 src="/images/rycode-product-system.png"
                 alt="نمایی انتزاعی از سیستم‌های دیجیتال و داده‌های متصل"
@@ -56,15 +60,15 @@ export function PageHero({
                 <span className="meta-label text-brand">RYCODE / FIELD NOTE</span>
                 <p className="mt-2 text-sm leading-6 text-white/80">
                   {locale === "fa"
-                    ? "از مسئله‌ی واقعی شروع می‌کنیم."
+                    ? "اول ببینیم واقعاً چه چیزی لازم دارید."
                     : "Start with the real problem."}
                 </p>
               </div>
             </div>
-            <div className="mt-3 rounded-xl border border-white/10 bg-ink/60 p-4 text-sm leading-7 text-white/60">
+            <div className="mt-2 rounded-lg border border-border bg-surface p-3 text-xs leading-6 text-muted-foreground dark:border-white/10 dark:bg-ink/60 dark:text-white/60">
               {aside ??
                 (locale === "fa"
-                  ? "هر پیشنهاد پس از شناخت مسئله، محدودیت‌ها و معیار موفقیت شکل می‌گیرد."
+                  ? "اول حرف‌هایتان را می‌شنویم؛ پیشنهاد فنی بعد از آن شکل می‌گیرد."
                   : "Every recommendation follows an understanding of the problem, constraints and success criteria.")}
             </div>
           </div>
@@ -91,8 +95,8 @@ export function ActionLink({
       href={localizedHref(locale, href)}
       className={
         secondary
-          ? "group inline-flex min-h-12 items-center gap-3 rounded-[6px] border border-foreground/25 px-6 text-sm font-bold transition-colors hover:border-foreground hover:bg-foreground/5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
-          : "group inline-flex min-h-12 items-center gap-3 rounded-[6px] bg-brand px-6 text-sm font-bold text-brand-foreground transition-colors hover:bg-brand/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+          ? "group inline-flex min-h-10 items-center gap-2.5 rounded-[5px] border border-foreground/25 px-5 text-sm font-bold transition-colors hover:border-foreground hover:bg-foreground/5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+          : "group inline-flex min-h-10 items-center gap-2.5 rounded-[5px] bg-brand px-5 text-sm font-bold text-brand-foreground transition-colors hover:bg-brand/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
       }
     >
       {children}
@@ -103,23 +107,24 @@ export function ActionLink({
 
 export function FinalBand({ locale }: { locale: Locale }) {
   return (
-    <section className="relative overflow-hidden bg-ink py-20 text-ink-foreground sm:py-28">
+    <section className="relative overflow-hidden bg-surface-2 py-14 text-foreground dark:bg-ink dark:text-ink-foreground sm:py-20">
       <Image
         src="/images/rycode-connected-world.png"
         alt=""
         fill
         sizes="100vw"
-        className="object-cover opacity-20"
+        className="object-cover opacity-10 dark:opacity-20"
         aria-hidden
       />
-      <div className="absolute inset-0 bg-gradient-to-l from-ink/35 via-ink/85 to-ink" />
+      <div className="absolute inset-0 bg-gradient-to-l from-background/35 via-background/85 to-background dark:from-ink/35 dark:via-ink/85 dark:to-ink" />
+      <div className="absolute -top-28 left-[18%] size-64 rounded-full bg-cyan-400/12 blur-3xl dark:bg-cyan-400/8" />
       <Container className="relative">
-        <div className="grid gap-10 lg:grid-cols-[1fr_auto] lg:items-end">
+        <div className="grid gap-7 lg:grid-cols-[1fr_auto] lg:items-end">
           <div>
             <p className="meta-label text-brand">RYCODE / START</p>
-            <h2 className="display-2 mt-6 max-w-4xl">
+            <h2 className="display-2 mt-4 max-w-3xl">
               {locale === "fa"
-                ? "مسئله را روشن کنیم؛ مسیر فنی بعد از آن مشخص می‌شود."
+                ? "از اصل مسئله شروع کنیم؛ راهش را با هم پیدا می‌کنیم."
                 : "Clarify the problem first; the engineering path follows."}
             </h2>
           </div>
@@ -129,7 +134,7 @@ export function FinalBand({ locale }: { locale: Locale }) {
             </ActionLink>
             <Link
               href={localizedHref(locale, "/contact")}
-              className="inline-flex min-h-12 items-center rounded-[6px] border border-white/25 px-6 text-sm font-bold text-white transition-colors hover:border-white"
+              className="inline-flex min-h-10 items-center rounded-[5px] border border-foreground/25 px-5 text-sm font-bold text-foreground transition-colors hover:border-foreground dark:border-white/25 dark:text-white dark:hover:border-white"
             >
               {locale === "fa" ? "تماس با ما" : "Contact us"}
             </Link>

@@ -18,7 +18,13 @@ function apply(mode: Mode) {
   document.documentElement.classList.toggle("dark", dark);
 }
 
-export function ThemeToggle({ className }: { className?: string }) {
+export function ThemeToggle({
+  className,
+  variant = "default",
+}: {
+  className?: string;
+  variant?: "default" | "light";
+}) {
   const [mode, setMode] = useState<Mode>(() => {
     if (typeof window === "undefined") return "system";
     const stored = localStorage.getItem(KEY);
@@ -45,6 +51,7 @@ export function ThemeToggle({ className }: { className?: string }) {
     <div
       className={cn(
         "inline-flex items-center gap-0.5 rounded-full border border-border p-0.5",
+        variant === "light" && "border-white/25",
         className,
       )}
     >
@@ -58,8 +65,12 @@ export function ThemeToggle({ className }: { className?: string }) {
           className={cn(
             "grid size-7 place-items-center rounded-full transition-colors",
             mode === value
-              ? "bg-foreground text-background"
-              : "text-muted-foreground hover:text-foreground",
+              ? variant === "light"
+                ? "bg-white text-ink"
+                : "bg-foreground text-background"
+              : variant === "light"
+                ? "text-white/55 hover:text-white"
+                : "text-muted-foreground hover:text-foreground",
           )}
         >
           <Icon className="size-3.5" />

@@ -25,10 +25,10 @@ async function requestFingerprint(): Promise<string> {
 function message(locale: "fa" | "en", key: "success" | "invalid" | "busy" | "unavailable") {
   const copy = {
     fa: {
-      success: "درخواست شما با موفقیت ثبت شد. برای ادامه با شما تماس می‌گیریم.",
-      invalid: "لطفاً اطلاعات مشخص‌شده را بررسی و دوباره ارسال کنید.",
-      busy: "تعداد درخواست‌ها زیاد است. کمی بعد دوباره تلاش کنید.",
-      unavailable: "ثبت درخواست موقتاً در دسترس نیست. لطفاً کمی بعد دوباره تلاش کنید.",
+      success: "پیامتان رسید. خیلی زود برای ادامه با شما تماس می‌گیریم.",
+      invalid: "به‌نظر می‌رسد یکی از بخش‌ها کامل نیست؛ یک نگاه بیندازید و دوباره بفرستید.",
+      busy: "الان درخواست‌ها کمی زیاد است. لطفاً چند دقیقه دیگر دوباره امتحان کنید.",
+      unavailable: "فعلاً نتوانستیم پیامتان را ثبت کنیم. لطفاً کمی بعد دوباره امتحان کنید.",
     },
     en: {
       success: "Your request has been recorded. We will contact you about the next step.",

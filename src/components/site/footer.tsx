@@ -47,23 +47,25 @@ export function SiteFooter({ locale }: { locale: Locale }) {
   const groups = isFa ? footerNav : englishFooter;
 
   return (
-    <footer className="border-t border-white/12 bg-ink text-ink-foreground">
-      <Container className="pt-14 pb-10">
+    <footer className="border-t border-border bg-surface text-foreground dark:border-white/12 dark:bg-ink dark:text-ink-foreground">
+      <Container className="pt-10 pb-7">
         <div
           dir="ltr"
-          className="flex items-end justify-between gap-6 border-b border-white/12 pb-10"
+          className="flex items-end justify-between gap-6 border-b border-border pb-7 dark:border-white/12"
         >
-          <span className="text-[clamp(3rem,10vw,8rem)] leading-[0.85] font-extrabold tracking-[-0.04em]">
-            <span className="text-ink-foreground">RY</span>
+          <span className="text-[clamp(2.4rem,7vw,5rem)] leading-[0.9] font-extrabold tracking-[-0.04em]">
+            <span className="text-foreground dark:text-ink-foreground">RY</span>
             <span className="text-brand">CODE</span>
           </span>
-          <MetaLabel className="hidden text-white/45 sm:inline-flex">rycode.ir</MetaLabel>
+          <MetaLabel className="hidden text-muted-foreground dark:text-white/45 sm:inline-flex">
+            rycode.ir
+          </MetaLabel>
         </div>
 
-        <div className="grid gap-12 py-14 lg:grid-cols-[1fr_2.2fr]">
-          <p className="max-w-sm text-sm leading-8 text-ink-foreground/65">
+        <div className="grid gap-9 py-10 lg:grid-cols-[1fr_2.2fr]">
+          <p className="max-w-sm text-sm leading-8 text-muted-foreground dark:text-ink-foreground/65">
             {isFa
-              ? "رای‌کد شریک فنی کسب‌وکارها برای ساخت، توسعه و رشد محصولات دیجیتال است؛ از طراحی سایت و فروشگاه اینترنتی تا نرم‌افزار اختصاصی، یکپارچه‌سازی و سئو."
+              ? "اگر می‌خواهید یک سایت یا نرم‌افزار درست‌وحسابی بسازید، پروژه نیمه‌کاره‌ای را جمع کنید یا بیشتر دیده شوید، رای‌کد کنارتان است."
               : "RYCODE is a technical partner for building, improving and growing dependable digital products."}
           </p>
 
@@ -76,7 +78,7 @@ export function SiteFooter({ locale }: { locale: Locale }) {
                     <li key={item.label}>
                       <Link
                         href={item.href}
-                        className="text-sm text-ink-foreground/65 transition-colors hover:text-ink-foreground"
+                        className="text-sm text-muted-foreground transition-colors hover:text-foreground dark:text-ink-foreground/65 dark:hover:text-ink-foreground"
                       >
                         {item.label}
                       </Link>
@@ -88,7 +90,7 @@ export function SiteFooter({ locale }: { locale: Locale }) {
           </div>
         </div>
 
-        <div className="flex flex-col gap-3 border-t border-white/12 pt-6 text-xs text-ink-foreground/50 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-col gap-3 border-t border-border pt-6 text-xs text-muted-foreground dark:border-white/12 dark:text-ink-foreground/50 sm:flex-row sm:items-center sm:justify-between">
           <p>
             © {new Date().getFullYear()} RYCODE —{" "}
             {isFa ? "تمام حقوق محفوظ است." : "All rights reserved."}

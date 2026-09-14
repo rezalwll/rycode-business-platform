@@ -202,7 +202,7 @@ const pages: Record<CompanyPageSlug, PageCopy> = {
           en: "How are cost and timing determined?",
         },
         body: {
-          fa: "پس از مشخص‌شدن دامنه، ریسک، وابستگی و معیار پذیرش. اگر ابهام زیاد باشد، ابتدا یک مرحله بررسی محدود پیشنهاد می‌شود.",
+          fa: "اول درباره چیزی که می‌خواهید، وضعیت فعلی و محدودیت‌ها حرف می‌زنیم. اگر هنوز بخش‌های زیادی مبهم باشد، با یک بررسی کوتاه شروع می‌کنیم تا عدد و زمان الکی تحویلتان ندهیم.",
           en: "After scope, risk, dependencies and acceptance criteria are known. Where uncertainty is high, a bounded assessment comes first.",
         },
       },
@@ -212,28 +212,28 @@ const pages: Record<CompanyPageSlug, PageCopy> = {
           en: "Can you continue an existing project?",
         },
         body: {
-          fa: "بله، پس از ممیزی اجراپذیری، امنیت، معماری و مالکیت دسترسی‌ها. نتیجه ممیزی می‌تواند ادامه، اصلاح هدفمند یا بازسازی بخشی باشد.",
+          fa: "بله. اول پروژه، دسترسی‌ها و وضعیت کد را بررسی می‌کنیم. بعد صادقانه می‌گوییم ادامه همین مسیر بهتر است، چند بخش باید تعمیر شود یا واقعاً نیاز به بازسازی دارد.",
           en: "Yes, after auditing runtime viability, security, architecture and access ownership. The evidence may support continuation, targeted correction or partial rebuilding.",
         },
       },
       {
         title: { fa: "مالکیت کد و حساب‌ها با چه کسی است؟", en: "Who owns the code and accounts?" },
         body: {
-          fa: "مالکیت و سطح دسترسی در قرارداد روشن می‌شود. حساب‌های عملیاتی و مخزن نهایی نباید به دسترسی شخصی و پنهان وابسته باشند.",
+          fa: "کد، حساب‌ها و دسترسی‌های اصلی برای شماست. از اول هم مشخص می‌کنیم هر کسی به چه چیزی دسترسی دارد تا پروژه به حساب شخصی یک نفر وابسته نماند.",
           en: "Ownership and access levels are explicit in the agreement. Operational accounts and the final repository should not depend on hidden personal access.",
         },
       },
       {
         title: { fa: "پشتیبانی پس از انتشار دارید؟", en: "Is post-release support available?" },
         body: {
-          fa: "بله؛ دامنه پشتیبانی، زمان پاسخ و مسئولیت زیرساخت باید جداگانه و قابل اندازه‌گیری تعریف شود.",
+          fa: "بله. می‌توانیم بعد از انتشار هم برای رفع خطا، نگهداری و قابلیت‌های جدید کنارتان بمانیم. فقط از اول روشن می‌کنیم چه چیزهایی داخل پشتیبانی است و پاسخ‌گویی چقدر زمان می‌برد.",
           en: "Yes; support scope, response expectations and infrastructure responsibility are defined separately and measurably.",
         },
       },
       {
         title: { fa: "برای شروع چه اطلاعاتی لازم است؟", en: "What is needed to begin?" },
         body: {
-          fa: "هدف کسب‌وکار، کاربران اصلی، وضعیت فعلی، محدودیت زمانی و دسترسی‌های فنی مرتبط. لازم نیست از قبل نام تکنولوژی یا راه‌حل را انتخاب کرده باشید.",
+          fa: "همین که بگویید چه کاری دارید، چه کسانی قرار است از محصول استفاده کنند و الان کجای مسیر هستید کافی است. لازم نیست اسم تکنولوژی بدانید یا از قبل راه‌حل انتخاب کرده باشید.",
           en: "Business goal, primary users, current state, timing constraints and relevant technical access. You do not need to choose a technology or solution in advance.",
         },
       },
@@ -278,7 +278,7 @@ export async function CompanyPage({ locale, slug }: { locale: Locale; slug: Comp
         title={t(page.title, locale)}
         lead={t(page.lead, locale)}
       />
-      <section className="bg-background py-16 sm:py-24">
+      <section className="bg-background py-12 sm:py-18">
         <Container>
           <div className="grid gap-4 lg:grid-cols-2">
             {sections.map((section, index) => (
@@ -329,60 +329,60 @@ const leadPages: Record<LeadKind, LeadPageCopy> = {
   project: {
     eyebrow: { fa: "شروع پروژه", en: "Start a project" },
     title: {
-      fa: "برای ساختن، ابتدا مسئله را دقیق تعریف کنیم",
+      fa: "بگویید چه چیزی توی ذهنتان است؛ با هم مسیرش را پیدا می‌کنیم",
       en: "Define the problem before deciding what to build",
     },
     lead: {
-      fa: "درباره وضعیت فعلی، نتیجه مورد انتظار و محدودیت‌ها بنویسید. پس از بررسی، مسیر مناسب گفت‌وگو را پیشنهاد می‌کنیم.",
+      fa: "کوتاه بگویید الان چه دارید، چه چیزی می‌خواهید بهتر شود و اگر زمان یا محدودیت خاصی هست. ما می‌خوانیم و برای قدم بعدی با شما هماهنگ می‌شویم.",
       en: "Tell us about the current state, required outcome and constraints. After review, we will suggest the right next conversation.",
     },
     note: {
-      fa: "ثبت فرم به‌معنای پذیرش پروژه یا اعلام برآورد نیست؛ دامنه و تعهدات پس از بررسی و توافق مکتوب مشخص می‌شوند.",
+      fa: "فرستادن این فرم فقط شروع گفت‌وگوست. بعد از اینکه موضوع را بررسی کردیم، درباره مسیر، زمان و هزینه شفاف با هم توافق می‌کنیم.",
       en: "Submitting this form does not confirm acceptance or an estimate; scope and commitments follow review and written agreement.",
     },
   },
   technical_review: {
     eyebrow: { fa: "بررسی فنی", en: "Technical review" },
     title: {
-      fa: "پیش از ادامه یا بازسازی، شواهد فنی جمع کنیم",
+      fa: "قبل از اینکه دوباره هزینه کنید، ببینیم واقعاً چه چیزی خراب است",
       en: "Gather technical evidence before continuing or rebuilding",
     },
     lead: {
-      fa: "اگر پروژه کند، ناپایدار یا متوقف شده، وضعیت اجرا، کد، امنیت و استقرار را برای تصمیم بعدی بررسی می‌کنیم.",
+      fa: "اگر پروژه کند شده، مدام خطا می‌دهد یا نیمه‌کاره مانده، کد و زیرساختش را نگاه می‌کنیم تا قدم بعدی را با حدس انتخاب نکنید.",
       en: "If a product is slow, unstable or stalled, we inspect runtime, code, security and deployment before the next decision.",
     },
     note: {
-      fa: "از قراردادن رمز عبور، کلید API یا داده محرمانه در فرم خودداری کنید. مسیر امن تبادل دسترسی پس از تماس هماهنگ می‌شود.",
+      fa: "اینجا رمز، کلید API یا اطلاعات محرمانه نفرستید. اگر به دسترسی نیاز باشد، بعد از تماس یک راه امن برایش هماهنگ می‌کنیم.",
       en: "Do not place passwords, API keys or confidential data in this form. A secure access-transfer path is arranged after contact.",
     },
   },
   seo_audit: {
     eyebrow: { fa: "درخواست SEO Audit", en: "Request an SEO audit" },
     title: {
-      fa: "مشکل دیده‌شدن را با داده و اولویت روشن بررسی کنیم",
+      fa: "ببینیم چرا گوگل سایتتان را آن‌طور که باید نمی‌بیند",
       en: "Investigate search visibility with evidence and clear priorities",
     },
     lead: {
-      fa: "نشانی سایت، تغییرات اخیر و هدف کسب‌وکار را ارسال کنید تا دامنه بررسی فنی و محتوایی مشخص شود.",
+      fa: "آدرس سایت، تغییرهای اخیر و چیزی که می‌خواهید از گوگل بگیرید را بفرستید؛ ما مشخص می‌کنیم بررسی را از کجا باید شروع کرد.",
       en: "Share the site, recent changes and business goal so the technical and content audit scope can be defined.",
     },
     note: {
-      fa: "هیچ رتبه یا نتیجه‌ای تضمین نمی‌شود. خروجی بررسی شامل شواهد، اولویت و معیار سنجش خواهد بود.",
+      fa: "قول رتبه یک نمی‌دهیم. در عوض دقیق نشان می‌دهیم مشکل کجاست، کدام کار مهم‌تر است و نتیجه را چطور باید سنجید.",
       en: "No ranking or outcome is guaranteed. The assessment focuses on evidence, priorities and measurable criteria.",
     },
   },
   contact: {
     eyebrow: { fa: "تماس", en: "Contact" },
     title: {
-      fa: "گفت‌وگو را از زمینه و مسئله شروع کنیم",
+      fa: "سلام؛ بگویید چطور می‌توانیم کمک کنیم",
       en: "Start the conversation with context and the problem",
     },
     lead: {
-      fa: "برای پرسش عمومی یا هماهنگی اولیه پیام بفرستید. برای پروژه، بررسی فنی یا سئو از فرم اختصاصی همان مسیر استفاده کنید.",
+      fa: "سؤال یا موضوعتان را همین‌جا بنویسید. اگر درباره شروع پروژه، بررسی فنی یا سئو است، فرم مخصوص همان بخش سریع‌تر ما را به اصل موضوع می‌رساند.",
       en: "Send a general question or initial note. For a project, technical review or SEO audit, use the corresponding dedicated form.",
     },
     note: {
-      fa: "اطلاعات این فرم فقط برای بررسی و پیگیری درخواست شما استفاده می‌شود.",
+      fa: "اطلاعاتی که می‌فرستید فقط برای خواندن و پیگیری همین درخواست استفاده می‌شود.",
       en: "Information submitted here is used only to review and follow up your request.",
     },
   },
@@ -406,7 +406,7 @@ export function PublicLeadPage({
         title={t(page.title, locale)}
         lead={t(page.lead, locale)}
       />
-      <section className="py-16 sm:py-24">
+      <section className="py-12 sm:py-18">
         <Container>
           <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_20rem] lg:items-start">
             <LeadForm locale={locale} kind={kind} sourcePath={sourcePath} />

@@ -47,26 +47,26 @@ const copy: Record<Locale, Copy> = {
     name: "نام و نام خانوادگی",
     email: "ایمیل",
     phone: "شماره تماس",
-    company: "نام شرکت یا مجموعه",
-    website: "نشانی وب‌سایت",
-    projectType: "نوع پروژه یا فناوری فعلی",
-    budget: "بازه تقریبی بودجه",
-    timeline: "زمان مطلوب شروع",
-    message: "مسئله، وضعیت فعلی و نتیجه‌ای که انتظار دارید",
-    consent: "با ثبت این فرم موافقم رای‌کد برای پیگیری همین درخواست با من تماس بگیرد.",
-    submit: "ثبت امن درخواست",
-    sending: "در حال ثبت…",
+    company: "اسم شرکت یا مجموعه",
+    website: "آدرس سایت",
+    projectType: "پروژه‌تان درباره چیست؟",
+    budget: "حدود بودجه‌ای که در نظر دارید",
+    timeline: "دوست دارید از چه زمانی شروع کنیم؟",
+    message: "کمی از وضعیت فعلی و چیزی که می‌خواهید برایمان بگویید",
+    consent: "موافقم رای‌کد فقط برای پیگیری همین درخواست با من تماس بگیرد.",
+    submit: "ارسال درخواست",
+    sending: "دارد ارسال می‌شود…",
     optional: "اختیاری",
-    choose: "انتخاب کنید",
-    contactHint: "حداقل یکی از ایمیل یا شماره تماس الزامی است.",
-    stepOne: "زمینه",
-    stepTwo: "دامنه",
-    stepThree: "گفت‌وگو",
-    next: "ادامه",
-    back: "مرحله قبل",
-    identityHint: "اول بدانیم با چه کسی و چه مجموعه‌ای قرار است صحبت کنیم.",
-    scopeHint: "چند نشانه از وضعیت فعلی کمک می‌کند گفت‌وگو دقیق‌تر شروع شود.",
-    finalHint: "آخرین بخش را بنویسید تا تیم رای‌کد با زمینه‌ی کافی برگردد.",
+    choose: "یکی را انتخاب کنید",
+    contactHint: "ایمیل یا شماره تماس؛ هر کدام برایتان راحت‌تر است.",
+    stepOne: "آشنایی",
+    stepTwo: "پروژه",
+    stepThree: "حرف آخر",
+    next: "بریم مرحله بعد",
+    back: "برگردیم",
+    identityHint: "اول کوتاه با شما و مجموعه‌تان آشنا شویم.",
+    scopeHint: "چند خط درباره وضعیت فعلی کمک می‌کند مستقیم برویم سر اصل مطلب.",
+    finalHint: "هر چیزی فکر می‌کنید به فهم بهتر موضوع کمک می‌کند، اینجا بنویسید.",
   },
   en: {
     name: "Full name",
@@ -97,7 +97,7 @@ const copy: Record<Locale, Copy> = {
 
 const budgetOptions: Record<Locale, string[]> = {
   fa: [
-    "نیازمند برآورد",
+    "هنوز نمی‌دانم؛ راهنمایی می‌خواهم",
     "کمتر از ۱۰۰ میلیون تومان",
     "۱۰۰ تا ۳۰۰ میلیون تومان",
     "۳۰۰ تا ۷۰۰ میلیون تومان",
@@ -113,7 +113,7 @@ const budgetOptions: Record<Locale, string[]> = {
 };
 
 const timelineOptions: Record<Locale, string[]> = {
-  fa: ["فوری؛ پس از بررسی ریسک", "یک ماه آینده", "یک تا سه ماه آینده", "زمان انعطاف‌پذیر"],
+  fa: ["هرچه زودتر", "تا یک ماه آینده", "یک تا سه ماه آینده", "عجله‌ای ندارم"],
   en: [
     "Urgent, subject to risk review",
     "Within one month",
@@ -209,7 +209,7 @@ export function LeadForm({
           <Check className="size-5" aria-hidden />
         </span>
         <h2 className="mt-6 text-xl font-bold">
-          {locale === "fa" ? "درخواست ثبت شد" : "Request submitted"}
+          {locale === "fa" ? "رسید دستمان 🙌" : "Request submitted"}
         </h2>
         <p className="mt-3 max-w-xl leading-8 text-muted-foreground">{state.message}</p>
       </div>

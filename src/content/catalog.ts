@@ -37,86 +37,101 @@ export const kindCopy: Record<
   services: {
     eyebrow: { fa: "خدمات", en: "Services" },
     title: {
-      fa: "مسیرهای فنی برای ساخت، نجات و رشد",
+      fa: "هر چیزی که برای ساختن، درست‌کردن یا رشد محصولتان لازم دارید",
       en: "Engineering paths to build, rescue and grow",
     },
     lead: {
-      fa: "از وضعیت کسب‌وکار شروع می‌کنیم و ابزار، معماری و دامنهٔ اجرا را بعد از شناخت مسئله انتخاب می‌کنیم.",
+      fa: "اول می‌شنویم الان کجای کارید و چه چیزی اذیتتان می‌کند؛ بعد درباره ابزار و مسیر اجرا تصمیم می‌گیریم.",
       en: "We start with the business situation, then choose the tools, architecture and delivery scope.",
     },
   },
   solutions: {
     eyebrow: { fa: "راهکارها", en: "Solutions" },
     title: {
-      fa: "سیستم‌هایی که حول فرآیند واقعی شما ساخته می‌شوند",
+      fa: "ابزاری که واقعاً با مدل کار شما جور درمی‌آید",
       en: "Systems designed around real operating workflows",
     },
     lead: {
-      fa: "راهکار آماده تحمیل نمی‌کنیم؛ اجزای لازم را با توجه به نقش‌ها، داده‌ها و مسیر کار طراحی می‌کنیم.",
+      fa: "قرار نیست کارتان را به زور داخل یک نرم‌افزار آماده جا بدهید. سیستم را دور آدم‌ها و روند واقعی کسب‌وکارتان می‌چینیم.",
       en: "We do not force a packaged answer; capabilities follow roles, data and the actual workflow.",
     },
   },
   problems: {
     eyebrow: { fa: "مشکلات رایج", en: "Problems" },
     title: {
-      fa: "از نشانه شروع کنید، نه از نام تکنولوژی",
+      fa: "لازم نیست اسم فنی مشکل را بدانید",
       en: "Start with the symptom, not a technology name",
     },
     lead: {
-      fa: "کندی، خطا، توقف پروژه یا فرآیند دستی را بررسی می‌کنیم و قبل از پیشنهاد راه‌حل، علت را مشخص می‌کنیم.",
+      fa: "فقط بگویید کجای کار گیر کرده؛ سایت کند است، پروژه خوابیده یا کارها با اکسل و پیام جلو می‌رود. پیدا کردن علت با ما.",
       en: "We diagnose slowness, failure, stalled delivery and manual work before prescribing a solution.",
     },
   },
   industries: {
     eyebrow: { fa: "صنایع", en: "Industries" },
     title: {
-      fa: "تکنولوژی متناسب با مدل کسب‌وکار",
+      fa: "هر کسب‌وکاری ابزار خودش را می‌خواهد",
       en: "Technology aligned with the business model",
     },
     lead: {
-      fa: "هر بازار قواعد، داده‌ها و نقاط اصطکاک خودش را دارد؛ معماری باید همین تفاوت‌ها را جدی بگیرد.",
+      fa: "فروشگاه، کارخانه و کلینیک شبیه هم کار نمی‌کنند. قبل از ساخت، با قواعد و دردسرهای صنعت شما آشنا می‌شویم.",
       en: "Every market has distinct rules, data and friction points; the architecture should reflect them.",
     },
   },
   integrations: {
     eyebrow: { fa: "یکپارچه‌سازی", en: "Integrations" },
     title: {
-      fa: "سیستم‌های جدا را به یک جریان قابل اعتماد وصل کنید",
+      fa: "سیستم‌هایتان را با هم آشتی بدهید",
       en: "Connect separate systems into one dependable flow",
     },
     lead: {
-      fa: "مالکیت داده، جهت تبادل، خطاها و بازیابی از ابتدا تعریف می‌شوند تا API فقط یک اتصال شکننده نباشد.",
+      fa: "اطلاعات را یک‌بار وارد کنید و بگذارید بین حسابداری، انبار، سایت و CRM درست جابه‌جا شود؛ حتی وقتی یکی از سرویس‌ها خطا می‌دهد.",
       en: "Data ownership, direction, failure and recovery are designed up front so an API is not a fragile bridge.",
     },
   },
   projects: {
     eyebrow: { fa: "مطالعات مفهومی", en: "Concept studies" },
-    title: { fa: "مسئله، تصمیم و معماری", en: "Problem, decision and architecture" },
+    title: {
+      fa: "چند مسئله واقعی، با راه‌حل‌های قابل تصور",
+      en: "Problem, decision and architecture",
+    },
     lead: {
-      fa: "تا زمان انتشار نمونه‌کار واقعی، این بخش فقط سناریوهای مفهومی و بدون نام مشتری یا عدد ساختگی را نشان می‌دهد.",
+      fa: "فعلاً اینجا چند سناریوی شفاف و مفهومی می‌بینید؛ نه اسم مشتری ساختگی داریم، نه عددی که نتوانیم ثابتش کنیم.",
       en: "Until real work is approved for publication, this archive contains clearly labelled concepts with no invented client or metric.",
     },
   },
   blog: {
     eyebrow: { fa: "مجله رای‌کد", en: "RYCODE Journal" },
     title: {
-      fa: "یادداشت‌های مهندسی، محصول و رشد",
+      fa: "چیزهایی که موقع ساختن و بهترکردن محصول یاد گرفته‌ایم",
       en: "Notes on engineering, product and growth",
     },
     lead: {
-      fa: "مطالب کاربردی درباره ساخت، نگهداری و رشد محصولات دیجیتال؛ بدون آمار یا ادعای ساختگی.",
+      fa: "یادداشت‌های کوتاه و کاربردی درباره سایت، نرم‌افزار و رشد؛ از همان چیزهایی که در کار واقعی به درد می‌خورند.",
       en: "Practical writing on building, maintaining and growing digital products—without invented evidence.",
     },
   },
 };
 
 const commonProcess: CatalogSection = {
-  title: { fa: "فرآیند اجرا", en: "Delivery process" },
+  title: { fa: "چطور جلو می‌رویم؟", en: "Delivery process" },
   items: [
-    { fa: "شناخت مسئله و محدودیت‌ها", en: "Understand the problem and constraints" },
-    { fa: "تعریف دامنه، معیار پذیرش و ریسک‌ها", en: "Define scope, acceptance criteria and risks" },
-    { fa: "طراحی، پیاده‌سازی و آزمون مرحله‌ای", en: "Design, implement and verify incrementally" },
-    { fa: "انتشار کنترل‌شده و بهبود مستمر", en: "Release deliberately and improve continuously" },
+    {
+      fa: "اول مسئله و محدودیت‌ها را با هم روشن می‌کنیم",
+      en: "Understand the problem and constraints",
+    },
+    {
+      fa: "روی نسخه اول، زمان‌بندی و خط قرمزها توافق می‌کنیم",
+      en: "Define scope, acceptance criteria and risks",
+    },
+    {
+      fa: "مرحله‌به‌مرحله می‌سازیم، تست می‌کنیم و نشانتان می‌دهیم",
+      en: "Design, implement and verify incrementally",
+    },
+    {
+      fa: "با خیال راحت منتشر می‌کنیم و بعد بهترش می‌کنیم",
+      en: "Release deliberately and improve continuously",
+    },
   ],
 };
 
@@ -127,24 +142,33 @@ const entries: CatalogEntry[] = [
     eyebrow: { fa: "خدمت / وب", en: "Service / Web" },
     title: { fa: "طراحی و توسعه وب", en: "Web design and development" },
     summary: {
-      fa: "وب‌سایت و وب‌اپلیکیشن سریع، دسترس‌پذیر و آمادهٔ رشد محتوا از روز اول.",
+      fa: "سایتی که سریع باز شود، راحت فهمیده شود و با بزرگ‌شدن کسب‌وکارتان کم نیاورد.",
       en: "Fast, accessible websites and web applications designed for content-led growth from day one.",
     },
     sections: [
       {
-        title: { fa: "برای چه مسئله‌ای؟", en: "What it solves" },
+        title: { fa: "این سرویس به درد چه کاری می‌خورد؟", en: "What it solves" },
         body: {
-          fa: "وقتی وب‌سایت باید هم ابزار معرفی و فروش باشد و هم پایه‌ای قابل توسعه برای محصول و محتوا.",
+          fa: "وقتی سایت قرار است فقط یک کارت ویزیت نباشد؛ باید مشتری بیاورد، محتوا را خوب نشان بدهد و بعداً هم بتوانید گسترشش دهید.",
           en: "For websites that must support sales and communication while remaining a maintainable product foundation.",
         },
       },
       {
-        title: { fa: "خروجی", en: "Deliverables" },
+        title: { fa: "آخر کار چه چیزی تحویل می‌گیرید؟", en: "Deliverables" },
         items: [
-          { fa: "معماری اطلاعات و تجربه کاربر", en: "Information architecture and UX" },
-          { fa: "پیاده‌سازی واکنش‌گرا و دسترس‌پذیر", en: "Responsive, accessible implementation" },
-          { fa: "SEO فنی و Core Web Vitals", en: "Technical SEO and Core Web Vitals" },
-          { fa: "مدیریت محتوا و مستندات", en: "Content management and documentation" },
+          { fa: "ساختاری که کاربر در آن گم نشود", en: "Information architecture and UX" },
+          {
+            fa: "نمای درست روی موبایل، تبلت و دسکتاپ",
+            en: "Responsive, accessible implementation",
+          },
+          {
+            fa: "پایه فنی سالم برای سرعت و دیده‌شدن در گوگل",
+            en: "Technical SEO and Core Web Vitals",
+          },
+          {
+            fa: "راه ساده برای مدیریت محتوا، همراه با توضیحات لازم",
+            en: "Content management and documentation",
+          },
         ],
       },
       commonProcess,
@@ -156,18 +180,27 @@ const entries: CatalogEntry[] = [
     eyebrow: { fa: "خدمت / تجارت", en: "Service / Commerce" },
     title: { fa: "فروشگاه اینترنتی", en: "Ecommerce engineering" },
     summary: {
-      fa: "تجربه خرید، مدیریت محصول و عملیات سفارش متناسب با مدل واقعی فروش.",
+      fa: "فروشگاهی که خرید را برای مشتری ساده و جمع‌کردن سفارش‌ها را برای تیم شما راحت کند.",
       en: "Buying experience, product management and order operations shaped around the real sales model.",
     },
     sections: [
       {
-        title: { fa: "دامنه", en: "Scope" },
+        title: { fa: "چه بخش‌هایی می‌تواند داشته باشد؟", en: "Scope" },
         items: [
-          { fa: "کاتالوگ و جست‌وجوی محصول", en: "Product catalog and search" },
-          { fa: "سبد، سفارش و وضعیت پرداخت", en: "Basket, order and payment state" },
-          { fa: "پنل مشتری و عملیات داخلی", en: "Customer portal and internal operations" },
           {
-            fa: "اتصال به انبار و حسابداری در صورت نیاز",
+            fa: "محصول‌ها و جست‌وجویی که واقعاً به پیدا کردن کمک کند",
+            en: "Product catalog and search",
+          },
+          {
+            fa: "سبد خرید، سفارش و پرداخت بدون مسیرهای گیج‌کننده",
+            en: "Basket, order and payment state",
+          },
+          {
+            fa: "پنل مشتری و یک فضای مرتب برای مدیریت سفارش‌ها",
+            en: "Customer portal and internal operations",
+          },
+          {
+            fa: "اگر لازم باشد، اتصال مستقیم به انبار و حسابداری",
             en: "Inventory and accounting integration when required",
           },
         ],
@@ -181,14 +214,14 @@ const entries: CatalogEntry[] = [
     eyebrow: { fa: "خدمت / نرم‌افزار", en: "Service / Software" },
     title: { fa: "نرم‌افزار اختصاصی", en: "Custom software" },
     summary: {
-      fa: "پنل، سامانه و ابزار داخلی برای فرآیندی که نرم‌افزار آماده پاسخ‌گوی آن نیست.",
+      fa: "وقتی نرم‌افزارهای آماده به مدل کارتان نمی‌خورند، ابزار مخصوص خودتان را می‌سازیم.",
       en: "Portals, systems and internal tools for workflows that off-the-shelf software cannot fit.",
     },
     sections: [
       {
-        title: { fa: "رویکرد", en: "Approach" },
+        title: { fa: "از کجا شروع می‌کنیم؟", en: "Approach" },
         body: {
-          fa: "نقش‌ها، تصمیم‌ها و جریان داده پیش از انتخاب تکنولوژی مدل می‌شوند.",
+          fa: "اول می‌بینیم چه کسی چه کاری انجام می‌دهد، اطلاعات از کجا می‌آید و کجا تصمیم گرفته می‌شود؛ انتخاب تکنولوژی بعد از این‌هاست.",
           en: "Roles, decisions and data flows are modelled before the technology is selected.",
         },
       },
@@ -201,17 +234,23 @@ const entries: CatalogEntry[] = [
     eyebrow: { fa: "خدمت / نجات", en: "Service / Rescue" },
     title: { fa: "نجات و توسعه پروژه", en: "Project rescue and continuation" },
     summary: {
-      fa: "ممیزی کد و زیرساخت برای تصمیم آگاهانه میان ادامه، اصلاح یا بازسازی بخش‌های ضروری.",
+      fa: "پروژه نیمه‌کاره را بررسی می‌کنیم تا بفهمیم بهتر است ادامه‌اش بدهیم، تعمیرش کنیم یا فقط بخش‌های خراب را از نو بسازیم.",
       en: "A code and infrastructure audit to choose deliberately between continuation, correction and targeted rebuilding.",
     },
     sections: [
       {
-        title: { fa: "آنچه بررسی می‌شود", en: "What we inspect" },
+        title: { fa: "دقیقاً چه چیزهایی را نگاه می‌کنیم؟", en: "What we inspect" },
         items: [
-          { fa: "سلامت معماری و امنیت", en: "Architecture and security" },
-          { fa: "قابلیت Build، Test و استقرار", en: "Build, test and deployment readiness" },
-          { fa: "بدهی فنی و ریسک داده", en: "Technical debt and data risk" },
-          { fa: "مسیر کوتاه‌مدت بازگشت پروژه", en: "Shortest safe route back to delivery" },
+          { fa: "وضعیت کلی کد و امنیت", en: "Architecture and security" },
+          {
+            fa: "اینکه پروژه واقعاً اجرا، تست و منتشر می‌شود یا نه",
+            en: "Build, test and deployment readiness",
+          },
+          { fa: "ریسک‌های فنی و احتمال آسیب‌دیدن اطلاعات", en: "Technical debt and data risk" },
+          {
+            fa: "کوتاه‌ترین راه امن برای راه‌انداختن دوباره پروژه",
+            en: "Shortest safe route back to delivery",
+          },
         ],
       },
       commonProcess,
@@ -223,16 +262,22 @@ const entries: CatalogEntry[] = [
     eyebrow: { fa: "خدمت / اتصال", en: "Service / Integration" },
     title: { fa: "API و یکپارچه‌سازی", en: "API and integration" },
     summary: {
-      fa: "اتصال سیستم‌ها با قرارداد داده روشن، امنیت، مشاهده‌پذیری و بازیابی خطا.",
+      fa: "سایت، انبار، حسابداری و ابزارهای دیگر را طوری وصل می‌کنیم که اطلاعات بینشان گم یا دوباره‌کاری نشود.",
       en: "Connect systems with explicit data contracts, security, observability and failure recovery.",
     },
     sections: [
       {
-        title: { fa: "اصول", en: "Principles" },
+        title: { fa: "چیزهایی که حواسمان به آن‌هاست", en: "Principles" },
         items: [
-          { fa: "منبع حقیقت مشخص", en: "Explicit source of truth" },
-          { fa: "Idempotency و Retry کنترل‌شده", en: "Idempotency and controlled retry" },
-          { fa: "ثبت رخداد و هشدار خطا", en: "Event logging and failure alerts" },
+          { fa: "معلوم باشد نسخه اصلی هر اطلاعات کجاست", en: "Explicit source of truth" },
+          {
+            fa: "اگر ارتباط قطع شد، اطلاعات دوباره و اشتباه ثبت نشود",
+            en: "Idempotency and controlled retry",
+          },
+          {
+            fa: "خطاها ثبت شوند و قبل از دردسر جدی خبردار شویم",
+            en: "Event logging and failure alerts",
+          },
         ],
       },
       commonProcess,
@@ -244,17 +289,29 @@ const entries: CatalogEntry[] = [
     eyebrow: { fa: "خدمت / رشد", en: "Service / Growth" },
     title: { fa: "سئو و رشد فنی", en: "Technical SEO and growth" },
     summary: {
-      fa: "معماری محتوا، سلامت فنی و اندازه‌گیری First-party برای رشد قابل پیگیری.",
+      fa: "کمک می‌کنیم گوگل سایتتان را درست بفهمد و شما هم بدانید کدام کار واقعاً نتیجه داده است.",
       en: "Content architecture, technical health and first-party measurement for accountable growth.",
     },
     sections: [
       {
-        title: { fa: "حوزه‌ها", en: "Areas" },
+        title: { fa: "روی چه چیزهایی کار می‌کنیم؟", en: "Areas" },
         items: [
-          { fa: "خزش، ایندکس و Metadata", en: "Crawling, indexing and metadata" },
-          { fa: "ساختار محتوا و لینک داخلی", en: "Content structure and internal linking" },
-          { fa: "سرعت و تجربه صفحه", en: "Performance and page experience" },
-          { fa: "قیف و Attribution داخلی", en: "First-party funnels and attribution" },
+          {
+            fa: "اینکه گوگل صفحه‌ها را پیدا کند و درست بشناسد",
+            en: "Crawling, indexing and metadata",
+          },
+          {
+            fa: "ساختار محتوا و ارتباط درست بین صفحه‌ها",
+            en: "Content structure and internal linking",
+          },
+          {
+            fa: "سرعت سایت و تجربه‌ای که کاربر واقعاً حس می‌کند",
+            en: "Performance and page experience",
+          },
+          {
+            fa: "اندازه‌گیری مسیر مشتری، بدون حدس و عددهای تزئینی",
+            en: "First-party funnels and attribution",
+          },
         ],
       },
       commonProcess,
@@ -266,14 +323,14 @@ const entries: CatalogEntry[] = [
     eyebrow: { fa: "خدمت / تداوم", en: "Service / Continuity" },
     title: { fa: "پشتیبانی و توسعه مستمر", en: "Ongoing support and development" },
     summary: {
-      fa: "رفع مشکل، نگهداری، پایش و تحویل تدریجی قابلیت‌های جدید با اولویت روشن.",
+      fa: "بعد از انتشار هم کنارتان می‌مانیم؛ از رفع خطا و نگهداری تا اضافه‌کردن قابلیت‌های بعدی.",
       en: "Issue resolution, maintenance, monitoring and incremental delivery with explicit priorities.",
     },
     sections: [
       {
-        title: { fa: "مدل همکاری", en: "Engagement model" },
+        title: { fa: "همکاری چطور پیش می‌رود؟", en: "Engagement model" },
         body: {
-          fa: "درخواست‌ها ثبت، اولویت‌بندی و با وضعیت شفاف تا تحویل دنبال می‌شوند.",
+          fa: "درخواست‌ها یک‌جا ثبت می‌شوند، با هم اولویت می‌دهیم و همیشه می‌دانید هر کار الان در چه وضعیتی است.",
           en: "Requests are recorded, prioritised and followed through transparent states to delivery.",
         },
       },
@@ -286,12 +343,12 @@ const entries: CatalogEntry[] = [
     eyebrow: { fa: "راهکار / فروش", en: "Solution / Sales" },
     title: { fa: "پلتفرم فروش اینترنتی", en: "Ecommerce platform" },
     summary: {
-      fa: "محصول، سفارش، مشتری و عملیات فروش در یک جریان قابل توسعه.",
+      fa: "محصول، سفارش و مشتری را یک‌جا مدیریت کنید؛ بدون اینکه با بیشترشدن فروش همه‌چیز به‌هم بریزد.",
       en: "Products, orders, customers and sales operations in one extensible flow.",
     },
     sections: [
       {
-        title: { fa: "قابلیت‌های پایه", en: "Core capabilities" },
+        title: { fa: "از چه بخش‌هایی تشکیل می‌شود؟", en: "Core capabilities" },
         items: [
           { fa: "کاتالوگ و قیمت‌گذاری", en: "Catalog and pricing" },
           { fa: "سبد و سفارش", en: "Basket and orders" },
@@ -308,17 +365,20 @@ const entries: CatalogEntry[] = [
     eyebrow: { fa: "راهکار / مشتری", en: "Solution / Customer" },
     title: { fa: "مدیریت سرنخ و مشتری", en: "Lead and customer management" },
     summary: {
-      fa: "از اولین تماس تا تبدیل و پیگیری رابطه با مشتری، با تاریخچه‌ای قابل اعتماد.",
+      fa: "از اولین پیام تا خرید و پیگیری‌های بعدی، هیچ مشتری بین تماس‌ها و یادداشت‌ها گم نمی‌شود.",
       en: "From first contact through conversion and continued relationship, with a dependable history.",
     },
     sections: [
       {
-        title: { fa: "جریان", en: "Workflow" },
+        title: { fa: "مسیر کار", en: "Workflow" },
         items: [
-          { fa: "ورود و Qualification سرنخ", en: "Lead intake and qualification" },
-          { fa: "مالکیت و فعالیت‌ها", en: "Ownership and activities" },
-          { fa: "تبدیل تراکنشی به مشتری/پروژه", en: "Transactional conversion to client/project" },
-          { fa: "گزارش قیف", en: "Funnel reporting" },
+          { fa: "ثبت سرنخ و تشخیص اینکه چقدر جدی است", en: "Lead intake and qualification" },
+          { fa: "معلوم‌بودن مسئول هر مشتری و کارهای انجام‌شده", en: "Ownership and activities" },
+          {
+            fa: "تبدیل ساده سرنخ به مشتری یا پروژه",
+            en: "Transactional conversion to client/project",
+          },
+          { fa: "دیدن اینکه مشتری‌ها در کجای مسیر فروش هستند", en: "Funnel reporting" },
         ],
       },
     ],
@@ -329,12 +389,12 @@ const entries: CatalogEntry[] = [
     eyebrow: { fa: "راهکار / عملیات", en: "Solution / Operations" },
     title: { fa: "سامانه سفارش‌گیری", en: "Ordering system" },
     summary: {
-      fa: "ثبت، اعتبارسنجی و پیگیری سفارش برای مشتری، نماینده یا تیم فروش.",
+      fa: "مشتری یا نماینده سفارش را راحت ثبت می‌کند و تیم شما هم تا لحظه ارسال همه‌چیز را می‌بیند.",
       en: "Capture, validate and track orders for customers, dealers or sales teams.",
     },
     sections: [
       {
-        title: { fa: "نقش‌ها", en: "Roles" },
+        title: { fa: "چه کسانی با آن کار می‌کنند؟", en: "Roles" },
         items: [
           { fa: "مشتری یا نماینده", en: "Customer or dealer" },
           { fa: "فروش و تایید", en: "Sales and approval" },
@@ -350,14 +410,14 @@ const entries: CatalogEntry[] = [
     eyebrow: { fa: "راهکار / تجربه", en: "Solution / Experience" },
     title: { fa: "پنل مشتری", en: "Customer portal" },
     summary: {
-      fa: "نمای واحد پروژه‌ها، فایل‌ها، تاییدها، صورتحساب‌ها و پشتیبانی.",
+      fa: "یک جای مرتب برای دیدن پروژه‌ها، فایل‌ها، تأییدها، صورتحساب‌ها و درخواست‌های پشتیبانی.",
       en: "One secure view of projects, files, approvals, invoices and support.",
     },
     sections: [
       {
-        title: { fa: "امنیت", en: "Security" },
+        title: { fa: "هر کسی فقط چیزهای مربوط به خودش را می‌بیند", en: "Security" },
         body: {
-          fa: "دسترسی هر رکورد با عضویت مشتری و Policy سروری بررسی می‌شود.",
+          fa: "دسترسی‌ها سمت سرور بررسی می‌شوند؛ یعنی هر مشتری فقط اطلاعات و پروژه‌های مربوط به خودش را می‌بیند.",
           en: "Every record is authorised server-side against client and project membership.",
         },
       },
@@ -369,14 +429,14 @@ const entries: CatalogEntry[] = [
     eyebrow: { fa: "راهکار / داده", en: "Solution / Data" },
     title: { fa: "داشبورد مدیریتی", en: "Management dashboard" },
     summary: {
-      fa: "شاخص‌های عملیاتی از دادهٔ واقعی، با تعریف روشن و امکان پیگیری منبع.",
+      fa: "عددهای مهم کسب‌وکارتان را یک‌جا و به زبان قابل فهم ببینید؛ با منبع مشخص برای هر عدد.",
       en: "Operational indicators derived from real data with explicit definitions and traceable sources.",
     },
     sections: [
       {
-        title: { fa: "قاعده", en: "Rule" },
+        title: { fa: "یک اصل ساده", en: "Rule" },
         body: {
-          fa: "نمودار ساختگی یا عدد نمایشی جای دادهٔ واقعی را نمی‌گیرد؛ وضعیت بدون داده صادقانه نمایش داده می‌شود.",
+          fa: "نمودار قشنگ جای اطلاعات واقعی را نمی‌گیرد. اگر هنوز داده کافی نداریم، همان را شفاف نشان می‌دهیم.",
           en: "Decorative metrics never replace real data; empty states are shown honestly.",
         },
       },
@@ -388,12 +448,12 @@ const entries: CatalogEntry[] = [
     eyebrow: { fa: "راهکار / پس از فروش", en: "Solution / After-sales" },
     title: { fa: "پرتال گارانتی و خدمات", en: "Warranty and service portal" },
     summary: {
-      fa: "ثبت محصول، اعتبار گارانتی، درخواست خدمت و پیگیری تیکت در یک مسیر.",
+      fa: "مشتری محصولش را ثبت می‌کند، وضعیت گارانتی را می‌بیند و درخواستش را بدون تماس‌های تکراری پیگیری می‌کند.",
       en: "Product registration, warranty validity, service requests and support tickets in one flow.",
     },
     sections: [
       {
-        title: { fa: "قابلیت‌ها", en: "Capabilities" },
+        title: { fa: "چه کارهایی انجام می‌دهد؟", en: "Capabilities" },
         items: [
           { fa: "ثبت و تایید محصول", en: "Product registration and verification" },
           { fa: "قواعد گارانتی", en: "Warranty rules" },
@@ -409,17 +469,23 @@ const entries: CatalogEntry[] = [
     eyebrow: { fa: "تشخیص / توقف", en: "Diagnosis / Stalled" },
     title: { fa: "پروژه متوقف یا نیمه‌کاره است", en: "The project is stalled or unfinished" },
     summary: {
-      fa: "ابتدا قابلیت ادامهٔ امن را می‌سنجیم؛ بازنویسی فقط وقتی پیشنهاد می‌شود که شواهد آن را توجیه کنند.",
+      fa: "اول می‌بینیم همین پروژه را می‌شود سالم ادامه داد یا نه. از نو ساختن آخرین گزینه است، نه اولین پیشنهاد.",
       en: "We first test whether safe continuation is viable; rebuilding is recommended only when evidence supports it.",
     },
     sections: [
       {
-        title: { fa: "آنچه بررسی می‌کنیم", en: "What we check" },
+        title: { fa: "اول این‌ها را بررسی می‌کنیم", en: "What we check" },
         items: [
-          { fa: "قابلیت اجرا و استقرار", en: "Runtime and deployment" },
-          { fa: "مالکیت و کیفیت کد", en: "Code ownership and quality" },
-          { fa: "امنیت و یکپارچگی داده", en: "Security and data integrity" },
-          { fa: "هزینهٔ ادامه در برابر بازسازی", en: "Continuation versus rebuild cost" },
+          { fa: "آیا پروژه اجرا و منتشر می‌شود؟", en: "Runtime and deployment" },
+          {
+            fa: "کد دست چه کسی است و چقدر می‌شود به آن تکیه کرد؟",
+            en: "Code ownership and quality",
+          },
+          { fa: "اطلاعات و دسترسی‌ها امن مانده‌اند؟", en: "Security and data integrity" },
+          {
+            fa: "ادامه‌دادن به‌صرفه‌تر است یا بازسازی بخشی از کار؟",
+            en: "Continuation versus rebuild cost",
+          },
         ],
       },
     ],
@@ -430,17 +496,20 @@ const entries: CatalogEntry[] = [
     eyebrow: { fa: "تشخیص / سرعت", en: "Diagnosis / Performance" },
     title: { fa: "سایت کند است", en: "The website is slow" },
     summary: {
-      fa: "اندازه‌گیری واقعی شبکه، سرور، پایگاه‌داده و رندر پیش از هر بهینه‌سازی.",
+      fa: "قبل از نصب افزونه و تغییر سرور، دقیق اندازه می‌گیریم کندی از کجاست؛ مرورگر، کد، دیتابیس یا زیرساخت.",
       en: "Measure network, server, database and rendering behaviour before optimising.",
     },
     sections: [
       {
-        title: { fa: "علت‌های محتمل", en: "Likely causes" },
+        title: { fa: "معمولاً مشکل یکی از این‌هاست", en: "Likely causes" },
         items: [
           { fa: "تصویر و JavaScript سنگین", en: "Heavy images and JavaScript" },
-          { fa: "Query یا Cache نامناسب", en: "Poor queries or caching" },
-          { fa: "رندر Client-side غیرضروری", en: "Unnecessary client rendering" },
-          { fa: "زیرساخت یا تنظیمات نادرست", en: "Infrastructure or configuration issues" },
+          { fa: "درخواست‌های سنگین دیتابیس یا کش نامناسب", en: "Poor queries or caching" },
+          {
+            fa: "کاری که بی‌دلیل روی دستگاه کاربر انجام می‌شود",
+            en: "Unnecessary client rendering",
+          },
+          { fa: "سرور ضعیف یا تنظیمات اشتباه", en: "Infrastructure or configuration issues" },
         ],
       },
     ],
@@ -451,16 +520,16 @@ const entries: CatalogEntry[] = [
     eyebrow: { fa: "تشخیص / دیده‌شدن", en: "Diagnosis / Visibility" },
     title: { fa: "در جست‌وجو دیده نمی‌شویم", en: "We are not visible in search" },
     summary: {
-      fa: "خزش، معماری محتوا، قصد جست‌وجو و کیفیت تجربه را کنار هم بررسی می‌کنیم.",
+      fa: "بررسی می‌کنیم گوگل سایت را چطور می‌بیند، آدم‌ها دنبال چه هستند و چرا صفحه‌های شما جوابشان را نمی‌دهند.",
       en: "We examine crawling, content architecture, search intent and experience together.",
     },
     sections: [
       {
-        title: { fa: "خروجی Audit", en: "Audit output" },
+        title: { fa: "آخر بررسی چه چیزی دستتان می‌رسد؟", en: "Audit output" },
         items: [
-          { fa: "مشکلات فنی اولویت‌بندی‌شده", en: "Prioritised technical issues" },
-          { fa: "نقشه محتوای قابل دفاع", en: "Defensible content map" },
-          { fa: "معیارهای اندازه‌گیری", en: "Measurement criteria" },
+          { fa: "فهرست مشکلات فنی، به‌ترتیب اهمیت", en: "Prioritised technical issues" },
+          { fa: "نقشه محتوایی که دلیل و هدف مشخص دارد", en: "Defensible content map" },
+          { fa: "چند معیار روشن برای اینکه بفهمیم بهتر شده یا نه", en: "Measurement criteria" },
         ],
       },
     ],
@@ -471,16 +540,19 @@ const entries: CatalogEntry[] = [
     eyebrow: { fa: "تشخیص / اتصال", en: "Diagnosis / Integration" },
     title: { fa: "سیستم‌ها از هم جدا هستند", en: "Systems are disconnected" },
     summary: {
-      fa: "ورود تکراری داده و وضعیت‌های متناقض را با قرارداد داده و جریان قابل بازیابی حذف می‌کنیم.",
+      fa: "اطلاعات را چندبار وارد نکنید و بین دو سیستم دنبال نسخه درست نگردید؛ جریان داده را یکدست می‌کنیم.",
       en: "Remove duplicate entry and conflicting state through explicit contracts and recoverable flows.",
     },
     sections: [
       {
-        title: { fa: "بررسی", en: "Assessment" },
+        title: { fa: "قبل از اتصال، این‌ها را روشن می‌کنیم", en: "Assessment" },
         items: [
-          { fa: "منبع حقیقت", en: "Source of truth" },
-          { fa: "جهت و زمان تبادل", en: "Direction and timing" },
-          { fa: "خطا، Retry و Reconciliation", en: "Failure, retry and reconciliation" },
+          { fa: "نسخه اصلی هر اطلاعات کدام سیستم است؟", en: "Source of truth" },
+          { fa: "اطلاعات چه زمانی و به کدام سمت برود؟", en: "Direction and timing" },
+          {
+            fa: "اگر اتصال قطع شد، چطور بدون دوباره‌کاری جبران شود؟",
+            en: "Failure, retry and reconciliation",
+          },
         ],
       },
     ],
@@ -491,17 +563,17 @@ const entries: CatalogEntry[] = [
     eyebrow: { fa: "تشخیص / عملیات", en: "Diagnosis / Operations" },
     title: { fa: "فرآیندها دستی و پراکنده‌اند", en: "Operations are manual and fragmented" },
     summary: {
-      fa: "نقاط تصمیم و تکرار را مدل می‌کنیم و فقط بخش‌هایی را خودکار می‌کنیم که ارزش روشن دارند.",
+      fa: "کارهای تکراری را پیدا می‌کنیم و فقط همان جاهایی را خودکار می‌کنیم که واقعاً وقت یا خطا را کم می‌کند.",
       en: "We model decisions and repetition, automating only the steps with clear value.",
     },
     sections: [
       {
-        title: { fa: "نشانه‌ها", en: "Symptoms" },
+        title: { fa: "اگر این‌ها آشناست، احتمالاً وقت تغییر رسیده", en: "Symptoms" },
         items: [
           { fa: "فایل‌های اکسل متعدد", en: "Multiple spreadsheets" },
           { fa: "پیگیری در پیام‌رسان", en: "Follow-up in chat tools" },
-          { fa: "نبود تاریخچه تصمیم", en: "No decision history" },
-          { fa: "گزارش دیرهنگام", en: "Late reporting" },
+          { fa: "کسی یادش نیست یک تصمیم چرا گرفته شده", en: "No decision history" },
+          { fa: "گزارشی که وقتی می‌رسد دیگر دیر شده", en: "Late reporting" },
         ],
       },
     ],
@@ -571,18 +643,24 @@ const entries: CatalogEntry[] = [
     summary: { fa: faSummary!, en: enSummary! },
     sections: [
       {
-        title: { fa: "چالش", en: "Challenge" },
+        title: { fa: "اصل ماجرا چیست؟", en: "Challenge" },
         body: {
-          fa: "فرآیند، داده و نقش‌های این صنعت باید پیش از انتخاب راهکار دقیق مدل شوند.",
+          fa: "قبل از پیشنهاد هر ابزاری، باید بفهمیم کار در این صنعت واقعاً چطور جلو می‌رود، چه اطلاعاتی مهم است و چه کسی تصمیم می‌گیرد.",
           en: "The market's workflows, data and roles must be modelled before selecting a solution.",
         },
       },
       {
-        title: { fa: "مسیر پیشنهادی", en: "Recommended path" },
+        title: { fa: "پیشنهاد می‌کنیم این‌طور شروع کنیم", en: "Recommended path" },
         items: [
-          { fa: "شناخت جریان فعلی", en: "Map the current flow" },
-          { fa: "تعیین گلوگاه و معیار موفقیت", en: "Define the bottleneck and success criteria" },
-          { fa: "اجرای مرحله‌ای", en: "Deliver incrementally" },
+          { fa: "ببینیم کار امروز چطور انجام می‌شود", en: "Map the current flow" },
+          {
+            fa: "بزرگ‌ترین دردسر و نشانه موفقیت را مشخص کنیم",
+            en: "Define the bottleneck and success criteria",
+          },
+          {
+            fa: "از یک بخش کوچک شروع کنیم و مرحله‌به‌مرحله جلو برویم",
+            en: "Deliver incrementally",
+          },
         ],
       },
     ],
@@ -598,23 +676,23 @@ const entries: CatalogEntry[] = [
     eyebrow: { fa: "یکپارچه‌سازی", en: "Integration" },
     title: { fa: faTitle!, en: enTitle! },
     summary: {
-      fa: "تبادل داده با قرارداد روشن، امنیت، ثبت خطا و امکان بازیابی.",
+      fa: "اطلاعات بین دو سیستم درست و امن جابه‌جا می‌شود و اگر خطایی پیش بیاید، قابل پیگیری و جبران است.",
       en: "Data exchange with clear contracts, security, failure logging and recovery.",
     },
     sections: [
       {
-        title: { fa: "طراحی جریان", en: "Flow design" },
+        title: { fa: "اول مسیر اطلاعات را روشن می‌کنیم", en: "Flow design" },
         items: [
-          { fa: "سیستم مبدا و مقصد", en: "Source and destination" },
-          { fa: "داده و جهت تبادل", en: "Data and direction" },
-          { fa: "Trigger و زمان‌بندی", en: "Triggers and timing" },
-          { fa: "Retry و Reconciliation", en: "Retry and reconciliation" },
+          { fa: "اطلاعات از کجا می‌آید و کجا می‌رود؟", en: "Source and destination" },
+          { fa: "دقیقاً چه چیزی باید جابه‌جا شود؟", en: "Data and direction" },
+          { fa: "چه اتفاقی انتقال را شروع می‌کند و هر چند وقت یک‌بار؟", en: "Triggers and timing" },
+          { fa: "اگر وسط کار خطا شد، چطور دوباره ادامه بدهیم؟", en: "Retry and reconciliation" },
         ],
       },
       {
-        title: { fa: "امنیت", en: "Security" },
+        title: { fa: "دسترسی‌ها امن می‌مانند", en: "Security" },
         body: {
-          fa: "اعتبارنامه‌ها فقط سمت سرور نگهداری می‌شوند و دسترسی‌ها کمینه هستند.",
+          fa: "کلیدها و رمزها داخل مرورگر یا کد عمومی نمی‌مانند و هر اتصال فقط به چیزهایی دسترسی دارد که واقعاً لازم است.",
           en: "Credentials remain server-side and every integration uses least privilege.",
         },
       },
@@ -651,7 +729,7 @@ const entries: CatalogEntry[] = [
   ].map(([slug, faTitle, enTitle, faProblem, enProblem, faSolution, enSolution]) => ({
     kind: "projects" as const,
     slug: slug!,
-    eyebrow: { fa: "مطالعه مفهومی — بدون مشتری واقعی", en: "Concept study — no real client" },
+    eyebrow: { fa: "یک سناریوی فرضی، نه پروژه واقعی", en: "Concept study — no real client" },
     title: { fa: faTitle!, en: enTitle! },
     summary: {
       fa: `${faProblem}؛ مسیر پیشنهادی: ${faSolution}.`,
@@ -660,17 +738,17 @@ const entries: CatalogEntry[] = [
     conceptual: true,
     sections: [
       {
-        title: { fa: "مسئله مفهومی", en: "Conceptual problem" },
+        title: { fa: "داستان از چه قرار است؟", en: "Conceptual problem" },
         body: { fa: faProblem!, en: enProblem! },
       },
       {
-        title: { fa: "راهکار مفهومی", en: "Conceptual solution" },
+        title: { fa: "چه راهی برایش داریم؟", en: "Conceptual solution" },
         body: { fa: faSolution!, en: enSolution! },
       },
       {
-        title: { fa: "یادداشت شفافیت", en: "Transparency note" },
+        title: { fa: "یک توضیح صادقانه", en: "Transparency note" },
         body: {
-          fa: "این سناریو برای توضیح نوع مسئله و معماری تهیه شده و ادعای پروژه، مشتری یا نتیجه واقعی نیست.",
+          fa: "این فقط یک مثال برای نشان‌دادن مدل فکر و راه‌حل ماست؛ پشت آن مشتری، قرارداد یا نتیجه ساختگی وجود ندارد.",
           en: "This scenario explains a problem and architecture pattern; it is not a claim about a real client, delivery or result.",
         },
       },
@@ -681,23 +759,23 @@ const entries: CatalogEntry[] = [
     slug: "how-to-audit-a-stalled-software-project",
     eyebrow: { fa: "مهندسی / راهنما", en: "Engineering / Guide" },
     title: {
-      fa: "ممیزی یک پروژه نرم‌افزاری متوقف‌شده از کجا شروع می‌شود؟",
+      fa: "یک پروژه نرم‌افزاری نیمه‌کاره را از کجا باید جمع‌وجور کرد؟",
       en: "Where should a stalled software audit begin?",
     },
     summary: {
-      fa: "یک چارچوب عملی برای جداکردن مشکل محیط، معماری، امنیت و فرآیند تحویل.",
+      fa: "یک راهنمای عملی برای اینکه بفهمیم مشکل از محیط اجراست، کد است، امنیت است یا شیوه تحویل.",
       en: "A practical framework for separating environment, architecture, security and delivery problems.",
     },
     sections: [
       {
-        title: { fa: "اول بازتولید، بعد قضاوت", en: "Reproduce before judging" },
+        title: { fa: "اول اجراش کنیم، بعد درباره‌اش نظر بدهیم", en: "Reproduce before judging" },
         body: {
-          fa: "نسخه موجود را با همان وابستگی‌ها اجرا کنید، خطاها را ثبت کنید و میان خرابی محیط و نقص کد تفاوت بگذارید.",
+          fa: "نسخه فعلی را با همان وابستگی‌ها بالا بیاورید، خطاها را یادداشت کنید و ببینید ایراد واقعاً از کد است یا فقط محیط اجرا درست تنظیم نشده.",
           en: "Run the existing version with its declared dependencies, record failures and separate environment problems from code defects.",
         },
       },
       {
-        title: { fa: "ریسک‌ها را دسته‌بندی کنید", en: "Classify risk" },
+        title: { fa: "ببینیم کدام مشکل خطرناک‌تر است", en: "Classify risk" },
         items: [
           { fa: "امنیت و از دست‌رفتن داده", en: "Security and data loss" },
           { fa: "قابلیت Build و استقرار", en: "Build and deployment" },
@@ -706,9 +784,9 @@ const entries: CatalogEntry[] = [
         ],
       },
       {
-        title: { fa: "تصمیم مستند", en: "Document the decision" },
+        title: { fa: "تصمیمی بگیریم که بشود از آن دفاع کرد", en: "Document the decision" },
         body: {
-          fa: "ادامه، اصلاح یا بازسازی باید بر اساس هزینه و ریسک سنجیده شود، نه ترجیح شخصی نسبت به یک فریم‌ورک.",
+          fa: "ادامه‌دادن، تعمیر یا بازسازی باید با توجه به هزینه و ریسک انتخاب شود؛ نه اینکه چه کسی کدام فریم‌ورک را بیشتر دوست دارد.",
           en: "Continue, correct or rebuild based on cost and risk—not personal preference for a framework.",
         },
       },

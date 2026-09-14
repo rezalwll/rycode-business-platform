@@ -1,25 +1,16 @@
 "use client";
 
-import { ChevronDown, Globe, Menu, X } from "lucide-react";
+import { Globe2, Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 
 import { Link, usePathname } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
-import {
-  industries,
-  primaryNav,
-  serviceGroups,
-  solutionGroups,
-  type NavGroup,
-  type NavLink,
-} from "@/lib/nav-content";
+import { primaryNav, type NavLink } from "@/lib/nav-content";
 import { cn } from "@/lib/utils";
 
 import { Logo } from "./logo";
 import { Container, CtaLink } from "./primitives";
 import { ThemeToggle } from "./theme-toggle";
-
-type MenuKey = "services" | "solutions" | "industries" | null;
 
 const englishPrimary: NavLink[] = [
   { label: "Services", href: "/services" },
@@ -30,349 +21,242 @@ const englishPrimary: NavLink[] = [
   { label: "About", href: "/about" },
 ];
 
-const englishServices: NavGroup[] = [
-  {
-    title: "Build",
-    items: [
-      { label: "Web platforms", href: "/services" },
-      { label: "Ecommerce", href: "/services" },
-      { label: "Custom software", href: "/services" },
-    ],
-  },
-  {
-    title: "Improve",
-    items: [
-      { label: "Project rescue", href: "/technical-review" },
-      { label: "Performance", href: "/problems" },
-      { label: "Continuous support", href: "/services" },
-    ],
-  },
-  {
-    title: "Connect",
-    items: [
-      { label: "APIs", href: "/integrations" },
-      { label: "Integrations", href: "/integrations" },
-      { label: "Business data", href: "/solutions" },
-    ],
-  },
-  {
-    title: "Grow",
-    items: [
-      { label: "Technical SEO", href: "/services" },
-      { label: "Content systems", href: "/services" },
-      { label: "SEO audit", href: "/seo-audit" },
-    ],
-  },
-];
-
-const englishSolutions: NavGroup[] = [
-  {
-    title: "Customers",
-    items: [
-      { label: "CRM", href: "/solutions" },
-      { label: "Customer portals", href: "/solutions" },
-      { label: "Lead management", href: "/solutions" },
-    ],
-  },
-  {
-    title: "Operations",
-    items: [
-      { label: "Ordering systems", href: "/solutions" },
-      { label: "Dashboards", href: "/solutions" },
-      { label: "Internal workflows", href: "/solutions" },
-    ],
-  },
-  {
-    title: "Platforms",
-    items: [
-      { label: "Marketplaces", href: "/solutions" },
-      { label: "Learning platforms", href: "/solutions" },
-      { label: "Booking systems", href: "/solutions" },
-    ],
-  },
-];
-
 export function SiteHeader({ locale }: { locale: Locale }) {
   const pathname = usePathname();
-  const [open, setOpen] = useState<MenuKey>(null);
-  const [mobile, setMobile] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const isFa = locale === "fa";
   const nav = isFa ? primaryNav : englishPrimary;
-  const services = isFa ? serviceGroups : englishServices;
-  const solutions = isFa ? solutionGroups : englishSolutions;
+  const isHome = pathname === "/";
+  const elevated = scrolled || !isHome;
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
+    const onScroll = () => setScrolled(window.scrollY > 72);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   useEffect(() => {
-    document.body.style.overflow = mobile ? "hidden" : "";
+    document.body.style.overflow = mobileOpen ? "hidden" : "";
     return () => {
       document.body.style.overflow = "";
     };
-  }, [mobile]);
+  }, [mobileOpen]);
 
   return (
-    <header
-      className={cn(
-        "sticky top-3 z-50 px-3 transition-[background-color,border-color] duration-300",
-      )}
-      onMouseLeave={() => setOpen(null)}
-    >
-      <Container
+    <>
+      <header
         className={cn(
-          "flex h-[68px] items-center justify-between gap-6 rounded-full border px-4 shadow-lg backdrop-blur-xl transition-colors sm:px-6",
-          scrolled ? "border-border bg-background/90" : "border-border/70 bg-background/75",
+          "fixed inset-x-0 top-0 z-50 border-b transition-[background-color,border-color,box-shadow,backdrop-filter] duration-500",
+          elevated
+            ? "border-border bg-background/92 shadow-[0_8px_30px_rgba(20,18,16,0.06)] backdrop-blur-xl"
+            : "border-border/50 bg-background/10 backdrop-blur-[2px] dark:border-white/10 dark:bg-ink/10",
         )}
       >
-        <div className="flex items-center gap-8">
-          <Link href="/" aria-label="RYCODE" className="shrink-0">
-            <Logo />
+        <Container className="grid h-14 grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-4 [direction:ltr] sm:h-[72px] lg:gap-7">
+          <HeaderActions
+            locale={locale}
+            pathname={pathname}
+            elevated={elevated}
+            className="hidden min-w-0 justify-self-start xl:flex"
+          />
+
+          <Link href="/" aria-label="RYCODE" className="col-start-2 justify-self-center">
+            <Logo variant={elevated ? "default" : "adaptive"} className="text-[1.05rem]" />
           </Link>
 
           <nav
             aria-label={isFa ? "ناوبری اصلی" : "Primary navigation"}
-            className="hidden items-center gap-1 lg:flex"
+            className="hidden min-w-0 items-center justify-self-end xl:flex"
+            dir={isFa ? "rtl" : "ltr"}
           >
-            {nav.map((item) => {
-              const key: MenuKey =
-                item.href === "/services"
-                  ? "services"
-                  : item.href === "/solutions"
-                    ? "solutions"
-                    : item.href === "/industries"
-                      ? "industries"
-                      : null;
-              const active = pathname === item.href || pathname.startsWith(`${item.href}/`);
-              return (
-                <div key={item.href} onMouseEnter={() => setOpen(key)}>
-                  <Link
-                    href={item.href}
-                    aria-current={active ? "page" : undefined}
-                    className={cn(
-                      "inline-flex items-center gap-1 rounded-md px-3 py-2 text-sm font-medium transition-colors hover:text-foreground",
-                      active ? "text-foreground" : "text-foreground/70",
-                    )}
-                  >
-                    {item.label}
-                    {key && (
-                      <ChevronDown
-                        aria-hidden
-                        className={cn(
-                          "size-3.5 transition-transform",
-                          open === key && "rotate-180",
-                        )}
-                      />
-                    )}
-                  </Link>
-                </div>
-              );
-            })}
+            <ul className="flex items-center gap-5 2xl:gap-7">
+              {nav.map((item) => {
+                const active = pathname === item.href || pathname.startsWith(`${item.href}/`);
+                return (
+                  <li key={item.href}>
+                    <Link
+                      href={item.href}
+                      aria-current={active ? "page" : undefined}
+                      className={cn(
+                        "relative block whitespace-nowrap py-3 text-[0.78rem] font-medium transition-colors after:absolute after:inset-x-0 after:bottom-1 after:h-px after:origin-center after:scale-x-0 after:bg-brand after:transition-transform hover:after:scale-x-100",
+                        elevated
+                          ? active
+                            ? "text-foreground after:scale-x-100"
+                            : "text-foreground/65 hover:text-foreground"
+                          : active
+                            ? "text-foreground after:scale-x-100 dark:text-white"
+                            : "text-foreground/65 hover:text-foreground dark:text-white/72 dark:hover:text-white",
+                      )}
+                    >
+                      {item.label}
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
           </nav>
-        </div>
 
-        <div className="flex items-center gap-2">
-          <Link
-            href={pathname}
-            locale={isFa ? "en" : "fa"}
-            className="hidden items-center gap-1.5 rounded-full border border-border px-3 py-1.5 text-xs font-semibold text-muted-foreground transition-colors hover:text-foreground md:inline-flex"
-            aria-label={isFa ? "Switch to English" : "تغییر زبان به فارسی"}
-            hrefLang={isFa ? "en" : "fa"}
-          >
-            <Globe className="size-3.5" aria-hidden />
-            {isFa ? "EN" : "FA"}
-          </Link>
-          <ThemeToggle className="hidden md:inline-flex" />
-          <Link
-            href="/login"
-            className="hidden px-3 text-sm font-medium text-foreground/80 hover:text-foreground md:inline-flex"
-          >
-            {isFa ? "ورود مشتری" : "Client login"}
-          </Link>
-          <CtaLink to="/start-project" className="hidden h-10 px-5 sm:inline-flex">
-            {isFa ? "شروع پروژه" : "Start a project"}
-          </CtaLink>
+          <div className="col-start-1 row-start-1 flex items-center gap-2 justify-self-start xl:hidden">
+            <CtaLink to="/start-project" className="hidden h-10 px-4 text-xs sm:inline-flex">
+              {isFa ? "شروع پروژه" : "Start a project"}
+            </CtaLink>
+          </div>
+
           <button
             type="button"
-            onClick={() => setMobile(true)}
-            aria-label={isFa ? "منو" : "Menu"}
-            aria-expanded={mobile}
-            className="grid size-10 place-items-center rounded-md border border-border lg:hidden"
+            onClick={() => setMobileOpen(true)}
+            aria-label={isFa ? "باز کردن منو" : "Open menu"}
+            aria-expanded={mobileOpen}
+            className={cn(
+              "col-start-3 row-start-1 grid size-10 justify-self-end place-items-center border transition-colors xl:hidden",
+              elevated
+                ? "border-border text-foreground hover:border-foreground/40"
+                : "border-border text-foreground hover:border-foreground/40 dark:border-white/35 dark:text-white dark:hover:border-white/70",
+            )}
           >
             <Menu className="size-5" aria-hidden />
           </button>
-        </div>
-      </Container>
+        </Container>
+      </header>
 
-      {open && (
-        <div className="absolute inset-x-3 top-[calc(100%+0.75rem)] hidden rounded-[1.5rem] border border-border bg-surface/95 shadow-2xl backdrop-blur-xl lg:block">
-          <Container className="py-10">
-            {open === "services" && <MegaColumns groups={services} />}
-            {open === "solutions" && <MegaColumns groups={solutions} />}
-            {open === "industries" && (
-              <div className="grid grid-cols-4 gap-x-8 gap-y-3">
-                {industries.map((name) => (
-                  <Link
-                    key={name}
-                    href="/industries"
-                    className="rule-top py-3 text-sm text-foreground/80 transition-colors hover:text-brand"
-                  >
-                    {name}
-                  </Link>
-                ))}
-              </div>
-            )}
-          </Container>
-        </div>
-      )}
-
-      {mobile && (
-        <MobileNav
+      {mobileOpen && (
+        <MobileMenu
           locale={locale}
           nav={nav}
-          services={services}
-          solutions={solutions}
-          onClose={() => setMobile(false)}
+          pathname={pathname}
+          onClose={() => setMobileOpen(false)}
         />
       )}
-    </header>
+    </>
   );
 }
 
-function MegaColumns({ groups }: { groups: NavGroup[] }) {
+function HeaderActions({
+  locale,
+  pathname,
+  elevated,
+  className,
+}: {
+  locale: Locale;
+  pathname: string;
+  elevated: boolean;
+  className?: string;
+}) {
+  const isFa = locale === "fa";
+
   return (
-    <div className="grid grid-cols-4 gap-8 xl:grid-cols-5">
-      {groups.map((group) => (
-        <div key={group.title}>
-          <p className="text-xs font-bold tracking-[0.12em] text-brand uppercase">{group.title}</p>
-          <ul className="mt-4 space-y-2.5">
-            {group.items.map((item) => (
-              <li key={`${group.title}-${item.label}`}>
-                <Link
-                  href={item.href}
-                  className="text-sm text-foreground/75 transition-colors hover:text-foreground"
-                >
-                  {item.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-      ))}
+    <div className={cn("items-center gap-3", className)} dir="ltr">
+      <CtaLink to="/start-project" className="h-10 whitespace-nowrap px-5 text-xs">
+        {isFa ? "شروع پروژه" : "Start a project"}
+      </CtaLink>
+      <ThemeToggle />
+      <Link
+        href={pathname}
+        locale={isFa ? "en" : "fa"}
+        hrefLang={isFa ? "en" : "fa"}
+        aria-label={isFa ? "Switch to English" : "تغییر زبان به فارسی"}
+        className={cn(
+          "inline-flex h-9 items-center gap-1.5 border px-3 font-latin text-[0.68rem] font-semibold tracking-[0.14em] transition-colors",
+          elevated
+            ? "border-border text-muted-foreground hover:border-foreground/35 hover:text-foreground"
+            : "border-border text-muted-foreground hover:border-foreground/35 hover:text-foreground dark:border-white/30 dark:text-white/70 dark:hover:border-white/60 dark:hover:text-white",
+        )}
+      >
+        <Globe2 className="size-3.5" aria-hidden />
+        {isFa ? "EN" : "FA"}
+      </Link>
     </div>
   );
 }
 
-function MobileNav({
+function MobileMenu({
   locale,
   nav,
-  services,
-  solutions,
+  pathname,
   onClose,
 }: {
   locale: Locale;
   nav: NavLink[];
-  services: NavGroup[];
-  solutions: NavGroup[];
+  pathname: string;
   onClose: () => void;
 }) {
-  const [section, setSection] = useState<string | null>(null);
   const isFa = locale === "fa";
-  const drawers = [
-    { key: "services", label: isFa ? "خدمات" : "Services", groups: services },
-    { key: "solutions", label: isFa ? "راهکارها" : "Solutions", groups: solutions },
-  ];
 
   return (
-    <div className="fixed inset-0 z-50 flex flex-col bg-background lg:hidden">
-      <div className="flex h-[72px] shrink-0 items-center justify-between border-b border-border px-5">
-        <Logo />
-        <button
-          type="button"
-          onClick={onClose}
-          aria-label={isFa ? "بستن" : "Close"}
-          className="grid size-10 place-items-center rounded-md border border-border"
-        >
-          <X className="size-5" aria-hidden />
-        </button>
-      </div>
+    <div className="fixed inset-0 z-[60] xl:hidden" dir="ltr">
+      <button
+        type="button"
+        aria-label={isFa ? "بستن منو" : "Close menu"}
+        onClick={onClose}
+        className="absolute inset-0 bg-ink/65 backdrop-blur-md"
+      />
 
-      <div className="flex-1 overflow-y-auto px-5 py-6">
-        {drawers.map((drawer) => (
-          <div key={drawer.key} className="border-b border-border">
-            <button
-              type="button"
-              onClick={() => setSection(section === drawer.key ? null : drawer.key)}
-              className="flex w-full items-center justify-between py-4 text-start text-lg font-semibold"
-            >
-              {drawer.label}
-              <ChevronDown
-                aria-hidden
-                className={cn(
-                  "size-4 transition-transform",
-                  section === drawer.key && "rotate-180",
-                )}
-              />
-            </button>
-            {section === drawer.key && (
-              <div className="pb-4">
-                {drawer.groups.map((group) => (
-                  <div key={group.title} className="mb-4">
-                    <p className="text-xs font-bold tracking-[0.12em] text-brand uppercase">
-                      {group.title}
-                    </p>
-                    <ul className="mt-2 space-y-2">
-                      {group.items.map((item) => (
-                        <li key={`${group.title}-${item.label}`}>
-                          <Link
-                            href={item.href}
-                            onClick={onClose}
-                            className="block text-sm text-muted-foreground"
-                          >
-                            {item.label}
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-        ))}
-
-        {nav
-          .filter((item) => item.href !== "/services" && item.href !== "/solutions")
-          .map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              onClick={onClose}
-              className="block border-b border-border py-4 text-lg font-semibold"
-            >
-              {item.label}
-            </Link>
-          ))}
-      </div>
-
-      <div className="shrink-0 space-y-3 border-t border-border px-5 py-5">
-        <CtaLink to="/start-project" className="w-full">
-          {isFa ? "شروع پروژه" : "Start a project"}
-        </CtaLink>
-        <CtaLink to="/technical-review" variant="outline" className="w-full">
-          {isFa ? "درخواست بررسی فنی" : "Technical review"}
-        </CtaLink>
-        <div className="flex items-center justify-between pt-2">
-          <ThemeToggle />
-          <Link href="/login" onClick={onClose} className="text-sm font-medium">
-            {isFa ? "ورود مشتری" : "Client login"}
-          </Link>
+      <aside
+        className="relative ml-auto flex h-full w-full max-w-[420px] flex-col border-l border-white/10 bg-ink text-white shadow-2xl"
+        dir={isFa ? "rtl" : "ltr"}
+      >
+        <div className="flex h-20 shrink-0 items-center justify-between border-b border-white/10 px-6">
+          <Logo variant="light" />
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label={isFa ? "بستن" : "Close"}
+            className="grid size-10 place-items-center border border-white/25 text-white transition-colors hover:border-white/60"
+          >
+            <X className="size-5" aria-hidden />
+          </button>
         </div>
-      </div>
+
+        <nav
+          aria-label={isFa ? "منوی موبایل" : "Mobile navigation"}
+          className="flex-1 overflow-y-auto px-6 py-6"
+        >
+          <ul>
+            {nav.map((item, index) => {
+              const active = pathname === item.href || pathname.startsWith(`${item.href}/`);
+              return (
+                <li key={item.href} className="border-b border-white/10">
+                  <Link
+                    href={item.href}
+                    onClick={onClose}
+                    aria-current={active ? "page" : undefined}
+                    className={cn(
+                      "group flex items-center gap-5 py-5 text-2xl font-semibold transition-colors",
+                      active ? "text-brand" : "text-white/85 hover:text-white",
+                    )}
+                  >
+                    <span className="font-latin text-[0.65rem] tracking-[0.16em] text-white/35">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <span>{item.label}</span>
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        </nav>
+
+        <div className="shrink-0 border-t border-white/10 px-6 py-6">
+          <div className="mb-5 flex items-center justify-between gap-3" dir="ltr">
+            <ThemeToggle variant="light" />
+            <Link
+              href={pathname}
+              locale={isFa ? "en" : "fa"}
+              hrefLang={isFa ? "en" : "fa"}
+              onClick={onClose}
+              className="inline-flex h-9 items-center gap-2 border border-white/25 px-3 font-latin text-xs tracking-[0.14em] text-white/75"
+            >
+              <Globe2 className="size-4" aria-hidden />
+              {isFa ? "ENGLISH" : "فارسی"}
+            </Link>
+          </div>
+          <CtaLink to="/start-project" className="w-full">
+            {isFa ? "شروع یک پروژه" : "Start a project"}
+          </CtaLink>
+        </div>
+      </aside>
     </div>
   );
 }
