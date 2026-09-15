@@ -5,10 +5,20 @@ import Image from "next/image";
 import {
   ArrowUpLeft,
   Blocks,
+  CalendarDays,
+  ClipboardList,
   Database,
+  GraduationCap,
   Headphones,
+  LayoutDashboard,
+  Route,
+  ScanSearch,
   Search,
+  ShieldCheck,
   ShoppingBag,
+  Store,
+  UserRound,
+  UsersRound,
   Waypoints,
   Webhook,
   Wrench,
@@ -466,20 +476,102 @@ const systems = [
   {
     name: "فروشگاه اینترنتی",
     body: "فروش آنلاین با مدیریت محصول، سفارش و پرداختی که با کار شما جور باشد.",
+    note: "برای فروش مستقیم به مشتری",
+    modules: ["کاتالوگ محصول", "سفارش و پرداخت", "انبار و ارسال"],
+    image: "/images/rycode-product-system.png",
+    imageAlt: "تصویر مفهومی از پنل مدیریت یک فروشگاه اینترنتی",
+    icon: ShoppingBag,
   },
-  { name: "CRM", body: "سرنخ‌ها و مشتری‌ها را یک‌جا ببینید و هیچ پیگیری‌ای جا نماند." },
-  { name: "سامانه سفارش‌گیری", body: "سفارش‌های تیم فروش، نماینده‌ها یا مشتری‌ها را منظم کنید." },
-  { name: "پنل مشتری", body: "مشتری از یک جا سفارش‌ها، فاکتورها و درخواست‌هایش را ببیند." },
-  { name: "Dashboard", body: "عددهای مهم کسب‌وکارتان را یک‌جا و قابل فهم ببینید." },
+  {
+    name: "CRM",
+    body: "سرنخ‌ها و مشتری‌ها را یک‌جا ببینید و هیچ پیگیری‌ای جا نماند.",
+    note: "برای تیم‌های فروش و ارتباط با مشتری",
+    modules: ["سرنخ‌ها", "پیگیری فروش", "تاریخچه مشتری"],
+    image: "/images/rycode-connected-world.png",
+    imageAlt: "شبکه‌ای از ارتباط مشتری‌ها و فرآیندهای فروش",
+    icon: UsersRound,
+  },
+  {
+    name: "سامانه سفارش‌گیری",
+    body: "سفارش‌های تیم فروش، نماینده‌ها یا مشتری‌ها را منظم کنید.",
+    note: "برای فروش عمده و شبکه نمایندگان",
+    modules: ["قیمت‌گذاری", "ثبت سفارش", "وضعیت تحویل"],
+    image: "/images/rycode-hero-structure.png",
+    imageAlt: "ساختار منظم یک سامانه ثبت و پردازش سفارش",
+    icon: ClipboardList,
+  },
+  {
+    name: "پنل مشتری",
+    body: "مشتری از یک جا سفارش‌ها، فاکتورها و درخواست‌هایش را ببیند.",
+    note: "برای ارائه خدمات سلف‌سرویس",
+    modules: ["حساب کاربری", "فاکتورها", "درخواست پشتیبانی"],
+    image: "/images/rycode-product-system.png",
+    imageAlt: "نمایی مفهومی از پنل یکپارچه مشتریان",
+    icon: UserRound,
+  },
+  {
+    name: "Dashboard",
+    body: "عددهای مهم کسب‌وکارتان را یک‌جا و قابل فهم ببینید.",
+    note: "برای تصمیم‌گیری سریع‌تر مدیران",
+    modules: ["شاخص‌های کلیدی", "گزارش زنده", "هشدارها"],
+    image: "/images/rycode-connected-world.png",
+    imageAlt: "داشبوردی برای مشاهده شاخص‌های کسب‌وکار",
+    icon: LayoutDashboard,
+  },
   {
     name: "نوبت‌دهی",
     body: "نوبت‌ها و ظرفیت مراجعه را بدون تماس و هماهنگی‌های تکراری مدیریت کنید.",
+    note: "برای کلینیک و خدمات زمان‌محور",
+    modules: ["تقویم کاری", "ظرفیت روزانه", "یادآوری نوبت"],
+    image: "/images/rycode-hero-structure.png",
+    imageAlt: "نمایی مفهومی از تقویم و فرآیند نوبت‌دهی",
+    icon: CalendarDays,
   },
-  { name: "رزرو", body: "رزرو آنلاین خدمات، منابع یا فضا با قوانینی که خودتان تعیین می‌کنید." },
-  { name: "Marketplace", body: "فروشنده‌ها، سفارش‌ها و تسویه‌ها را در یک پلتفرم مدیریت کنید." },
-  { name: "سامانه گارانتی", body: "ثبت محصول و پیگیری گارانتی را برای مشتری ساده کنید." },
-  { name: "پنل نمایندگان", body: "قیمت، سفارش و گزارش هر نماینده را شفاف و در دسترس کنید." },
-  { name: "LMS", body: "دوره، آزمون و مسیر یادگیری را برای آموزش آنلاین کنار هم بچینید." },
+  {
+    name: "رزرو",
+    body: "رزرو آنلاین خدمات، منابع یا فضا با قوانینی که خودتان تعیین می‌کنید.",
+    note: "برای فضا، اقامت یا تجهیزات",
+    modules: ["موجودی و ظرفیت", "قوانین رزرو", "پرداخت آنلاین"],
+    image: "/images/rycode-product-system.png",
+    imageAlt: "سیستم آنلاین مدیریت ظرفیت و رزرو",
+    icon: CalendarDays,
+  },
+  {
+    name: "Marketplace",
+    body: "فروشنده‌ها، سفارش‌ها و تسویه‌ها را در یک پلتفرم مدیریت کنید.",
+    note: "برای کسب‌وکارهای چندفروشنده",
+    modules: ["پنل فروشنده", "کمیسیون", "تسویه حساب"],
+    image: "/images/rycode-connected-world.png",
+    imageAlt: "شبکه‌ای از فروشنده‌ها در یک مارکت‌پلیس",
+    icon: Store,
+  },
+  {
+    name: "سامانه گارانتی",
+    body: "ثبت محصول و پیگیری گارانتی را برای مشتری ساده کنید.",
+    note: "برای خدمات پس از فروش",
+    modules: ["ثبت محصول", "اعتبار گارانتی", "پیگیری درخواست"],
+    image: "/images/rycode-project-rescue.png",
+    imageAlt: "سامانه‌ای منظم برای مدیریت گارانتی و خدمات",
+    icon: ShieldCheck,
+  },
+  {
+    name: "پنل نمایندگان",
+    body: "قیمت، سفارش و گزارش هر نماینده را شفاف و در دسترس کنید.",
+    note: "برای شبکه فروش و توزیع",
+    modules: ["لیست قیمت", "سفارش نماینده", "گزارش عملکرد"],
+    image: "/images/rycode-connected-world.png",
+    imageAlt: "شبکه متصل نمایندگان فروش و اطلاعات سفارش",
+    icon: UsersRound,
+  },
+  {
+    name: "LMS",
+    body: "دوره، آزمون و مسیر یادگیری را برای آموزش آنلاین کنار هم بچینید.",
+    note: "برای آموزش سازمانی و آنلاین",
+    modules: ["دوره‌ها", "آزمون و تمرین", "گزارش پیشرفت"],
+    image: "/images/rycode-hero-structure.png",
+    imageAlt: "ساختار مفهومی یک سامانه آموزش آنلاین",
+    icon: GraduationCap,
+  },
 ];
 
 export function SolutionExplorer() {
@@ -487,89 +579,125 @@ export function SolutionExplorer() {
   const current = systems[active]!;
 
   return (
-    <section className="bg-surface py-16 text-foreground dark:bg-ink dark:text-ink-foreground sm:py-20">
+    <section className="grain bg-surface-2/45 py-16 text-foreground sm:py-20">
       <Container>
-        <MetaLabel className="text-brand">SOLUTIONS</MetaLabel>
-        <h2 className="display-2 mt-6 max-w-3xl">برای کسب‌وکارتان چه چیزی لازم دارید؟</h2>
+        <div className="grid items-end gap-7 border-b border-border pb-8 lg:grid-cols-[1fr_auto]">
+          <div>
+            <MetaLabel className="text-brand">SOLUTION FINDER / 11</MetaLabel>
+            <h2 className="display-2 mt-6 max-w-3xl">برای کسب‌وکارتان چه چیزی لازم دارید؟</h2>
+          </div>
+          <p className="max-w-md text-sm leading-7 text-muted-foreground lg:text-end">
+            یکی را انتخاب کنید تا ببینید هر راهکار چه بخش‌هایی دارد و قرار است کدام کار را برایتان
+            ساده‌تر کند
+          </p>
+        </div>
 
-        <div className="mt-14 grid gap-0 border-t border-border dark:border-white/12 lg:grid-cols-[1fr_1fr]">
-          <ul className="lg:border-e lg:border-border lg:pe-10 dark:lg:border-white/12">
-            {systems.map((s, i) => (
-              <li key={s.name}>
-                <button
-                  type="button"
-                  onMouseEnter={() => setActive(i)}
-                  onFocus={() => setActive(i)}
-                  onClick={() => setActive(i)}
-                  aria-pressed={active === i}
+        <div className="mt-7 grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-6" role="tablist">
+          {systems.map((system, index) => (
+            <button
+              key={system.name}
+              type="button"
+              role="tab"
+              aria-selected={active === index}
+              aria-controls="solution-preview"
+              onClick={() => setActive(index)}
+              className={cn(
+                "group relative min-h-20 border bg-surface px-4 py-3 text-start transition-[border-color,background-color,transform,box-shadow] duration-200 hover:border-brand/45",
+                active === index
+                  ? "-translate-y-0.5 border-2 border-brand bg-brand/[0.045] shadow-[0_8px_24px_rgba(249,115,22,0.08)]"
+                  : "border-border",
+              )}
+            >
+              <span className="flex items-center justify-between gap-3">
+                <span
                   className={cn(
-                    "flex w-full items-center gap-5 border-b border-border py-5 text-start transition-colors duration-200 dark:border-white/10",
-                    active === i
-                      ? "text-brand"
-                      : "text-muted-foreground hover:text-foreground dark:text-ink-foreground/70 dark:hover:text-ink-foreground",
+                    "font-latin text-[0.58rem] tracking-[0.16em]",
+                    active === index ? "text-brand" : "text-muted-foreground/60",
                   )}
                 >
-                  <MetaLabel index={i + 1} className="opacity-60" />
-                  <span className="text-lg font-bold sm:text-xl">{s.name}</span>
-                </button>
-              </li>
-            ))}
-          </ul>
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <system.icon
+                  className={cn(
+                    "size-4",
+                    active === index ? "text-brand" : "text-muted-foreground/50",
+                  )}
+                  aria-hidden
+                />
+              </span>
+              <span className="mt-3 block text-xs font-bold leading-5 sm:text-sm">
+                {system.name}
+              </span>
+              {active === index && (
+                <span className="absolute inset-x-0 bottom-0 h-0.5 bg-brand" aria-hidden />
+              )}
+            </button>
+          ))}
+        </div>
 
-          <div className="border-b border-border px-0 py-12 dark:border-white/12 lg:ps-14">
-            <div className="lg:sticky lg:top-28">
-              <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[1.25rem] border border-white/12 bg-white/[0.04] p-4">
-                <div className="grid-field absolute inset-0 opacity-20" />
-                <div className="relative h-full rounded-[0.9rem] border border-white/10 bg-ink/60 p-4 backdrop-blur-sm">
-                  <div className="flex items-center justify-between border-b border-white/10 pb-3">
-                    <MetaLabel className="text-white/40">
-                      PREVIEW / {String(active + 1).padStart(2, "0")}
-                    </MetaLabel>
-                    <span className="size-2 rounded-full bg-brand shadow-[0_0_12px_var(--color-brand)]" />
-                  </div>
-                  <div className="mt-6 grid grid-cols-[1.2fr_0.8fr] gap-3">
-                    <div className="rounded-lg border border-white/10 bg-white/[0.06] p-3">
-                      <div className="flex h-24 items-end gap-1.5">
-                        {[32, 48, 25, 64, 52, 78, 58].map((height, i) => (
-                          <span
-                            key={i}
-                            className="flex-1 rounded-t-sm bg-brand/80"
-                            style={{ height: `${height}%` }}
-                          />
-                        ))}
-                      </div>
-                      <span className="mt-3 block text-[0.65rem] text-white/45">
-                        ACTIVITY / THIS WEEK
-                      </span>
-                    </div>
-                    <div className="space-y-3">
-                      <div className="rounded-lg border border-white/10 bg-white/[0.06] p-3">
-                        <span className="block text-2xl font-bold text-white">۸۶٪</span>
-                        <span className="text-[0.65rem] text-white/45">HEALTH SCORE</span>
-                      </div>
-                      <div className="rounded-lg border border-white/10 bg-brand p-3 text-brand-foreground">
-                        <span className="block text-lg font-bold">+۱۲</span>
-                        <span className="text-[0.65rem]">NEW SIGNALS</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="mt-3 flex gap-2">
-                    <span className="h-2 flex-1 rounded-full bg-white/10" />
-                    <span className="h-2 w-1/4 rounded-full bg-white/10" />
-                  </div>
-                </div>
-              </div>
-              <h3 className="mt-8 text-2xl font-bold">{current.name}</h3>
-              <p className="mt-4 text-base leading-8 text-muted-foreground dark:text-ink-foreground/70">
-                {current.body}
-              </p>
-              <div className="mt-8">
-                <TextLink to="/solutions" className="text-foreground dark:text-ink-foreground">
-                  جزئیات راهکارها
-                </TextLink>
-              </div>
+        <div
+          id="solution-preview"
+          role="tabpanel"
+          key={current.name}
+          className="reveal mt-5 grid overflow-hidden rounded-xl border border-border bg-surface shadow-[0_20px_60px_rgba(15,23,42,0.06)] lg:grid-cols-[0.82fr_1.18fr]"
+        >
+          <div className="flex flex-col p-7 sm:p-9 lg:p-11">
+            <span className="flex items-center gap-3 text-xs font-bold text-brand">
+              <span className="grid size-9 place-items-center rounded-lg bg-brand/10">
+                <current.icon className="size-4" aria-hidden />
+              </span>
+              {current.note}
+            </span>
+
+            <h3 className="mt-8 text-3xl font-bold tracking-[-0.03em] sm:text-4xl">
+              {current.name}
+            </h3>
+            <p className="mt-5 max-w-lg text-base leading-8 text-muted-foreground">
+              {current.body}
+            </p>
+
+            <div className="mt-9 border-t border-border pt-6">
+              <MetaLabel className="text-muted-foreground">بخش‌های اصلی این راهکار</MetaLabel>
+              <ul className="mt-4 space-y-3">
+                {current.modules.map((module, index) => (
+                  <li key={module} className="flex items-center gap-3 text-sm font-bold">
+                    <span className="grid size-6 place-items-center rounded-full bg-brand/10 font-latin text-[0.58rem] text-brand">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    {module}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="mt-auto pt-9">
+              <TextLink to="/solutions">جزئیات راهکارها</TextLink>
             </div>
           </div>
+
+          <figure className="relative min-h-[360px] overflow-hidden bg-ink lg:min-h-[500px]">
+            <Image
+              src={current.image}
+              alt={current.imageAlt}
+              fill
+              priority={active === 0}
+              className="object-cover transition-transform duration-700 hover:scale-[1.025]"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+
+            <figcaption className="absolute inset-x-5 bottom-5 flex items-end justify-between gap-4 border border-white/15 bg-black/30 p-4 text-white backdrop-blur-md sm:inset-x-7 sm:bottom-7">
+              <span>
+                <MetaLabel className="text-white/55">
+                  LIVE VIEW / {String(active + 1).padStart(2, "0")}
+                </MetaLabel>
+                <span className="mt-2 block text-sm font-bold">نمونه‌ی تصویری {current.name}</span>
+              </span>
+              <span className="flex items-center gap-2 text-[0.65rem] text-white/60">
+                <span className="size-2 animate-pulse rounded-full bg-emerald-400" />
+                آماده بررسی
+              </span>
+            </figcaption>
+          </figure>
         </div>
       </Container>
     </section>
@@ -579,50 +707,174 @@ export function SolutionExplorer() {
 /* 6. PROJECT RESCUE (orange interruption) -------------------------------- */
 
 export function ProjectRescue() {
-  const steps = ["بررسی", "تصمیم", "ادامه"];
+  const auditRows = [
+    {
+      label: "ساختار کد",
+      state: "بخش‌های سالم قابل نگهداری‌اند",
+      score: "۷۲٪",
+      width: "72%",
+      color: "bg-emerald-500",
+    },
+    {
+      label: "زیرساخت و انتشار",
+      state: "نیاز به اصلاح فوری دارد",
+      score: "۴۶٪",
+      width: "46%",
+      color: "bg-amber-400",
+    },
+    {
+      label: "مسیر توسعه",
+      state: "بعد از اصلاحات قابل ادامه است",
+      score: "۸۴٪",
+      width: "84%",
+      color: "bg-sky-500",
+    },
+  ];
+
+  const reviewDays = [
+    { day: "روز ۱", title: "دسترسی و شناخت", icon: ScanSearch },
+    { day: "روز ۲", title: "بررسی و اولویت‌بندی", icon: Route },
+    { day: "روز ۳", title: "گزارش تصمیم", icon: Wrench },
+  ];
+
   return (
-    <section className="bg-brand py-16 text-brand-foreground sm:py-20">
+    <section className="relative overflow-hidden border-y border-border bg-[#edf2ed] py-16 text-foreground dark:bg-ink dark:text-ink-foreground sm:py-24">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 opacity-35 [background-image:linear-gradient(to_right,hsl(var(--foreground)/.055)_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--foreground)/.055)_1px,transparent_1px)] [background-size:42px_42px] dark:opacity-15"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -top-32 -left-32 size-[34rem] rounded-full bg-emerald-400/10 blur-[110px]"
+      />
       <Container>
-        <MetaLabel>PROJECT RESCUE</MetaLabel>
-        <h2 className="display-1 mt-8 max-w-[14ch]">پروژه‌تان وسط راه مانده؟</h2>
-
-        <figure className="mt-12 overflow-hidden border border-brand-foreground/25 bg-ink shadow-[12px_12px_0_hsl(var(--brand-foreground)/0.16)] lg:ms-auto lg:max-w-xl">
-          <Image
-            src="/images/rycode-project-rescue.png"
-            alt="تبدیل یک ساختار پراکنده و شکسته به سیستمی منظم و پایدار"
-            width={1248}
-            height={1248}
-            className="aspect-square w-full object-cover"
-          />
-          <figcaption className="border-t border-brand-foreground/20 px-4 py-3 text-xs tracking-[0.14em] opacity-70">
-            UNTANGLE / REBUILD / MOVE FORWARD
-          </figcaption>
-        </figure>
-
-        <div className="mt-16 grid gap-10 border-t border-brand-foreground/25 pt-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
-          <ol className="grid gap-0 sm:grid-cols-3">
-            {steps.map((step, i) => (
-              <li key={step} className="border-t border-brand-foreground/25 py-6 sm:border-t-0">
-                <MetaLabel index={i + 1} className="opacity-70" />
-                <p className="mt-3 text-2xl font-bold">{step}</p>
-              </li>
-            ))}
-          </ol>
-          <div className="lg:text-end">
-            <p className="max-w-md text-base leading-8 lg:ms-auto">
-              اگر برنامه‌نویس قبلی پروژه را رها کرده یا سیستم فعلی برای رشد کافی نیست، لازم نیست
-              دوباره از صفر شروع کنید.
+        <header className="relative grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
+          <div>
+            <MetaLabel className="text-brand">TECHNICAL TRIAGE / 06</MetaLabel>
+            <h2 className="display-2 mt-6 max-w-[18ch]">
+              قبل از بازنویسی، ببینیم چه چیزی هنوز ارزش نگه‌داشتن دارد
+            </h2>
+          </div>
+          <div className="max-w-md lg:justify-self-end">
+            <p className="text-base leading-8 text-muted-foreground dark:text-white/60">
+              پروژه‌ی نیمه‌کاره را با حدس جلو نمی‌بریم. اول یک گزارش روشن می‌سازیم: چه چیزی سالم
+              است، خطر کجاست و کوتاه‌ترین مسیر ادامه کدام است.
             </p>
-            <div className="mt-8 inline-flex">
-              <CtaLink
-                to="/technical-review"
-                className="bg-brand-foreground text-brand hover:bg-brand-foreground/90"
-              >
-                بفرستید بررسی‌اش کنیم
-              </CtaLink>
+            <div className="mt-7 inline-flex">
+              <CtaLink to="/technical-review">پروژه را برای بررسی بفرستید</CtaLink>
             </div>
           </div>
-        </div>
+        </header>
+
+        <article className="relative mt-12 overflow-hidden border border-foreground/15 bg-background shadow-[0_26px_80px_rgba(25,39,31,0.12)] dark:border-white/15 dark:bg-[#111815]">
+          <div className="flex flex-wrap items-center justify-between gap-4 border-b border-border bg-surface-2/70 px-5 py-4 dark:border-white/10 dark:bg-white/[0.035] sm:px-8">
+            <div className="flex items-center gap-4">
+              <span className="size-2 rounded-full bg-emerald-500 shadow-[0_0_0_5px_rgba(16,185,129,0.12)]" />
+              <span className="font-latin text-[0.64rem] tracking-[0.16em] text-muted-foreground">
+                TECHNICAL REVIEW / SAMPLE REPORT
+              </span>
+            </div>
+            <span className="font-latin text-[0.64rem] tracking-[0.14em] text-muted-foreground">
+              RPT — 006
+            </span>
+          </div>
+
+          <div dir="ltr" className="grid lg:grid-cols-[0.42fr_1fr]">
+            <aside
+              dir="rtl"
+              className="flex flex-col justify-between border-b border-border bg-[#173b32] p-7 text-white lg:border-r lg:border-b-0 sm:p-10 dark:bg-[#173128]"
+            >
+              <div>
+                <div className="grid size-16 place-items-center rounded-full border border-emerald-300/25 bg-emerald-300/10 text-emerald-200">
+                  <ShieldCheck className="size-7" />
+                </div>
+                <MetaLabel className="mt-10 text-emerald-200/65">نتیجه‌ی نمونه</MetaLabel>
+                <p className="mt-3 text-3xl leading-tight font-black sm:text-4xl">قابل نجات است</p>
+                <p className="mt-5 max-w-sm text-sm leading-7 text-white/60">
+                  ادامه از نسخه‌ی فعلی منطقی است؛ به‌شرط اینکه زیرساخت انتشار و بخش‌های پرریسک اول
+                  اصلاح شوند.
+                </p>
+              </div>
+              <div className="mt-12 border-t border-white/15 pt-5">
+                <p className="text-xs leading-6 text-white/50">
+                  این فقط نمونه‌ی شکل گزارش است؛ نتیجه‌ی واقعی بعد از دیدن کد و دسترسی‌ها مشخص
+                  می‌شود
+                </p>
+              </div>
+            </aside>
+
+            <div dir="rtl" className="p-6 sm:p-10 lg:p-12">
+              <div className="flex flex-wrap items-end justify-between gap-5 border-b border-border pb-7 dark:border-white/10">
+                <div>
+                  <MetaLabel className="text-muted-foreground">وضعیت سه بخش اصلی</MetaLabel>
+                  <h3 className="mt-3 text-2xl font-black sm:text-3xl">خلاصه‌ی بررسی فنی پروژه</h3>
+                </div>
+                <span className="border border-emerald-500/20 bg-emerald-500/10 px-3 py-2 text-xs font-bold text-emerald-700 dark:text-emerald-300">
+                  تصمیم قبل از هزینه
+                </span>
+              </div>
+
+              <div className="divide-y divide-border dark:divide-white/10">
+                {auditRows.map((row, index) => (
+                  <div
+                    key={row.label}
+                    className="grid gap-4 py-7 sm:grid-cols-[1fr_1.4fr_auto] sm:items-center"
+                  >
+                    <div>
+                      <span className="font-latin text-[0.6rem] text-muted-foreground">
+                        0{index + 1}
+                      </span>
+                      <p className="mt-1 text-sm font-extrabold">{row.label}</p>
+                    </div>
+                    <div>
+                      <div className="h-1.5 overflow-hidden rounded-full bg-foreground/8 dark:bg-white/10">
+                        <div
+                          className={cn("h-full rounded-full", row.color)}
+                          style={{ width: row.width }}
+                        />
+                      </div>
+                      <p className="mt-2 text-xs text-muted-foreground dark:text-white/45">
+                        {row.state}
+                      </p>
+                    </div>
+                    <span className="font-latin text-xl font-black tabular-nums">{row.score}</span>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-2 border-s-4 border-brand bg-brand/8 p-5">
+                <MetaLabel className="text-brand">جمع‌بندی پیشنهادی</MetaLabel>
+                <p className="mt-3 text-sm leading-7">
+                  نسخه‌ی فعلی نگه داشته شود، انتشار پایدار شود و بازنویسی فقط روی بخش‌های پرریسک
+                  انجام بگیرد
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <footer className="grid border-t border-border bg-surface-2/55 dark:border-white/10 dark:bg-white/[0.025] sm:grid-cols-3">
+            {reviewDays.map((item, index) => {
+              const Icon = item.icon;
+              return (
+                <div
+                  key={item.day}
+                  className="flex items-center gap-4 border-b border-border px-6 py-5 last:border-b-0 sm:border-e sm:border-b-0 sm:last:border-e-0 dark:border-white/10"
+                >
+                  <span className="grid size-9 place-items-center rounded-full bg-brand/10 text-brand">
+                    <Icon className="size-4" />
+                  </span>
+                  <div>
+                    <span className="text-[0.65rem] font-bold text-brand">{item.day}</span>
+                    <p className="mt-1 text-sm font-extrabold">{item.title}</p>
+                  </div>
+                  <span className="ms-auto font-latin text-xs text-muted-foreground">
+                    0{index + 1}
+                  </span>
+                </div>
+              );
+            })}
+          </footer>
+        </article>
       </Container>
     </section>
   );
