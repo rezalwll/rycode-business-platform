@@ -7,7 +7,6 @@ import {
   Blocks,
   CalendarDays,
   ClipboardList,
-  Database,
   GraduationCap,
   Headphones,
   LayoutDashboard,
@@ -16,6 +15,7 @@ import {
   Search,
   ShieldCheck,
   ShoppingBag,
+  Smartphone,
   Store,
   UserRound,
   UsersRound,
@@ -25,7 +25,6 @@ import {
 } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import {
-  ArrowSquare,
   Container,
   CtaLink,
   Eyebrow,
@@ -261,210 +260,230 @@ export function PathSelector() {
 
 /* 4. SERVICES INDEX ----------------------------------------------------- */
 
-const pillars = [
+const servicePillars = [
   {
-    title: "طراحی و توسعه وب",
-    body: "سایت شرکتی، فروشگاه یا وب‌اپی که از روز اول درست، سریع و آماده رشد ساخته شود.",
+    title: "طراحی و توسعه سایت",
+    lead: "از یک سایت ساده تا یک پلتفرم کاملاً اختصاصی.",
+    body: "سایت شرکتی، فروشگاهی، خدماتی، آموزشی، رزرو و نوبت‌دهی، مارکت‌پلیس، پنل کاربری و پروژه‌های اختصاصی را متناسب با نیاز کسب‌وکارت طراحی و توسعه می‌دهیم.",
     icon: Waypoints,
-    tone: "text-sky-600 dark:text-sky-300",
-    iconTone: "bg-sky-500/10",
-    rail: "bg-sky-500",
     image: "/images/rycode-hero-structure.png",
     imageAlt: "ساختار بصری یک محصول دیجیتال مدرن",
-    layout: "lg:col-span-7 lg:min-h-[360px]",
+    layout: "lg:col-span-7 lg:min-h-[400px]",
+    accent: "#20bfb2",
   },
   {
     title: "نرم‌افزار اختصاصی",
-    body: "وقتی نرم‌افزار آماده کارتان را راه نمی‌اندازد، پنل و ابزار خودتان را می‌سازیم.",
+    lead: "وقتی ابزارهای آماده دقیقاً کاری که می‌خواهی را انجام نمی‌دهند، ابزار مخصوص کسب‌وکار خودت را می‌سازیم.",
+    body: "از سیستم مدیریت مشتری و سفارش گرفته تا پنل‌های مدیریتی، سیستم‌های داخلی شرکت، CRM، مدیریت انبار، رزرو، اتوماسیون فرایندها و نرم‌افزارهای تحت وب.",
     icon: Blocks,
-    tone: "text-violet-600 dark:text-violet-300",
-    iconTone: "bg-violet-500/10",
-    rail: "bg-violet-500",
     image: "/images/rycode-product-system.png",
     imageAlt: "لایه‌های مختلف یک نرم‌افزار اختصاصی",
-    layout: "lg:col-span-5 lg:min-h-[360px]",
+    layout: "lg:col-span-5 lg:min-h-[400px]",
+    accent: "#6c92f4",
   },
   {
-    title: "نجات و توسعه پروژه",
-    body: "پروژه‌ای را که رها شده تحویل می‌گیریم و از همان‌جایی که مانده جلو می‌رویم.",
-    icon: Wrench,
-    tone: "text-amber-600 dark:text-amber-300",
-    iconTone: "bg-amber-500/10",
-    rail: "bg-amber-500",
-    image: "/images/rycode-project-rescue.png",
-    imageAlt: "بازسازی و منظم‌کردن یک پروژه نرم‌افزاری",
-    layout: "lg:col-span-4 lg:min-h-[280px]",
+    title: "اپلیکیشن موبایل",
+    lead: "اپلیکیشن‌هایی که کنار سایت یا به‌صورت یک محصول مستقل کار می‌کنند.",
+    body: "اپ فروشگاهی، خدماتی، سازمانی، رزرو و نوبت‌دهی، اپ مشتریان، پنل کارکنان و اپلیکیشن‌های اختصاصی Android و iOS را متناسب با مدل کسب‌وکار توسعه می‌دهیم.",
+    icon: Smartphone,
+    layout: "lg:col-span-4 lg:min-h-[340px]",
+    accent: "#796fe8",
   },
   {
-    title: "API و یکپارچه‌سازی",
-    body: "سیستم‌های پراکنده‌تان را به هم وصل می‌کنیم تا اطلاعات دوباره‌کاری نشود.",
-    icon: Webhook,
-    tone: "text-cyan-600 dark:text-cyan-300",
-    iconTone: "bg-cyan-500/10",
-    rail: "bg-cyan-500",
-    image: "/images/rycode-connected-world.png",
-    imageAlt: "اتصال سرویس‌ها و داده‌ها به یکدیگر",
-    layout: "lg:col-span-4 lg:min-h-[280px]",
-  },
-  {
-    title: "سئو و رشد",
-    body: "کمک می‌کنیم آدم‌هایی که دنبال شما هستند، راحت‌تر پیدایتان کنند.",
+    title: "سئو و رشد ارگانیک",
+    lead: "کمک می‌کنیم افرادی که در گوگل دنبال محصولات یا خدماتت هستند راحت‌تر پیدایت کنند.",
+    body: "از سئوی فنی و ساختار سایت تا تحقیق کلمات کلیدی، صفحات خدمات و محصولات، محتوا، بهبود صفحات مهم، Search Console، سرعت سایت و رفع مشکلات ایندکس.",
     icon: Search,
-    tone: "text-emerald-600 dark:text-emerald-300",
-    iconTone: "bg-emerald-500/10",
-    rail: "bg-emerald-500",
-    layout: "lg:col-span-4 lg:min-h-[280px]",
+    layout: "lg:col-span-4 lg:min-h-[340px]",
+    accent: "#4eaf8e",
   },
   {
-    title: "داده و ابزارهای کسب‌وکار",
-    body: "داده‌ها را از چند فایل و سیستم جمع می‌کنیم تا تصمیم‌گیری راحت‌تر شود.",
-    icon: Database,
-    tone: "text-rose-600 dark:text-rose-300",
-    iconTone: "bg-rose-500/10",
-    rail: "bg-rose-500",
-    layout: "lg:col-span-7 lg:min-h-[280px]",
+    title: "API، اتصال سیستم‌ها و ربات‌ها",
+    lead: "اگر اطلاعات و کارهایت بین چند سیستم مختلف پخش شده، آن‌ها را به هم متصل می‌کنیم.",
+    body: "اتصال سایت به نرم‌افزار حسابداری، انبار، CRM، پیامک، درگاه پرداخت و سرویس‌های دیگر، ساخت API، ربات تلگرام، ابزارهای خودکار، Web Scraping، استخراج اطلاعات و انتقال داده بین سیستم‌ها.",
+    icon: Webhook,
+    image: "/images/rycode-connected-world.png",
+    imageAlt: "اتصال سرویس‌ها، ربات‌ها و داده‌ها به یکدیگر",
+    layout: "lg:col-span-4 lg:min-h-[340px]",
+    accent: "#3aaed8",
   },
   {
-    title: "پشتیبانی و توسعه مستمر",
-    body: "بعد از تحویل هم برای نگهداری و بهتر شدن محصول کنار شما می‌مانیم.",
+    title: "داده، داشبورد و گزارش‌گیری",
+    lead: "داده‌های پراکنده را تبدیل به اطلاعات قابل استفاده برای تصمیم‌گیری می‌کنیم.",
+    body: "داشبورد مدیریتی، گزارش فروش، گزارش مالی و عملیاتی، تحلیل اطلاعات، Power BI، Excel حرفه‌ای، پردازش فایل‌های CSV و Excel، جمع‌آوری و یکپارچه‌سازی داده‌ها و گزارش‌گیری خودکار.",
+    icon: LayoutDashboard,
+    layout: "lg:col-span-7 lg:min-h-[360px]",
+    accent: "#9b78d5",
+  },
+  {
+    title: "رفع مشکل و ادامه پروژه",
+    lead: "پروژه نیمه‌کاره، سایت کند، باگ عجیب یا سیستمی داری که دیگر درست کار نمی‌کند؟",
+    body: "کد و ساختار فعلی را بررسی می‌کنیم، مشکل را پیدا می‌کنیم و پروژه را دوباره به مسیر درست برمی‌گردانیم؛ از رفع باگ و مشکلات دیتابیس تا تکمیل پروژه، بهینه‌سازی سرعت، مهاجرت و توسعه سیستم‌های قدیمی.",
+    icon: Wrench,
+    image: "/images/rycode-project-rescue.png",
+    imageAlt: "بازسازی و ادامه یک پروژه نرم‌افزاری نیمه‌کاره",
+    layout: "lg:col-span-5 lg:min-h-[360px]",
+    accent: "#d06f9a",
+  },
+  {
+    title: "پشتیبانی و توسعه",
+    lead: "تحویل پروژه پایان همکاری نیست.",
+    body: "برای نگهداری، رفع مشکلات، بروزرسانی، افزایش سرعت، اضافه کردن امکانات جدید و توسعه مرحله‌به‌مرحله محصول کنارت می‌مانیم تا سیستم با رشد کسب‌وکارت رشد کند.",
     icon: Headphones,
-    tone: "text-orange-600 dark:text-orange-300",
-    iconTone: "bg-orange-500/10",
-    rail: "bg-orange-500",
-    layout: "lg:col-span-5 lg:min-h-[280px]",
+    layout: "lg:col-span-12 lg:min-h-[290px]",
+    accent: "#5a86d6",
   },
 ];
 
 export function ServicesEditorial() {
   return (
-    <Section className="bg-surface">
-      <Container>
-        <div className="flex flex-col gap-7 border-b border-border pb-8 sm:flex-row sm:items-end sm:justify-between">
-          <div className="max-w-2xl">
-            <MetaLabel className="text-muted-foreground">SERVICES / 07</MetaLabel>
-            <h2 className="display-2 mt-6">خدمات رای‌کد</h2>
-            <p className="mt-5 max-w-2xl text-base leading-8 text-muted-foreground">
-              هر کدام از این خدمات را می‌توانید جداگانه بردارید یا کنار هم پیش ببرید؛ بستگی دارد
-              الان کجای مسیر باشید.
+    <Section className="relative overflow-hidden bg-white text-[#073b4c] sm:py-20">
+      <div
+        className="pointer-events-none absolute inset-0 opacity-80"
+        style={{
+          backgroundImage:
+            "radial-gradient(circle at 12% 16%, rgba(32,191,178,0.14), transparent 24%), radial-gradient(circle at 88% 42%, rgba(108,146,244,0.11), transparent 28%), radial-gradient(circle at 26% 78%, rgba(155,120,213,0.08), transparent 24%), linear-gradient(180deg, rgba(255,255,255,0.45), rgba(255,255,255,0.78))",
+        }}
+        aria-hidden
+      />
+      <div
+        className="pointer-events-none absolute inset-0 opacity-[0.18]"
+        style={{
+          backgroundImage: "radial-gradient(rgba(7,59,76,0.28) 0.7px, transparent 0.7px)",
+          backgroundSize: "34px 34px",
+        }}
+        aria-hidden
+      />
+
+      <Container className="relative z-10">
+        <div className="flex flex-col gap-6 border-b border-[#073b4c]/12 pb-8 sm:flex-row sm:items-end sm:justify-between">
+          <div className="max-w-3xl">
+            <h2 className="text-[clamp(1.9rem,3.5vw,3.2rem)] font-semibold leading-[1.2] tracking-[-0.03em]">
+              خدمات رای‌کد
+            </h2>
+            <p className="mt-5 max-w-2xl text-sm leading-8 text-[#52717b] sm:text-base sm:leading-9">
+              از ساخت یک حضور دیجیتال دقیق تا توسعه ابزارهای پیچیده؛ هر چیزی را متناسب با مسئله،
+              فرایند و مسیر رشد کسب‌وکارت طراحی می‌کنیم.
             </p>
           </div>
-          <TextLink to="/services">همه خدمات</TextLink>
+          <Link
+            href="/services"
+            className="group inline-flex min-h-11 w-fit items-center gap-3 rounded-full border border-[#20bfb2]/45 bg-white/65 px-6 text-sm font-semibold text-[#0b766e] shadow-[0_10px_32px_rgba(31,92,105,0.08)] backdrop-blur-md transition-colors hover:border-[#20bfb2]/80 hover:bg-white/90"
+          >
+            همه خدمات
+            <ArrowUpLeft className="size-4 transition-transform group-hover:-translate-x-1 group-hover:-translate-y-1" />
+          </Link>
         </div>
 
-        <ul className="mt-10 grid grid-cols-12 gap-3">
-          {pillars.map((pillar, index) => (
+        <ol className="mt-8 grid grid-cols-12 gap-4">
+          {servicePillars.map((service, index) => (
             <li
-              key={pillar.title}
+              key={service.title}
               className={cn(
                 "col-span-12 md:col-span-6",
-                index === pillars.length - 1 && "sm:col-span-12",
-                pillar.layout,
+                index === servicePillars.length - 1 && "md:col-span-12",
+                service.layout,
               )}
             >
               <Link
                 href="/services"
                 className={cn(
-                  "group relative flex h-full min-h-64 flex-col overflow-hidden rounded-xl border border-border bg-surface p-6 transition-[transform,box-shadow,border-color] duration-300 hover:-translate-y-0.5 hover:shadow-xl sm:p-7",
-                  "image" in pillar && "border-white/15 bg-ink text-white",
+                  "group relative flex h-full min-h-[300px] flex-col overflow-hidden rounded-xl border border-[#0b5262]/12 p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.75),0_10px_32px_rgba(31,92,105,0.065)] backdrop-blur-md transition-[transform,border-color,background-color,box-shadow] duration-300 hover:-translate-y-0.5 hover:border-[#20bfb2]/45 hover:shadow-[0_18px_48px_rgba(31,92,105,0.12)] sm:p-7",
+                  "image" in service ? "bg-white/75" : "bg-white/65 hover:bg-white/90",
                 )}
               >
-                {"image" in pillar && (
+                {"image" in service && (
                   <>
                     <Image
-                      src={pillar.image}
-                      alt={pillar.imageAlt ?? ""}
+                      src={service.image}
+                      alt={service.imageAlt ?? ""}
                       fill
-                      className="object-cover opacity-80 transition-transform duration-700 group-hover:scale-[1.035]"
+                      sizes="(min-width: 1024px) 58vw, (min-width: 768px) 50vw, 100vw"
+                      className="object-cover opacity-75 saturate-90 transition-[transform,opacity] duration-700 group-hover:scale-[1.035] group-hover:opacity-90"
                     />
                     <span
-                      className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/45 to-black/10"
+                      className="absolute inset-0 bg-[linear-gradient(180deg,rgba(234,247,248,0.08)_0%,rgba(234,247,248,0.72)_48%,rgba(234,247,248,0.98)_100%)]"
                       aria-hidden
                     />
                   </>
                 )}
 
+                {!("image" in service) && (
+                  <span
+                    className="pointer-events-none absolute -top-20 -left-16 size-56 rounded-full blur-3xl"
+                    style={{ backgroundColor: `${service.accent}18` }}
+                    aria-hidden
+                  />
+                )}
+
                 {index === 5 && (
                   <span
-                    className="pointer-events-none absolute inset-x-7 bottom-5 flex h-28 items-end gap-2 opacity-[0.11]"
+                    className="pointer-events-none absolute inset-x-8 bottom-7 flex h-36 items-end gap-2 opacity-[0.09]"
                     aria-hidden
                   >
                     {[36, 68, 48, 88, 58, 76, 100, 64, 82].map((height) => (
                       <span
                         key={height}
-                        className="flex-1 rounded-t-sm bg-rose-500"
-                        style={{ height: `${height}%` }}
+                        className="flex-1 rounded-t-sm"
+                        style={{ height: `${height}%`, backgroundColor: service.accent }}
                       />
                     ))}
                   </span>
                 )}
 
-                {index === 6 && (
+                {index === 7 && (
                   <span
-                    className="pointer-events-none absolute -bottom-28 -left-20 size-72 rounded-full border border-orange-500/15 shadow-[0_0_0_38px_rgba(249,115,22,0.04),0_0_0_76px_rgba(249,115,22,0.025)]"
+                    className="pointer-events-none absolute -bottom-32 -left-16 size-80 rounded-full border opacity-30 shadow-[0_0_0_42px_rgba(90,134,214,0.07),0_0_0_84px_rgba(90,134,214,0.035)]"
+                    style={{ borderColor: service.accent }}
                     aria-hidden
                   />
                 )}
 
                 <span
-                  className={cn(
-                    "absolute inset-x-0 top-0 z-10 h-0.5 origin-right scale-x-0 transition-transform duration-200 group-hover:scale-x-100 group-focus-visible:scale-x-100",
-                    pillar.rail,
-                  )}
+                  className="absolute inset-x-0 top-0 z-10 h-px origin-right scale-x-0 transition-transform duration-500 group-hover:scale-x-100"
+                  style={{ backgroundColor: service.accent }}
                   aria-hidden
                 />
 
-                <span className="relative z-10 flex items-start justify-between gap-4">
+                <span className="relative z-10 flex items-start gap-5">
                   <span
-                    className={cn(
-                      "grid size-10 place-items-center rounded-[0.65rem] backdrop-blur-sm",
-                      "image" in pillar ? "bg-white/12 text-white" : pillar.iconTone,
-                      !("image" in pillar) && pillar.tone,
-                    )}
+                    className="grid size-11 place-items-center rounded-xl border backdrop-blur-md transition-[filter,transform] group-hover:scale-105 group-hover:brightness-90"
+                    style={{
+                      borderColor: `${service.accent}59`,
+                      backgroundColor: `${service.accent}18`,
+                      color: service.accent,
+                    }}
                   >
-                    <pillar.icon className="size-[1.1rem]" aria-hidden />
-                  </span>
-                  <span
-                    className={cn(
-                      "font-latin text-[0.62rem] tracking-[0.18em]",
-                      "image" in pillar ? "text-white/65" : "text-muted-foreground/70",
-                    )}
-                  >
-                    {String(index + 1).padStart(2, "0")}
+                    <service.icon className="size-5" aria-hidden />
                   </span>
                 </span>
 
-                <span className="relative z-10 mt-auto pt-16">
-                  <h3
-                    className={cn(
-                      "font-bold leading-8",
-                      "image" in pillar ? "text-2xl" : "text-xl",
-                    )}
-                  >
-                    {pillar.title}
+                <span className="relative z-10 mt-auto pt-14">
+                  <h3 className="text-lg font-bold leading-8 text-[#073b4c] sm:text-xl">
+                    {service.title}
                   </h3>
-                  <p
-                    className={cn(
-                      "mt-3 max-w-xl text-sm leading-7",
-                      "image" in pillar ? "text-white/72" : "text-muted-foreground",
-                    )}
-                  >
-                    {pillar.body}
+                  <p className="mt-4 max-w-2xl text-sm font-medium leading-8 text-[#214f5b]/90">
+                    {service.lead}
                   </p>
+                  <span
+                    className="my-5 block h-px w-12 opacity-55"
+                    style={{ backgroundColor: service.accent }}
+                    aria-hidden
+                  />
+                  <p className="max-w-2xl text-sm leading-7 text-[#52717b]">{service.body}</p>
                 </span>
 
                 <span
-                  className={cn(
-                    "relative z-10 flex items-center gap-2 pt-5 text-xs font-bold opacity-70 transition-opacity group-hover:opacity-100",
-                    "image" in pillar ? "text-white" : pillar.tone,
-                  )}
+                  className="relative z-10 mt-7 flex items-center gap-2 text-xs font-semibold transition-[filter] group-hover:brightness-75"
+                  style={{ color: service.accent }}
                 >
-                  بیشتر ببینید
+                  جزئیات خدمت
                   <ArrowUpLeft className="size-3.5 transition-transform group-hover:-translate-x-1 group-hover:-translate-y-1" />
                 </span>
               </Link>
             </li>
           ))}
-        </ul>
+        </ol>
       </Container>
     </Section>
   );
@@ -886,141 +905,209 @@ const projects = [
   {
     name: "سامانه سفارش‌گیری نمایندگان",
     industry: "تولید و کارخانه",
+    category: "وب‌اپ اختصاصی",
     problem: "نماینده‌ها سفارش را تلفنی و با اکسل می‌فرستادند و پیگیری‌اش سخت بود.",
     solution: "یک پنل اختصاصی برای قیمت‌گذاری، ثبت سفارش و دیدن وضعیت هر سفارش.",
+    image: "/images/rycode-product-system.png",
+    imageAlt: "نمایی مفهومی از پنل سفارش‌گیری و مدیریت نمایندگان",
+    scope: ["پنل نمایندگان", "مدیریت سفارش", "گزارش وضعیت"],
+    accent: "#5fe1d5",
   },
   {
     name: "بازطراحی فروشگاه اینترنتی",
     industry: "خودرو و لوازم یدکی",
+    category: "فروشگاه و سئو",
     problem: "دسته‌بندی‌ها نامرتب بود و کندی سایت جلوی رشد در گوگل را گرفته بود.",
     solution: "مرتب‌کردن ساختار سایت، سریع‌تر کردن صفحات و تقویت سئوی فروشگاهی.",
+    image: "/images/rycode-project-rescue.png",
+    imageAlt: "نمایی مفهومی از بازطراحی تجربه کاربری یک فروشگاه اینترنتی",
+    scope: ["بازطراحی UX", "بهینه‌سازی سرعت", "سئوی فنی"],
+    accent: "#7dc8ff",
   },
   {
     name: "پرتال خدمات پس از فروش",
     industry: "تجهیزات صنعتی",
+    category: "پرتال سازمانی",
     problem: "درخواست‌های گارانتی بین تماس، پیام و کانال‌های مختلف گم می‌شد.",
     solution: "سامانه‌ای برای ثبت محصول، گارانتی و پیگیری همه درخواست‌ها در یک جا.",
+    image: "/images/rycode-connected-world.png",
+    imageAlt: "نمایی مفهومی از پرتال یکپارچه خدمات پس از فروش",
+    scope: ["ثبت گارانتی", "تیکت پشتیبانی", "داشبورد مدیریتی"],
+    accent: "#b9a7ff",
   },
 ];
 
-function CaseVisual({ index }: { index: number }) {
-  const source = [
-    "/images/rycode-product-system.png",
-    "/images/rycode-project-rescue.png",
-    "/images/rycode-connected-world.png",
-  ][(index - 1) % 3]!;
+function CaseVisual({ project, index }: { project: (typeof projects)[number]; index: number }) {
   return (
-    <div className="relative aspect-[16/10] w-full overflow-hidden rounded-[1.25rem] border border-border bg-surface-2">
+    <div className="absolute inset-0 overflow-hidden bg-[#dceff0]">
       <Image
-        src={source}
-        alt="تصویر مفهومی از یک پروژه‌ی دیجیتال رای‌کد"
+        src={project.image}
+        alt={project.imageAlt}
         fill
         className={cn(
-          "object-cover transition-transform duration-700 group-hover:scale-105",
-          index === 2 ? "object-center" : "object-left",
+          "object-cover transition-transform duration-1000 ease-out group-hover:scale-[1.045]",
+          index === 1 ? "object-left" : "object-center",
         )}
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-transparent to-transparent opacity-80" />
-      <div className="absolute top-4 right-4 rounded-full border border-white/20 bg-ink/35 px-3 py-1 text-[0.65rem] tracking-[0.14em] text-white/70 backdrop-blur-sm">
-        RYCODE / CASE
+      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(2,35,47,0.05)_5%,rgba(2,35,47,0.2)_42%,rgba(2,30,40,0.96)_100%)]" />
+
+      <div className="absolute inset-x-5 top-5 z-10 flex items-center gap-4 sm:inset-x-7 sm:top-7">
+        <div className="flex items-center gap-1.5 rounded-full border border-white/25 bg-[#073b4c]/25 px-3 py-2 backdrop-blur-md">
+          <span className="size-1.5 rounded-full" style={{ backgroundColor: project.accent }} />
+          <span className="size-1.5 rounded-full bg-white/55" />
+          <span className="size-1.5 rounded-full bg-white/25" />
+        </div>
       </div>
-      <span
-        dir="ltr"
-        className="absolute bottom-3 left-5 text-[4.5rem] leading-none font-extrabold text-white/20"
-      >
-        {String(index).padStart(2, "0")}
-      </span>
     </div>
   );
 }
 
 export function SelectedProjects() {
-  const published: {
-    id: string;
-    slug: string;
-    title_fa: string;
-    summary_fa: string | null;
-  }[] = [];
-
   return (
-    <Section className="grain">
-      <Container>
-        <div className="flex flex-wrap items-end justify-between gap-6">
-          <div>
-            <MetaLabel className="text-muted-foreground">SELECTED WORK</MetaLabel>
-            <h2 className="display-2 mt-6 max-w-3xl">
-              چند نمونه از مسئله‌هایی که برایشان راه‌حل ساخته‌ایم
-            </h2>
+    <Section className="relative overflow-hidden bg-white text-[#073b4c] sm:py-20">
+      <div
+        className="pointer-events-none absolute inset-0 opacity-70"
+        style={{
+          backgroundImage:
+            "radial-gradient(circle at 82% 12%, rgba(32,191,178,0.13), transparent 24%), radial-gradient(circle at 8% 64%, rgba(108,146,244,0.11), transparent 27%), radial-gradient(circle at 78% 82%, rgba(185,167,255,0.08), transparent 24%)",
+        }}
+        aria-hidden
+      />
+
+      <Container className="relative z-10">
+        <div className="relative isolate overflow-hidden rounded-[1.35rem] bg-[#073b4c] px-6 py-8 text-white shadow-[0_20px_58px_rgba(17,71,83,0.14)] sm:px-9 sm:py-9 lg:px-11 lg:py-10">
+          <span
+            className="pointer-events-none absolute -top-40 -right-24 size-[30rem] rounded-full bg-[#20bfb2]/16 blur-3xl"
+            aria-hidden
+          />
+          <span
+            className="pointer-events-none absolute -bottom-52 left-0 size-[28rem] rounded-full border border-[#b9a7ff]/16 shadow-[0_0_0_56px_rgba(125,200,255,0.035),0_0_0_112px_rgba(185,167,255,0.022)]"
+            aria-hidden
+          />
+          <span
+            className="pointer-events-none absolute inset-0 opacity-[0.09]"
+            style={{
+              backgroundImage: "radial-gradient(rgba(255,255,255,0.75) 0.7px, transparent 0.7px)",
+              backgroundSize: "30px 30px",
+            }}
+            aria-hidden
+          />
+
+          <div className="relative grid gap-10 lg:grid-cols-[1.3fr_0.7fr] lg:items-center">
+            <div>
+              <h2 className="max-w-3xl text-[clamp(1.9rem,3.4vw,3.25rem)] font-semibold leading-[1.22] tracking-[-0.03em]">
+                نمونه‌کارهای منتخب
+                <span className="text-[#5fe1d5]"> رای‌کد</span>
+              </h2>
+              <p className="mt-5 max-w-2xl text-sm leading-8 text-white/62 sm:text-base sm:leading-9">
+                هر پروژه از یک چالش مشخص شروع شده و به یک محصول دیجیتال روشن، کاربردی و قابل توسعه
+                رسیده است.
+              </p>
+            </div>
+
+            <div className="flex flex-col items-start lg:border-r lg:border-white/12 lg:pr-10">
+              <p className="text-sm font-medium leading-7 text-white/75">
+                سه مسئله، سه مسیر متفاوت؛ با یک هدف مشترک: ساختن چیزی که واقعاً کار کند.
+              </p>
+              <Link
+                href="/projects"
+                className="group mt-6 inline-flex min-h-11 items-center gap-3 rounded-full border border-[#5fe1d5]/35 bg-[#5fe1d5]/10 px-6 text-sm font-semibold text-[#b9fff8] backdrop-blur-md transition-colors hover:border-[#5fe1d5]/70 hover:bg-[#5fe1d5]/18"
+              >
+                مشاهده همه پروژه‌ها
+                <ArrowUpLeft className="size-4 transition-transform group-hover:-translate-x-1 group-hover:-translate-y-1" />
+              </Link>
+            </div>
           </div>
-          <TextLink to="/projects">همه پروژه‌ها</TextLink>
         </div>
 
-        <div className="mt-16 border-t border-border">
-          {published.length > 0
-            ? published.map((p, i) => (
-                <Link
-                  key={p.id}
-                  href={`/projects/${p.slug}`}
-                  className="group grid gap-8 border-b border-border py-14 lg:grid-cols-[1.4fr_1fr] lg:items-center lg:gap-16 lg:even:[direction:inherit]"
-                >
-                  <div className={cn(i % 2 === 1 && "lg:order-2")}>
-                    <CaseVisual index={i + 1} />
-                  </div>
-                  <div>
-                    <MetaLabel index={i + 1} className="text-muted-foreground">
-                      CASE STUDY
-                    </MetaLabel>
-                    <h3 className="display-3 mt-5">{p.title_fa}</h3>
-                    {p.summary_fa && (
-                      <p className="mt-5 max-w-lg text-base leading-8 text-muted-foreground">
-                        {p.summary_fa}
-                      </p>
-                    )}
-                    <span className="mt-8 inline-flex items-center gap-3 text-sm font-bold">
-                      مطالعه موردی
-                      <ArrowSquare />
-                    </span>
-                  </div>
-                </Link>
-              ))
-            : projects.map((p, i) => (
-                <article
-                  key={p.name}
-                  className="group grid gap-8 border-b border-border py-14 lg:grid-cols-[1.4fr_1fr] lg:items-center lg:gap-16"
-                >
-                  <div className={cn(i % 2 === 1 && "lg:order-2")}>
-                    <CaseVisual index={i + 1} />
-                  </div>
-                  <div>
-                    <MetaLabel index={i + 1} className="text-muted-foreground">
-                      {p.industry}
-                    </MetaLabel>
-                    <h3 className="display-3 mt-5">{p.name}</h3>
-                    <dl className="mt-6 space-y-5 text-sm">
-                      <div>
-                        <dt className="meta-label text-brand">PROBLEM</dt>
-                        <dd className="mt-2 max-w-lg leading-8 text-muted-foreground">
-                          {p.problem}
-                        </dd>
-                      </div>
-                      <div>
-                        <dt className="meta-label text-brand">SOLUTION</dt>
-                        <dd className="mt-2 max-w-lg leading-8 text-muted-foreground">
-                          {p.solution}
-                        </dd>
-                      </div>
-                    </dl>
-                  </div>
-                </article>
-              ))}
-        </div>
+        <ol className="mt-5 grid grid-cols-12 gap-4 sm:gap-5">
+          {projects.map((project, index) => (
+            <li
+              key={project.name}
+              className={cn(
+                "col-span-12",
+                index === 0 && "lg:col-span-7",
+                index === 1 && "lg:col-span-5",
+                index === 2 && "lg:col-span-12",
+              )}
+            >
+              <article
+                className={cn(
+                  "group relative isolate flex min-h-[460px] overflow-hidden rounded-[1.2rem] border border-[#073b4c]/10 shadow-[0_16px_48px_rgba(17,71,83,0.1)] sm:min-h-[520px]",
+                  index === 2 && "lg:min-h-[440px]",
+                )}
+              >
+                <CaseVisual project={project} index={index + 1} />
 
-        {published.length === 0 && (
-          <p className="mt-6 text-xs text-muted-foreground">
-            این‌ها نمونه‌های مفهومی‌اند تا ببینید برای چه جور مسئله‌هایی می‌توانیم راه‌حل بسازیم؛
-            نام مشتری یا آمار واقعی در آن‌ها نیست.
+                <div
+                  className={cn(
+                    "relative z-10 mt-auto w-full p-5 sm:p-8",
+                    index === 2 && "lg:grid lg:grid-cols-[1fr_1fr] lg:items-end lg:gap-12",
+                  )}
+                >
+                  <div>
+                    <div className="flex flex-wrap items-center gap-2 text-[0.65rem] font-semibold tracking-[0.08em] text-white/65">
+                      <span
+                        className="rounded-full border px-3 py-1.5 backdrop-blur-md"
+                        style={{
+                          borderColor: `${project.accent}66`,
+                          backgroundColor: `${project.accent}18`,
+                          color: project.accent,
+                        }}
+                      >
+                        {project.category}
+                      </span>
+                      <span className="rounded-full border border-white/20 bg-white/8 px-3 py-1.5 backdrop-blur-md">
+                        {project.industry}
+                      </span>
+                    </div>
+                    <h3 className="mt-4 text-[clamp(1.4rem,2.2vw,2.2rem)] font-semibold leading-[1.35] tracking-[-0.025em] text-white">
+                      {project.name}
+                    </h3>
+                    <p className="mt-4 max-w-2xl text-sm leading-7 text-white/64">
+                      {project.problem}
+                    </p>
+                  </div>
+
+                  <div className={cn("mt-6", index === 2 && "lg:mt-0")}>
+                    <p
+                      className="max-w-2xl border-r-2 pr-4 text-sm font-medium leading-7 text-white/88"
+                      style={{ borderColor: `${project.accent}b3` }}
+                    >
+                      {project.solution}
+                    </p>
+                    <div className="mt-5 flex flex-wrap gap-x-4 gap-y-2">
+                      {project.scope.map((item) => (
+                        <span
+                          key={item}
+                          className="inline-flex items-center gap-2 text-[0.67rem] text-white/55"
+                        >
+                          <span
+                            className="size-1 rounded-full"
+                            style={{ backgroundColor: project.accent }}
+                          />
+                          {item}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                <span
+                  className="absolute inset-x-0 top-0 z-20 h-0.5 origin-right scale-x-0 transition-transform duration-700 group-hover:scale-x-100"
+                  style={{ backgroundColor: project.accent }}
+                  aria-hidden
+                />
+              </article>
+            </li>
+          ))}
+        </ol>
+
+        <div className="mt-8 border-t border-[#073b4c]/10 pt-6 text-xs leading-6 text-[#52717b]">
+          <p>
+            تصاویر و سناریوهای این بخش مفهومی‌اند؛ نمونه‌های واقعی فقط با اجازه مشتری منتشر می‌شوند.
           </p>
-        )}
+        </div>
       </Container>
     </Section>
   );
@@ -1161,73 +1248,190 @@ export function IndustriesSection() {
 
 const whyItems = [
   {
-    title: "اول می‌فهمیم مشکل کجاست",
-    body: "قبل از اینکه ابزار و تکنولوژی پیشنهاد بدهیم، می‌نشینیم ببینیم دقیقاً چه چیزی قرار است بهتر شود.",
+    title: "اول مطمئن می‌شویم مسئله درست را حل می‌کنیم",
+    body: "هدف کسب‌وکار، کاربران و وضعیت فعلی را بررسی می‌کنیم تا پروژه با یک فهرست امکانات پراکنده شروع نشود.",
+    note: "تعریف مسئله و اولویت‌ها",
+    icon: ScanSearch,
+    accent: "#5fe1d5",
+    layout: "lg:col-span-7 lg:min-h-[370px]",
+    featured: true,
   },
   {
-    title: "لازم نیست همه‌چیز را از نو بسازید",
-    body: "اگر پروژه فعلی قابل نجات باشد، همان را مرتب و قوی‌تر می‌کنیم؛ بازنویسی فقط وقتی که واقعاً لازم باشد.",
+    title: "دامنه، اولویت و تحویل‌ها از ابتدا روشن‌اند",
+    body: "مشخص می‌کنیم چه چیزی ساخته می‌شود، چه چیزی فعلاً خارج از دامنه است و هر مرحله با چه خروجی‌ای تحویل خواهد شد.",
+    note: "مسیر روشن، دوباره‌کاری کمتر",
+    icon: ClipboardList,
+    accent: "#7dc8ff",
+    layout: "lg:col-span-5 lg:min-h-[370px]",
   },
   {
-    title: "سئو را آخر کار یادمان نمی‌افتد",
-    body: "ساختار فنی و دیده‌شدن در گوگل را از همان اول کنار هم جلو می‌بریم.",
+    title: "پروژه را مرحله‌ای و قابل دیدن جلو می‌بریم",
+    body: "به‌جای یک رونمایی غافلگیرکننده در پایان، نسخه‌های قابل بررسی می‌بینید و بازخوردها زودتر وارد محصول می‌شوند.",
+    note: "بازبینی در طول مسیر",
+    icon: Route,
+    accent: "#796fe8",
+    layout: "lg:col-span-4 lg:min-h-[320px]",
   },
   {
-    title: "کد و دسترسی‌ها برای خودتان می‌ماند",
-    body: "همه‌چیز شفاف تحویل شما می‌شود؛ کد، داده‌ها، دامنه و دسترسی‌ها.",
+    title: "برای بازنویسی و تکنولوژی خاص تعصب نداریم",
+    body: "اگر سیستم فعلی قابل نجات باشد، همان را بهتر می‌کنیم. ابزار را بر اساس مسئله، هزینه نگهداری و آینده محصول انتخاب می‌کنیم.",
+    note: "راه‌حل متناسب، نه پرهزینه‌تر",
+    icon: Wrench,
+    accent: "#4eaf8e",
+    layout: "lg:col-span-4 lg:min-h-[320px]",
   },
   {
-    title: "بعد از تحویل هم تنها نمی‌مانید",
-    body: "اگر خواستید، نگهداری، رفع مشکل و توسعه‌های بعدی را هم کنار شما ادامه می‌دهیم.",
+    title: "کد، داده و دسترسی‌ها متعلق به شماست",
+    body: "مخزن کد، حساب‌های اصلی، دامنه و مستندات تحویل می‌شوند تا کسب‌وکار شما به حساب شخصی یا حضور یک نفر وابسته نماند.",
+    note: "بدون قفل‌شدن به مجری",
+    icon: ShieldCheck,
+    accent: "#d06f9a",
+    layout: "lg:col-span-4 lg:min-h-[320px]",
+  },
+  {
+    title: "انتشار، پایان پروژه نیست؛ شروع یادگیری است",
+    body: "بعد از راه‌اندازی می‌توانیم پایش، رفع مشکل و توسعه مرحله بعد را ادامه دهیم تا محصول با نیازهای واقعی کسب‌وکار رشد کند.",
+    note: "پشتیبانی و توسعه ادامه‌دار",
+    icon: Headphones,
+    accent: "#5a86d6",
+    layout: "lg:col-span-12 lg:min-h-[270px]",
   },
 ];
 
 export function WhyRycode() {
   return (
-    <Section className="grain bg-surface">
-      <Container>
-        <MetaLabel className="text-muted-foreground">WHY RYCODE</MetaLabel>
-        <div className="mt-10 grid gap-4 lg:grid-cols-[1.3fr_0.7fr]">
-          <div className="relative min-h-[180px] overflow-hidden rounded-[1.25rem] bg-ink">
-            <Image
-              src="/images/rycode-product-system.png"
-              alt="لایه‌های مختلف یک سیستم منسجم و قابل رشد"
-              fill
-              className="object-cover object-right opacity-70"
-            />
-            <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/30 to-transparent" />
-            <div className="absolute inset-y-0 left-0 flex max-w-xs flex-col justify-center p-6 text-white">
-              <MetaLabel className="text-brand">THE RYCODE METHOD</MetaLabel>
-              <p className="mt-2 text-lg font-bold leading-7">
-                شفاف، قابل توسعه، ساخته‌شده برای فردا
-              </p>
-            </div>
+    <Section className="relative overflow-hidden bg-white text-[#073b4c] sm:py-20">
+      <div
+        className="pointer-events-none absolute inset-0 opacity-80"
+        style={{
+          backgroundImage:
+            "radial-gradient(circle at 88% 18%, rgba(95,225,213,0.13), transparent 24%), radial-gradient(circle at 10% 56%, rgba(125,200,255,0.11), transparent 27%), radial-gradient(circle at 72% 88%, rgba(185,167,255,0.09), transparent 22%)",
+        }}
+        aria-hidden
+      />
+
+      <Container className="relative z-10">
+        <div className="grid gap-8 border-b border-[#073b4c]/12 pb-10 lg:grid-cols-[1.25fr_0.75fr] lg:items-end">
+          <div>
+            <h2 className="max-w-4xl text-[clamp(1.95rem,3.5vw,3.3rem)] font-semibold leading-[1.22] tracking-[-0.03em]">
+              کمتر حدس می‌زنیم.
+              <span className="block text-[#159f96]">بیشتر روشن می‌کنیم.</span>
+            </h2>
+            <p className="mt-6 max-w-2xl text-sm leading-8 text-[#52717b] sm:text-base sm:leading-9">
+              تفاوت یک همکاری خوب فقط در کدی که تحویل می‌شود نیست؛ در تصمیم‌های روشن، ریسک کمتر و
+              محصولی است که بعداً هم بتوان آن را فهمید و توسعه داد.
+            </p>
           </div>
-          <div className="visual-card flex items-end justify-between bg-brand p-6 text-brand-foreground">
-            <span className="text-6xl font-extrabold tracking-[-0.08em]">۰۵</span>
-            <span className="max-w-[8rem] text-sm font-bold leading-6">
-              دلیل برای اینکه پروژه را درست شروع کنیم
-            </span>
-          </div>
-        </div>
-        <div className="mt-14 border-t border-border">
-          {whyItems.map((item, i) => (
-            <div
-              key={item.title}
-              className={cn(
-                "grid gap-6 border-b border-border py-14 lg:grid-cols-2 lg:items-start lg:gap-16",
+
+          <div className="rounded-2xl border border-[#0b5262]/12 bg-white/70 p-6 shadow-[0_18px_50px_rgba(31,92,105,0.08)] backdrop-blur-md sm:p-7">
+            <ul className="space-y-4 text-sm font-medium text-[#214f5b]">
+              {["خروجی‌های قابل بازبینی", "تصمیم‌ها و دامنه مستند", "مالکیت و دسترسی شفاف"].map(
+                (item, index) => (
+                  <li key={item} className="flex items-center gap-3">
+                    <span
+                      className={cn(
+                        "grid size-7 shrink-0 place-items-center rounded-full text-[0.65rem] font-bold",
+                        index === 0 && "bg-[#5fe1d5]/18 text-[#0b766e]",
+                        index === 1 && "bg-[#7dc8ff]/20 text-[#276f9f]",
+                        index === 2 && "bg-[#b9a7ff]/22 text-[#6657b8]",
+                      )}
+                    >
+                      ✓
+                    </span>
+                    {item}
+                  </li>
+                ),
               )}
+            </ul>
+            <CtaLink
+              to="/start-project"
+              variant="outline"
+              className="mt-7 !rounded-full !border-[#20bfb2]/45 !bg-[#20bfb2]/8 !text-[#0b766e] hover:!border-[#20bfb2]/80 hover:!bg-[#20bfb2]/14"
             >
-              <div className={cn(i % 2 === 1 && "lg:order-2")}>
-                <MetaLabel index={i + 1} className="text-brand" />
-                <h3 className="display-3 mt-5 max-w-[16ch]">{item.title}</h3>
-              </div>
-              <p className="max-w-md text-base leading-9 text-muted-foreground lg:pt-14">
-                {item.body}
-              </p>
-            </div>
-          ))}
+              درباره پروژه صحبت کنیم
+            </CtaLink>
+          </div>
         </div>
+
+        <ol className="mt-8 grid grid-cols-12 gap-4">
+          {whyItems.map((item, index) => (
+            <li key={item.title} className={cn("col-span-12", item.layout)}>
+              <article
+                className={cn(
+                  "group relative isolate flex h-full min-h-[290px] flex-col overflow-hidden rounded-xl border p-6 transition-[transform,border-color,box-shadow] duration-300 hover:-translate-y-0.5 sm:p-7",
+                  item.featured
+                    ? "border-white/10 bg-[#073b4c] text-white shadow-[0_24px_70px_rgba(7,59,76,0.2)]"
+                    : "border-[#0b5262]/12 bg-white/72 text-[#073b4c] shadow-[0_14px_44px_rgba(31,92,105,0.08)] backdrop-blur-md hover:shadow-[0_24px_65px_rgba(31,92,105,0.14)]",
+                )}
+                style={{ borderTopColor: item.accent }}
+              >
+                {item.featured && (
+                  <>
+                    <Image
+                      src="/images/rycode-hero-structure.png"
+                      alt="ساختار یک محصول دیجیتال که از مسئله تا راه‌حل شکل می‌گیرد"
+                      fill
+                      sizes="(min-width: 1024px) 58vw, 100vw"
+                      className="-z-10 object-cover opacity-25 saturate-75 transition-transform duration-1000 group-hover:scale-[1.035]"
+                    />
+                    <span
+                      className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(7,59,76,0.16),rgba(7,40,52,0.94))]"
+                      aria-hidden
+                    />
+                  </>
+                )}
+
+                {!item.featured && (
+                  <span
+                    className="pointer-events-none absolute -top-20 -left-16 -z-10 size-56 rounded-full blur-3xl"
+                    style={{ backgroundColor: `${item.accent}18` }}
+                    aria-hidden
+                  />
+                )}
+
+                <div className="flex items-start gap-5">
+                  <span
+                    className="grid size-11 place-items-center rounded-xl border backdrop-blur-md"
+                    style={{
+                      borderColor: `${item.accent}59`,
+                      backgroundColor: `${item.accent}18`,
+                      color: item.accent,
+                    }}
+                  >
+                    <item.icon className="size-5" aria-hidden />
+                  </span>
+                </div>
+
+                <div className={cn("mt-auto pt-12", index === 5 && "lg:max-w-4xl")}>
+                  <h3 className="max-w-xl text-lg font-bold leading-8 sm:text-xl">{item.title}</h3>
+                  <p
+                    className={cn(
+                      "mt-4 max-w-2xl text-sm leading-8",
+                      item.featured ? "text-white/66" : "text-[#52717b]",
+                    )}
+                  >
+                    {item.body}
+                  </p>
+                  <span
+                    className={cn(
+                      "mt-6 inline-flex rounded-full border px-3 py-1.5 text-[0.68rem] font-semibold",
+                      item.featured ? "bg-white/6" : "bg-white/65",
+                    )}
+                    style={{ borderColor: `${item.accent}55`, color: item.accent }}
+                  >
+                    {item.note}
+                  </span>
+                </div>
+
+                <span
+                  className="absolute inset-x-0 top-0 h-0.5 origin-right scale-x-0 transition-transform duration-500 group-hover:scale-x-100"
+                  style={{ backgroundColor: item.accent }}
+                  aria-hidden
+                />
+              </article>
+            </li>
+          ))}
+        </ol>
       </Container>
     </Section>
   );
@@ -1308,36 +1512,135 @@ export function ProcessSection() {
 /* 11. PAYMENT ------------------------------------------------------------ */
 
 export function PaymentSection() {
+  const paymentStages = [
+    {
+      title: "شروع و تعریف دامنه",
+      description: "نیازسنجی، اولویت‌ها و برنامه اجرای پروژه",
+      icon: ScanSearch,
+      accent: "#5fe1d5",
+    },
+    {
+      title: "طراحی و نمونه اولیه",
+      description: "مسیرها، وایرفریم و رابط قابل بررسی",
+      icon: Waypoints,
+      accent: "#7dc8ff",
+    },
+    {
+      title: "توسعه و تست",
+      description: "نسخه قابل اجرا، اتصال‌ها و رفع ایراد",
+      icon: Blocks,
+      accent: "#b9a7ff",
+    },
+    {
+      title: "انتشار و تحویل",
+      description: "راه‌اندازی، دسترسی‌ها و مستندات نهایی",
+      icon: ShieldCheck,
+      accent: "#9be7a8",
+    },
+  ];
+
   return (
-    <Section className="bg-brand-soft">
+    <Section className="bg-white py-8 text-[#073b4c] sm:py-14">
       <Container>
-        <div className="grid gap-12 lg:grid-cols-[1.2fr_1fr] lg:items-end">
-          <h2 className="display-2 max-w-[14ch]">لازم نیست همه هزینه را یک‌جا پرداخت کنید</h2>
-          <div className="text-base leading-9 text-muted-foreground">
-            <p>
-              برای پروژه‌های واجد شرایط، هزینه را به چند مرحله تقسیم می‌کنیم. هر مرحله که تحویل و
-              تأیید شد، سراغ مرحله بعد می‌رویم.
-            </p>
-            <div className="mt-8">
-              <TextLink to="/start-project">درباره پرداخت مرحله‌ای بپرسید</TextLink>
+        <div className="relative isolate overflow-hidden rounded-[1.5rem] bg-[#073b4c] px-5 py-8 text-white shadow-[0_22px_64px_rgba(7,59,76,0.14)] sm:px-8 sm:py-9 lg:px-10 lg:py-10">
+          <div
+            className="pointer-events-none absolute inset-0 -z-10"
+            style={{
+              backgroundImage:
+                "radial-gradient(circle at 88% 8%, rgba(95,225,213,0.2), transparent 28%), radial-gradient(circle at 8% 100%, rgba(125,200,255,0.18), transparent 31%), radial-gradient(circle at 64% 110%, rgba(185,167,255,0.12), transparent 26%)",
+            }}
+            aria-hidden
+          />
+          <div
+            className="pointer-events-none absolute inset-0 -z-10 opacity-[0.07]"
+            style={{
+              backgroundImage:
+                "linear-gradient(rgba(255,255,255,.7) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.7) 1px, transparent 1px)",
+              backgroundSize: "42px 42px",
+              maskImage: "linear-gradient(to bottom, black, transparent 80%)",
+            }}
+            aria-hidden
+          />
+
+          <div className="grid gap-9 lg:grid-cols-[1.12fr_0.88fr] lg:items-center lg:gap-14">
+            <div>
+              <h2 className="max-w-[18ch] text-[clamp(1.8rem,3.5vw,3.35rem)] font-bold leading-[1.2] tracking-[-0.03em]">
+                پروژه را مرحله‌ای جلو ببرید،
+                <span className="mt-1 block text-[#5fe1d5]">هزینه را هم مرحله‌ای پرداخت کنید.</span>
+              </h2>
+              <p className="mt-6 max-w-2xl text-sm leading-8 text-white/72 sm:text-base sm:leading-9">
+                برای پروژه‌های واجد شرایط، مبلغ براساس فازهای واقعی کار تقسیم می‌شود. پیش از شروع،
+                خروجی هر مرحله، زمان تحویل و مبلغ همان مرحله در پیشنهاد همکاری مشخص است.
+              </p>
+
+              <div className="mt-8 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
+                <CtaLink
+                  to="/start-project"
+                  className="h-12 rounded-xl bg-[#5fe1d5] px-6 text-[#073b4c] shadow-[0_14px_35px_rgba(95,225,213,0.2)] hover:bg-[#7aebe1] focus-visible:outline-[#5fe1d5]"
+                >
+                  بررسی شرایط پرداخت پروژه
+                </CtaLink>
+                <p className="max-w-[30ch] text-xs leading-6 text-white/48">
+                  شرایط نهایی پس از بررسی دامنه و زمان‌بندی پروژه مشخص می‌شود.
+                </p>
+              </div>
             </div>
-          </div>
-        </div>
-        <div className="relative mt-14 overflow-hidden rounded-[1.5rem] border border-brand/25 bg-background p-5 sm:p-8">
-          <div className="absolute inset-0 soft-grid opacity-40" />
-          <div className="relative grid gap-3 sm:grid-cols-4">
-            {["شروع", "طراحی", "ساخت", "رشد"].map((label, i) => (
-              <div key={label} className="rounded-xl border border-border bg-surface p-4">
-                <MetaLabel index={i + 1} className="text-brand" />
-                <p className="mt-6 text-sm font-bold">{label}</p>
-                <div className="mt-5 h-1.5 overflow-hidden rounded-full bg-border">
-                  <span
-                    className="block h-full rounded-full bg-brand"
-                    style={{ width: `${[28, 52, 76, 100][i]}%` }}
-                  />
+
+            <div className="rounded-[1.2rem] border border-white/12 bg-white/[0.07] p-5 shadow-xl backdrop-blur-xl sm:p-6">
+              <div className="flex items-start gap-4">
+                <span className="grid size-12 shrink-0 place-items-center rounded-2xl bg-[#5fe1d5] text-[#073b4c] shadow-[0_10px_30px_rgba(95,225,213,0.22)]">
+                  <ClipboardList className="size-6" aria-hidden />
+                </span>
+                <div>
+                  <h3 className="text-lg font-extrabold leading-8 sm:text-xl">
+                    هر پرداخت، بعد از یک خروجی قابل بررسی
+                  </h3>
+                  <p className="mt-2 text-sm leading-7 text-white/58">
+                    مسیر مالی پروژه همان‌قدر روشن است که مسیر اجرا.
+                  </p>
                 </div>
               </div>
-            ))}
+
+              <ul className="mt-7 space-y-3 border-t border-white/10 pt-6 text-sm font-semibold text-white/82">
+                {[
+                  "خروجی هر مرحله از قبل مشخص است",
+                  "پیش از ادامه، نتیجه را بررسی می‌کنید",
+                  "مبلغ و زمان‌بندی به‌صورت مکتوب ثبت می‌شود",
+                ].map((item) => (
+                  <li key={item} className="flex items-center gap-3">
+                    <span className="grid size-5 shrink-0 place-items-center rounded-full bg-[#5fe1d5]/15 text-[#5fe1d5]">
+                      <span className="size-1.5 rounded-full bg-current" />
+                    </span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          <div className="mt-10 grid gap-3 border-t border-white/10 pt-6 sm:grid-cols-2 lg:grid-cols-4">
+            {paymentStages.map((stage) => {
+              const Icon = stage.icon;
+
+              return (
+                <div
+                  key={stage.title}
+                  className="group rounded-[1.25rem] border border-white/10 bg-white/[0.055] p-5 transition duration-300 hover:-translate-y-1 hover:bg-white/[0.09]"
+                >
+                  <div className="mb-8 flex items-center justify-between">
+                    <span
+                      className="grid size-10 place-items-center rounded-xl border border-white/10"
+                      style={{ color: stage.accent, backgroundColor: `${stage.accent}14` }}
+                    >
+                      <Icon className="size-5" aria-hidden />
+                    </span>
+                    <span className="h-px w-12 bg-gradient-to-l from-white/25 to-transparent" />
+                  </div>
+                  <h3 className="text-base font-extrabold">{stage.title}</h3>
+                  <p className="mt-2 text-sm leading-7 text-white/55">{stage.description}</p>
+                </div>
+              );
+            })}
           </div>
         </div>
       </Container>
@@ -1347,92 +1650,133 @@ export function PaymentSection() {
 
 /* 12. BLOG --------------------------------------------------------------- */
 
-export function BlogSection() {
-  const rows: {
-    id: string;
-    slug: string;
-    title_fa: string;
-    excerpt_fa: string | null;
-  }[] = [];
-  const featured = rows[0] ?? null;
-  const latest = rows.slice(1, 6);
+const sampleArticles = [
+  {
+    title: "قبل از شروع طراحی سایت، به این ۷ سؤال جواب دهید",
+    excerpt:
+      "از هدف اصلی سایت و مخاطب گرفته تا محتوا، امکانات و معیار موفقیت؛ تصمیم‌هایی که پیش از طراحی، مسیر پروژه را روشن می‌کنند.",
+    category: "استراتژی دیجیتال",
+    readTime: "۶ دقیقه مطالعه",
+    date: "۲۸ شهریور ۱۴۰۵",
+    image: "/images/rycode-hero-structure.png",
+    imageAlt: "ساختار مفهومی برنامه‌ریزی یک وب‌سایت حرفه‌ای",
+    accent: "#20bfb2",
+  },
+  {
+    title: "نرم‌افزار اختصاصی یا ابزار آماده؛ کدام انتخاب بهتری است؟",
+    excerpt:
+      "همه کسب‌وکارها به نرم‌افزار اختصاصی نیاز ندارند. هزینه، سرعت اجرا، محدودیت‌ها و مسیر رشد هر انتخاب را مقایسه می‌کنیم.",
+    category: "محصول و فناوری",
+    readTime: "۸ دقیقه مطالعه",
+    date: "۲۰ شهریور ۱۴۰۵",
+    image: "/images/rycode-product-system.png",
+    imageAlt: "نمایی مفهومی از اجزای یک نرم‌افزار و انتخاب ابزار مناسب",
+    accent: "#6c92f4",
+  },
+  {
+    title: "چرا پروژه‌های نرم‌افزاری نیمه‌کاره می‌مانند؟",
+    excerpt:
+      "دامنه نامشخص، تحویل دیرهنگام و وابستگی به یک نفر از نشانه‌های خطرند؛ ببینیم چطور می‌شود قبل از توقف پروژه آن‌ها را کنترل کرد.",
+    category: "مدیریت پروژه",
+    readTime: "۷ دقیقه مطالعه",
+    date: "۱۲ شهریور ۱۴۰۵",
+    image: "/images/rycode-project-rescue.png",
+    imageAlt: "بازسازی مفهومی یک پروژه نرم‌افزاری متوقف‌شده",
+    accent: "#b07ce8",
+  },
+];
 
+export function BlogSection() {
   return (
-    <Section>
-      <Container>
-        <div className="flex flex-wrap items-end justify-between gap-6">
+    <Section className="relative overflow-hidden bg-white text-[#073b4c] sm:py-20">
+      <div
+        className="pointer-events-none absolute inset-0 opacity-75"
+        style={{
+          backgroundImage:
+            "radial-gradient(circle at 88% 18%, rgba(32,191,178,0.1), transparent 23%), radial-gradient(circle at 8% 82%, rgba(176,124,232,0.08), transparent 24%)",
+        }}
+        aria-hidden
+      />
+
+      <Container className="relative z-10">
+        <div className="flex flex-col gap-7 border-b border-[#073b4c]/12 pb-10 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <MetaLabel className="text-muted-foreground">JOURNAL</MetaLabel>
-            <h2 className="display-2 mt-6 max-w-3xl">
-              از چیزهایی می‌نویسیم که در مسیر ساخت و رشد یاد می‌گیریم
+            <h2 className="max-w-4xl text-[clamp(1.95rem,3.5vw,3.3rem)] font-semibold leading-[1.22] tracking-[-0.03em]">
+              تجربه‌هایی برای ساختن
+              <span className="block text-[#159f96]">تصمیم‌های بهتر.</span>
             </h2>
+            <p className="mt-5 max-w-2xl text-sm leading-8 text-[#52717b] sm:text-base sm:leading-9">
+              یادداشت‌هایی کاربردی درباره طراحی، توسعه، سئو و مدیریت محصول؛ برآمده از مسئله‌هایی که
+              در پروژه‌های دیجیتال تکرار می‌شوند.
+            </p>
           </div>
-          <TextLink to="/blog">همه مقاله‌ها</TextLink>
+          <Link
+            href="/blog"
+            className="group inline-flex min-h-11 w-fit items-center gap-3 rounded-full border border-[#20bfb2]/45 bg-white/75 px-6 text-sm font-semibold text-[#0b766e] shadow-[0_10px_30px_rgba(31,92,105,0.08)] transition-colors hover:border-[#20bfb2]/80 hover:bg-white"
+          >
+            همه مقاله‌ها
+            <ArrowUpLeft className="size-4 transition-transform group-hover:-translate-x-1 group-hover:-translate-y-1" />
+          </Link>
         </div>
 
-        {featured ? (
-          <Link
-            href={`/blog/${featured.slug}`}
-            className="group mt-14 grid gap-10 border-y border-border py-12 lg:grid-cols-[1fr_1fr] lg:items-center"
-          >
-            <div className="relative aspect-[16/9] overflow-hidden border border-border bg-surface-2">
-              <div className="grid-field absolute inset-0 opacity-50" />
-              <div className="absolute bottom-0 left-0 h-1.5 w-1/3 bg-brand" />
-            </div>
-            <div>
-              <MetaLabel className="text-brand">FEATURED</MetaLabel>
-              <h3 className="display-3 mt-5">{featured.title_fa}</h3>
-              {featured.excerpt_fa && (
-                <p className="mt-5 line-clamp-3 max-w-lg text-base leading-8 text-muted-foreground">
-                  {featured.excerpt_fa}
-                </p>
-              )}
-              <span className="mt-8 inline-flex items-center gap-3 text-sm font-bold">
-                خواندن مقاله
-                <ArrowSquare />
-              </span>
-            </div>
-          </Link>
-        ) : (
-          <div className="mt-14 grid gap-8 overflow-hidden rounded-[1.5rem] border border-border bg-surface-2 p-5 sm:p-8 lg:grid-cols-[1fr_0.9fr] lg:items-center">
-            <div>
-              <MetaLabel className="text-muted-foreground">FEATURED / SOON</MetaLabel>
-              <p className="mt-5 max-w-xl text-base leading-8 text-muted-foreground">
-                هنوز مقاله‌ای منتشر نکرده‌ایم؛ به‌زودی تجربه‌ها و نکته‌های کاربردی تیم را اینجا
-                می‌گذاریم.
-              </p>
-            </div>
-            <div className="relative aspect-[16/8] overflow-hidden rounded-xl bg-ink">
-              <Image
-                src="/images/rycode-product-system.png"
-                alt="تصویر انتزاعی دفترچه‌ی یادداشت و ساخت محصول"
-                fill
-                className="object-cover opacity-75"
-              />
-              <div className="absolute inset-0 bg-gradient-to-tr from-ink/70 via-transparent to-brand/20" />
-              <span className="absolute right-4 bottom-4 rounded-full bg-brand px-3 py-1 text-xs font-bold text-brand-foreground">
-                یادداشت‌های تیم
-              </span>
-            </div>
-          </div>
-        )}
-
-        {latest.length > 0 && (
-          <ul>
-            {latest.map((a, i) => (
-              <li key={a.id}>
+        <ol className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+          {sampleArticles.map((article, index) => (
+            <li key={article.title} className={cn(index === 2 && "md:col-span-2 lg:col-span-1")}>
+              <article className="h-full">
                 <Link
-                  href={`/blog/${a.slug}`}
-                  className="group flex items-center gap-6 border-b border-border py-7 transition-colors hover:text-brand"
+                  href="/blog"
+                  className="group flex h-full min-h-[480px] flex-col overflow-hidden rounded-xl border border-[#0b5262]/12 bg-white/78 shadow-[0_12px_36px_rgba(31,92,105,0.075)] backdrop-blur-md transition-[transform,border-color,box-shadow] duration-300 hover:-translate-y-0.5 hover:shadow-[0_20px_52px_rgba(31,92,105,0.12)]"
+                  style={{ borderTopColor: article.accent }}
                 >
-                  <MetaLabel index={i + 2} className="text-muted-foreground" />
-                  <span className="flex-1 text-lg font-bold leading-8">{a.title_fa}</span>
-                  <ArrowSquare />
+                  <div className="relative aspect-[16/10] w-full shrink-0 overflow-hidden bg-[#eaf3f4]">
+                    <Image
+                      src={article.image}
+                      alt={article.imageAlt}
+                      fill
+                      sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+                      className="object-cover transition-transform duration-700 group-hover:scale-[1.045]"
+                    />
+                    <span className="absolute inset-0 bg-gradient-to-t from-[#073b4c]/38 via-transparent to-transparent" />
+                    <span
+                      className="absolute top-4 right-4 rounded-full border bg-[#073b4c]/35 px-3 py-1.5 text-[0.65rem] font-semibold text-white backdrop-blur-md"
+                      style={{ borderColor: `${article.accent}80` }}
+                    >
+                      {article.category}
+                    </span>
+                  </div>
+
+                  <div className="flex flex-1 flex-col p-6 sm:p-7">
+                    <div className="flex items-center justify-between gap-4 text-[0.68rem] text-[#52717b]">
+                      <span>{article.date}</span>
+                      <span>{article.readTime}</span>
+                    </div>
+                    <h3 className="mt-5 text-lg font-bold leading-8 tracking-[-0.015em] text-[#073b4c] sm:text-xl">
+                      {article.title}
+                    </h3>
+                    <p className="mt-4 text-sm leading-8 text-[#52717b]">{article.excerpt}</p>
+
+                    <span
+                      className="mt-auto flex items-center justify-between gap-4 border-t border-[#073b4c]/10 pt-6 text-sm font-semibold"
+                      style={{ color: article.accent }}
+                    >
+                      خواندن مقاله
+                      <span
+                        className="grid size-9 place-items-center rounded-full border transition-transform group-hover:-translate-x-1 group-hover:-translate-y-1"
+                        style={{ borderColor: `${article.accent}66` }}
+                      >
+                        <ArrowUpLeft className="size-4" />
+                      </span>
+                    </span>
+                  </div>
                 </Link>
-              </li>
-            ))}
-          </ul>
-        )}
+              </article>
+            </li>
+          ))}
+        </ol>
+
+        <p className="mt-6 text-xs leading-6 text-[#52717b]">
+          این نوشته‌ها نمونه محتوایی هستند و در نسخه نهایی با مقاله‌های منتشرشده جایگزین می‌شوند.
+        </p>
       </Container>
     </Section>
   );
@@ -1444,18 +1788,32 @@ const faqs = [
   {
     q: "پروژه‌ای که نیمه‌کاره مانده را هم قبول می‌کنید؟",
     a: "بله. اول کد، دسترسی‌ها و زیرساخت را بررسی می‌کنیم؛ بعد صادقانه می‌گوییم ادامه دادن همین مسیر بهتر است یا باید بخشی از آن را دوباره ساخت.",
+    accent: "#20bfb2",
   },
   {
     q: "هزینه پروژه را چطور حساب می‌کنید؟",
     a: "بعد از اینکه درباره نیاز و دامنه کار به جمع‌بندی رسیدیم، زمان و هزینه را شفاف اعلام می‌کنیم. پروژه‌های بزرگ‌تر را هم می‌شود مرحله‌ای جلو برد.",
+    accent: "#6c92f4",
+  },
+  {
+    q: "برای شروع همکاری چه چیزهایی لازم است؟",
+    a: "یک توضیح کوتاه از مسئله، هدف کسب‌وکار و امکاناتی که در ذهن دارید کافی است. اگر مستندات، طرح یا سیستم فعلی دارید بررسی می‌کنیم؛ اگر هم ندارید، مسیر را از جلسه شناخت شروع می‌کنیم.",
+    accent: "#b07ce8",
+  },
+  {
+    q: "مدت زمان اجرای پروژه چقدر است؟",
+    a: "به دامنه، پیچیدگی و آماده‌بودن محتوا بستگی دارد. پیش از شروع، پروژه را به فازهای مشخص تقسیم می‌کنیم و زمان تقریبی تحویل هر فاز را در برنامه اجرا می‌نویسیم.",
+    accent: "#55bfe0",
   },
   {
     q: "کد و دسترسی‌ها برای چه کسی است؟",
     a: "برای شماست. کد، دسترسی‌ها، دیتابیس و دامنه در پایان پروژه کامل و شفاف تحویل داده می‌شود.",
+    accent: "#45c879",
   },
   {
     q: "بعد از تحویل هم کمک می‌کنید؟",
     a: "بله. می‌توانیم نگهداری، رفع مشکل و توسعه‌های بعدی را به‌صورت مستمر یا موردی کنار شما ادامه بدهیم.",
+    accent: "#e6b85c",
   },
 ];
 
@@ -1464,43 +1822,112 @@ export function FaqSection() {
   const items = faqs;
 
   return (
-    <Section className="bg-surface">
-      <Container>
-        <MetaLabel className="text-muted-foreground">FAQ</MetaLabel>
-        <h2 className="display-2 mt-6">پرسش‌های پرتکرار</h2>
+    <Section className="relative overflow-hidden bg-white py-16 text-[#073b4c] sm:py-20">
+      <div
+        className="pointer-events-none absolute inset-0 opacity-80"
+        style={{
+          backgroundImage:
+            "radial-gradient(circle at 92% 6%, rgba(32,191,178,0.1), transparent 25%), radial-gradient(circle at 4% 92%, rgba(108,146,244,0.08), transparent 27%)",
+        }}
+        aria-hidden
+      />
 
-        <div className="mt-14 border-t border-border">
-          {items.map((f, i) => (
-            <div key={f.q} className="border-b border-border">
-              <button
-                type="button"
-                onClick={() => setOpen(open === i ? null : i)}
-                className="flex w-full items-center justify-between gap-8 py-8 text-start"
-                aria-expanded={open === i}
+      <Container className="relative z-10">
+        <div className="grid gap-10 lg:grid-cols-[0.72fr_1.28fr] lg:gap-16">
+          <div className="lg:sticky lg:top-32 lg:self-start">
+            <span className="inline-flex items-center gap-3 rounded-full border border-[#20bfb2]/20 bg-[#20bfb2]/8 px-4 py-2 text-xs font-bold text-[#0a8f86]">
+              <span className="size-2 rounded-full bg-[#20bfb2] shadow-[0_0_0_5px_rgba(32,191,178,0.12)]" />
+              پاسخ روشن، پیش از شروع همکاری
+            </span>
+
+            <h2 className="mt-6 max-w-[14ch] text-[clamp(2rem,3.6vw,3.55rem)] font-bold leading-[1.2] tracking-[-0.03em]">
+              چیزهایی که معمولاً از ما می‌پرسید.
+            </h2>
+            <p className="mt-6 max-w-md text-base leading-9 text-[#52717b]">
+              درباره روند کار، هزینه، مالکیت و ادامه مسیر؛ جواب کوتاه و شفاف سؤال‌های رایج را اینجا
+              ببینید.
+            </p>
+
+            <div className="mt-8 rounded-[1.2rem] border border-[#073b4c]/10 bg-[#effbf9] p-5 sm:p-6">
+              <div className="flex items-start gap-4">
+                <span className="grid size-11 shrink-0 place-items-center rounded-2xl bg-[#073b4c] text-[#5fe1d5]">
+                  <Headphones className="size-5" aria-hidden />
+                </span>
+                <div>
+                  <h3 className="font-extrabold">سؤال دیگری در ذهن دارید؟</h3>
+                  <p className="mt-2 text-sm leading-7 text-[#52717b]">
+                    مسئله‌تان را بگویید؛ مستقیم و بدون پیچیدگی راهنمایی‌تان می‌کنیم.
+                  </p>
+                </div>
+              </div>
+              <CtaLink
+                to="/start-project"
+                variant="outline"
+                className="mt-5 h-11 w-full rounded-xl border-[#073b4c]/15 bg-white text-[#073b4c] hover:border-[#20bfb2] hover:bg-[#20bfb2]/8"
               >
-                <span
-                  className={cn(
-                    "text-xl font-bold sm:text-2xl",
-                    open === i ? "text-brand" : "text-foreground",
-                  )}
-                >
-                  {f.q}
-                </span>
-                <span
-                  aria-hidden
-                  className={cn(
-                    "grid size-9 shrink-0 place-items-center rounded-[5px] border text-lg transition-colors",
-                    open === i ? "border-brand bg-brand text-brand-foreground" : "border-border",
-                  )}
-                >
-                  {open === i ? "−" : "+"}
-                </span>
-              </button>
-              {open === i && (
-                <p className="max-w-3xl pb-8 text-base leading-9 text-muted-foreground">{f.a}</p>
-              )}
+                مطرح کردن سؤال
+              </CtaLink>
             </div>
-          ))}
+          </div>
+
+          <div className="space-y-3">
+            {items.map((f, i) => (
+              <div
+                key={f.q}
+                className={cn(
+                  "overflow-hidden rounded-xl border bg-white transition-[border-color,box-shadow,transform] duration-300",
+                  open === i
+                    ? "-translate-y-0.5 border-[#073b4c]/16 shadow-[0_20px_60px_rgba(7,59,76,0.09)]"
+                    : "border-[#073b4c]/10 hover:border-[#073b4c]/20",
+                )}
+              >
+                <button
+                  type="button"
+                  onClick={() => setOpen(open === i ? null : i)}
+                  className="group flex w-full items-center gap-4 px-5 py-5 text-start sm:gap-5 sm:px-6 sm:py-6"
+                  aria-expanded={open === i}
+                  aria-controls={`faq-answer-${i}`}
+                >
+                  <span
+                    className="grid size-10 shrink-0 place-items-center rounded-xl transition-transform duration-300 group-hover:scale-105"
+                    style={{ color: f.accent, backgroundColor: `${f.accent}14` }}
+                  >
+                    <span
+                      className="size-2 rounded-full bg-current"
+                      style={{ boxShadow: `0 0 0 5px ${f.accent}1f` }}
+                    />
+                  </span>
+                  <span
+                    className={cn(
+                      "flex-1 text-base font-extrabold leading-8 transition-colors sm:text-lg",
+                      open === i ? "text-[#073b4c]" : "text-[#214f5c]",
+                    )}
+                  >
+                    {f.q}
+                  </span>
+                  <span
+                    aria-hidden
+                    className={cn(
+                      "relative grid size-10 shrink-0 place-items-center rounded-full border transition-all duration-300",
+                      open === i
+                        ? "rotate-45 border-[#073b4c] bg-[#073b4c] text-white"
+                        : "border-[#073b4c]/14 bg-[#f4f9f8] text-[#073b4c] group-hover:border-[#20bfb2] group-hover:text-[#0a9b90]",
+                    )}
+                  >
+                    <span className="absolute h-px w-4 bg-current" />
+                    <span className="absolute h-4 w-px bg-current" />
+                  </span>
+                </button>
+                {open === i && (
+                  <div id={`faq-answer-${i}`} className="px-5 pb-6 sm:px-7 sm:pb-7">
+                    <p className="mr-14 border-t border-[#073b4c]/8 pt-5 text-sm leading-8 text-[#52717b] sm:mr-16 sm:text-base sm:leading-9">
+                      {f.a}
+                    </p>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
         </div>
       </Container>
     </Section>
@@ -1511,7 +1938,7 @@ export function FaqSection() {
 
 export function FinalCta() {
   return (
-    <section className="relative overflow-hidden bg-surface-2 py-16 text-foreground dark:bg-ink dark:text-ink-foreground sm:py-20">
+    <section className="relative overflow-hidden bg-white py-14 text-foreground dark:bg-ink dark:text-ink-foreground sm:py-16">
       <Image
         src="/images/rycode-connected-world.png"
         alt=""
@@ -1522,13 +1949,12 @@ export function FinalCta() {
       <div className="absolute inset-0 bg-gradient-to-l from-background/40 via-background/85 to-background dark:from-ink/40 dark:via-ink/85 dark:to-ink" />
       <Container>
         <div className="relative">
-          <MetaLabel className="text-brand">START HERE</MetaLabel>
-          <h2 className="display-1 mt-8 max-w-[15ch]">
+          <h2 className="display-1 max-w-[15ch]">
             یه پروژه توی ذهنتونه؟
             <br />
             یا یه <span className="text-brand">مشکل</span> که باید حل بشه؟
           </h2>
-          <div className="mt-14 flex flex-wrap items-center gap-8 border-t border-border pt-10 dark:border-white/12">
+          <div className="mt-10 flex flex-wrap items-center gap-7 border-t border-border pt-8 dark:border-white/12">
             <CtaLink to="/start-project">با هم شروع کنیم</CtaLink>
             <TextLink to="/technical-review" className="text-foreground dark:text-ink-foreground">
               پروژه‌تان را بررسی کنیم

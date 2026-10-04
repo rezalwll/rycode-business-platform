@@ -113,10 +113,10 @@
   --brand-foreground: oklch(0.16 0.008 60);
   --brand-soft: oklch(0.685 0.185 45 / 12%);
 
-  --background: oklch(0.981 0.005 85);
+  --background: oklch(1 0 0);
   --foreground: oklch(0.19 0.008 60);
   --surface: oklch(1 0 0);
-  --surface-2: oklch(0.958 0.006 85);
+  --surface-2: oklch(0.985 0 0);
   --hairline: oklch(0.19 0.008 60 / 12%);
 
   --ink: oklch(0.16 0.008 60);
@@ -302,15 +302,15 @@
 
 /* Compact editorial scale — clear hierarchy without oversized display type. */
 @utility display-1 {
-  font-size: clamp(2rem, 4vw, 4rem);
-  line-height: 1.1;
+  font-size: clamp(1.85rem, 3.2vw, 3.35rem);
+  line-height: 1.14;
   font-weight: 800;
   letter-spacing: -0.025em;
 }
 
 @utility display-2 {
-  font-size: clamp(1.5rem, 2.7vw, 2.5rem);
-  line-height: 1.18;
+  font-size: clamp(1.4rem, 2.15vw, 2.15rem);
+  line-height: 1.22;
   font-weight: 800;
   letter-spacing: -0.02em;
 }
@@ -404,6 +404,29 @@
   }
 }
 
+@keyframes rycode-hero-fade-rise {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-fade-rise {
+  animation: rycode-hero-fade-rise 0.85s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.hero-fade-rise-delay-1 {
+  animation-delay: 0.16s;
+}
+
+.hero-fade-rise-delay-2 {
+  animation-delay: 0.32s;
+}
+
 .hero-scroll-cue {
   animation: rycode-scroll-cue 2.4s ease-in-out infinite;
 }
@@ -413,7 +436,9 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .float-slow {
+  .float-slow,
+  .hero-fade-rise,
+  .hero-scroll-cue {
     animation: none;
   }
 }

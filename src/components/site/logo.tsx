@@ -22,7 +22,7 @@ export function Logo({
         height={30}
         className={cn(
           "h-[1.4em] w-auto",
-          variant === "light" && "brightness-0 invert",
+          variant === "light" && "hidden",
           variant === "adaptive" && "dark:brightness-0 dark:invert",
         )}
       />
@@ -35,7 +35,7 @@ export function Logo({
         >
           RY
         </span>
-        <span className="text-brand">CODE</span>
+        <span className={cn(variant === "light" ? "text-[#5fe1d5]" : "text-brand")}>CODE</span>
       </span>
     </span>
   );

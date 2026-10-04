@@ -1,54 +1,65 @@
-import Image from "next/image";
-import { Container, CtaLink, MetaLabel } from "@/components/site/primitives";
+import { ArrowLeft } from "lucide-react";
+
+import { Link } from "@/i18n/navigation";
+
+const heroLinkBase =
+  "group inline-flex min-h-11 items-center justify-center gap-3 rounded-full border px-6 text-sm font-semibold transition-[background-color,border-color,color,transform] duration-300 hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white";
 
 export function Hero() {
   return (
-    <section className="relative flex min-h-[560px] overflow-hidden bg-background text-foreground dark:bg-ink dark:text-white sm:min-h-[620px] lg:min-h-[680px]">
-      <Image
-        src="/images/rycode-hero-structure.png"
-        alt="تصویر انتزاعی از اتصال ایده‌ها به یک محصول دیجیتال"
-        fill
-        priority
-        sizes="100vw"
-        className="ken-burns object-cover object-[66%_center] opacity-45 saturate-50 motion-reduce:animate-none dark:opacity-100 dark:saturate-100"
-      />
-      <div className="absolute inset-0 bg-background/55 dark:bg-transparent" />
-      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(248,245,240,0.32)_0%,rgba(248,245,240,0.62)_45%,rgba(248,245,240,0.96)_100%)] dark:bg-[linear-gradient(180deg,rgba(19,18,16,0.36)_0%,rgba(19,18,16,0.12)_38%,rgba(19,18,16,0.88)_100%)]" />
-      <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(248,245,240,0.72)_0%,transparent_58%,rgba(248,245,240,0.36)_100%)] dark:bg-[linear-gradient(90deg,rgba(19,18,16,0.56)_0%,transparent_58%,rgba(19,18,16,0.18)_100%)]" />
-      <Container className="relative z-10 flex min-h-[560px] flex-1 items-center justify-center py-20 sm:min-h-[620px] lg:min-h-[680px]">
-        <div className="max-w-3xl text-center">
-          <MetaLabel className="text-foreground/60 dark:text-white/70">
-            RYCODE · SOFTWARE ENGINEERING · TEHRAN
-          </MetaLabel>
-          <h1 className="mt-5 text-[clamp(2.5rem,5.8vw,5rem)] font-extrabold leading-[1.08] tracking-[-0.04em] text-foreground dark:text-white">
-            ایده‌هایی که باید
-            <br />
-            <span className="text-brand">واقعی کار کنند</span>
-          </h1>
-          <p className="mx-auto mt-5 max-w-xl text-sm leading-7 text-foreground/70 dark:text-white/75 sm:mt-6 sm:text-base sm:leading-8">
-            سایت، فروشگاه و نرم‌افزاری می‌سازیم که فقط قشنگ نباشد؛ درست کار کند، قابل اعتماد باشد و
-            با کسب‌وکارتان رشد کند.
-          </p>
-          <div className="mx-auto mt-7 flex max-w-md flex-col justify-center gap-3 sm:mt-8 sm:max-w-none sm:flex-row">
-            <CtaLink to="/start-project" className="w-full sm:w-auto">
-              شروع یک گفت‌وگو
-            </CtaLink>
-            <CtaLink
-              to="/services"
-              variant="outline"
-              className="w-full border-foreground/35 text-foreground hover:border-foreground hover:bg-foreground/5 dark:border-white/45 dark:text-white dark:hover:border-white dark:hover:bg-white/10 sm:w-auto"
-            >
-              سرویس‌ها را ببینید
-            </CtaLink>
-          </div>
-        </div>
-      </Container>
+    <section
+      id="home"
+      className="relative isolate flex min-h-[640px] overflow-hidden bg-[#00364a] text-white sm:min-h-[720px]"
+    >
+      <video
+        className="absolute inset-0 -z-30 size-full object-cover"
+        autoPlay
+        loop
+        muted
+        playsInline
+        preload="metadata"
+        aria-hidden="true"
+      >
+        <source src="/videos/rycode-hero.mp4" type="video/mp4" />
+      </video>
 
-      <div className="absolute inset-x-0 bottom-7 z-10 hidden justify-center lg:flex">
-        <div className="flex flex-col items-center gap-3 text-[0.62rem] font-medium tracking-[0.22em] text-foreground/50 uppercase dark:text-white/60">
-          Scroll to explore
-          <span className="hero-scroll-cue h-12 w-px bg-foreground/50 dark:bg-white/70" />
+      <div className="absolute inset-0 -z-20 bg-[#002f40]/14" />
+      <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(0,25,36,0.12)_0%,rgba(0,35,48,0)_50%,rgba(0,20,28,0.38)_100%)]" />
+
+      <div className="mx-auto flex w-full max-w-[1320px] flex-1 flex-col items-center justify-center px-5 pb-20 pt-28 text-center sm:px-8 sm:pb-24 sm:pt-32">
+        <h1 className="hero-fade-rise max-w-[1120px] text-[clamp(2.15rem,5vw,4.9rem)] font-light leading-[1.22] tracking-[-0.035em] text-white">
+          <span>ایده‌ها، </span>
+          <span className="text-white/48">از دل سکوت</span>
+          <br />
+          <span className="text-white/48">به </span>
+          <span className="text-[#5fe1d5]">واقعیت</span>
+          <span> می‌رسند.</span>
+        </h1>
+
+        <p className="hero-fade-rise hero-fade-rise-delay-1 mt-6 max-w-2xl text-sm leading-8 text-white/68 sm:text-base sm:leading-8">
+          برای کسب‌وکارهایی که بزرگ فکر می‌کنند، فضای دیجیتال می‌سازیم؛ از سایت و فروشگاه تا
+          نرم‌افزار اختصاصی—با تمرکز، دقت و مهندسی واقعی.
+        </p>
+
+        <div className="hero-fade-rise hero-fade-rise-delay-2 mt-8 flex w-full max-w-md flex-col items-stretch justify-center gap-3 sm:mt-9 sm:w-auto sm:max-w-none sm:flex-row">
+          <Link
+            href="/start-project"
+            className={`${heroLinkBase} border-[#5fe1d5]/70 bg-[#5fe1d5]/15 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.16),0_8px_32px_rgba(95,225,213,0.14)] backdrop-blur-md hover:border-[#5fe1d5] hover:bg-[#5fe1d5]/25`}
+          >
+            شروع یک گفت‌وگو
+            <ArrowLeft className="size-4 transition-transform duration-300 group-hover:-translate-x-1" />
+          </Link>
+          <Link
+            href="/services"
+            className={`${heroLinkBase} border-white/20 bg-black/8 text-white/78 backdrop-blur-sm hover:border-white/45 hover:bg-black/15 hover:text-white`}
+          >
+            سرویس‌ها را ببینید
+          </Link>
         </div>
+      </div>
+
+      <div className="absolute inset-x-0 bottom-7 hidden justify-center lg:flex" aria-hidden="true">
+        <span className="hero-scroll-cue h-12 w-px bg-[#5fe1d5]" />
       </div>
     </section>
   );

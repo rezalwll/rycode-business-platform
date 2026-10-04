@@ -5,17 +5,11 @@ import { EnglishHome } from "@/components/home/english-home";
 import { Hero } from "@/components/home/hero";
 import {
   BlogSection,
-  CapabilityStrip,
   FaqSection,
   FinalCta,
-  IndustriesSection,
-  PathSelector,
   PaymentSection,
-  ProcessSection,
-  ProjectRescue,
   SelectedProjects,
   ServicesEditorial,
-  SolutionExplorer,
   WhyRycode,
 } from "@/components/home/sections";
 import { SiteShell } from "@/components/site/site-shell";
@@ -55,15 +49,9 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       ) : (
         <>
           <Hero />
-          <CapabilityStrip />
-          <PathSelector />
           <ServicesEditorial />
-          <SolutionExplorer />
-          <ProjectRescue />
           <SelectedProjects />
-          <IndustriesSection />
           <WhyRycode />
-          <ProcessSection />
           <PaymentSection />
           <BlogSection />
           <FaqSection />
