@@ -77,11 +77,12 @@ export function generateObjectKey(
 
 export function resolveObjectPath(storageRoot: string, objectKey: string): string {
   const safeKey = assertSafeObjectKey(objectKey);
-  const absoluteRoot = path.resolve(storageRoot);
-  const absoluteObjectPath = path.resolve(absoluteRoot, ...safeKey.split("/"));
-  const relative = path.relative(absoluteRoot, absoluteObjectPath);
+  const pathApi = /^[a-zA-Z]:[\\/]/.test(storageRoot) ? path.win32 : path;
+  const absoluteRoot = pathApi.resolve(storageRoot);
+  const absoluteObjectPath = pathApi.resolve(absoluteRoot, ...safeKey.split("/"));
+  const relative = pathApi.relative(absoluteRoot, absoluteObjectPath);
 
-  if (relative.startsWith("..") || path.isAbsolute(relative)) {
+  if (relative.startsWith("..") || pathApi.isAbsolute(relative)) {
     throw new UnsafeStorageKeyError("The object key resolves outside private storage.");
   }
 

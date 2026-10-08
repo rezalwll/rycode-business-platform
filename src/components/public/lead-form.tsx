@@ -265,7 +265,7 @@ export function LeadForm({
       {state.status === "error" && (
         <div
           role="alert"
-          className="rounded-[6px] border border-destructive/40 bg-destructive/5 p-4 text-sm leading-7 text-destructive"
+          className="rounded-xl border border-destructive/40 bg-destructive/5 p-4 text-sm leading-7 text-destructive"
         >
           {state.message}
         </div>
