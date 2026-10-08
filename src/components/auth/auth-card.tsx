@@ -114,9 +114,15 @@ export function AuthCard({ locale, mode }: { locale: Locale; mode: Mode }) {
 
   if (status === "done") {
     return (
-      <div className="rounded-[6px] border border-brand/30 bg-brand/5 p-8" role="status">
-        <p className="text-lg font-bold">{isFa ? "درخواست ثبت شد" : "Request received"}</p>
-        <p className="mt-3 text-sm leading-7 text-muted-foreground">
+      <div
+        className="rounded-2xl border border-[#5fe1d5]/30 bg-white/[0.08] p-8 text-white shadow-[0_28px_90px_rgba(0,18,26,0.34)] backdrop-blur-md"
+        role="status"
+      >
+        <span className="grid size-11 place-items-center rounded-full bg-[#5fe1d5] text-[#00364a]">
+          ✓
+        </span>
+        <p className="mt-6 text-lg font-bold">{isFa ? "درخواست ثبت شد" : "Request received"}</p>
+        <p className="mt-3 text-sm leading-7 text-white/62">
           {mode === "register"
             ? isFa
               ? "برای فعال‌سازی حساب، لینک تأیید ارسال‌شده به ایمیل خود را باز کنید. پوشه هرزنامه را هم بررسی کنید."
@@ -130,10 +136,10 @@ export function AuthCard({ locale, mode }: { locale: Locale; mode: Mode }) {
   }
 
   return (
-    <section className="w-full max-w-md rounded-[6px] border border-border bg-surface p-7 shadow-[0_24px_80px_rgba(0,0,0,.06)] sm:p-10">
-      <p className="meta-label text-brand">ACCOUNT / RYCODE</p>
-      <h1 className="mt-5 text-2xl font-extrabold sm:text-3xl">{title}</h1>
-      <p className="mt-3 text-sm leading-7 text-muted-foreground">{description}</p>
+    <section className="w-full rounded-2xl border border-white/15 bg-white/[0.075] p-7 text-white shadow-[0_28px_90px_rgba(0,18,26,0.38)] backdrop-blur-xl sm:p-9">
+      <p className="meta-label text-[#5fe1d5]">ACCOUNT / RYCODE</p>
+      <h1 className="mt-5 text-2xl font-light tracking-[-0.02em] sm:text-3xl">{title}</h1>
+      <p className="mt-3 text-sm leading-7 text-white/60">{description}</p>
 
       <form className="mt-8 space-y-5" noValidate onSubmit={submit}>
         {mode === "register" && (
@@ -188,7 +194,10 @@ export function AuthCard({ locale, mode }: { locale: Locale; mode: Mode }) {
         )}
 
         {error && (
-          <p className="text-sm leading-6 text-destructive" role="alert">
+          <p
+            className="rounded-xl border border-red-300/20 bg-red-400/10 p-3 text-sm leading-6 text-red-100"
+            role="alert"
+          >
             {error}
           </p>
         )}
@@ -196,7 +205,7 @@ export function AuthCard({ locale, mode }: { locale: Locale; mode: Mode }) {
         <button
           type="submit"
           disabled={status === "saving"}
-          className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-[6px] bg-brand px-6 text-sm font-bold text-brand-foreground disabled:opacity-60"
+          className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-full border border-[#5fe1d5]/60 bg-[#5fe1d5] px-6 text-sm font-bold text-[#00364a] shadow-[0_12px_32px_rgba(95,225,213,0.16)] transition-[background-color,transform] hover:-translate-y-0.5 hover:bg-[#74eadf] disabled:opacity-60"
         >
           {status === "saving" && <Loader2 aria-hidden className="size-4 animate-spin" />}
           {status === "saving"
@@ -221,19 +230,19 @@ export function AuthCard({ locale, mode }: { locale: Locale; mode: Mode }) {
         </button>
       </form>
 
-      <div className="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-xs text-muted-foreground">
+      <div className="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-xs text-white/55">
         {mode === "login" && (
-          <Link href="/forgot-password" className="hover:text-brand">
+          <Link href="/forgot-password" className="transition-colors hover:text-[#5fe1d5]">
             {isFa ? "گذرواژه را فراموش کرده‌اید؟" : "Forgot password?"}
           </Link>
         )}
         {mode !== "register" && (
-          <Link href="/register" className="hover:text-brand">
+          <Link href="/register" className="transition-colors hover:text-[#5fe1d5]">
             {isFa ? "ساخت حساب" : "Create account"}
           </Link>
         )}
         {mode !== "login" && (
-          <Link href="/login" className="hover:text-brand">
+          <Link href="/login" className="transition-colors hover:text-[#5fe1d5]">
             {isFa ? "بازگشت به ورود" : "Back to sign in"}
           </Link>
         )}
@@ -260,7 +269,7 @@ function Field({
   dir?: "ltr" | "rtl";
 }) {
   return (
-    <label className="block text-sm font-semibold" htmlFor={id}>
+    <label className="block text-sm font-semibold text-white/82" htmlFor={id}>
       {label}
       <input
         id={id}
@@ -270,7 +279,7 @@ function Field({
         autoComplete={autoComplete}
         dir={dir}
         required
-        className="mt-2 h-12 w-full rounded-[6px] border border-input bg-background px-3 text-sm outline-none focus:border-brand focus:ring-2 focus:ring-brand/20"
+        className="mt-2 h-12 w-full rounded-xl border border-white/15 bg-black/10 px-4 text-sm text-white outline-none transition-[border-color,background-color,box-shadow] focus:border-[#5fe1d5]/70 focus:bg-white/[0.07] focus:ring-4 focus:ring-[#5fe1d5]/10"
       />
     </label>
   );
