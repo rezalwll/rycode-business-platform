@@ -21,7 +21,7 @@ type Feedback = { tone: "success" | "error"; message: string } | null;
 type CustomerOperation = () => Promise<ActionResult<unknown>>;
 
 const inputClass =
-  "mt-2 min-h-11 w-full rounded-[6px] border border-input bg-background px-3 py-2 text-sm outline-none transition-colors focus:border-brand focus:ring-2 focus:ring-brand/15 disabled:cursor-not-allowed disabled:opacity-60";
+  "mt-2 min-h-11 w-full rounded-xl border border-[#0b5262]/14 bg-[#f9fcfb] px-3 py-2 text-sm text-[#073b4c] outline-none transition-[border-color,background-color,box-shadow] focus:border-[#20bfb2]/70 focus:bg-white focus:ring-4 focus:ring-[#5fe1d5]/12 disabled:cursor-not-allowed disabled:opacity-60";
 const labelClass = "block text-xs font-semibold text-muted-foreground";
 
 function Button({
@@ -211,8 +211,8 @@ export function CustomerFileUpload({
   }
 
   return (
-    <details className="mt-6 rounded-[6px] border border-border bg-surface p-5">
-      <summary className="cursor-pointer font-bold text-brand">
+    <details className="mt-6 rounded-2xl border border-[#0b5262]/12 bg-white/80 p-5 shadow-[0_10px_34px_rgba(31,92,105,0.05)]">
+      <summary className="cursor-pointer font-bold text-[#0b8f87]">
         {fa ? "ارسال فایل" : "Upload a file"}
       </summary>
       <form ref={formRef} onSubmit={submit} className="mt-5 space-y-4">
@@ -321,7 +321,7 @@ export function CustomerMilestoneApproval({
   return (
     <div className="min-w-52">
       <details ref={detailsRef}>
-        <summary className="cursor-pointer font-bold text-brand marker:text-muted-foreground">
+        <summary className="cursor-pointer font-bold text-[#0b8f87] marker:text-muted-foreground">
           {fa ? "ثبت نظر" : "Review"}
         </summary>
         <form ref={formRef} onSubmit={submit} className="mt-3 space-y-3" noValidate>
@@ -384,7 +384,7 @@ export function CustomerTicketCreateForm({
 
   if (clients.length === 0) {
     return (
-      <p className="mt-8 rounded-[6px] border border-dashed border-border p-5 text-sm text-muted-foreground">
+      <p className="mt-8 rounded-2xl border border-dashed border-[#20bfb2]/35 bg-white/60 p-5 text-sm text-muted-foreground">
         {fa
           ? "برای ثبت تیکت ابتدا باید عضویت فعال یک مجموعه داشته باشید."
           : "An active organisation membership is required before creating a ticket."}
@@ -419,8 +419,8 @@ export function CustomerTicketCreateForm({
   }
 
   return (
-    <details className="mt-8 rounded-[6px] border border-border bg-surface p-5">
-      <summary className="cursor-pointer font-bold text-brand marker:text-muted-foreground">
+    <details className="mt-8 rounded-2xl border border-[#0b5262]/12 bg-white/80 p-5 shadow-[0_10px_34px_rgba(31,92,105,0.05)]">
+      <summary className="cursor-pointer font-bold text-[#0b8f87] marker:text-muted-foreground">
         {fa ? "ثبت تیکت جدید" : "Create a new ticket"}
       </summary>
       <form ref={formRef} onSubmit={submit} className="mt-6" noValidate>
@@ -548,7 +548,7 @@ export function CustomerTicketActions({
   return (
     <div className="min-w-56">
       <details>
-        <summary className="cursor-pointer font-bold text-brand marker:text-muted-foreground">
+        <summary className="cursor-pointer font-bold text-[#0b8f87] marker:text-muted-foreground">
           {fa ? "پاسخ و عملیات" : "Reply and actions"}
         </summary>
         <form ref={replyFormRef} onSubmit={submitReply} className="mt-3 space-y-3" noValidate>
@@ -683,7 +683,7 @@ export function CustomerProfileForm({
     <form
       ref={formRef}
       onSubmit={submit}
-      className="rounded-[6px] border border-border bg-surface p-6"
+      className="rounded-2xl border border-[#0b5262]/12 bg-white/80 p-6 shadow-[0_10px_34px_rgba(31,92,105,0.055)]"
       noValidate
     >
       <fieldset disabled={pending} className="grid gap-5 sm:grid-cols-2">

@@ -202,23 +202,23 @@ async function Projects({ locale, actor }: { locale: Locale; actor: Actor }) {
             <Link
               key={row.id}
               href={`/dashboard/projects/${row.id}`}
-              className="rounded-[6px] border border-border bg-surface p-6 transition-colors hover:border-brand/50"
+              className="group rounded-2xl border border-[#0b5262]/12 bg-white/80 p-6 shadow-[0_10px_34px_rgba(31,92,105,0.055)] transition-[border-color,box-shadow,transform] hover:-translate-y-1 hover:border-[#20bfb2]/45 hover:shadow-[0_20px_50px_rgba(31,92,105,0.11)]"
             >
               <div className="flex items-center justify-between gap-4">
-                <span className="meta-label text-brand">{row.number}</span>
+                <span className="meta-label text-[#0b8f87]">{row.number}</span>
                 <span className="text-xs text-muted-foreground">{row.status}</span>
               </div>
-              <h2 className="mt-5 text-xl font-bold">{row.name}</h2>
+              <h2 className="mt-5 text-xl font-bold text-[#073b4c]">{row.name}</h2>
               <p className="mt-3 text-sm text-muted-foreground">{row.client.displayName}</p>
-              <div className="mt-6 h-1.5 overflow-hidden rounded-full bg-secondary">
+              <div className="mt-6 h-1.5 overflow-hidden rounded-full bg-[#dceeea]">
                 <div
-                  className="h-full bg-brand"
+                  className="h-full rounded-full bg-[linear-gradient(90deg,#20bfb2,#5fe1d5)]"
                   style={{ width: `${Math.max(0, Math.min(100, row.progress))}%` }}
                 />
               </div>
               <p className="mt-2 text-xs tabular-nums text-muted-foreground">{row.progress}%</p>
               {row.clientAction && (
-                <p className="mt-5 border-s-2 border-brand ps-3 text-sm leading-7">
+                <p className="mt-5 rounded-e-xl border-s-2 border-[#20bfb2] bg-[#5fe1d5]/7 px-3 py-2 text-sm leading-7">
                   {row.clientAction}
                 </p>
               )}
@@ -414,7 +414,7 @@ function FileDownload({
 }) {
   if (file.status === "READY" && file.scanStatus === "CLEAN") {
     return (
-      <a href={`/api/files/${file.id}`} className="font-bold text-brand">
+      <a href={`/api/files/${file.id}`} className="font-bold text-[#0b8f87] hover:text-[#075f68]">
         {locale === "fa" ? "دریافت" : "Download"}
       </a>
     );
@@ -511,7 +511,7 @@ async function Support({ locale, actor }: { locale: Locale; actor: Actor }) {
             <Link
               key={row.id}
               href={`/dashboard/support/${row.id}`}
-              className="font-bold text-brand"
+              className="font-bold text-[#0b8f87] hover:text-[#075f68]"
             >
               {row.subject}
             </Link>,
@@ -560,7 +560,10 @@ async function TicketDetail({
       faDescription={`${ticket.client.displayName} — ${ticket.status}`}
       enDescription={`${ticket.client.displayName} — ${ticket.status}`}
     >
-      <Link href="/dashboard/support" className="mt-6 inline-flex text-sm font-bold text-brand">
+      <Link
+        href="/dashboard/support"
+        className="mt-6 inline-flex rounded-full border border-[#0b5262]/15 bg-white/65 px-5 py-2.5 text-sm font-bold text-[#075264] hover:border-[#20bfb2]/50"
+      >
         {fa ? "همه تیکت‌ها" : "All tickets"}
       </Link>
       <dl className="mt-6 flex flex-wrap gap-6 text-sm">
@@ -590,7 +593,10 @@ async function TicketDetail({
       )}
       <section aria-label={fa ? "گفتگو" : "Conversation"} className="mt-8 space-y-4">
         {[...ticket.messages].reverse().map((message) => (
-          <article key={message.id} className="rounded-[6px] border border-border bg-surface p-5">
+          <article
+            key={message.id}
+            className="rounded-2xl border border-[#0b5262]/12 bg-white/80 p-5 shadow-[0_8px_28px_rgba(31,92,105,0.04)]"
+          >
             <header className="flex flex-wrap items-center justify-between gap-3 text-xs">
               <span className="font-bold">
                 {message.isSystem
@@ -621,7 +627,7 @@ async function TicketDetail({
         ))}
       </section>
       {canManage && (
-        <section className="mt-8 rounded-[6px] border border-border bg-surface p-5">
+        <section className="mt-8 rounded-2xl border border-[#0b5262]/12 bg-white/80 p-5 shadow-[0_8px_28px_rgba(31,92,105,0.04)]">
           <CustomerTicketActions locale={locale} ticketId={ticket.id} status={ticket.status} />
         </section>
       )}
@@ -655,7 +661,7 @@ async function Notifications({ locale, actor }: { locale: Locale; actor: Actor }
     >
       {rows.some((row) => !row.readAt) && <CustomerNotificationsToolbar locale={locale} />}
       {rows.length ? (
-        <div className="mt-8 divide-y divide-border rounded-[6px] border border-border bg-surface">
+        <div className="mt-8 divide-y divide-[#0b5262]/8 overflow-hidden rounded-2xl border border-[#0b5262]/12 bg-white/80 shadow-[0_10px_34px_rgba(31,92,105,0.055)]">
           {rows.map((row) => (
             <article key={row.id} className="p-5">
               <div className="flex items-center justify-between gap-5">
@@ -665,7 +671,7 @@ async function Notifications({ locale, actor }: { locale: Locale; actor: Actor }
               {row.body && (
                 <p className="mt-2 text-sm leading-7 text-muted-foreground">{row.body}</p>
               )}
-              <span className="mt-3 inline-flex text-xs text-brand">
+              <span className="mt-3 inline-flex rounded-full bg-[#5fe1d5]/10 px-3 py-1 text-xs font-semibold text-[#0b8f87]">
                 {row.readAt
                   ? locale === "fa"
                     ? "خوانده‌شده"
@@ -680,7 +686,10 @@ async function Notifications({ locale, actor }: { locale: Locale; actor: Actor }
                 </div>
               )}
               {row.link?.startsWith("/dashboard") && !row.link.includes("\\") && (
-                <Link href={row.link} className="mt-4 inline-flex text-sm font-bold text-brand">
+                <Link
+                  href={row.link}
+                  className="mt-4 inline-flex text-sm font-bold text-[#0b8f87] hover:text-[#075f68]"
+                >
                   {locale === "fa" ? "مشاهده" : "View"}
                 </Link>
               )}
@@ -725,7 +734,7 @@ async function Profile({ locale, actor }: { locale: Locale; actor: Actor }) {
             bio: row.profile?.bio ?? null,
           }}
         />
-        <article className="rounded-[6px] border border-border bg-surface p-6">
+        <article className="rounded-2xl border border-[#0b5262]/12 bg-white/80 p-6 shadow-[0_10px_34px_rgba(31,92,105,0.055)]">
           <dl className="space-y-5 text-sm">
             <div>
               <dt className="text-muted-foreground">{locale === "fa" ? "نام" : "Name"}</dt>
@@ -745,7 +754,7 @@ async function Profile({ locale, actor }: { locale: Locale; actor: Actor }) {
             </div>
           </dl>
         </article>
-        <article className="rounded-[6px] border border-border bg-surface p-6">
+        <article className="rounded-2xl border border-[#0b5262]/12 bg-white/80 p-6 shadow-[0_10px_34px_rgba(31,92,105,0.055)]">
           <h2 className="font-bold">{locale === "fa" ? "مجموعه‌ها" : "Organisations"}</h2>
           {row.clientMemberships.length ? (
             <ul className="mt-4 space-y-3">
