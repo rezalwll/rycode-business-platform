@@ -177,14 +177,14 @@ export function AdminClientMembersForm({
           return (
             <div
               key={user.id}
-              className="grid gap-2 rounded-[5px] border border-input p-3 sm:grid-cols-[1fr_11rem_auto] sm:items-center"
+              className="grid gap-2 rounded-xl border border-[#0b5262]/12 bg-[#f9fcfb] p-3 transition-colors hover:border-[#20bfb2]/40 sm:grid-cols-[1fr_11rem_auto] sm:items-center"
             >
               <label className="flex items-center gap-3 text-sm">
                 <input
                   type="checkbox"
                   name={`member:${user.id}`}
                   defaultChecked={Boolean(membership)}
-                  className="size-4 accent-[var(--brand)]"
+                  className="size-4 accent-[#20bfb2]"
                 />
                 <span>
                   {user.name} <small className="block text-muted-foreground">{user.email}</small>
@@ -205,7 +205,7 @@ export function AdminClientMembersForm({
                   name="primaryUserId"
                   value={user.id}
                   defaultChecked={membership?.isPrimary ?? false}
-                  className="size-4 accent-[var(--brand)]"
+                  className="size-4 accent-[#20bfb2]"
                 />
                 {label(locale, "عضو اصلی", "Primary")}
               </label>

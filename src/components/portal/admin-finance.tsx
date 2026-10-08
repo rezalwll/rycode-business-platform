@@ -141,7 +141,7 @@ export function AdminCreateInvoice({
           {items.map((row, index) => (
             <div
               key={row}
-              className="grid gap-3 rounded-[5px] border border-border p-4 sm:grid-cols-3"
+              className="grid gap-3 rounded-xl border border-[#0b5262]/12 bg-[#f9fcfb] p-4 sm:grid-cols-3"
             >
               <AdminField
                 name={`itemDescription${row}`}
@@ -189,7 +189,7 @@ export function AdminCreateInvoice({
           {installments.map((row) => (
             <div
               key={row}
-              className="grid gap-3 rounded-[5px] border border-border p-4 sm:grid-cols-3"
+              className="grid gap-3 rounded-xl border border-[#0b5262]/12 bg-[#f9fcfb] p-4 sm:grid-cols-3"
             >
               <AdminField
                 name={`installmentLabel${row}`}

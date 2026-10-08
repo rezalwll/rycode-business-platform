@@ -34,14 +34,14 @@ export function AdminUserRolesForm({
         {roles.map((role) => (
           <label
             key={role.id}
-            className="flex min-h-10 items-center gap-3 rounded-[5px] border border-input px-3 text-sm"
+            className="flex min-h-11 items-center gap-3 rounded-xl border border-[#0b5262]/12 bg-[#f9fcfb] px-3 text-sm transition-colors hover:border-[#20bfb2]/40 hover:bg-white"
           >
             <input
               type="checkbox"
               name="roleIds"
               value={role.id}
               defaultChecked={selected.has(role.id)}
-              className="size-4 accent-[var(--brand)]"
+              className="size-4 accent-[#20bfb2]"
             />
             <span>
               {role.name} <small className="text-muted-foreground">({role.key})</small>

@@ -32,7 +32,7 @@ function initialDocument(value: unknown, fallbackText: string): EditorDocument {
 }
 
 const buttonClass =
-  "rounded-[4px] border border-border bg-background px-3 py-2 text-xs font-semibold aria-pressed:border-brand aria-pressed:bg-brand/10 disabled:opacity-40";
+  "rounded-lg border border-[#0b5262]/12 bg-white px-3 py-2 text-xs font-semibold text-[#075264] transition-colors hover:border-[#20bfb2]/45 aria-pressed:border-[#20bfb2] aria-pressed:bg-[#5fe1d5]/12 disabled:opacity-40";
 
 export function AdminRichText({
   locale,
@@ -68,9 +68,9 @@ export function AdminRichText({
       <span className="block text-xs font-semibold">{title}</span>
       <input type="hidden" name={documentName} value={documentValue} />
       <input type="hidden" name={textName} value={plainText} />
-      <div className="mt-2 overflow-hidden rounded-[5px] border border-input bg-background focus-within:border-brand focus-within:ring-2 focus-within:ring-brand/20">
+      <div className="mt-2 overflow-hidden rounded-xl border border-[#0b5262]/14 bg-[#f9fcfb] focus-within:border-[#20bfb2]/70 focus-within:bg-white focus-within:ring-4 focus-within:ring-[#5fe1d5]/12">
         <div
-          className="flex flex-wrap gap-2 border-b border-border bg-surface-2 p-2"
+          className="flex flex-wrap gap-2 border-b border-[#0b5262]/10 bg-[#edf7f4] p-2"
           role="toolbar"
           aria-label={fa ? "ابزار ویرایش متن" : "Rich text controls"}
         >

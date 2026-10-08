@@ -195,7 +195,7 @@ export function AdminCheck({
         type="checkbox"
         name={name}
         defaultChecked={defaultChecked}
-        className="size-4 accent-[var(--brand)]"
+        className="size-4 accent-[#20bfb2]"
       />
       {title}
     </label>

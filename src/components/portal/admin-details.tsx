@@ -41,7 +41,7 @@ function BackLink({ locale, section }: { locale: Locale; section: string }) {
     <Link
       href={`/admin/${section}`}
       locale={locale}
-      className="mb-6 inline-flex min-h-10 items-center text-sm font-bold text-brand hover:underline"
+      className="mb-6 inline-flex min-h-10 items-center rounded-full border border-[#0b5262]/15 bg-white/65 px-5 text-sm font-bold text-[#075264] transition-colors hover:border-[#20bfb2]/50 hover:bg-white"
     >
       {copy(locale, "بازگشت به فهرست", "Back to list")}
     </Link>
@@ -66,7 +66,7 @@ export async function AdminLeadDetailPage({ locale, actor, id }: DetailProps) {
         title={lead.name}
         description={`${lead.type} · ${lead.status}`}
       />
-      <dl className="mt-8 grid gap-4 rounded-[6px] border border-border p-5 text-sm sm:grid-cols-2">
+      <dl className="mt-8 grid gap-4 rounded-2xl border border-[#0b5262]/12 bg-white/80 p-5 text-sm shadow-[0_10px_34px_rgba(31,92,105,0.055)] sm:grid-cols-2">
         <div>
           <dt className="text-muted-foreground">{copy(locale, "تماس", "Contact")}</dt>
           <dd className="mt-2" dir="auto">
@@ -109,7 +109,7 @@ export async function AdminLeadDetailPage({ locale, actor, id }: DetailProps) {
           <Link
             locale={locale}
             href={`/admin/projects/${lead.convertedProject.id}`}
-            className="text-brand hover:underline"
+            className="text-[#0b8f87] hover:text-[#075f68] hover:underline"
           >
             {lead.convertedProject.number} · {lead.convertedProject.name}
           </Link>
@@ -223,7 +223,7 @@ export async function AdminInvoiceDetailPage({ locale, actor, id }: DetailProps)
         title={invoice.title}
         description={`${invoice.client.displayName} · ${invoice.status}`}
       />
-      <div className="mt-8 grid gap-4 rounded-[6px] border border-border p-5 text-sm sm:grid-cols-3">
+      <div className="mt-8 grid gap-4 rounded-2xl border border-[#0b5262]/12 bg-white/80 p-5 text-sm shadow-[0_10px_34px_rgba(31,92,105,0.055)] sm:grid-cols-3">
         <p>
           {copy(locale, "مبلغ نهایی: ", "Total: ")}
           {amount(invoice.totalAmount, invoice.currency, locale)}
@@ -335,7 +335,7 @@ export async function AdminTicketDetailPage({ locale, actor, id }: DetailProps) 
         {ticket.messages.map((message) => (
           <article
             key={message.id}
-            className={`rounded-[6px] border p-5 ${message.visibility === "INTERNAL" ? "border-brand/40 bg-brand/5" : "border-border bg-surface"}`}
+            className={`rounded-2xl border p-5 shadow-[0_8px_28px_rgba(31,92,105,0.04)] ${message.visibility === "INTERNAL" ? "border-[#20bfb2]/35 bg-[#5fe1d5]/8" : "border-[#0b5262]/12 bg-white/80"}`}
           >
             <div className="flex flex-wrap justify-between gap-3 text-xs text-muted-foreground">
               <span>

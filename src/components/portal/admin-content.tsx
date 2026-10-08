@@ -81,7 +81,7 @@ function AdminTaxonomyChoices({
     <fieldset className="sm:col-span-2">
       <legend className="text-xs font-semibold">{title}</legend>
       {options.length ? (
-        <div className="mt-2 grid gap-2 rounded-[5px] border border-input p-3 sm:grid-cols-2">
+        <div className="mt-2 grid gap-2 rounded-xl border border-[#0b5262]/12 bg-[#f9fcfb] p-3 sm:grid-cols-2">
           {options.map((option) => (
             <label key={option.id} className="flex min-h-9 items-center gap-2 text-sm">
               <input
@@ -89,7 +89,7 @@ function AdminTaxonomyChoices({
                 name={name}
                 value={option.id}
                 defaultChecked={selectedIds.has(option.id)}
-                className="size-4 accent-[var(--brand)]"
+                className="size-4 accent-[#20bfb2]"
               />
               <span>
                 {option.translations.find((item) => item.locale === locale)?.name ?? option.slug}
@@ -121,7 +121,7 @@ function AdminFaqChoices({
         {label(locale, "پرسش‌های مرتبط", "Related FAQs")}
       </legend>
       {options.length ? (
-        <div className="mt-2 grid gap-2 rounded-[5px] border border-input p-3 sm:grid-cols-2">
+        <div className="mt-2 grid gap-2 rounded-xl border border-[#0b5262]/12 bg-[#f9fcfb] p-3 sm:grid-cols-2">
           {options.map((option) => (
             <label key={option.id} className="flex min-h-9 items-center gap-2 text-sm">
               <input
@@ -129,7 +129,7 @@ function AdminFaqChoices({
                 name="faqIds"
                 value={option.id}
                 defaultChecked={selectedIds.has(option.id)}
-                className="size-4 accent-[var(--brand)]"
+                className="size-4 accent-[#20bfb2]"
               />
               <span>
                 {option.translations.find((item) => item.locale === locale)?.question ?? option.id}
@@ -480,7 +480,7 @@ export function AdminContentOperations({
         </AdminForm>
       )}
       {!editable && (
-        <p className="rounded-[5px] border border-border p-4 text-sm leading-7 text-muted-foreground">
+        <p className="rounded-xl border border-[#0b5262]/12 bg-[#f9fcfb] p-4 text-sm leading-7 text-muted-foreground">
           {label(
             locale,
             "ویرایش این محتوا به مجوز مدیریت و در وضعیت منتشرشده به مجوز انتشار نیاز دارد.",

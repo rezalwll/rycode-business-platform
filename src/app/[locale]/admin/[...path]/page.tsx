@@ -224,7 +224,7 @@ async function Leads({ locale, actor }: SectionProps) {
               key={row.id}
               locale={locale}
               href={`/admin/leads/${row.id}`}
-              className="font-bold text-brand hover:underline"
+              className="font-bold text-[#0b8f87] hover:text-[#075f68] hover:underline"
             >
               {row.name}
             </Link>,
@@ -341,7 +341,7 @@ async function Projects({ locale, actor }: SectionProps) {
               key={row.id}
               locale={locale}
               href={`/admin/projects/${row.id}`}
-              className="font-bold text-brand hover:underline"
+              className="font-bold text-[#0b8f87] hover:text-[#075f68] hover:underline"
             >
               {row.name}
             </Link>,
@@ -394,7 +394,7 @@ async function Files({ locale, actor }: SectionProps) {
                     <button
                       name="decision"
                       value="scan"
-                      className="rounded-[5px] bg-brand px-3 py-2 text-xs font-bold text-brand-foreground"
+                      className="rounded-full border border-[#20bfb2]/60 bg-[#5fe1d5] px-4 py-2 text-xs font-bold text-[#00364a] transition-colors hover:bg-[#74eadf]"
                     >
                       {locale === "fa" ? "اسکن بدافزار" : "Scan for malware"}
                     </button>
@@ -404,7 +404,7 @@ async function Files({ locale, actor }: SectionProps) {
                     <button
                       name="decision"
                       value="reject"
-                      className="rounded-[5px] border border-destructive px-3 py-2 text-xs font-bold text-destructive"
+                      className="rounded-full border border-destructive/35 bg-white/60 px-4 py-2 text-xs font-bold text-destructive transition-colors hover:bg-destructive/5"
                     >
                       {locale === "fa" ? "رد" : "Reject"}
                     </button>
@@ -473,7 +473,7 @@ async function Finance({ locale, actor }: SectionProps) {
               key={row.id}
               locale={locale}
               href={`/admin/finance/${row.id}`}
-              className="font-bold text-brand hover:underline"
+              className="font-bold text-[#0b8f87] hover:text-[#075f68] hover:underline"
             >
               {row.number}
             </Link>,
@@ -521,7 +521,7 @@ async function Tickets({ locale, actor }: SectionProps) {
               key={row.id}
               locale={locale}
               href={`/admin/support/${row.id}`}
-              className="font-bold text-brand hover:underline"
+              className="font-bold text-[#0b8f87] hover:text-[#075f68] hover:underline"
             >
               {row.subject}
             </Link>,
@@ -562,7 +562,7 @@ async function Content({ locale, actor }: SectionProps) {
               key={row.id}
               locale={locale}
               href={`/admin/content/${row.id}`}
-              className="font-bold text-brand hover:underline"
+              className="font-bold text-[#0b8f87] hover:text-[#075f68] hover:underline"
             >
               {row.slug}
             </Link>,
