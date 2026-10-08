@@ -278,24 +278,25 @@ export async function CompanyPage({ locale, slug }: { locale: Locale; slug: Comp
         title={t(page.title, locale)}
         lead={t(page.lead, locale)}
       />
-      <section className="bg-background py-12 sm:py-18">
+      <section className="relative overflow-hidden bg-[#f7fbfa] py-14 sm:py-20">
+        <div className="pointer-events-none absolute inset-0 opacity-70 [background-image:radial-gradient(circle_at_10%_16%,rgba(32,191,178,0.1),transparent_25%),radial-gradient(circle_at_88%_72%,rgba(99,146,255,0.08),transparent_27%)]" />
         <Container>
-          <div className="grid gap-4 lg:grid-cols-2">
+          <div className="relative grid gap-4 lg:grid-cols-2">
             {sections.map((section, index) => (
               <article
                 key={section.title}
-                className="group rounded-[1.25rem] border border-border bg-surface p-6 transition-[transform,box-shadow,border-color] duration-300 hover:-translate-y-1 hover:border-brand/45 hover:shadow-xl sm:p-8"
+                className="group rounded-2xl border border-[#0b5262]/12 bg-white/78 p-6 shadow-[0_10px_34px_rgba(31,92,105,0.055)] backdrop-blur-sm transition-[transform,box-shadow,border-color] duration-300 hover:-translate-y-1 hover:border-[#20bfb2]/45 hover:shadow-[0_20px_50px_rgba(31,92,105,0.12)] sm:p-8"
               >
                 <div className="flex items-center justify-between gap-4">
-                  <span className="meta-label text-muted-foreground">
+                  <span className="meta-label text-[#0b766e]">
                     {String(index + 1).padStart(2, "0")} / RYCODE
                   </span>
-                  <span className="grid size-9 place-items-center rounded-full bg-brand-soft text-brand transition-transform duration-300 group-hover:rotate-12">
+                  <span className="grid size-9 place-items-center rounded-full border border-[#20bfb2]/20 bg-[#5fe1d5]/12 text-[#0b8f87] transition-transform duration-300 group-hover:rotate-12">
                     <CheckCircle2 className="size-4" aria-hidden />
                   </span>
                 </div>
                 <div className="mt-12 max-w-3xl">
-                  <h2 className="display-3">{section.title}</h2>
+                  <h2 className="display-3 text-[#073b4c]">{section.title}</h2>
                   <p className="mt-5 text-base leading-8 text-muted-foreground sm:text-lg sm:leading-9">
                     {section.body}
                   </p>
@@ -304,9 +305,9 @@ export async function CompanyPage({ locale, slug }: { locale: Locale; slug: Comp
                       {section.items.map((item) => (
                         <li
                           key={item}
-                          className="flex gap-3 rounded-lg border border-border bg-background p-3 text-sm leading-7"
+                          className="flex gap-3 rounded-xl border border-[#0b5262]/10 bg-[#f8fcfb] p-3 text-sm leading-7 text-[#214f5b]"
                         >
-                          <span className="mt-1 size-1.5 shrink-0 rounded-full bg-brand" />
+                          <span className="mt-1 size-1.5 shrink-0 rounded-full bg-[#20bfb2]" />
                           {item}
                         </li>
                       ))}
@@ -406,11 +407,14 @@ export function PublicLeadPage({
         title={t(page.title, locale)}
         lead={t(page.lead, locale)}
       />
-      <section className="py-12 sm:py-18">
+      <section className="relative overflow-hidden bg-[#f7fbfa] py-14 sm:py-20">
+        <div className="pointer-events-none absolute inset-0 opacity-60 [background-image:radial-gradient(circle_at_12%_18%,rgba(32,191,178,0.1),transparent_26%),radial-gradient(circle_at_86%_72%,rgba(99,146,255,0.08),transparent_28%)]" />
         <Container>
-          <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_20rem] lg:items-start">
-            <LeadForm locale={locale} kind={kind} sourcePath={sourcePath} />
-            <aside className="overflow-hidden border border-hairline bg-surface lg:sticky lg:top-28">
+          <div className="relative grid gap-8 lg:grid-cols-[minmax(0,1fr)_22rem] lg:items-start">
+            <div className="rounded-2xl border border-[#0b5262]/12 bg-white/80 p-6 shadow-[0_18px_55px_rgba(31,92,105,0.08)] backdrop-blur-sm sm:p-9">
+              <LeadForm locale={locale} kind={kind} sourcePath={sourcePath} />
+            </div>
+            <aside className="overflow-hidden rounded-2xl border border-[#0b5262]/12 bg-white/82 shadow-[0_18px_55px_rgba(31,92,105,0.08)] backdrop-blur-sm lg:sticky lg:top-28">
               <div className="relative aspect-[4/3] overflow-hidden bg-ink">
                 <Image
                   src={
@@ -424,14 +428,14 @@ export function PublicLeadPage({
                   className="object-cover opacity-80"
                   aria-hidden
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-ink via-transparent to-transparent" />
-                <span className="meta-label absolute inset-x-5 bottom-5 text-white/75">
+                <div className="absolute inset-0 bg-gradient-to-t from-[#00364a] via-[#00364a]/15 to-transparent" />
+                <span className="meta-label absolute inset-x-5 bottom-5 text-[#5fe1d5]">
                   RYCODE / NEXT STEP
                 </span>
               </div>
               <div className="p-6">
-                <ShieldCheck className="size-6 text-brand" aria-hidden />
-                <h2 className="mt-5 text-lg font-bold">
+                <ShieldCheck className="size-6 text-[#20bfb2]" aria-hidden />
+                <h2 className="mt-5 text-lg font-bold text-[#073b4c]">
                   {locale === "fa" ? "شفافیت و امنیت" : "Clarity and security"}
                 </h2>
                 <p className="mt-3 text-sm leading-7 text-muted-foreground">

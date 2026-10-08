@@ -44,14 +44,15 @@ export default async function SearchPage({ params, searchParams }: Props) {
             : "Find services, solutions and articles from RYCODE."
         }
       />
-      <section className="py-12 sm:py-18">
+      <section className="relative overflow-hidden bg-[#f7fbfa] py-14 sm:py-20">
+        <div className="pointer-events-none absolute inset-0 opacity-60 [background-image:radial-gradient(circle_at_15%_10%,rgba(32,191,178,0.1),transparent_28%),radial-gradient(circle_at_85%_75%,rgba(99,146,255,0.08),transparent_30%)]" />
         <Container>
           {ready && <SearchTracker queryLength={query.length} resultCount={entries.length} />}
           <form
             action={localizedHref(locale, "/search")}
             method="get"
             role="search"
-            className="mb-12 flex max-w-3xl flex-wrap items-end gap-3"
+            className="relative mb-12 flex max-w-3xl flex-wrap items-end gap-3 rounded-2xl border border-[#0b5262]/12 bg-white/80 p-5 shadow-[0_14px_44px_rgba(31,92,105,0.07)] backdrop-blur-sm sm:p-7"
             data-analytics-form="site-search"
           >
             <label
@@ -67,11 +68,11 @@ export default async function SearchPage({ params, searchParams }: Props) {
                 maxLength={120}
                 defaultValue={query}
                 required
-                className="min-h-12 rounded-[6px] border border-hairline bg-background px-4 text-base font-normal focus-visible:outline-2 focus-visible:outline-brand"
+                className="min-h-12 rounded-xl border border-[#0b5262]/14 bg-[#f9fcfb] px-4 text-base font-normal outline-none transition-[border-color,box-shadow] focus:border-[#20bfb2]/70 focus:ring-4 focus:ring-[#5fe1d5]/12"
               />
             </label>
             <button
-              className="min-h-12 rounded-[6px] bg-brand px-7 text-sm font-bold text-brand-foreground"
+              className="min-h-12 rounded-full border border-[#20bfb2]/60 bg-[#5fe1d5] px-7 text-sm font-bold text-[#00364a] transition-colors hover:bg-[#74eadf]"
               type="submit"
             >
               {locale === "fa" ? "جست‌وجو" : "Search"}
@@ -84,7 +85,9 @@ export default async function SearchPage({ params, searchParams }: Props) {
                   ? `${entries.length} نتیجه برای «${query}»`
                   : `${entries.length} results for “${query}”`}
               </p>
-              <PublicContentCards locale={locale} entries={entries} />
+              <div className="relative">
+                <PublicContentCards locale={locale} entries={entries} />
+              </div>
             </>
           ) : (
             <p className="text-muted-foreground">

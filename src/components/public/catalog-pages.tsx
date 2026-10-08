@@ -17,24 +17,24 @@ import { ActionLink, FinalBand, JsonLd, localizedHref, PageHero } from "./shared
 
 const contentTones = [
   {
-    card: "border-sky-500/20 bg-gradient-to-bl from-sky-500/8 via-surface to-surface hover:border-sky-500/45",
-    rail: "border-s-sky-500/70",
-    label: "text-sky-600 dark:text-sky-300",
+    card: "border-[#20bfb2]/18 bg-gradient-to-bl from-[#5fe1d5]/8 via-white/90 to-white/80 hover:border-[#20bfb2]/45",
+    rail: "border-s-[#20bfb2]/75",
+    label: "text-[#0b8f87]",
   },
   {
-    card: "border-emerald-500/20 bg-gradient-to-bl from-emerald-500/8 via-surface to-surface hover:border-emerald-500/45",
-    rail: "border-s-emerald-500/70",
-    label: "text-emerald-600 dark:text-emerald-300",
+    card: "border-[#6c92f4]/18 bg-gradient-to-bl from-[#6c92f4]/8 via-white/90 to-white/80 hover:border-[#6c92f4]/45",
+    rail: "border-s-[#6c92f4]/75",
+    label: "text-[#5674c5]",
   },
   {
-    card: "border-violet-500/20 bg-gradient-to-bl from-violet-500/8 via-surface to-surface hover:border-violet-500/45",
-    rail: "border-s-violet-500/70",
-    label: "text-violet-600 dark:text-violet-300",
+    card: "border-[#9b78d5]/18 bg-gradient-to-bl from-[#9b78d5]/8 via-white/90 to-white/80 hover:border-[#9b78d5]/45",
+    rail: "border-s-[#9b78d5]/75",
+    label: "text-[#7f5fba]",
   },
   {
-    card: "border-rose-500/20 bg-gradient-to-bl from-rose-500/8 via-surface to-surface hover:border-rose-500/45",
-    rail: "border-s-rose-500/70",
-    label: "text-rose-600 dark:text-rose-300",
+    card: "border-[#d06f9a]/18 bg-gradient-to-bl from-[#d06f9a]/8 via-white/90 to-white/80 hover:border-[#d06f9a]/45",
+    rail: "border-s-[#d06f9a]/75",
+    label: "text-[#ae527d]",
   },
 ] as const;
 
@@ -93,7 +93,7 @@ export function CatalogHub({ locale, kind }: { locale: Locale; kind: CatalogKind
         lead={localize(copy.lead, locale)}
         aside={
           <>
-            <span className="meta-label block text-foreground">
+            <span className="meta-label block text-[#5fe1d5]">
               {String(entries.length).padStart(2, "0")} / {kind.toUpperCase()}
             </span>
             <span className="mt-3 block">
@@ -104,15 +104,16 @@ export function CatalogHub({ locale, kind }: { locale: Locale; kind: CatalogKind
           </>
         }
       />
-      <section className="bg-background py-12 sm:py-18">
+      <section className="relative overflow-hidden bg-[#f7fbfa] py-14 sm:py-20">
+        <div className="pointer-events-none absolute inset-0 opacity-60 [background-image:radial-gradient(circle_at_15%_12%,rgba(32,191,178,0.1),transparent_26%),radial-gradient(circle_at_86%_72%,rgba(99,146,255,0.08),transparent_28%)]" />
         <Container>
-          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+          <div className="relative grid gap-4 md:grid-cols-2 xl:grid-cols-3">
             {entries.map((entry, index) => (
               <Link
                 key={entry.slug}
                 href={localizedHref(locale, `/${kind}/${entry.slug}`)}
                 className={cn(
-                  "group relative overflow-hidden rounded-xl border bg-surface p-3 transition-[transform,box-shadow,border-color] duration-300 hover:-translate-y-1 hover:shadow-xl",
+                  "group relative overflow-hidden rounded-2xl border p-3 shadow-[0_10px_32px_rgba(31,92,105,0.06)] backdrop-blur-sm transition-[transform,box-shadow,border-color] duration-300 hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(31,92,105,0.12)]",
                   contentTone(index).card,
                 )}
               >
@@ -123,23 +124,23 @@ export function CatalogHub({ locale, kind }: { locale: Locale; kind: CatalogKind
                     fill
                     className="object-cover opacity-80 transition-transform duration-700 group-hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-transparent to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#00364a]/95 via-transparent to-transparent" />
                   <div className="absolute inset-x-3 bottom-3 flex items-end justify-between gap-4">
                     <span className="meta-label text-white/70">
                       {String(index + 1).padStart(2, "0")} / {labels[kind][locale].item}
                     </span>
-                    <span className="grid size-9 place-items-center rounded-full border border-white/25 bg-ink/30 text-white backdrop-blur-sm transition-colors group-hover:border-brand group-hover:bg-brand group-hover:text-brand-foreground">
+                    <span className="grid size-9 place-items-center rounded-full border border-white/25 bg-[#00364a]/35 text-white backdrop-blur-sm transition-colors group-hover:border-[#5fe1d5] group-hover:bg-[#5fe1d5] group-hover:text-[#00364a]">
                       <Arrow className="size-4" aria-hidden />
                     </span>
                   </div>
                 </div>
                 <div className="p-4 sm:p-5">
-                  <h2 className="display-3">{localize(entry.title, locale)}</h2>
+                  <h2 className="display-3 text-[#073b4c]">{localize(entry.title, locale)}</h2>
                   <p className="mt-4 max-w-md text-sm leading-7 text-muted-foreground">
                     {localize(entry.summary, locale)}
                   </p>
                   {entry.conceptual && (
-                    <span className="mt-5 inline-flex rounded-full border border-brand/35 bg-brand-soft px-3 py-1 text-xs font-semibold text-brand">
+                    <span className="mt-5 inline-flex rounded-full border border-[#20bfb2]/35 bg-[#5fe1d5]/10 px-3 py-1 text-xs font-semibold text-[#0b766e]">
                       {locale === "fa" ? "یک نمونه فرضی" : "Concept study"}
                     </span>
                   )}
@@ -179,7 +180,7 @@ export function CatalogDetail({ locale, entry }: { locale: Locale; entry: Catalo
         aside={
           <>
             {entry.conceptual && (
-              <strong className="mb-4 block text-brand">
+              <strong className="mb-4 block text-[#5fe1d5]">
                 {locale === "fa"
                   ? "این صفحه یک مثال فرضی است، نه پروژه واقعی."
                   : "This is a concept scenario."}
@@ -191,20 +192,21 @@ export function CatalogDetail({ locale, entry }: { locale: Locale; entry: Catalo
           </>
         }
       />
-      <section className="bg-background py-12 sm:py-18">
+      <section className="relative overflow-hidden bg-[#f7fbfa] py-14 sm:py-20">
+        <div className="pointer-events-none absolute inset-0 opacity-60 [background-image:radial-gradient(circle_at_12%_15%,rgba(32,191,178,0.1),transparent_27%),radial-gradient(circle_at_88%_78%,rgba(99,146,255,0.08),transparent_28%)]" />
         <Container>
           <Link
             href={localizedHref(locale, `/${entry.kind}`)}
-            className="brand-underline inline-flex text-sm font-bold"
+            className="relative inline-flex rounded-full border border-[#0b5262]/15 bg-white/65 px-5 py-2.5 text-sm font-bold text-[#075264] transition-colors hover:border-[#20bfb2]/50 hover:bg-white"
           >
             {kindLabel.back}
           </Link>
-          <div className="mt-12 grid gap-4">
+          <div className="relative mt-10 grid gap-4">
             {entry.sections.map((section, index) => (
               <section
                 key={`${entry.slug}-${index}`}
                 className={cn(
-                  "grid gap-8 rounded-xl border border-s-[3px] bg-surface p-6 sm:p-8 lg:grid-cols-[15rem_minmax(0,1fr)] lg:p-10",
+                  "grid gap-8 rounded-2xl border border-s-[3px] bg-white/80 p-6 shadow-[0_10px_34px_rgba(31,92,105,0.055)] backdrop-blur-sm sm:p-8 lg:grid-cols-[15rem_minmax(0,1fr)] lg:p-10",
                   contentTone(index).rail,
                 )}
               >
@@ -212,20 +214,20 @@ export function CatalogDetail({ locale, entry }: { locale: Locale; entry: Catalo
                   {String(index + 1).padStart(2, "0")} / {kindLabel.item}
                 </div>
                 <div className="max-w-3xl">
-                  <h2 className="display-3">{localize(section.title, locale)}</h2>
+                  <h2 className="display-3 text-[#073b4c]">{localize(section.title, locale)}</h2>
                   {section.body && (
                     <p className="mt-6 text-base leading-8 text-muted-foreground sm:text-lg sm:leading-9">
                       {localize(section.body, locale)}
                     </p>
                   )}
                   {section.items && (
-                    <ol className="mt-8 grid gap-0 border-t border-hairline">
+                    <ol className="mt-8 grid gap-0 border-t border-[#0b5262]/10">
                       {section.items.map((item, itemIndex) => (
                         <li
                           key={localize(item, locale)}
-                          className="grid grid-cols-[2.5rem_1fr] gap-4 border-b border-hairline py-5 text-base"
+                          className="grid grid-cols-[2.5rem_1fr] gap-4 border-b border-[#0b5262]/10 py-5 text-base text-[#214f5b]"
                         >
-                          <span className="meta-label text-brand">
+                          <span className="meta-label text-[#0b8f87]">
                             {String(itemIndex + 1).padStart(2, "0")}
                           </span>
                           <span>{localize(item, locale)}</span>
@@ -237,7 +239,7 @@ export function CatalogDetail({ locale, entry }: { locale: Locale; entry: Catalo
               </section>
             ))}
           </div>
-          <div className="mt-14 flex flex-wrap gap-3">
+          <div className="relative mt-12 flex flex-wrap gap-3">
             <ActionLink locale={locale} href="/start-project">
               {locale === "fa" ? "گفت‌وگو درباره این مسیر" : "Discuss this path"}
             </ActionLink>

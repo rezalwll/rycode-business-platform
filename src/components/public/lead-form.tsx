@@ -139,7 +139,7 @@ function SubmitButton({ locale }: { locale: Locale }) {
     <button
       type="submit"
       disabled={pending}
-      className="inline-flex min-h-12 items-center justify-center gap-3 rounded-[6px] bg-brand px-7 text-sm font-bold text-brand-foreground transition-colors hover:bg-brand/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand disabled:cursor-wait disabled:opacity-70"
+      className="inline-flex min-h-12 items-center justify-center gap-3 rounded-full border border-[#20bfb2]/60 bg-[#5fe1d5] px-7 text-sm font-bold text-[#00364a] shadow-[0_10px_28px_rgba(32,191,178,0.15)] transition-[background-color,transform] hover:-translate-y-0.5 hover:bg-[#74eadf] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#20bfb2] disabled:cursor-wait disabled:opacity-70"
     >
       {pending && <LoaderCircle className="size-4 animate-spin" aria-hidden />}
       {pending ? text.sending : text.submit}
@@ -148,7 +148,7 @@ function SubmitButton({ locale }: { locale: Locale }) {
 }
 
 const inputClass =
-  "mt-2 min-h-12 w-full rounded-[6px] border border-input bg-background px-4 text-base outline-none transition-colors placeholder:text-muted-foreground/60 focus:border-brand focus:ring-2 focus:ring-brand/20";
+  "mt-2 min-h-12 w-full rounded-xl border border-[#0b5262]/14 bg-[#f9fcfb] px-4 text-base text-[#073b4c] outline-none transition-[border-color,background-color,box-shadow] placeholder:text-muted-foreground/60 focus:border-[#20bfb2]/70 focus:bg-white focus:ring-4 focus:ring-[#5fe1d5]/12";
 
 function labelText(label: string, optional: string, isOptional = false) {
   return (
@@ -204,8 +204,11 @@ export function LeadForm({
 
   if (state.status === "success") {
     return (
-      <div role="status" className="rounded-[6px] border border-brand/35 bg-brand-soft p-8 sm:p-10">
-        <span className="grid size-11 place-items-center rounded-full bg-brand text-brand-foreground">
+      <div
+        role="status"
+        className="rounded-2xl border border-[#20bfb2]/30 bg-[#5fe1d5]/10 p-8 sm:p-10"
+      >
+        <span className="grid size-11 place-items-center rounded-full bg-[#5fe1d5] text-[#00364a]">
           <Check className="size-5" aria-hidden />
         </span>
         <h2 className="mt-6 text-xl font-bold">
@@ -230,7 +233,7 @@ export function LeadForm({
       )}
 
       <div
-        className="flex items-center gap-2 border-b border-hairline pb-5"
+        className="flex items-center gap-2 border-b border-[#0b5262]/10 pb-6"
         aria-label="Form progress"
       >
         {stepLabels.map((label, index) => (
@@ -238,8 +241,8 @@ export function LeadForm({
             <span
               className={`grid size-8 shrink-0 place-items-center rounded-full border text-xs font-bold transition-colors ${
                 index <= step
-                  ? "border-brand bg-brand text-brand-foreground"
-                  : "border-border text-muted-foreground"
+                  ? "border-[#20bfb2] bg-[#5fe1d5] text-[#00364a]"
+                  : "border-[#0b5262]/14 bg-[#f7fbfa] text-muted-foreground"
               }`}
             >
               {index + 1}
@@ -249,7 +252,7 @@ export function LeadForm({
             >
               {label}
             </span>
-            {index < stepLabels.length - 1 && <span className="h-px flex-1 bg-border" />}
+            {index < stepLabels.length - 1 && <span className="h-px flex-1 bg-[#0b5262]/10" />}
           </div>
         ))}
       </div>
@@ -416,7 +419,7 @@ export function LeadForm({
           <button
             type="button"
             onClick={() => setStep((current) => Math.max(0, current - 1))}
-            className="inline-flex min-h-12 items-center gap-2 rounded-[6px] border border-border px-5 text-sm font-bold transition-colors hover:border-brand/50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+            className="inline-flex min-h-12 items-center gap-2 rounded-full border border-[#0b5262]/18 bg-white/50 px-6 text-sm font-bold text-[#075264] transition-[border-color,background-color] hover:border-[#20bfb2]/60 hover:bg-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#20bfb2]"
           >
             {locale === "fa" ? (
               <ChevronRight className="size-4" aria-hidden />
@@ -430,7 +433,7 @@ export function LeadForm({
           <button
             type="button"
             onClick={nextStep}
-            className="inline-flex min-h-12 items-center gap-2 rounded-[6px] bg-brand px-7 text-sm font-bold text-brand-foreground transition-colors hover:bg-brand/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+            className="inline-flex min-h-12 items-center gap-2 rounded-full border border-[#20bfb2]/60 bg-[#5fe1d5] px-7 text-sm font-bold text-[#00364a] shadow-[0_10px_28px_rgba(32,191,178,0.15)] transition-[background-color,transform] hover:-translate-y-0.5 hover:bg-[#74eadf] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#20bfb2]"
           >
             {text.next}
             {locale === "fa" ? (
