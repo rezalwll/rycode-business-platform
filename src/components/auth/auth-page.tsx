@@ -3,7 +3,6 @@ import { Container } from "@/components/site/primitives";
 import { SiteShell } from "@/components/site/site-shell";
 import type { Locale } from "@/i18n/routing";
 import { LockKeyhole, ShieldCheck, Sparkles } from "lucide-react";
-import Image from "next/image";
 import { Suspense } from "react";
 
 export function AuthPage({
@@ -16,16 +15,9 @@ export function AuthPage({
   return (
     <SiteShell locale={locale}>
       <section className="relative isolate min-h-[calc(100vh-72px)] overflow-hidden bg-[#00364a] text-white">
-        <Image
-          src="/images/rycode-connected-world.png"
-          alt=""
-          fill
-          sizes="100vw"
-          className="-z-30 object-cover opacity-30 mix-blend-screen"
-          aria-hidden
-        />
         <div className="absolute inset-0 -z-20 bg-[linear-gradient(105deg,rgba(0,31,43,0.97),rgba(0,54,74,0.88),rgba(0,44,60,0.72))]" />
         <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_18%_15%,rgba(95,225,213,0.18),transparent_24%),radial-gradient(circle_at_82%_82%,rgba(99,146,255,0.16),transparent_28%)]" />
+        <div className="absolute inset-0 -z-10 opacity-[0.07] [background-image:linear-gradient(rgba(255,255,255,.75)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.75)_1px,transparent_1px)] [background-size:44px_44px]" />
         <Container className="grid min-h-[calc(100vh-72px)] gap-10 py-14 lg:grid-cols-[minmax(0,1fr)_minmax(400px,0.72fr)] lg:items-center lg:gap-16 lg:py-20">
           <div className="max-w-2xl">
             <p className="flex items-center gap-3 text-xs font-semibold tracking-[0.16em] text-[#5fe1d5] uppercase">

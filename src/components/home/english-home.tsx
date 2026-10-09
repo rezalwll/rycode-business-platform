@@ -193,8 +193,8 @@ export function EnglishHome() {
             <div className="visual-card relative overflow-hidden bg-ink p-3 text-white">
               <div className="relative aspect-[4/3] overflow-hidden rounded-[0.9rem]">
                 <Image
-                  src="/images/rycode-hero-structure.png"
-                  alt="Abstract connected product architecture"
+                  src="/images/editorial/web-experience.png"
+                  alt="A responsive digital product design workspace"
                   fill
                   sizes="(min-width: 1024px) 42vw, 100vw"
                   className="object-cover"

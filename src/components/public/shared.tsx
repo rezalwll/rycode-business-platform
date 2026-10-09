@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
 
+import { ContextVisual, type ContextVisualVariant } from "@/components/site/context-visual";
 import { Container } from "@/components/site/primitives";
 import type { Locale } from "@/i18n/routing";
 
@@ -17,23 +18,23 @@ export function PageHero({
   title,
   lead,
   aside,
+  imageSrc,
+  imageAlt = "",
+  visualVariant = "software",
+  visualItems = [],
 }: {
   locale: Locale;
   eyebrow: string;
   title: string;
   lead: string;
   aside?: ReactNode;
+  imageSrc?: string;
+  imageAlt?: string;
+  visualVariant?: ContextVisualVariant;
+  visualItems?: readonly string[];
 }) {
   return (
     <section className="relative isolate overflow-hidden bg-[#00364a] text-white">
-      <Image
-        src="/images/rycode-connected-world.png"
-        alt=""
-        fill
-        sizes="100vw"
-        className="-z-30 object-cover object-center opacity-30 mix-blend-screen"
-        aria-hidden
-      />
       <div className="absolute inset-0 -z-20 bg-[linear-gradient(110deg,rgba(0,30,42,0.98)_4%,rgba(0,54,74,0.9)_54%,rgba(0,49,67,0.55)_100%)]" />
       <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_80%_20%,rgba(95,225,213,0.18),transparent_24%),radial-gradient(circle_at_12%_85%,rgba(99,146,255,0.16),transparent_28%)]" />
       <div className="pointer-events-none absolute inset-0 -z-10 opacity-[0.08] [background-image:radial-gradient(rgba(255,255,255,0.8)_0.7px,transparent_0.7px)] [background-size:34px_34px]" />
@@ -53,13 +54,22 @@ export function PageHero({
           </div>
           <div className="relative overflow-hidden rounded-2xl border border-white/15 bg-white/[0.07] p-2 shadow-[0_30px_90px_rgba(0,18,26,0.4)] backdrop-blur-md">
             <div className="relative aspect-[16/10] overflow-hidden rounded-xl">
-              <Image
-                src="/images/rycode-product-system.png"
-                alt="نمایی انتزاعی از سیستم‌های دیجیتال و داده‌های متصل"
-                fill
-                sizes="(min-width: 1024px) 40vw, 100vw"
-                className="object-cover opacity-90 saturate-75"
-              />
+              {imageSrc ? (
+                <Image
+                  src={imageSrc}
+                  alt={imageAlt}
+                  fill
+                  sizes="(min-width: 1024px) 40vw, 100vw"
+                  className="object-cover opacity-90 saturate-75"
+                />
+              ) : (
+                <ContextVisual
+                  variant={visualVariant}
+                  title={title}
+                  items={visualItems}
+                  className="absolute inset-0 min-h-0"
+                />
+              )}
               <div className="absolute inset-0 bg-gradient-to-t from-[#002936]/95 via-[#00364a]/10 to-transparent" />
               <div className="absolute inset-x-4 bottom-4">
                 <span className="meta-label text-[#5fe1d5]">RYCODE / FIELD NOTE</span>
@@ -113,14 +123,6 @@ export function ActionLink({
 export function FinalBand({ locale }: { locale: Locale }) {
   return (
     <section className="relative isolate overflow-hidden bg-[#00364a] py-16 text-white sm:py-24">
-      <Image
-        src="/images/rycode-connected-world.png"
-        alt=""
-        fill
-        sizes="100vw"
-        className="-z-30 object-cover opacity-25 mix-blend-screen"
-        aria-hidden
-      />
       <div className="absolute inset-0 -z-20 bg-[linear-gradient(105deg,rgba(0,33,46,0.98),rgba(0,54,74,0.82),rgba(0,42,58,0.96))]" />
       <div className="absolute -top-28 left-[18%] -z-10 size-72 rounded-full bg-[#5fe1d5]/15 blur-3xl" />
       <Container className="relative">

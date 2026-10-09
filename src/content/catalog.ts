@@ -30,6 +30,41 @@ export type CatalogEntry = {
   conceptual?: boolean;
 };
 
+export type CatalogVisual = {
+  src: string;
+  alt: LocalizedText;
+};
+
+const projectVisuals: Record<string, CatalogVisual> = {
+  "dealer-ordering-concept": {
+    src: "/images/projects/dealer-ordering-platform.png",
+    alt: {
+      fa: "نمایی مفهومی از پنل سفارش‌گیری نمایندگان و مدیریت سفارش‌های صنعتی",
+      en: "Concept visual of a dealer ordering and industrial order management portal",
+    },
+  },
+  "ecommerce-redesign-concept": {
+    src: "/images/projects/automotive-ecommerce-redesign.png",
+    alt: {
+      fa: "نمایی مفهومی از فروشگاه اینترنتی مدرن برای قطعات و لوازم خودرو",
+      en: "Concept visual of a modern automotive parts ecommerce experience",
+    },
+  },
+  "after-sales-concept": {
+    src: "/images/projects/after-sales-service-portal.png",
+    alt: {
+      fa: "نمایی مفهومی از پرتال یکپارچه گارانتی و خدمات پس از فروش تجهیزات صنعتی",
+      en: "Concept visual of an integrated warranty and after-sales service portal",
+    },
+  },
+};
+
+export function getCatalogVisual(
+  entry: Pick<CatalogEntry, "kind" | "slug">,
+): CatalogVisual | undefined {
+  return entry.kind === "projects" ? projectVisuals[entry.slug] : undefined;
+}
+
 export const kindCopy: Record<
   CatalogKind,
   { title: LocalizedText; lead: LocalizedText; eyebrow: LocalizedText }

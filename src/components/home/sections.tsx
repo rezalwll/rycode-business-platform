@@ -34,6 +34,7 @@ import {
   SectionTitle,
   TextLink,
 } from "@/components/site/primitives";
+import { ContextVisual, type ContextVisualVariant } from "@/components/site/context-visual";
 import { industries } from "@/lib/nav-content";
 import { cn } from "@/lib/utils";
 
@@ -266,8 +267,7 @@ const servicePillars = [
     lead: "از یک سایت ساده تا یک پلتفرم کاملاً اختصاصی.",
     body: "سایت شرکتی، فروشگاهی، خدماتی، آموزشی، رزرو و نوبت‌دهی، مارکت‌پلیس، پنل کاربری و پروژه‌های اختصاصی را متناسب با نیاز کسب‌وکارت طراحی و توسعه می‌دهیم.",
     icon: Waypoints,
-    image: "/images/rycode-hero-structure.png",
-    imageAlt: "ساختار بصری یک محصول دیجیتال مدرن",
+    visual: "web" as ContextVisualVariant,
     layout: "lg:col-span-7 lg:min-h-[400px]",
     accent: "#20bfb2",
   },
@@ -276,8 +276,7 @@ const servicePillars = [
     lead: "وقتی ابزارهای آماده دقیقاً کاری که می‌خواهی را انجام نمی‌دهند، ابزار مخصوص کسب‌وکار خودت را می‌سازیم.",
     body: "از سیستم مدیریت مشتری و سفارش گرفته تا پنل‌های مدیریتی، سیستم‌های داخلی شرکت، CRM، مدیریت انبار، رزرو، اتوماسیون فرایندها و نرم‌افزارهای تحت وب.",
     icon: Blocks,
-    image: "/images/rycode-product-system.png",
-    imageAlt: "لایه‌های مختلف یک نرم‌افزار اختصاصی",
+    visual: "software" as ContextVisualVariant,
     layout: "lg:col-span-5 lg:min-h-[400px]",
     accent: "#6c92f4",
   },
@@ -286,6 +285,7 @@ const servicePillars = [
     lead: "اپلیکیشن‌هایی که کنار سایت یا به‌صورت یک محصول مستقل کار می‌کنند.",
     body: "اپ فروشگاهی، خدماتی، سازمانی، رزرو و نوبت‌دهی، اپ مشتریان، پنل کارکنان و اپلیکیشن‌های اختصاصی Android و iOS را متناسب با مدل کسب‌وکار توسعه می‌دهیم.",
     icon: Smartphone,
+    visual: "mobile" as ContextVisualVariant,
     layout: "lg:col-span-4 lg:min-h-[340px]",
     accent: "#796fe8",
   },
@@ -294,6 +294,7 @@ const servicePillars = [
     lead: "کمک می‌کنیم افرادی که در گوگل دنبال محصولات یا خدماتت هستند راحت‌تر پیدایت کنند.",
     body: "از سئوی فنی و ساختار سایت تا تحقیق کلمات کلیدی، صفحات خدمات و محصولات، محتوا، بهبود صفحات مهم، Search Console، سرعت سایت و رفع مشکلات ایندکس.",
     icon: Search,
+    visual: "seo" as ContextVisualVariant,
     layout: "lg:col-span-4 lg:min-h-[340px]",
     accent: "#4eaf8e",
   },
@@ -302,8 +303,7 @@ const servicePillars = [
     lead: "اگر اطلاعات و کارهایت بین چند سیستم مختلف پخش شده، آن‌ها را به هم متصل می‌کنیم.",
     body: "اتصال سایت به نرم‌افزار حسابداری، انبار، CRM، پیامک، درگاه پرداخت و سرویس‌های دیگر، ساخت API، ربات تلگرام، ابزارهای خودکار، Web Scraping، استخراج اطلاعات و انتقال داده بین سیستم‌ها.",
     icon: Webhook,
-    image: "/images/rycode-connected-world.png",
-    imageAlt: "اتصال سرویس‌ها، ربات‌ها و داده‌ها به یکدیگر",
+    visual: "integration" as ContextVisualVariant,
     layout: "lg:col-span-4 lg:min-h-[340px]",
     accent: "#3aaed8",
   },
@@ -312,6 +312,7 @@ const servicePillars = [
     lead: "داده‌های پراکنده را تبدیل به اطلاعات قابل استفاده برای تصمیم‌گیری می‌کنیم.",
     body: "داشبورد مدیریتی، گزارش فروش، گزارش مالی و عملیاتی، تحلیل اطلاعات، Power BI، Excel حرفه‌ای، پردازش فایل‌های CSV و Excel، جمع‌آوری و یکپارچه‌سازی داده‌ها و گزارش‌گیری خودکار.",
     icon: LayoutDashboard,
+    visual: "data" as ContextVisualVariant,
     layout: "lg:col-span-7 lg:min-h-[360px]",
     accent: "#9b78d5",
   },
@@ -320,8 +321,7 @@ const servicePillars = [
     lead: "پروژه نیمه‌کاره، سایت کند، باگ عجیب یا سیستمی داری که دیگر درست کار نمی‌کند؟",
     body: "کد و ساختار فعلی را بررسی می‌کنیم، مشکل را پیدا می‌کنیم و پروژه را دوباره به مسیر درست برمی‌گردانیم؛ از رفع باگ و مشکلات دیتابیس تا تکمیل پروژه، بهینه‌سازی سرعت، مهاجرت و توسعه سیستم‌های قدیمی.",
     icon: Wrench,
-    image: "/images/rycode-project-rescue.png",
-    imageAlt: "بازسازی و ادامه یک پروژه نرم‌افزاری نیمه‌کاره",
+    visual: "recovery" as ContextVisualVariant,
     layout: "lg:col-span-5 lg:min-h-[360px]",
     accent: "#d06f9a",
   },
@@ -330,6 +330,7 @@ const servicePillars = [
     lead: "تحویل پروژه پایان همکاری نیست.",
     body: "برای نگهداری، رفع مشکلات، بروزرسانی، افزایش سرعت، اضافه کردن امکانات جدید و توسعه مرحله‌به‌مرحله محصول کنارت می‌مانیم تا سیستم با رشد کسب‌وکارت رشد کند.",
     icon: Headphones,
+    visual: "support" as ContextVisualVariant,
     layout: "lg:col-span-12 lg:min-h-[290px]",
     accent: "#5a86d6",
   },
@@ -389,32 +390,19 @@ export function ServicesEditorial() {
                 href="/services"
                 className={cn(
                   "group relative flex h-full min-h-[300px] flex-col overflow-hidden rounded-xl border border-[#0b5262]/12 p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.75),0_10px_32px_rgba(31,92,105,0.065)] backdrop-blur-md transition-[transform,border-color,background-color,box-shadow] duration-300 hover:-translate-y-0.5 hover:border-[#20bfb2]/45 hover:shadow-[0_18px_48px_rgba(31,92,105,0.12)] sm:p-7",
-                  "image" in service ? "bg-white/75" : "bg-white/65 hover:bg-white/90",
+                  "bg-white/75",
                 )}
               >
-                {"image" in service && (
-                  <>
-                    <Image
-                      src={service.image}
-                      alt={service.imageAlt ?? ""}
-                      fill
-                      sizes="(min-width: 1024px) 58vw, (min-width: 768px) 50vw, 100vw"
-                      className="object-cover opacity-75 saturate-90 transition-[transform,opacity] duration-700 group-hover:scale-[1.035] group-hover:opacity-90"
-                    />
-                    <span
-                      className="absolute inset-0 bg-[linear-gradient(180deg,rgba(234,247,248,0.08)_0%,rgba(234,247,248,0.72)_48%,rgba(234,247,248,0.98)_100%)]"
-                      aria-hidden
-                    />
-                  </>
-                )}
-
-                {!("image" in service) && (
-                  <span
-                    className="pointer-events-none absolute -top-20 -left-16 size-56 rounded-full blur-3xl"
-                    style={{ backgroundColor: `${service.accent}18` }}
-                    aria-hidden
-                  />
-                )}
+                <ContextVisual
+                  variant={service.visual}
+                  title={service.title}
+                  decorative
+                  className="absolute inset-0 min-h-0 opacity-[0.72] transition-[transform,opacity] duration-700 group-hover:scale-[1.025] group-hover:opacity-85"
+                />
+                <span
+                  className="absolute inset-0 bg-[linear-gradient(180deg,rgba(234,247,248,0.12)_0%,rgba(234,247,248,0.8)_48%,rgba(234,247,248,0.99)_100%)]"
+                  aria-hidden
+                />
 
                 {index === 5 && (
                   <span
@@ -497,8 +485,7 @@ const systems = [
     body: "فروش آنلاین با مدیریت محصول، سفارش و پرداختی که با کار شما جور باشد.",
     note: "برای فروش مستقیم به مشتری",
     modules: ["کاتالوگ محصول", "سفارش و پرداخت", "انبار و ارسال"],
-    image: "/images/rycode-product-system.png",
-    imageAlt: "تصویر مفهومی از پنل مدیریت یک فروشگاه اینترنتی",
+    visual: "ecommerce" as ContextVisualVariant,
     icon: ShoppingBag,
   },
   {
@@ -506,8 +493,7 @@ const systems = [
     body: "سرنخ‌ها و مشتری‌ها را یک‌جا ببینید و هیچ پیگیری‌ای جا نماند.",
     note: "برای تیم‌های فروش و ارتباط با مشتری",
     modules: ["سرنخ‌ها", "پیگیری فروش", "تاریخچه مشتری"],
-    image: "/images/rycode-connected-world.png",
-    imageAlt: "شبکه‌ای از ارتباط مشتری‌ها و فرآیندهای فروش",
+    visual: "crm" as ContextVisualVariant,
     icon: UsersRound,
   },
   {
@@ -515,8 +501,7 @@ const systems = [
     body: "سفارش‌های تیم فروش، نماینده‌ها یا مشتری‌ها را منظم کنید.",
     note: "برای فروش عمده و شبکه نمایندگان",
     modules: ["قیمت‌گذاری", "ثبت سفارش", "وضعیت تحویل"],
-    image: "/images/rycode-hero-structure.png",
-    imageAlt: "ساختار منظم یک سامانه ثبت و پردازش سفارش",
+    visual: "ordering" as ContextVisualVariant,
     icon: ClipboardList,
   },
   {
@@ -524,8 +509,7 @@ const systems = [
     body: "مشتری از یک جا سفارش‌ها، فاکتورها و درخواست‌هایش را ببیند.",
     note: "برای ارائه خدمات سلف‌سرویس",
     modules: ["حساب کاربری", "فاکتورها", "درخواست پشتیبانی"],
-    image: "/images/rycode-product-system.png",
-    imageAlt: "نمایی مفهومی از پنل یکپارچه مشتریان",
+    visual: "portal" as ContextVisualVariant,
     icon: UserRound,
   },
   {
@@ -533,8 +517,7 @@ const systems = [
     body: "عددهای مهم کسب‌وکارتان را یک‌جا و قابل فهم ببینید.",
     note: "برای تصمیم‌گیری سریع‌تر مدیران",
     modules: ["شاخص‌های کلیدی", "گزارش زنده", "هشدارها"],
-    image: "/images/rycode-connected-world.png",
-    imageAlt: "داشبوردی برای مشاهده شاخص‌های کسب‌وکار",
+    visual: "dashboard" as ContextVisualVariant,
     icon: LayoutDashboard,
   },
   {
@@ -542,8 +525,7 @@ const systems = [
     body: "نوبت‌ها و ظرفیت مراجعه را بدون تماس و هماهنگی‌های تکراری مدیریت کنید.",
     note: "برای کلینیک و خدمات زمان‌محور",
     modules: ["تقویم کاری", "ظرفیت روزانه", "یادآوری نوبت"],
-    image: "/images/rycode-hero-structure.png",
-    imageAlt: "نمایی مفهومی از تقویم و فرآیند نوبت‌دهی",
+    visual: "scheduling" as ContextVisualVariant,
     icon: CalendarDays,
   },
   {
@@ -551,8 +533,7 @@ const systems = [
     body: "رزرو آنلاین خدمات، منابع یا فضا با قوانینی که خودتان تعیین می‌کنید.",
     note: "برای فضا، اقامت یا تجهیزات",
     modules: ["موجودی و ظرفیت", "قوانین رزرو", "پرداخت آنلاین"],
-    image: "/images/rycode-product-system.png",
-    imageAlt: "سیستم آنلاین مدیریت ظرفیت و رزرو",
+    visual: "booking" as ContextVisualVariant,
     icon: CalendarDays,
   },
   {
@@ -560,8 +541,7 @@ const systems = [
     body: "فروشنده‌ها، سفارش‌ها و تسویه‌ها را در یک پلتفرم مدیریت کنید.",
     note: "برای کسب‌وکارهای چندفروشنده",
     modules: ["پنل فروشنده", "کمیسیون", "تسویه حساب"],
-    image: "/images/rycode-connected-world.png",
-    imageAlt: "شبکه‌ای از فروشنده‌ها در یک مارکت‌پلیس",
+    visual: "marketplace" as ContextVisualVariant,
     icon: Store,
   },
   {
@@ -569,8 +549,7 @@ const systems = [
     body: "ثبت محصول و پیگیری گارانتی را برای مشتری ساده کنید.",
     note: "برای خدمات پس از فروش",
     modules: ["ثبت محصول", "اعتبار گارانتی", "پیگیری درخواست"],
-    image: "/images/rycode-project-rescue.png",
-    imageAlt: "سامانه‌ای منظم برای مدیریت گارانتی و خدمات",
+    visual: "warranty" as ContextVisualVariant,
     icon: ShieldCheck,
   },
   {
@@ -578,8 +557,7 @@ const systems = [
     body: "قیمت، سفارش و گزارش هر نماینده را شفاف و در دسترس کنید.",
     note: "برای شبکه فروش و توزیع",
     modules: ["لیست قیمت", "سفارش نماینده", "گزارش عملکرد"],
-    image: "/images/rycode-connected-world.png",
-    imageAlt: "شبکه متصل نمایندگان فروش و اطلاعات سفارش",
+    visual: "dealer" as ContextVisualVariant,
     icon: UsersRound,
   },
   {
@@ -587,8 +565,7 @@ const systems = [
     body: "دوره، آزمون و مسیر یادگیری را برای آموزش آنلاین کنار هم بچینید.",
     note: "برای آموزش سازمانی و آنلاین",
     modules: ["دوره‌ها", "آزمون و تمرین", "گزارش پیشرفت"],
-    image: "/images/rycode-hero-structure.png",
-    imageAlt: "ساختار مفهومی یک سامانه آموزش آنلاین",
+    visual: "lms" as ContextVisualVariant,
     icon: GraduationCap,
   },
 ];
@@ -623,7 +600,7 @@ export function SolutionExplorer() {
               className={cn(
                 "group relative min-h-20 border bg-surface px-4 py-3 text-start transition-[border-color,background-color,transform,box-shadow] duration-200 hover:border-brand/45",
                 active === index
-                  ? "-translate-y-0.5 border-2 border-brand bg-brand/[0.045] shadow-[0_8px_24px_rgba(249,115,22,0.08)]"
+                  ? "-translate-y-0.5 border-2 border-brand bg-brand/[0.045] shadow-[0_8px_24px_rgba(32,191,178,0.1)]"
                   : "border-border",
               )}
             >
@@ -695,12 +672,11 @@ export function SolutionExplorer() {
           </div>
 
           <figure className="relative min-h-[360px] overflow-hidden bg-ink lg:min-h-[500px]">
-            <Image
-              src={current.image}
-              alt={current.imageAlt}
-              fill
-              priority={active === 0}
-              className="object-cover transition-transform duration-700 hover:scale-[1.025]"
+            <ContextVisual
+              variant={current.visual}
+              title={current.name}
+              items={current.modules}
+              className="absolute inset-0 min-h-0 transition-transform duration-700 hover:scale-[1.015]"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
 
@@ -723,7 +699,7 @@ export function SolutionExplorer() {
   );
 }
 
-/* 6. PROJECT RESCUE (orange interruption) -------------------------------- */
+/* 6. PROJECT RESCUE ------------------------------------------------------ */
 
 export function ProjectRescue() {
   const auditRows = [
@@ -739,7 +715,7 @@ export function ProjectRescue() {
       state: "نیاز به اصلاح فوری دارد",
       score: "۴۶٪",
       width: "46%",
-      color: "bg-amber-400",
+      color: "bg-[#7dc8ff]",
     },
     {
       label: "مسیر توسعه",
@@ -908,7 +884,7 @@ const projects = [
     category: "وب‌اپ اختصاصی",
     problem: "نماینده‌ها سفارش را تلفنی و با اکسل می‌فرستادند و پیگیری‌اش سخت بود.",
     solution: "یک پنل اختصاصی برای قیمت‌گذاری، ثبت سفارش و دیدن وضعیت هر سفارش.",
-    image: "/images/rycode-product-system.png",
+    image: "/images/projects/dealer-ordering-platform.png",
     imageAlt: "نمایی مفهومی از پنل سفارش‌گیری و مدیریت نمایندگان",
     scope: ["پنل نمایندگان", "مدیریت سفارش", "گزارش وضعیت"],
     accent: "#5fe1d5",
@@ -919,7 +895,7 @@ const projects = [
     category: "فروشگاه و سئو",
     problem: "دسته‌بندی‌ها نامرتب بود و کندی سایت جلوی رشد در گوگل را گرفته بود.",
     solution: "مرتب‌کردن ساختار سایت، سریع‌تر کردن صفحات و تقویت سئوی فروشگاهی.",
-    image: "/images/rycode-project-rescue.png",
+    image: "/images/projects/automotive-ecommerce-redesign.png",
     imageAlt: "نمایی مفهومی از بازطراحی تجربه کاربری یک فروشگاه اینترنتی",
     scope: ["بازطراحی UX", "بهینه‌سازی سرعت", "سئوی فنی"],
     accent: "#7dc8ff",
@@ -930,7 +906,7 @@ const projects = [
     category: "پرتال سازمانی",
     problem: "درخواست‌های گارانتی بین تماس، پیام و کانال‌های مختلف گم می‌شد.",
     solution: "سامانه‌ای برای ثبت محصول، گارانتی و پیگیری همه درخواست‌ها در یک جا.",
-    image: "/images/rycode-connected-world.png",
+    image: "/images/projects/after-sales-service-portal.png",
     imageAlt: "نمایی مفهومی از پرتال یکپارچه خدمات پس از فروش",
     scope: ["ثبت گارانتی", "تیکت پشتیبانی", "داشبورد مدیریتی"],
     accent: "#b9a7ff",
@@ -1172,11 +1148,11 @@ export function IndustriesSection() {
         </div>
 
         <div className="relative mt-4 min-h-[240px] overflow-hidden rounded-2xl border border-border bg-ink text-white dark:border-white/12">
-          <Image
-            src="/images/rycode-connected-world.png"
-            alt="شبکه‌ای از سیستم‌های متصل برای صنایع مختلف"
-            fill
-            className="object-cover opacity-65"
+          <ContextVisual
+            variant="connected"
+            title="سیستم‌های متصل برای کسب‌وکار"
+            items={["عملیات", "داده", "مشتری"]}
+            className="absolute inset-0 min-h-0 opacity-75"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/35 to-transparent" />
           <div className="absolute inset-y-0 left-0 flex max-w-sm flex-col justify-end p-6 sm:p-8">
@@ -1367,12 +1343,11 @@ export function WhyRycode() {
               >
                 {item.featured && (
                   <>
-                    <Image
-                      src="/images/rycode-hero-structure.png"
-                      alt="ساختار یک محصول دیجیتال که از مسئله تا راه‌حل شکل می‌گیرد"
-                      fill
-                      sizes="(min-width: 1024px) 58vw, 100vw"
-                      className="-z-10 object-cover opacity-25 saturate-75 transition-transform duration-1000 group-hover:scale-[1.035]"
+                    <ContextVisual
+                      variant="software"
+                      title={item.title}
+                      decorative
+                      className="absolute inset-0 -z-10 min-h-0 opacity-30 transition-transform duration-1000 group-hover:scale-[1.025]"
                     />
                     <span
                       className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(7,59,76,0.16),rgba(7,40,52,0.94))]"
@@ -1658,7 +1633,7 @@ const sampleArticles = [
     category: "استراتژی دیجیتال",
     readTime: "۶ دقیقه مطالعه",
     date: "۲۸ شهریور ۱۴۰۵",
-    image: "/images/rycode-hero-structure.png",
+    image: "/images/editorial/web-experience.png",
     imageAlt: "ساختار مفهومی برنامه‌ریزی یک وب‌سایت حرفه‌ای",
     accent: "#20bfb2",
   },
@@ -1669,7 +1644,7 @@ const sampleArticles = [
     category: "محصول و فناوری",
     readTime: "۸ دقیقه مطالعه",
     date: "۲۰ شهریور ۱۴۰۵",
-    image: "/images/rycode-product-system.png",
+    image: "/images/editorial/data-dashboard.png",
     imageAlt: "نمایی مفهومی از اجزای یک نرم‌افزار و انتخاب ابزار مناسب",
     accent: "#6c92f4",
   },
@@ -1680,8 +1655,7 @@ const sampleArticles = [
     category: "مدیریت پروژه",
     readTime: "۷ دقیقه مطالعه",
     date: "۱۲ شهریور ۱۴۰۵",
-    image: "/images/rycode-project-rescue.png",
-    imageAlt: "بازسازی مفهومی یک پروژه نرم‌افزاری متوقف‌شده",
+    visual: "recovery" as ContextVisualVariant,
     accent: "#b07ce8",
   },
 ];
@@ -1729,13 +1703,21 @@ export function BlogSection() {
                   style={{ borderTopColor: article.accent }}
                 >
                   <div className="relative aspect-[16/10] w-full shrink-0 overflow-hidden bg-[#eaf3f4]">
-                    <Image
-                      src={article.image}
-                      alt={article.imageAlt}
-                      fill
-                      sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
-                      className="object-cover transition-transform duration-700 group-hover:scale-[1.045]"
-                    />
+                    {"image" in article ? (
+                      <Image
+                        src={article.image}
+                        alt={article.imageAlt ?? article.title}
+                        fill
+                        sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+                        className="object-cover transition-transform duration-700 group-hover:scale-[1.045]"
+                      />
+                    ) : (
+                      <ContextVisual
+                        variant={article.visual}
+                        title={article.title}
+                        className="absolute inset-0 min-h-0 transition-transform duration-700 group-hover:scale-[1.025]"
+                      />
+                    )}
                     <span className="absolute inset-0 bg-gradient-to-t from-[#073b4c]/38 via-transparent to-transparent" />
                     <span
                       className="absolute top-4 right-4 rounded-full border bg-[#073b4c]/35 px-3 py-1.5 text-[0.65rem] font-semibold text-white backdrop-blur-md"
@@ -1939,13 +1921,7 @@ export function FaqSection() {
 export function FinalCta() {
   return (
     <section className="relative overflow-hidden bg-white py-14 text-foreground dark:bg-ink dark:text-ink-foreground sm:py-16">
-      <Image
-        src="/images/rycode-connected-world.png"
-        alt=""
-        fill
-        className="object-cover object-right opacity-10 dark:opacity-20"
-        aria-hidden
-      />
+      <div className="absolute inset-0 opacity-80 [background-image:radial-gradient(circle_at_82%_18%,rgba(95,225,213,0.14),transparent_28%),radial-gradient(circle_at_18%_88%,rgba(125,200,255,0.11),transparent_30%)]" />
       <div className="absolute inset-0 bg-gradient-to-l from-background/40 via-background/85 to-background dark:from-ink/40 dark:via-ink/85 dark:to-ink" />
       <Container>
         <div className="relative">

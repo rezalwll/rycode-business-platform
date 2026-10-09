@@ -61,7 +61,7 @@ export async function generateMetadata({
     },
     twitter: { card: "summary_large_image", title, description },
     robots: { index: true, follow: true },
-    icons: { icon: "/favicon.png" },
+    icons: { icon: "/favicon.svg" },
   };
 }
 

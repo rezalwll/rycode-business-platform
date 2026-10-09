@@ -1,6 +1,7 @@
 import { CheckCircle2, ShieldCheck } from "lucide-react";
 import Image from "next/image";
 
+import { ContextVisual, type ContextVisualVariant } from "@/components/site/context-visual";
 import { Container } from "@/components/site/primitives";
 import type { LeadKind } from "@/features/leads/schema";
 import type { Locale } from "@/i18n/routing";
@@ -247,6 +248,13 @@ function t(value: LocalText, locale: Locale): string {
 
 export async function CompanyPage({ locale, slug }: { locale: Locale; slug: CompanyPageSlug }) {
   const page = pages[slug];
+  const companyVisual: Record<CompanyPageSlug, ContextVisualVariant> = {
+    about: "connected",
+    "why-rycode": "software",
+    process: "ordering",
+    technologies: "integration",
+    faq: "support",
+  };
   const isFaq = slug === "faq";
   const managedFaqs = isFaq ? await listPublicFaqs(locale) : [];
   const sections: RenderedSection[] = managedFaqs.length
@@ -277,6 +285,7 @@ export async function CompanyPage({ locale, slug }: { locale: Locale; slug: Comp
         eyebrow={t(page.eyebrow, locale)}
         title={t(page.title, locale)}
         lead={t(page.lead, locale)}
+        visualVariant={companyVisual[slug]}
       />
       <section className="relative overflow-hidden bg-[#f7fbfa] py-14 sm:py-20">
         <div className="pointer-events-none absolute inset-0 opacity-70 [background-image:radial-gradient(circle_at_10%_16%,rgba(32,191,178,0.1),transparent_25%),radial-gradient(circle_at_88%_72%,rgba(99,146,255,0.08),transparent_27%)]" />
@@ -399,6 +408,12 @@ export function PublicLeadPage({
   sourcePath: string;
 }) {
   const page = leadPages[kind];
+  const visualVariant: Record<LeadKind, ContextVisualVariant> = {
+    project: "software",
+    technical_review: "recovery",
+    seo_audit: "seo",
+    contact: "connected",
+  };
   return (
     <>
       <PageHero
@@ -406,6 +421,7 @@ export function PublicLeadPage({
         eyebrow={t(page.eyebrow, locale)}
         title={t(page.title, locale)}
         lead={t(page.lead, locale)}
+        visualVariant={visualVariant[kind]}
       />
       <section className="relative overflow-hidden bg-[#f7fbfa] py-14 sm:py-20">
         <div className="pointer-events-none absolute inset-0 opacity-60 [background-image:radial-gradient(circle_at_12%_18%,rgba(32,191,178,0.1),transparent_26%),radial-gradient(circle_at_86%_72%,rgba(99,146,255,0.08),transparent_28%)]" />
@@ -416,18 +432,23 @@ export function PublicLeadPage({
             </div>
             <aside className="overflow-hidden rounded-2xl border border-[#0b5262]/12 bg-white/82 shadow-[0_18px_55px_rgba(31,92,105,0.08)] backdrop-blur-sm lg:sticky lg:top-28">
               <div className="relative aspect-[4/3] overflow-hidden bg-ink">
-                <Image
-                  src={
-                    kind === "technical_review"
-                      ? "/images/rycode-project-rescue.png"
-                      : "/images/rycode-product-system.png"
-                  }
-                  alt=""
-                  fill
-                  sizes="(min-width: 1024px) 20rem, 100vw"
-                  className="object-cover opacity-80"
-                  aria-hidden
-                />
+                {kind === "seo_audit" ? (
+                  <Image
+                    src="/images/editorial/seo-growth-workspace.png"
+                    alt=""
+                    fill
+                    sizes="(min-width: 1024px) 20rem, 100vw"
+                    className="object-cover opacity-90"
+                    aria-hidden
+                  />
+                ) : (
+                  <ContextVisual
+                    variant={visualVariant[kind]}
+                    title={t(page.title, locale)}
+                    decorative
+                    className="absolute inset-0 min-h-0 opacity-90"
+                  />
+                )}
                 <div className="absolute inset-0 bg-gradient-to-t from-[#00364a] via-[#00364a]/15 to-transparent" />
                 <span className="meta-label absolute inset-x-5 bottom-5 text-[#5fe1d5]">
                   RYCODE / NEXT STEP

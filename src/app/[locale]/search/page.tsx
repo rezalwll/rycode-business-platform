@@ -43,6 +43,7 @@ export default async function SearchPage({ params, searchParams }: Props) {
             ? "در خدمات، راهکارها و مطالب رای‌کد جست‌وجو کنید."
             : "Find services, solutions and articles from RYCODE."
         }
+        visualVariant="article"
       />
       <section className="relative overflow-hidden bg-[#f7fbfa] py-14 sm:py-20">
         <div className="pointer-events-none absolute inset-0 opacity-60 [background-image:radial-gradient(circle_at_15%_10%,rgba(32,191,178,0.1),transparent_28%),radial-gradient(circle_at_85%_75%,rgba(99,146,255,0.08),transparent_30%)]" />

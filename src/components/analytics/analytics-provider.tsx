@@ -222,7 +222,7 @@ function ConsentBanner({ locale }: { locale: "fa" | "en" }): React.ReactElement 
   return (
     <aside
       aria-label={isPersian ? "تنظیمات تحلیل بازدید" : "Analytics preference"}
-      className="fixed inset-x-4 bottom-4 z-[100] mx-auto max-w-2xl border border-black/15 bg-[#fffaf1] p-4 text-[#1f1e1b] shadow-2xl dark:border-white/20 dark:bg-[#211f1b] dark:text-[#fffaf1]"
+      className="fixed inset-x-4 bottom-4 z-[100] mx-auto max-w-2xl rounded-2xl border border-[#0b5262]/15 bg-white/95 p-5 text-[#073b4c] shadow-[0_22px_70px_rgba(0,54,74,0.2)] backdrop-blur-xl dark:border-white/15 dark:bg-[#073b4c]/95 dark:text-white"
       dir={isPersian ? "rtl" : "ltr"}
       role="dialog"
     >
@@ -233,14 +233,14 @@ function ConsentBanner({ locale }: { locale: "fa" | "en" }): React.ReactElement 
       </p>
       <div className="mt-3 flex gap-2">
         <button
-          className="rounded-md bg-[#ef5b23] px-4 py-2 text-sm font-semibold text-white"
+          className="rounded-full bg-[#5fe1d5] px-5 py-2.5 text-sm font-bold text-[#00364a] transition-colors hover:bg-[#74eadf]"
           onClick={() => setConsent("granted")}
           type="button"
         >
           {isPersian ? "می‌پذیرم" : "Allow"}
         </button>
         <button
-          className="rounded-md border border-current px-4 py-2 text-sm"
+          className="rounded-full border border-[#0b5262]/20 px-5 py-2.5 text-sm font-semibold transition-colors hover:border-[#20bfb2]/60 hover:bg-[#5fe1d5]/8 dark:border-white/25 dark:hover:border-[#5fe1d5]/60"
           onClick={() => setConsent("denied")}
           type="button"
         >

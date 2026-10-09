@@ -2,9 +2,11 @@ import { ArrowUpLeft, ArrowUpRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
+import { catalogContextVariant, ContextVisual } from "@/components/site/context-visual";
 import { Container } from "@/components/site/primitives";
 import {
   getCatalogEntries,
+  getCatalogVisual,
   kindCopy,
   localize,
   type CatalogEntry,
@@ -77,12 +79,6 @@ export function CatalogHub({ locale, kind }: { locale: Locale; kind: CatalogKind
   const copy = kindCopy[kind];
   const entries = getCatalogEntries(kind);
   const Arrow = locale === "fa" ? ArrowUpLeft : ArrowUpRight;
-  const cardImages = [
-    "/images/rycode-product-system.png",
-    "/images/rycode-hero-structure.png",
-    "/images/rycode-connected-world.png",
-    "/images/rycode-project-rescue.png",
-  ];
 
   return (
     <>
@@ -91,6 +87,7 @@ export function CatalogHub({ locale, kind }: { locale: Locale; kind: CatalogKind
         eyebrow={localize(copy.eyebrow, locale)}
         title={localize(copy.title, locale)}
         lead={localize(copy.lead, locale)}
+        visualVariant={catalogContextVariant(kind, "")}
         aside={
           <>
             <span className="meta-label block text-[#5fe1d5]">
@@ -108,45 +105,57 @@ export function CatalogHub({ locale, kind }: { locale: Locale; kind: CatalogKind
         <div className="pointer-events-none absolute inset-0 opacity-60 [background-image:radial-gradient(circle_at_15%_12%,rgba(32,191,178,0.1),transparent_26%),radial-gradient(circle_at_86%_72%,rgba(99,146,255,0.08),transparent_28%)]" />
         <Container>
           <div className="relative grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-            {entries.map((entry, index) => (
-              <Link
-                key={entry.slug}
-                href={localizedHref(locale, `/${kind}/${entry.slug}`)}
-                className={cn(
-                  "group relative overflow-hidden rounded-2xl border p-3 shadow-[0_10px_32px_rgba(31,92,105,0.06)] backdrop-blur-sm transition-[transform,box-shadow,border-color] duration-300 hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(31,92,105,0.12)]",
-                  contentTone(index).card,
-                )}
-              >
-                <div className="relative aspect-[16/9] overflow-hidden rounded-[1rem] bg-ink">
-                  <Image
-                    src={cardImages[index % cardImages.length]!}
-                    alt=""
-                    fill
-                    className="object-cover opacity-80 transition-transform duration-700 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#00364a]/95 via-transparent to-transparent" />
-                  <div className="absolute inset-x-3 bottom-3 flex items-end justify-between gap-4">
-                    <span className="meta-label text-white/70">
-                      {String(index + 1).padStart(2, "0")} / {labels[kind][locale].item}
-                    </span>
-                    <span className="grid size-9 place-items-center rounded-full border border-white/25 bg-[#00364a]/35 text-white backdrop-blur-sm transition-colors group-hover:border-[#5fe1d5] group-hover:bg-[#5fe1d5] group-hover:text-[#00364a]">
-                      <Arrow className="size-4" aria-hidden />
-                    </span>
-                  </div>
-                </div>
-                <div className="p-4 sm:p-5">
-                  <h2 className="display-3 text-[#073b4c]">{localize(entry.title, locale)}</h2>
-                  <p className="mt-4 max-w-md text-sm leading-7 text-muted-foreground">
-                    {localize(entry.summary, locale)}
-                  </p>
-                  {entry.conceptual && (
-                    <span className="mt-5 inline-flex rounded-full border border-[#20bfb2]/35 bg-[#5fe1d5]/10 px-3 py-1 text-xs font-semibold text-[#0b766e]">
-                      {locale === "fa" ? "یک نمونه فرضی" : "Concept study"}
-                    </span>
+            {entries.map((entry, index) => {
+              const visual = getCatalogVisual(entry);
+              return (
+                <Link
+                  key={entry.slug}
+                  href={localizedHref(locale, `/${kind}/${entry.slug}`)}
+                  className={cn(
+                    "group relative overflow-hidden rounded-2xl border p-3 shadow-[0_10px_32px_rgba(31,92,105,0.06)] backdrop-blur-sm transition-[transform,box-shadow,border-color] duration-300 hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(31,92,105,0.12)]",
+                    contentTone(index).card,
                   )}
-                </div>
-              </Link>
-            ))}
+                >
+                  <div className="relative aspect-[16/9] overflow-hidden rounded-[1rem] bg-ink">
+                    {visual ? (
+                      <Image
+                        src={visual.src}
+                        alt={localize(visual.alt, locale)}
+                        fill
+                        className="object-cover opacity-80 transition-transform duration-700 group-hover:scale-105"
+                      />
+                    ) : (
+                      <ContextVisual
+                        variant={catalogContextVariant(entry.kind, entry.slug)}
+                        title={localize(entry.title, locale)}
+                        items={entry.sections.map((section) => localize(section.title, locale))}
+                        className="absolute inset-0 min-h-0 transition-transform duration-700 group-hover:scale-[1.025]"
+                      />
+                    )}
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#00364a]/95 via-transparent to-transparent" />
+                    <div className="absolute inset-x-3 bottom-3 flex items-end justify-between gap-4">
+                      <span className="meta-label text-white/70">
+                        {String(index + 1).padStart(2, "0")} / {labels[kind][locale].item}
+                      </span>
+                      <span className="grid size-9 place-items-center rounded-full border border-white/25 bg-[#00364a]/35 text-white backdrop-blur-sm transition-colors group-hover:border-[#5fe1d5] group-hover:bg-[#5fe1d5] group-hover:text-[#00364a]">
+                        <Arrow className="size-4" aria-hidden />
+                      </span>
+                    </div>
+                  </div>
+                  <div className="p-4 sm:p-5">
+                    <h2 className="display-3 text-[#073b4c]">{localize(entry.title, locale)}</h2>
+                    <p className="mt-4 max-w-md text-sm leading-7 text-muted-foreground">
+                      {localize(entry.summary, locale)}
+                    </p>
+                    {entry.conceptual && (
+                      <span className="mt-5 inline-flex rounded-full border border-[#20bfb2]/35 bg-[#5fe1d5]/10 px-3 py-1 text-xs font-semibold text-[#0b766e]">
+                        {locale === "fa" ? "یک نمونه فرضی" : "Concept study"}
+                      </span>
+                    )}
+                  </div>
+                </Link>
+              );
+            })}
           </div>
         </Container>
       </section>
@@ -158,6 +167,7 @@ export function CatalogHub({ locale, kind }: { locale: Locale; kind: CatalogKind
 export function CatalogDetail({ locale, entry }: { locale: Locale; entry: CatalogEntry }) {
   const kindLabel = labels[entry.kind][locale];
   const absolutePath = localizedHref(locale, `/${entry.kind}/${entry.slug}`);
+  const visual = getCatalogVisual(entry);
 
   return (
     <>
@@ -177,6 +187,12 @@ export function CatalogDetail({ locale, entry }: { locale: Locale; entry: Catalo
         eyebrow={localize(entry.eyebrow, locale)}
         title={localize(entry.title, locale)}
         lead={localize(entry.summary, locale)}
+        {...(visual
+          ? { imageSrc: visual.src, imageAlt: localize(visual.alt, locale) }
+          : {
+              visualVariant: catalogContextVariant(entry.kind, entry.slug),
+              visualItems: entry.sections.map((section) => localize(section.title, locale)),
+            })}
         aside={
           <>
             {entry.conceptual && (
