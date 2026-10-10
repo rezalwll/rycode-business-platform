@@ -143,7 +143,7 @@ export function SiteHeader({ locale }: { locale: Locale }) {
           <HeaderActions
             locale={locale}
             pathname={pathname}
-            className="hidden min-w-0 justify-self-start xl:flex"
+            className="hidden min-w-0 justify-self-start 2xl:flex"
           />
 
           <Link href="/" aria-label="RYCODE" className="col-start-2 justify-self-center">
@@ -152,10 +152,10 @@ export function SiteHeader({ locale }: { locale: Locale }) {
 
           <nav
             aria-label={isFa ? "ناوبری اصلی" : "Primary navigation"}
-            className="hidden min-w-0 items-center justify-self-end xl:flex"
+            className="hidden min-w-0 items-center justify-self-end 2xl:flex"
             dir={isFa ? "rtl" : "ltr"}
           >
-            <ul className="flex items-center gap-3 2xl:gap-5">
+            <ul className="flex items-center gap-2 2xl:gap-4">
               {nav.map((item, index) => (
                 <DesktopNavItem
                   key={`${item.id ?? item.href}-${index}`}
@@ -172,7 +172,7 @@ export function SiteHeader({ locale }: { locale: Locale }) {
             aria-label={isFa ? "باز کردن منو" : "Open menu"}
             aria-expanded={mobileOpen}
             className={cn(
-              "col-start-3 row-start-1 grid size-10 justify-self-end place-items-center rounded-xl border border-[#073b4c]/15 bg-white/75 text-[#073b4c] shadow-sm backdrop-blur-md transition-colors hover:border-[#20bfb2]/55 hover:bg-[#dff8f4] xl:hidden",
+              "col-start-3 row-start-1 grid size-10 justify-self-end place-items-center rounded-xl border border-[#073b4c]/15 bg-white/75 text-[#073b4c] shadow-sm backdrop-blur-md transition-colors hover:border-[#20bfb2]/55 hover:bg-[#dff8f4] 2xl:hidden",
             )}
           >
             <Menu className="size-5" aria-hidden />
@@ -287,7 +287,7 @@ function MobileMenu({
   const isFa = locale === "fa";
 
   return (
-    <div className="fixed inset-0 z-[60] xl:hidden" dir="ltr">
+    <div className="fixed inset-0 z-[60] 2xl:hidden" dir="ltr">
       <button
         type="button"
         aria-label={isFa ? "بستن منو" : "Close menu"}
