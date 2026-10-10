@@ -114,6 +114,7 @@ export function SiteHeader({ locale }: { locale: Locale }) {
   const nav = isFa ? primaryNav : englishPrimary;
   const isHome = pathname === "/";
   const elevated = scrolled || !isHome;
+  const overlay = !elevated;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 72);
@@ -133,21 +134,22 @@ export function SiteHeader({ locale }: { locale: Locale }) {
     <>
       <header
         className={cn(
-          "fixed inset-x-0 top-0 z-50 border-b text-[#073b4c] transition-[background-color,border-color,box-shadow,backdrop-filter] duration-500",
+          "fixed inset-x-0 top-0 z-50 border-b transition-[background-color,border-color,box-shadow,backdrop-filter,color] duration-500",
           elevated
-            ? "border-[#073b4c]/10 bg-white/88 shadow-[0_12px_42px_rgba(7,59,76,0.10)] backdrop-blur-2xl backdrop-saturate-150"
-            : "border-[#073b4c]/7 bg-white/64 shadow-none backdrop-blur-xl",
+            ? "border-[#073b4c]/10 bg-white/80 text-[#073b4c] shadow-[0_12px_42px_rgba(7,59,76,0.10)] backdrop-blur-2xl backdrop-saturate-150 dark:border-white/10 dark:bg-[#101a20]/82 dark:text-white"
+            : "border-transparent bg-transparent text-white shadow-none backdrop-blur-none",
         )}
       >
         <Container className="grid h-14 grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-4 [direction:ltr] sm:h-[72px] 2xl:grid-cols-[auto_auto_minmax(0,1fr)] 2xl:gap-5">
           <HeaderActions
             locale={locale}
             pathname={pathname}
+            overlay={overlay}
             className="hidden min-w-0 justify-self-start 2xl:flex"
           />
 
           <Link href="/" aria-label="RYCODE" className="col-start-2 justify-self-center">
-            <Logo className="text-[1.05rem]" />
+            <Logo variant={overlay ? "light" : "adaptive"} className="text-[1.05rem]" />
           </Link>
 
           <nav
@@ -161,6 +163,7 @@ export function SiteHeader({ locale }: { locale: Locale }) {
                   key={`${item.id ?? item.href}-${index}`}
                   item={item}
                   pathname={pathname}
+                  overlay={overlay}
                 />
               ))}
             </ul>
@@ -172,7 +175,10 @@ export function SiteHeader({ locale }: { locale: Locale }) {
             aria-label={isFa ? "باز کردن منو" : "Open menu"}
             aria-expanded={mobileOpen}
             className={cn(
-              "col-start-3 row-start-1 grid size-10 justify-self-end place-items-center rounded-xl border border-[#073b4c]/15 bg-white/75 text-[#073b4c] shadow-sm backdrop-blur-md transition-colors hover:border-[#20bfb2]/55 hover:bg-[#dff8f4] 2xl:hidden",
+              "col-start-3 row-start-1 grid size-10 justify-self-end place-items-center rounded-xl border shadow-sm transition-colors 2xl:hidden",
+              overlay
+                ? "border-white/35 bg-transparent text-white hover:border-[#5fe1d5]/75 hover:bg-white/10"
+                : "border-[#073b4c]/15 bg-white/75 text-[#073b4c] backdrop-blur-md hover:border-[#20bfb2]/55 hover:bg-[#dff8f4] dark:border-white/15 dark:bg-white/8 dark:text-white dark:hover:bg-white/12",
             )}
           >
             <Menu className="size-5" aria-hidden />
@@ -192,7 +198,15 @@ export function SiteHeader({ locale }: { locale: Locale }) {
   );
 }
 
-function DesktopNavItem({ item, pathname }: { item: PrimaryNavItem; pathname: string }) {
+function DesktopNavItem({
+  item,
+  pathname,
+  overlay,
+}: {
+  item: PrimaryNavItem;
+  pathname: string;
+  overlay: boolean;
+}) {
   const active = pathname === item.href || pathname.startsWith(`${item.href}/`);
 
   return (
@@ -203,14 +217,28 @@ function DesktopNavItem({ item, pathname }: { item: PrimaryNavItem; pathname: st
         className={cn(
           "relative flex items-center gap-1 whitespace-nowrap py-3 text-[0.7rem] font-medium transition-colors after:absolute after:inset-x-0 after:bottom-1 after:h-px after:origin-center after:scale-x-0 after:bg-[#5fe1d5] after:transition-transform hover:after:scale-x-100",
           item.emphasis
-            ? "text-[#087b83]"
+            ? overlay
+              ? "text-[#9cf5ec]"
+              : "text-[#087b83] dark:text-[#9cf5ec]"
             : active
-              ? "text-[#087b83] after:scale-x-100"
-              : "text-[#214f5b]/70 hover:text-[#073b4c]",
+              ? overlay
+                ? "text-[#9cf5ec] after:scale-x-100"
+                : "text-[#087b83] after:scale-x-100 dark:text-[#9cf5ec]"
+              : overlay
+                ? "text-white/75 hover:text-white"
+                : "text-[#214f5b]/70 hover:text-[#073b4c] dark:text-white/70 dark:hover:text-white",
         )}
       >
         {item.label}
-        {item.menu && <ChevronDown className="size-3.5 text-[#214f5b]/40" aria-hidden />}
+        {item.menu && (
+          <ChevronDown
+            className={cn(
+              "size-3.5",
+              overlay ? "text-white/50" : "text-[#214f5b]/40 dark:text-white/45",
+            )}
+            aria-hidden
+          />
+        )}
       </Link>
 
       {item.menu && (
@@ -248,23 +276,30 @@ function DesktopNavItem({ item, pathname }: { item: PrimaryNavItem; pathname: st
 function HeaderActions({
   locale,
   pathname,
+  overlay,
   className,
 }: {
   locale: Locale;
   pathname: string;
+  overlay: boolean;
   className?: string;
 }) {
   const isFa = locale === "fa";
 
   return (
     <div className={cn("items-center gap-3", className)} dir="ltr">
-      <ThemeToggle />
+      <ThemeToggle variant={overlay ? "light" : "default"} />
       <Link
         href={pathname}
         locale={isFa ? "en" : "fa"}
         hrefLang={isFa ? "en" : "fa"}
         aria-label={isFa ? "Switch to English" : "تغییر زبان به فارسی"}
-        className="inline-flex h-9 items-center gap-1.5 rounded-lg border border-[#073b4c]/15 bg-white/70 px-3 font-latin text-[0.68rem] font-semibold tracking-[0.14em] text-[#214f5b]/70 shadow-sm backdrop-blur-md transition-colors hover:border-[#20bfb2]/55 hover:text-[#073b4c]"
+        className={cn(
+          "inline-flex h-9 items-center gap-1.5 rounded-lg border px-3 font-latin text-[0.68rem] font-semibold tracking-[0.14em] shadow-sm transition-colors",
+          overlay
+            ? "border-white/30 bg-transparent text-white/75 hover:border-[#5fe1d5]/70 hover:text-white"
+            : "border-[#073b4c]/15 bg-white/70 text-[#214f5b]/70 backdrop-blur-md hover:border-[#20bfb2]/55 hover:text-[#073b4c] dark:border-white/15 dark:bg-white/8 dark:text-white/70 dark:hover:text-white",
+        )}
       >
         <Globe2 className="size-3.5" aria-hidden />
         {isFa ? "EN" : "FA"}
