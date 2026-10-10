@@ -3,6 +3,7 @@
 import { usePathname } from "next/navigation";
 import { useEffect, useState, useSyncExternalStore } from "react";
 
+import { Link } from "@/i18n/navigation";
 import type { AnalyticsEventInput } from "@/server/analytics/validation";
 
 const CONSENT_KEY = "rycode.analytics.consent.v1";
@@ -229,7 +230,13 @@ function ConsentBanner({ locale }: { locale: "fa" | "en" }): React.ReactElement 
       <p className="text-sm leading-7">
         {isPersian
           ? "برای بهبود تجربه سایت، آمار ناشناس و بدون ذخیره IP خام ثبت شود؟"
-          : "May we collect anonymous usage data, without storing your raw IP address?"}
+          : "May we collect anonymous usage data, without storing your raw IP address?"}{" "}
+        <Link
+          href="/privacy"
+          className="font-semibold text-[#0b766e] underline decoration-[#5fe1d5] underline-offset-4 dark:text-[#9cf5ec]"
+        >
+          {isPersian ? "حریم خصوصی" : "Privacy policy"}
+        </Link>
       </p>
       <div className="mt-3 flex gap-2">
         <button

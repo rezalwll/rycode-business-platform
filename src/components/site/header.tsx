@@ -1,24 +1,109 @@
 "use client";
 
-import { Globe2, Menu, X } from "lucide-react";
+import { ChevronDown, Globe2, Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 
 import { Link, usePathname } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
-import { primaryNav, type NavLink } from "@/lib/nav-content";
+import { primaryNav, type NavGroup, type PrimaryNavItem } from "@/lib/nav-content";
 import { cn } from "@/lib/utils";
 
 import { Logo } from "./logo";
 import { Container, CtaLink } from "./primitives";
 import { ThemeToggle } from "./theme-toggle";
 
-const englishPrimary: NavLink[] = [
-  { label: "Services", href: "/services" },
-  { label: "Solutions", href: "/solutions" },
-  { label: "Industries", href: "/industries" },
-  { label: "Projects", href: "/projects" },
-  { label: "Journal", href: "/blog" },
-  { label: "About", href: "/about" },
+const englishServiceMenu: NavGroup[] = [
+  {
+    title: "Build",
+    items: [
+      { label: "Websites and stores", href: "/services" },
+      { label: "Custom software", href: "/services" },
+      { label: "Existing product development", href: "/services" },
+    ],
+  },
+  {
+    title: "Grow",
+    items: [
+      { label: "Technical SEO", href: "/services" },
+      { label: "SEO audit", href: "/seo-audit" },
+      { label: "Integrations", href: "/integrations" },
+    ],
+  },
+  {
+    title: "Related paths",
+    items: [
+      { label: "Businesses and our solutions", href: "/solutions" },
+      { label: "Projects", href: "/projects" },
+      { label: "Installment payment", href: "/installment-purchase" },
+    ],
+  },
+];
+
+const englishProjectsMenu: NavGroup[] = [
+  {
+    title: "Portfolio",
+    items: [
+      { label: "All projects", href: "/projects" },
+      { label: "Concept studies", href: "/projects" },
+    ],
+  },
+  {
+    title: "Built around the business",
+    items: [
+      { label: "Industries", href: "/industries" },
+      { label: "Our solutions", href: "/solutions" },
+    ],
+  },
+];
+
+const englishCompanyMenu: NavGroup[] = [
+  {
+    title: "About and legal",
+    items: [
+      { label: "About us", href: "/about" },
+      { label: "Terms of use", href: "/terms" },
+      { label: "Privacy policy", href: "/privacy" },
+    ],
+  },
+];
+
+const englishBusinessMenu: NavGroup[] = [
+  {
+    title: "Our solutions",
+    items: [
+      { label: "All solutions", href: "/solutions" },
+      { label: "CRM and customer portals", href: "/solutions" },
+      { label: "Commerce and ordering", href: "/solutions" },
+      { label: "Booking and operations", href: "/solutions" },
+      { label: "Warranty and after-sales", href: "/solutions" },
+    ],
+  },
+  {
+    title: "For businesses like yours",
+    items: [
+      { label: "All industries", href: "/industries" },
+      { label: "Manufacturing", href: "/industries" },
+      { label: "Commerce and export", href: "/industries" },
+      { label: "Healthcare and clinics", href: "/industries" },
+      { label: "Education and real estate", href: "/industries" },
+    ],
+  },
+];
+
+const englishPrimary: PrimaryNavItem[] = [
+  { label: "Services", href: "/services", menu: englishServiceMenu },
+  { label: "Projects", href: "/projects", menu: englishProjectsMenu },
+  { label: "Blog", href: "/blog" },
+  { label: "Support", href: "/services/ongoing-support" },
+  { label: "FAQ", href: "/faq" },
+  { label: "Contact us", href: "/contact" },
+  { label: "About us", href: "/about", menu: englishCompanyMenu },
+  { label: "Get started", href: "/start-project", emphasis: true },
+  {
+    label: "Businesses and our solutions",
+    href: "/solutions",
+    menu: englishBusinessMenu,
+  },
 ];
 
 export function SiteHeader({ locale }: { locale: Locale }) {
@@ -48,22 +133,21 @@ export function SiteHeader({ locale }: { locale: Locale }) {
     <>
       <header
         className={cn(
-          "fixed inset-x-0 top-0 z-50 border-b text-white transition-[background-color,border-color,box-shadow,backdrop-filter] duration-500",
+          "fixed inset-x-0 top-0 z-50 border-b text-[#073b4c] transition-[background-color,border-color,box-shadow,backdrop-filter] duration-500",
           elevated
-            ? "border-white/12 bg-[#052f3c]/78 shadow-[0_12px_42px_rgba(1,25,34,0.18)] backdrop-blur-2xl backdrop-saturate-150"
-            : "border-transparent bg-transparent shadow-none backdrop-blur-none",
+            ? "border-[#073b4c]/10 bg-white/88 shadow-[0_12px_42px_rgba(7,59,76,0.10)] backdrop-blur-2xl backdrop-saturate-150"
+            : "border-[#073b4c]/7 bg-white/64 shadow-none backdrop-blur-xl",
         )}
       >
         <Container className="grid h-14 grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-4 [direction:ltr] sm:h-[72px] lg:gap-7">
           <HeaderActions
             locale={locale}
             pathname={pathname}
-            elevated={elevated}
             className="hidden min-w-0 justify-self-start xl:flex"
           />
 
           <Link href="/" aria-label="RYCODE" className="col-start-2 justify-self-center">
-            <Logo variant="light" className="text-[1.05rem]" />
+            <Logo className="text-[1.05rem]" />
           </Link>
 
           <nav
@@ -71,41 +155,16 @@ export function SiteHeader({ locale }: { locale: Locale }) {
             className="hidden min-w-0 items-center justify-self-end xl:flex"
             dir={isFa ? "rtl" : "ltr"}
           >
-            <ul className="flex items-center gap-5 2xl:gap-7">
-              {nav.map((item) => {
-                const active = pathname === item.href || pathname.startsWith(`${item.href}/`);
-                return (
-                  <li key={item.href}>
-                    <Link
-                      href={item.href}
-                      aria-current={active ? "page" : undefined}
-                      className={cn(
-                        "relative block whitespace-nowrap py-3 text-[0.78rem] font-medium transition-colors after:absolute after:inset-x-0 after:bottom-1 after:h-px after:origin-center after:scale-x-0 after:bg-[#5fe1d5] after:transition-transform hover:after:scale-x-100",
-                        active
-                          ? "text-[#9cf5ec] after:scale-x-100"
-                          : "text-white/70 hover:text-white",
-                      )}
-                    >
-                      {item.label}
-                    </Link>
-                  </li>
-                );
-              })}
+            <ul className="flex items-center gap-3 2xl:gap-5">
+              {nav.map((item, index) => (
+                <DesktopNavItem
+                  key={`${item.id ?? item.href}-${index}`}
+                  item={item}
+                  pathname={pathname}
+                />
+              ))}
             </ul>
           </nav>
-
-          <div className="col-start-1 row-start-1 flex items-center gap-2 justify-self-start xl:hidden">
-            <CtaLink
-              to="/start-project"
-              variant="outline"
-              className={cn(
-                "hidden h-10 px-4 text-xs sm:inline-flex !rounded-full !border-[#5fe1d5]/55 !text-white backdrop-blur-md hover:!border-[#5fe1d5] hover:!bg-[#5fe1d5]/22",
-                elevated ? "!bg-[#5fe1d5]/16" : "!bg-[#5fe1d5]/10",
-              )}
-            >
-              {isFa ? "شروع پروژه" : "Start a project"}
-            </CtaLink>
-          </div>
 
           <button
             type="button"
@@ -113,7 +172,7 @@ export function SiteHeader({ locale }: { locale: Locale }) {
             aria-label={isFa ? "باز کردن منو" : "Open menu"}
             aria-expanded={mobileOpen}
             className={cn(
-              "col-start-3 row-start-1 grid size-10 justify-self-end place-items-center rounded-xl border border-white/25 bg-white/6 text-white backdrop-blur-md transition-colors hover:border-[#5fe1d5]/70 hover:bg-[#5fe1d5]/12 xl:hidden",
+              "col-start-3 row-start-1 grid size-10 justify-self-end place-items-center rounded-xl border border-[#073b4c]/15 bg-white/75 text-[#073b4c] shadow-sm backdrop-blur-md transition-colors hover:border-[#20bfb2]/55 hover:bg-[#dff8f4] xl:hidden",
             )}
           >
             <Menu className="size-5" aria-hidden />
@@ -133,38 +192,79 @@ export function SiteHeader({ locale }: { locale: Locale }) {
   );
 }
 
+function DesktopNavItem({ item, pathname }: { item: PrimaryNavItem; pathname: string }) {
+  const active = pathname === item.href || pathname.startsWith(`${item.href}/`);
+
+  return (
+    <li className="group relative">
+      <Link
+        href={item.href}
+        aria-current={active ? "page" : undefined}
+        className={cn(
+          "relative flex items-center gap-1 whitespace-nowrap py-3 text-[0.7rem] font-medium transition-colors after:absolute after:inset-x-0 after:bottom-1 after:h-px after:origin-center after:scale-x-0 after:bg-[#5fe1d5] after:transition-transform hover:after:scale-x-100",
+          item.emphasis
+            ? "text-[#087b83]"
+            : active
+              ? "text-[#087b83] after:scale-x-100"
+              : "text-[#214f5b]/70 hover:text-[#073b4c]",
+        )}
+      >
+        {item.label}
+        {item.menu && <ChevronDown className="size-3.5 text-[#214f5b]/40" aria-hidden />}
+      </Link>
+
+      {item.menu && (
+        <div
+          className="pointer-events-none invisible absolute end-0 top-full z-50 w-[min(82vw,850px)] translate-y-2 rounded-2xl border border-[#073b4c]/10 bg-white/96 p-5 text-[#073b4c] opacity-0 shadow-[0_24px_70px_rgba(7,59,76,0.16)] backdrop-blur-2xl transition-[opacity,transform,visibility] duration-200 group-hover:pointer-events-auto group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100"
+          dir="rtl"
+        >
+          <div className="grid max-h-[min(70vh,520px)] grid-cols-2 gap-x-8 gap-y-6 overflow-y-auto pe-1 lg:grid-cols-3">
+            {item.menu.map((group) => (
+              <div key={group.title}>
+                <p className="mb-3 text-[0.67rem] font-bold tracking-[0.14em] text-[#5fe1d5]">
+                  {group.title}
+                </p>
+                <ul className="space-y-2">
+                  {group.items.map((child, index) => (
+                    <li key={`${child.id ?? child.href}-${child.label}-${index}`}>
+                      <Link
+                        href={child.href}
+                        className="block rounded-lg px-2 py-1.5 text-[0.72rem] leading-5 text-[#214f5b]/68 transition-colors hover:bg-[#e8f9f6] hover:text-[#073b4c]"
+                      >
+                        {child.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </li>
+  );
+}
+
 function HeaderActions({
   locale,
   pathname,
-  elevated,
   className,
 }: {
   locale: Locale;
   pathname: string;
-  elevated: boolean;
   className?: string;
 }) {
   const isFa = locale === "fa";
 
   return (
     <div className={cn("items-center gap-3", className)} dir="ltr">
-      <CtaLink
-        to="/start-project"
-        variant="outline"
-        className={cn(
-          "h-10 whitespace-nowrap px-5 text-xs !rounded-full !border-[#5fe1d5]/55 !text-white backdrop-blur-md hover:!border-[#5fe1d5] hover:!bg-[#5fe1d5]/22",
-          elevated ? "!bg-[#5fe1d5]/16" : "!bg-[#5fe1d5]/10",
-        )}
-      >
-        {isFa ? "شروع پروژه" : "Start a project"}
-      </CtaLink>
-      <ThemeToggle variant="light" />
+      <ThemeToggle />
       <Link
         href={pathname}
         locale={isFa ? "en" : "fa"}
         hrefLang={isFa ? "en" : "fa"}
         aria-label={isFa ? "Switch to English" : "تغییر زبان به فارسی"}
-        className="inline-flex h-9 items-center gap-1.5 rounded-lg border border-white/25 bg-white/5 px-3 font-latin text-[0.68rem] font-semibold tracking-[0.14em] text-white/70 backdrop-blur-md transition-colors hover:border-[#5fe1d5]/60 hover:text-white"
+        className="inline-flex h-9 items-center gap-1.5 rounded-lg border border-[#073b4c]/15 bg-white/70 px-3 font-latin text-[0.68rem] font-semibold tracking-[0.14em] text-[#214f5b]/70 shadow-sm backdrop-blur-md transition-colors hover:border-[#20bfb2]/55 hover:text-[#073b4c]"
       >
         <Globe2 className="size-3.5" aria-hidden />
         {isFa ? "EN" : "FA"}
@@ -180,7 +280,7 @@ function MobileMenu({
   onClose,
 }: {
   locale: Locale;
-  nav: NavLink[];
+  nav: PrimaryNavItem[];
   pathname: string;
   onClose: () => void;
 }) {
@@ -196,16 +296,16 @@ function MobileMenu({
       />
 
       <aside
-        className="relative ml-auto flex h-full w-full max-w-[420px] flex-col border-l border-[#5fe1d5]/15 bg-[#073b4c]/96 text-white shadow-2xl backdrop-blur-2xl"
+        className="relative ml-auto flex h-full w-full max-w-[420px] flex-col border-l border-[#073b4c]/10 bg-[#f8fdfc]/98 text-[#073b4c] shadow-2xl backdrop-blur-2xl"
         dir={isFa ? "rtl" : "ltr"}
       >
-        <div className="flex h-20 shrink-0 items-center justify-between border-b border-white/10 px-6">
-          <Logo variant="light" />
+        <div className="flex h-20 shrink-0 items-center justify-between border-b border-[#073b4c]/10 px-6">
+          <Logo />
           <button
             type="button"
             onClick={onClose}
             aria-label={isFa ? "بستن" : "Close"}
-            className="grid size-10 place-items-center border border-white/25 text-white transition-colors hover:border-white/60"
+            className="grid size-10 place-items-center rounded-xl border border-[#073b4c]/15 text-[#073b4c] transition-colors hover:border-[#20bfb2]/60 hover:bg-[#e8f9f6]"
           >
             <X className="size-5" aria-hidden />
           </button>
@@ -219,36 +319,79 @@ function MobileMenu({
             {nav.map((item, index) => {
               const active = pathname === item.href || pathname.startsWith(`${item.href}/`);
               return (
-                <li key={item.href} className="border-b border-white/10">
-                  <Link
-                    href={item.href}
-                    onClick={onClose}
-                    aria-current={active ? "page" : undefined}
-                    className={cn(
-                      "group flex items-center gap-5 py-5 text-2xl font-semibold transition-colors",
-                      active ? "text-[#5fe1d5]" : "text-white/85 hover:text-white",
+                <li
+                  key={`${item.id ?? item.href}-${index}`}
+                  className="border-b border-[#073b4c]/10 py-1"
+                >
+                  <div className="flex items-center gap-3">
+                    <Link
+                      href={item.href}
+                      onClick={onClose}
+                      aria-current={active ? "page" : undefined}
+                      className={cn(
+                        "group flex min-w-0 flex-1 items-center gap-5 py-4 text-2xl font-semibold transition-colors",
+                        item.emphasis
+                          ? "text-[#087b83]"
+                          : active
+                            ? "text-[#087b83]"
+                            : "text-[#153f4b]/85 hover:text-[#073b4c]",
+                      )}
+                    >
+                      <span className="font-latin text-[0.65rem] tracking-[0.16em] text-[#214f5b]/38">
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
+                      <span>{item.label}</span>
+                    </Link>
+                    {item.menu && (
+                      <details className="group/menu shrink-0">
+                        <summary
+                          aria-label={isFa ? `نمایش ${item.label}` : `Show ${item.label}`}
+                          className="grid size-10 cursor-pointer list-none place-items-center rounded-lg border border-[#073b4c]/15 text-[#214f5b]/55 transition-colors hover:border-[#20bfb2]/55 hover:bg-[#e8f9f6] hover:text-[#087b83] [&::-webkit-details-marker]:hidden"
+                        >
+                          <ChevronDown className="size-5 transition-transform group-open/menu:rotate-180" />
+                        </summary>
+                        <div className="mb-3 mt-1 grid gap-5 border-s-2 border-[#5fe1d5]/25 ps-5">
+                          {item.menu.map((group) => (
+                            <div key={group.title}>
+                              <p className="mb-2 text-[0.66rem] font-bold tracking-[0.14em] text-[#5fe1d5]">
+                                {group.title}
+                              </p>
+                              <ul className="space-y-1">
+                                {group.items.slice(0, 8).map((child, childIndex) => (
+                                  <li
+                                    key={`${child.id ?? child.href}-${child.label}-${childIndex}`}
+                                  >
+                                    <Link
+                                      href={child.href}
+                                      onClick={onClose}
+                                      className="block py-1 text-sm leading-6 text-[#214f5b]/68 transition-colors hover:text-[#087b83]"
+                                    >
+                                      {child.label}
+                                    </Link>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                          ))}
+                        </div>
+                      </details>
                     )}
-                  >
-                    <span className="font-latin text-[0.65rem] tracking-[0.16em] text-white/35">
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
-                    <span>{item.label}</span>
-                  </Link>
+                  </div>
                 </li>
               );
             })}
           </ul>
         </nav>
 
-        <div className="shrink-0 border-t border-white/10 px-6 py-6">
+        <div className="shrink-0 border-t border-[#073b4c]/10 bg-[#edfaf7] px-6 py-6">
           <div className="mb-5 flex items-center justify-between gap-3" dir="ltr">
-            <ThemeToggle variant="light" />
+            <ThemeToggle />
             <Link
               href={pathname}
               locale={isFa ? "en" : "fa"}
               hrefLang={isFa ? "en" : "fa"}
               onClick={onClose}
-              className="inline-flex h-9 items-center gap-2 border border-white/25 px-3 font-latin text-xs tracking-[0.14em] text-white/75"
+              className="inline-flex h-9 items-center gap-2 rounded-lg border border-[#073b4c]/15 bg-white px-3 font-latin text-xs tracking-[0.14em] text-[#214f5b]/75"
             >
               <Globe2 className="size-4" aria-hidden />
               {isFa ? "ENGLISH" : "فارسی"}
@@ -257,7 +400,7 @@ function MobileMenu({
           <CtaLink
             to="/start-project"
             variant="outline"
-            className="w-full !rounded-full !border-[#5fe1d5]/55 !bg-[#5fe1d5]/14 !text-white hover:!border-[#5fe1d5] hover:!bg-[#5fe1d5]/22"
+            className="w-full !rounded-full !border-[#20bfb2]/55 !bg-[#5fe1d5] !text-[#073b4c] hover:!border-[#20bfb2] hover:!bg-[#77e9df]"
           >
             {isFa ? "شروع یک پروژه" : "Start a project"}
           </CtaLink>

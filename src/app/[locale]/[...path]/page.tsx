@@ -6,6 +6,7 @@ import { PublicCatalogHub } from "@/components/public/cms-catalog";
 import {
   companyPageSlugs,
   CompanyPage,
+  InstallmentPage,
   PublicLeadPage,
   type CompanyPageSlug,
 } from "@/components/public/marketing-pages";
@@ -29,7 +30,12 @@ type PageProps = {
 export const dynamic = "force-dynamic";
 
 const staticMetadata: Record<
-  CompanyPageSlug | "contact" | "start-project" | "technical-review" | "seo-audit",
+  | CompanyPageSlug
+  | "contact"
+  | "start-project"
+  | "technical-review"
+  | "seo-audit"
+  | "installment-purchase",
   { fa: { title: string; description: string }; en: { title: string; description: string } }
 > = {
   about: {
@@ -74,6 +80,28 @@ const staticMetadata: Record<
     en: {
       title: "Technologies",
       description: "Technology selection principles and the stack behind the RYCODE platform.",
+    },
+  },
+  terms: {
+    fa: {
+      title: "قوانین استفاده",
+      description: "قواعد استفاده از وب‌سایت، ارسال درخواست و چارچوب شروع همکاری با رای‌کد.",
+    },
+    en: {
+      title: "Terms of use",
+      description:
+        "Terms governing website use, submitted requests and the framework for engaging RYCODE.",
+    },
+  },
+  privacy: {
+    fa: {
+      title: "حریم خصوصی",
+      description: "نحوه دریافت، استفاده، نگهداری و محافظت از اطلاعات کاربران رای‌کد.",
+    },
+    en: {
+      title: "Privacy policy",
+      description:
+        "How RYCODE collects, uses, retains and protects information submitted by website users.",
     },
   },
   faq: {
@@ -129,6 +157,18 @@ const staticMetadata: Record<
       title: "Request an SEO audit",
       description:
         "Request a prioritised technical and content review of your website's search visibility.",
+    },
+  },
+  "installment-purchase": {
+    fa: {
+      title: "خرید قسطی خدمات دیجیتال",
+      description:
+        "شرایط پرداخت مرحله‌ای و قسطی پروژه‌های واجد شرایط رای‌کد، بر اساس خروجی‌های قابل بررسی.",
+    },
+    en: {
+      title: "Installment payment for digital services",
+      description:
+        "Staged payment options for eligible RYCODE projects, tied to reviewable deliverables.",
     },
   },
 };
@@ -261,6 +301,8 @@ export default async function PublicPage({ params, searchParams }: PageProps) {
       );
     } else if (segment === "seo-audit") {
       content = <PublicLeadPage locale={locale} kind="seo_audit" sourcePath="/seo-audit" />;
+    } else if (segment === "installment-purchase") {
+      content = <InstallmentPage locale={locale} />;
     } else {
       notFound();
     }

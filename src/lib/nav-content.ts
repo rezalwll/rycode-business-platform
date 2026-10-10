@@ -1,6 +1,8 @@
 export type AppPath =
   | "/"
   | "/services"
+  | "/services/ongoing-support"
+  | "/installment-purchase"
   | "/solutions"
   | "/problems"
   | "/industries"
@@ -8,6 +10,8 @@ export type AppPath =
   | "/projects"
   | "/blog"
   | "/about"
+  | "/terms"
+  | "/privacy"
   | "/why-rycode"
   | "/process"
   | "/technologies"
@@ -18,8 +22,12 @@ export type AppPath =
   | "/seo-audit"
   | "/login";
 
-export type NavLink = { label: string; href: AppPath };
+export type NavLink = { label: string; href: AppPath; id?: string };
 export type NavGroup = { title: string; items: NavLink[] };
+export type PrimaryNavItem = NavLink & {
+  menu?: NavGroup[];
+  emphasis?: boolean;
+};
 
 export const serviceGroups: NavGroup[] = [
   {
@@ -129,13 +137,81 @@ export const industries = [
   "املاک",
 ];
 
-export const primaryNav: NavLink[] = [
-  { label: "خدمات", href: "/services" },
-  { label: "راهکارها", href: "/solutions" },
-  { label: "صنایع", href: "/industries" },
-  { label: "پروژه‌ها", href: "/projects" },
+const businessSolutionGroups: NavGroup[] = [
+  {
+    title: "راهکارهای ما",
+    items: [
+      { label: "همه راهکارها", href: "/solutions", id: "solutions-all" },
+      ...solutionGroups.flatMap((group) => group.items),
+    ],
+  },
+  {
+    title: "برای چه کسب‌وکارهایی؟",
+    items: [
+      { label: "همه صنایع", href: "/industries", id: "industries-all" },
+      ...industries.map((label, index) => ({
+        label,
+        href: "/industries" as const,
+        id: `industry-${index}`,
+      })),
+    ],
+  },
+];
+
+const servicesMenu: NavGroup[] = [
+  ...serviceGroups,
+  {
+    title: "مسیرهای مرتبط",
+    items: [
+      { label: "کسب‌وکارها و راهکارهای ما", href: "/solutions" },
+      { label: "نمونه‌کارها", href: "/projects" },
+      { label: "خرید قسطی خدمات", href: "/installment-purchase" },
+    ],
+  },
+];
+
+const projectsMenu: NavGroup[] = [
+  {
+    title: "نمونه‌کارها",
+    items: [
+      { label: "همه نمونه‌کارها", href: "/projects" },
+      { label: "مطالعات مفهومی", href: "/projects" },
+    ],
+  },
+  {
+    title: "بر اساس کسب‌وکار",
+    items: [
+      { label: "صنایع", href: "/industries" },
+      { label: "راهکارهای ما", href: "/solutions" },
+    ],
+  },
+];
+
+const companyMenu: NavGroup[] = [
+  {
+    title: "درباره و قوانین",
+    items: [
+      { label: "درباره ما", href: "/about" },
+      { label: "قوانین استفاده", href: "/terms" },
+      { label: "حریم خصوصی", href: "/privacy" },
+    ],
+  },
+];
+
+export const primaryNav: PrimaryNavItem[] = [
+  { label: "خدمات", href: "/services", menu: servicesMenu },
+  { label: "نمونه‌کارها", href: "/projects", menu: projectsMenu },
   { label: "بلاگ", href: "/blog" },
-  { label: "درباره رای‌کد", href: "/about" },
+  { label: "پشتیبانی", href: "/services/ongoing-support" },
+  { label: "سوالات متداول", href: "/faq" },
+  { label: "تماس با ما", href: "/contact" },
+  { label: "درباره ما", href: "/about", menu: companyMenu },
+  { label: "شروع کار", href: "/start-project", emphasis: true },
+  {
+    label: "کسب‌وکارها و راهکارهای ما",
+    href: "/solutions",
+    menu: businessSolutionGroups,
+  },
 ];
 
 export const footerNav: NavGroup[] = [
@@ -146,16 +222,17 @@ export const footerNav: NavGroup[] = [
       { label: "چرا رای‌کد", href: "/why-rycode" },
       { label: "فرآیند کار", href: "/process" },
       { label: "تکنولوژی‌ها", href: "/technologies" },
+      { label: "قوانین استفاده", href: "/terms" },
+      { label: "حریم خصوصی", href: "/privacy" },
     ],
   },
   {
     title: "مسیرها",
     items: [
       { label: "خدمات", href: "/services" },
-      { label: "راهکارها", href: "/solutions" },
-      { label: "مشکلات رایج", href: "/problems" },
-      { label: "صنایع", href: "/industries" },
-      { label: "یکپارچه‌سازی", href: "/integrations" },
+      { label: "پشتیبانی", href: "/services/ongoing-support" },
+      { label: "نمونه‌کارها", href: "/projects" },
+      { label: "کسب‌وکارها و راهکارهای ما", href: "/solutions" },
     ],
   },
   {
@@ -171,6 +248,7 @@ export const footerNav: NavGroup[] = [
     title: "شروع",
     items: [
       { label: "شروع پروژه", href: "/start-project" },
+      { label: "خرید قسطی خدمات", href: "/installment-purchase" },
       { label: "درخواست بررسی فنی", href: "/technical-review" },
       { label: "درخواست SEO Audit", href: "/seo-audit" },
       { label: "ورود مشتری", href: "/login" },

@@ -14,15 +14,21 @@ const STATIC_PATHS = [
   "/why-rycode",
   "/process",
   "/technologies",
+  "/terms",
+  "/privacy",
   "/contact",
   "/faq",
   "/start-project",
   "/technical-review",
   "/seo-audit",
+  "/installment-purchase",
   "/en",
   "/en/services",
   "/en/about",
   "/en/contact",
+  "/en/terms",
+  "/en/privacy",
+  "/en/installment-purchase",
 ];
 
 const KIND_PREFIX: Record<string, string> = {

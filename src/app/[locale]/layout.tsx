@@ -12,10 +12,10 @@ const appUrl = process.env.NEXT_PUBLIC_APP_URL ?? "https://rycode.ir";
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  colorScheme: "light dark",
+  colorScheme: "light",
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f9f6ef" },
-    { media: "(prefers-color-scheme: dark)", color: "#171614" },
+    { media: "(prefers-color-scheme: light)", color: "#f7fcfb" },
+    { media: "(prefers-color-scheme: dark)", color: "#f7fcfb" },
   ],
 };
 
@@ -81,7 +81,7 @@ export default async function LocaleLayout({
         <script
           dangerouslySetInnerHTML={{
             __html:
-              '(function(){try{var m=localStorage.getItem("rycode-theme")||"system";var d=m==="dark"||(m==="system"&&window.matchMedia("(prefers-color-scheme: dark)").matches);document.documentElement.classList.toggle("dark",d);}catch(e){}})();',
+              '(function(){try{var m=localStorage.getItem("rycode-theme")||"light";var d=m==="dark"||(m==="system"&&window.matchMedia("(prefers-color-scheme: dark)").matches);document.documentElement.classList.toggle("dark",d);}catch(e){}})();',
           }}
         />
       </head>

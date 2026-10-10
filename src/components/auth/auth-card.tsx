@@ -115,14 +115,14 @@ export function AuthCard({ locale, mode }: { locale: Locale; mode: Mode }) {
   if (status === "done") {
     return (
       <div
-        className="rounded-2xl border border-[#5fe1d5]/30 bg-white/[0.08] p-8 text-white shadow-[0_28px_90px_rgba(0,18,26,0.34)] backdrop-blur-md"
+        className="rounded-2xl border border-[#20bfb2]/25 bg-white/85 p-8 text-[#073b4c] shadow-[0_28px_90px_rgba(7,59,76,0.14)] backdrop-blur-md"
         role="status"
       >
-        <span className="grid size-11 place-items-center rounded-full bg-[#5fe1d5] text-[#00364a]">
+        <span className="grid size-11 place-items-center rounded-full bg-[#5fe1d5] text-[#073b4c]">
           ✓
         </span>
         <p className="mt-6 text-lg font-bold">{isFa ? "درخواست ثبت شد" : "Request received"}</p>
-        <p className="mt-3 text-sm leading-7 text-white/62">
+        <p className="mt-3 text-sm leading-7 text-[#315d68]/78">
           {mode === "register"
             ? isFa
               ? "برای فعال‌سازی حساب، لینک تأیید ارسال‌شده به ایمیل خود را باز کنید. پوشه هرزنامه را هم بررسی کنید."
@@ -136,10 +136,10 @@ export function AuthCard({ locale, mode }: { locale: Locale; mode: Mode }) {
   }
 
   return (
-    <section className="w-full rounded-2xl border border-white/15 bg-white/[0.075] p-7 text-white shadow-[0_28px_90px_rgba(0,18,26,0.38)] backdrop-blur-xl sm:p-9">
-      <p className="meta-label text-[#5fe1d5]">ACCOUNT / RYCODE</p>
+    <section className="w-full rounded-2xl border border-white/90 bg-white/85 p-7 text-[#073b4c] shadow-[0_28px_90px_rgba(7,59,76,0.14)] backdrop-blur-xl sm:p-9">
+      <p className="meta-label text-[#087b83]">ACCOUNT / RYCODE</p>
       <h1 className="mt-5 text-2xl font-light tracking-[-0.02em] sm:text-3xl">{title}</h1>
-      <p className="mt-3 text-sm leading-7 text-white/60">{description}</p>
+      <p className="mt-3 text-sm leading-7 text-[#315d68]/78">{description}</p>
 
       <form className="mt-8 space-y-5" noValidate onSubmit={submit}>
         {mode === "register" && (
@@ -195,7 +195,7 @@ export function AuthCard({ locale, mode }: { locale: Locale; mode: Mode }) {
 
         {error && (
           <p
-            className="rounded-xl border border-red-300/20 bg-red-400/10 p-3 text-sm leading-6 text-red-100"
+            className="rounded-xl border border-red-300/40 bg-red-50 p-3 text-sm leading-6 text-red-700"
             role="alert"
           >
             {error}
@@ -205,7 +205,7 @@ export function AuthCard({ locale, mode }: { locale: Locale; mode: Mode }) {
         <button
           type="submit"
           disabled={status === "saving"}
-          className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-full border border-[#5fe1d5]/60 bg-[#5fe1d5] px-6 text-sm font-bold text-[#00364a] shadow-[0_12px_32px_rgba(95,225,213,0.16)] transition-[background-color,transform] hover:-translate-y-0.5 hover:bg-[#74eadf] disabled:opacity-60"
+          className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-full border border-[#20bfb2]/60 bg-[#5fe1d5] px-6 text-sm font-bold text-[#073b4c] shadow-[0_12px_32px_rgba(95,225,213,0.16)] transition-[background-color,transform] hover:-translate-y-0.5 hover:bg-[#74eadf] disabled:opacity-60"
         >
           {status === "saving" && <Loader2 aria-hidden className="size-4 animate-spin" />}
           {status === "saving"
@@ -230,7 +230,7 @@ export function AuthCard({ locale, mode }: { locale: Locale; mode: Mode }) {
         </button>
       </form>
 
-      <div className="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-xs text-white/55">
+      <div className="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-xs text-[#315d68]/70">
         {mode === "login" && (
           <Link href="/forgot-password" className="transition-colors hover:text-[#5fe1d5]">
             {isFa ? "گذرواژه را فراموش کرده‌اید؟" : "Forgot password?"}
@@ -269,7 +269,7 @@ function Field({
   dir?: "ltr" | "rtl";
 }) {
   return (
-    <label className="block text-sm font-semibold text-white/82" htmlFor={id}>
+    <label className="block text-sm font-semibold text-[#214f5b]/90" htmlFor={id}>
       {label}
       <input
         id={id}
@@ -279,7 +279,7 @@ function Field({
         autoComplete={autoComplete}
         dir={dir}
         required
-        className="mt-2 h-12 w-full rounded-xl border border-white/15 bg-black/10 px-4 text-sm text-white outline-none transition-[border-color,background-color,box-shadow] focus:border-[#5fe1d5]/70 focus:bg-white/[0.07] focus:ring-4 focus:ring-[#5fe1d5]/10"
+        className="mt-2 h-12 w-full rounded-xl border border-[#073b4c]/15 bg-[#f4fbfa] px-4 text-sm text-[#073b4c] outline-none transition-[border-color,background-color,box-shadow] focus:border-[#20bfb2]/70 focus:bg-white focus:ring-4 focus:ring-[#5fe1d5]/20"
       />
     </label>
   );

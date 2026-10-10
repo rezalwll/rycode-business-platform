@@ -777,21 +777,23 @@ export function ProjectRescue() {
           <div dir="ltr" className="grid lg:grid-cols-[0.42fr_1fr]">
             <aside
               dir="rtl"
-              className="flex flex-col justify-between border-b border-border bg-[#173b32] p-7 text-white lg:border-r lg:border-b-0 sm:p-10 dark:bg-[#173128]"
+              className="flex flex-col justify-between border-b border-border bg-[#dff7ef] p-7 text-[#073b4c] lg:border-r lg:border-b-0 sm:p-10 dark:bg-[#173128] dark:text-white"
             >
               <div>
-                <div className="grid size-16 place-items-center rounded-full border border-emerald-300/25 bg-emerald-300/10 text-emerald-200">
+                <div className="grid size-16 place-items-center rounded-full border border-emerald-500/20 bg-emerald-500/10 text-emerald-700 dark:text-emerald-200">
                   <ShieldCheck className="size-7" />
                 </div>
-                <MetaLabel className="mt-10 text-emerald-200/65">نتیجه‌ی نمونه</MetaLabel>
+                <MetaLabel className="mt-10 text-emerald-700/75 dark:text-emerald-200/65">
+                  نتیجه‌ی نمونه
+                </MetaLabel>
                 <p className="mt-3 text-3xl leading-tight font-black sm:text-4xl">قابل نجات است</p>
-                <p className="mt-5 max-w-sm text-sm leading-7 text-white/60">
+                <p className="mt-5 max-w-sm text-sm leading-7 text-[#315d68]/78 dark:text-white/60">
                   ادامه از نسخه‌ی فعلی منطقی است؛ به‌شرط اینکه زیرساخت انتشار و بخش‌های پرریسک اول
                   اصلاح شوند.
                 </p>
               </div>
-              <div className="mt-12 border-t border-white/15 pt-5">
-                <p className="text-xs leading-6 text-white/50">
+              <div className="mt-12 border-t border-[#073b4c]/12 pt-5 dark:border-white/15">
+                <p className="text-xs leading-6 text-[#315d68]/65 dark:text-white/50">
                   این فقط نمونه‌ی شکل گزارش است؛ نتیجه‌ی واقعی بعد از دیدن کد و دسترسی‌ها مشخص
                   می‌شود
                 </p>
@@ -951,7 +953,7 @@ export function SelectedProjects() {
       />
 
       <Container className="relative z-10">
-        <div className="relative isolate overflow-hidden rounded-[1.35rem] bg-[#073b4c] px-6 py-8 text-white shadow-[0_20px_58px_rgba(17,71,83,0.14)] sm:px-9 sm:py-9 lg:px-11 lg:py-10">
+        <div className="relative isolate overflow-hidden rounded-[1.35rem] border border-white/90 bg-[linear-gradient(120deg,#e4faf5,#eef5ff_58%,#fff8df)] px-6 py-8 text-[#073b4c] shadow-[0_20px_58px_rgba(17,71,83,0.12)] sm:px-9 sm:py-9 lg:px-11 lg:py-10">
           <span
             className="pointer-events-none absolute -top-40 -right-24 size-[30rem] rounded-full bg-[#20bfb2]/16 blur-3xl"
             aria-hidden
@@ -963,7 +965,7 @@ export function SelectedProjects() {
           <span
             className="pointer-events-none absolute inset-0 opacity-[0.09]"
             style={{
-              backgroundImage: "radial-gradient(rgba(255,255,255,0.75) 0.7px, transparent 0.7px)",
+              backgroundImage: "radial-gradient(rgba(7,59,76,0.35) 0.7px, transparent 0.7px)",
               backgroundSize: "30px 30px",
             }}
             aria-hidden
@@ -973,21 +975,21 @@ export function SelectedProjects() {
             <div>
               <h2 className="max-w-3xl text-[clamp(1.9rem,3.4vw,3.25rem)] font-semibold leading-[1.22] tracking-[-0.03em]">
                 نمونه‌کارهای منتخب
-                <span className="text-[#5fe1d5]"> رای‌کد</span>
+                <span className="text-[#0ba99d]"> رای‌کد</span>
               </h2>
-              <p className="mt-5 max-w-2xl text-sm leading-8 text-white/62 sm:text-base sm:leading-9">
+              <p className="mt-5 max-w-2xl text-sm leading-8 text-[#315d68]/78 sm:text-base sm:leading-9">
                 هر پروژه از یک چالش مشخص شروع شده و به یک محصول دیجیتال روشن، کاربردی و قابل توسعه
                 رسیده است.
               </p>
             </div>
 
-            <div className="flex flex-col items-start lg:border-r lg:border-white/12 lg:pr-10">
-              <p className="text-sm font-medium leading-7 text-white/75">
+            <div className="flex flex-col items-start lg:border-r lg:border-[#073b4c]/12 lg:pr-10">
+              <p className="text-sm font-medium leading-7 text-[#315d68]/82">
                 سه مسئله، سه مسیر متفاوت؛ با یک هدف مشترک: ساختن چیزی که واقعاً کار کند.
               </p>
               <Link
                 href="/projects"
-                className="group mt-6 inline-flex min-h-11 items-center gap-3 rounded-full border border-[#5fe1d5]/35 bg-[#5fe1d5]/10 px-6 text-sm font-semibold text-[#b9fff8] backdrop-blur-md transition-colors hover:border-[#5fe1d5]/70 hover:bg-[#5fe1d5]/18"
+                className="group mt-6 inline-flex min-h-11 items-center gap-3 rounded-full border border-[#20bfb2]/45 bg-[#5fe1d5] px-6 text-sm font-semibold text-[#073b4c] shadow-sm backdrop-blur-md transition-colors hover:border-[#0ba99d] hover:bg-[#74eadf]"
               >
                 مشاهده همه پروژه‌ها
                 <ArrowUpLeft className="size-4 transition-transform group-hover:-translate-x-1 group-hover:-translate-y-1" />
@@ -1517,12 +1519,12 @@ export function PaymentSection() {
   return (
     <Section className="bg-white py-8 text-[#073b4c] sm:py-14">
       <Container>
-        <div className="relative isolate overflow-hidden rounded-[1.5rem] bg-[#073b4c] px-5 py-8 text-white shadow-[0_22px_64px_rgba(7,59,76,0.14)] sm:px-8 sm:py-9 lg:px-10 lg:py-10">
+        <div className="relative isolate overflow-hidden rounded-[1.5rem] border border-white/90 bg-[linear-gradient(120deg,#e3faf4,#f0f5ff_58%,#fff6d7)] px-5 py-8 text-[#073b4c] shadow-[0_22px_64px_rgba(7,59,76,0.12)] sm:px-8 sm:py-9 lg:px-10 lg:py-10">
           <div
             className="pointer-events-none absolute inset-0 -z-10"
             style={{
               backgroundImage:
-                "radial-gradient(circle at 88% 8%, rgba(95,225,213,0.2), transparent 28%), radial-gradient(circle at 8% 100%, rgba(125,200,255,0.18), transparent 31%), radial-gradient(circle at 64% 110%, rgba(185,167,255,0.12), transparent 26%)",
+                "radial-gradient(circle at 88% 8%, rgba(95,225,213,0.28), transparent 28%), radial-gradient(circle at 8% 100%, rgba(125,200,255,0.22), transparent 31%), radial-gradient(circle at 64% 110%, rgba(185,167,255,0.18), transparent 26%)",
             }}
             aria-hidden
           />
@@ -1530,7 +1532,7 @@ export function PaymentSection() {
             className="pointer-events-none absolute inset-0 -z-10 opacity-[0.07]"
             style={{
               backgroundImage:
-                "linear-gradient(rgba(255,255,255,.7) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.7) 1px, transparent 1px)",
+                "linear-gradient(rgba(7,59,76,.28) 1px, transparent 1px), linear-gradient(90deg, rgba(7,59,76,.28) 1px, transparent 1px)",
               backgroundSize: "42px 42px",
               maskImage: "linear-gradient(to bottom, black, transparent 80%)",
             }}
@@ -1539,29 +1541,31 @@ export function PaymentSection() {
 
           <div className="grid gap-9 lg:grid-cols-[1.12fr_0.88fr] lg:items-center lg:gap-14">
             <div>
+              <MetaLabel className="text-[#087b83]">INSTALLMENT / 11</MetaLabel>
               <h2 className="max-w-[18ch] text-[clamp(1.8rem,3.5vw,3.35rem)] font-bold leading-[1.2] tracking-[-0.03em]">
-                پروژه را مرحله‌ای جلو ببرید،
-                <span className="mt-1 block text-[#5fe1d5]">هزینه را هم مرحله‌ای پرداخت کنید.</span>
+                خرید قسطی خدمات دیجیتال،
+                <span className="mt-1 block text-[#0ba99d]">با خروجی‌های واقعی هر مرحله.</span>
               </h2>
-              <p className="mt-6 max-w-2xl text-sm leading-8 text-white/72 sm:text-base sm:leading-9">
+              <p className="mt-6 max-w-2xl text-sm leading-8 text-[#315d68]/80 sm:text-base sm:leading-9">
                 برای پروژه‌های واجد شرایط، مبلغ براساس فازهای واقعی کار تقسیم می‌شود. پیش از شروع،
-                خروجی هر مرحله، زمان تحویل و مبلغ همان مرحله در پیشنهاد همکاری مشخص است.
+                خروجی هر مرحله، زمان تحویل و مبلغ همان مرحله در پیشنهاد همکاری مشخص است؛ نه یک وعده
+                مبهم برای همه پروژه‌ها.
               </p>
 
               <div className="mt-8 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
                 <CtaLink
-                  to="/start-project"
+                  to="/installment-purchase"
                   className="h-12 rounded-xl bg-[#5fe1d5] px-6 text-[#073b4c] shadow-[0_14px_35px_rgba(95,225,213,0.2)] hover:bg-[#7aebe1] focus-visible:outline-[#5fe1d5]"
                 >
-                  بررسی شرایط پرداخت پروژه
+                  شرایط خرید قسطی را ببینید
                 </CtaLink>
-                <p className="max-w-[30ch] text-xs leading-6 text-white/48">
+                <p className="max-w-[30ch] text-xs leading-6 text-[#315d68]/68">
                   شرایط نهایی پس از بررسی دامنه و زمان‌بندی پروژه مشخص می‌شود.
                 </p>
               </div>
             </div>
 
-            <div className="rounded-[1.2rem] border border-white/12 bg-white/[0.07] p-5 shadow-xl backdrop-blur-xl sm:p-6">
+            <div className="rounded-[1.2rem] border border-white/90 bg-white/70 p-5 shadow-xl backdrop-blur-xl sm:p-6">
               <div className="flex items-start gap-4">
                 <span className="grid size-12 shrink-0 place-items-center rounded-2xl bg-[#5fe1d5] text-[#073b4c] shadow-[0_10px_30px_rgba(95,225,213,0.22)]">
                   <ClipboardList className="size-6" aria-hidden />
@@ -1570,13 +1574,13 @@ export function PaymentSection() {
                   <h3 className="text-lg font-extrabold leading-8 sm:text-xl">
                     هر پرداخت، بعد از یک خروجی قابل بررسی
                   </h3>
-                  <p className="mt-2 text-sm leading-7 text-white/58">
+                  <p className="mt-2 text-sm leading-7 text-[#315d68]/72">
                     مسیر مالی پروژه همان‌قدر روشن است که مسیر اجرا.
                   </p>
                 </div>
               </div>
 
-              <ul className="mt-7 space-y-3 border-t border-white/10 pt-6 text-sm font-semibold text-white/82">
+              <ul className="mt-7 space-y-3 border-t border-[#073b4c]/10 pt-6 text-sm font-semibold text-[#214f5b]/88">
                 {[
                   "خروجی هر مرحله از قبل مشخص است",
                   "پیش از ادامه، نتیجه را بررسی می‌کنید",
@@ -1593,26 +1597,26 @@ export function PaymentSection() {
             </div>
           </div>
 
-          <div className="mt-10 grid gap-3 border-t border-white/10 pt-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-10 grid gap-3 border-t border-[#073b4c]/10 pt-6 sm:grid-cols-2 lg:grid-cols-4">
             {paymentStages.map((stage) => {
               const Icon = stage.icon;
 
               return (
                 <div
                   key={stage.title}
-                  className="group rounded-[1.25rem] border border-white/10 bg-white/[0.055] p-5 transition duration-300 hover:-translate-y-1 hover:bg-white/[0.09]"
+                  className="group rounded-[1.25rem] border border-[#073b4c]/10 bg-white/60 p-5 transition duration-300 hover:-translate-y-1 hover:bg-white"
                 >
                   <div className="mb-8 flex items-center justify-between">
                     <span
-                      className="grid size-10 place-items-center rounded-xl border border-white/10"
+                      className="grid size-10 place-items-center rounded-xl border border-[#073b4c]/10"
                       style={{ color: stage.accent, backgroundColor: `${stage.accent}14` }}
                     >
                       <Icon className="size-5" aria-hidden />
                     </span>
-                    <span className="h-px w-12 bg-gradient-to-l from-white/25 to-transparent" />
+                    <span className="h-px w-12 bg-gradient-to-l from-[#073b4c]/20 to-transparent" />
                   </div>
                   <h3 className="text-base font-extrabold">{stage.title}</h3>
-                  <p className="mt-2 text-sm leading-7 text-white/55">{stage.description}</p>
+                  <p className="mt-2 text-sm leading-7 text-[#315d68]/72">{stage.description}</p>
                 </div>
               );
             })}

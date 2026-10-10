@@ -34,25 +34,25 @@ export function PageHero({
   visualItems?: readonly string[];
 }) {
   return (
-    <section className="relative isolate overflow-hidden bg-[#00364a] text-white">
-      <div className="absolute inset-0 -z-20 bg-[linear-gradient(110deg,rgba(0,30,42,0.98)_4%,rgba(0,54,74,0.9)_54%,rgba(0,49,67,0.55)_100%)]" />
-      <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_80%_20%,rgba(95,225,213,0.18),transparent_24%),radial-gradient(circle_at_12%_85%,rgba(99,146,255,0.16),transparent_28%)]" />
-      <div className="pointer-events-none absolute inset-0 -z-10 opacity-[0.08] [background-image:radial-gradient(rgba(255,255,255,0.8)_0.7px,transparent_0.7px)] [background-size:34px_34px]" />
+    <section className="relative isolate overflow-hidden bg-[#f7fcfb] text-[#073b4c]">
+      <div className="absolute inset-0 -z-20 bg-[linear-gradient(120deg,rgba(239,252,249,0.98)_4%,rgba(247,252,255,0.92)_54%,rgba(255,250,235,0.84)_100%)]" />
+      <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_80%_20%,rgba(95,225,213,0.24),transparent_24%),radial-gradient(circle_at_12%_85%,rgba(99,146,255,0.16),transparent_28%)]" />
+      <div className="pointer-events-none absolute inset-0 -z-10 opacity-[0.18] [background-image:radial-gradient(rgba(7,59,76,0.5)_0.7px,transparent_0.7px)] [background-size:34px_34px]" />
       <Container className="relative py-16 sm:py-20 lg:py-24">
         <div className="grid gap-10 lg:grid-cols-[1.18fr_0.82fr] lg:items-center lg:gap-16">
           <div className="reveal max-w-3xl">
-            <p className="flex items-center gap-3 text-xs font-semibold tracking-[0.16em] text-[#5fe1d5] uppercase">
-              <span className="inline-block h-px w-8 bg-[#5fe1d5]" />
+            <p className="flex items-center gap-3 text-xs font-semibold tracking-[0.16em] text-[#087b83] uppercase">
+              <span className="inline-block h-px w-8 bg-[#20bfb2]" />
               {eyebrow}
             </p>
-            <h1 className="mt-6 text-[clamp(2rem,4.4vw,4.5rem)] font-light leading-[1.2] tracking-[-0.035em] text-white">
+            <h1 className="mt-6 text-[clamp(2rem,4.4vw,4.5rem)] font-light leading-[1.2] tracking-[-0.035em] text-[#073b4c]">
               {title}
             </h1>
-            <p className="mt-6 max-w-2xl text-base leading-8 text-white/68 sm:text-lg sm:leading-9">
+            <p className="mt-6 max-w-2xl text-base leading-8 text-[#315d68]/78 sm:text-lg sm:leading-9">
               {lead}
             </p>
           </div>
-          <div className="relative overflow-hidden rounded-2xl border border-white/15 bg-white/[0.07] p-2 shadow-[0_30px_90px_rgba(0,18,26,0.4)] backdrop-blur-md">
+          <div className="relative overflow-hidden rounded-2xl border border-white/85 bg-white/72 p-2 shadow-[0_30px_90px_rgba(7,59,76,0.14)] backdrop-blur-md">
             <div className="relative aspect-[16/10] overflow-hidden rounded-xl">
               {imageSrc ? (
                 <Image
@@ -70,17 +70,17 @@ export function PageHero({
                   className="absolute inset-0 min-h-0"
                 />
               )}
-              <div className="absolute inset-0 bg-gradient-to-t from-[#002936]/95 via-[#00364a]/10 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#073b4c]/78 via-[#073b4c]/5 to-transparent" />
               <div className="absolute inset-x-4 bottom-4">
-                <span className="meta-label text-[#5fe1d5]">RYCODE / FIELD NOTE</span>
-                <p className="mt-2 text-sm leading-6 text-white/82">
+                <span className="meta-label text-[#a5fff1]">RYCODE / FIELD NOTE</span>
+                <p className="mt-2 text-sm leading-6 text-white/90">
                   {locale === "fa"
                     ? "اول ببینیم واقعاً چه چیزی لازم دارید."
                     : "Start with the real problem."}
                 </p>
               </div>
             </div>
-            <div className="mt-2 rounded-xl border border-white/10 bg-black/10 p-4 text-xs leading-6 text-white/60">
+            <div className="mt-2 rounded-xl border border-[#073b4c]/10 bg-[#e8f9f6] p-4 text-xs leading-6 text-[#315d68]/80">
               {aside ??
                 (locale === "fa"
                   ? "اول حرف‌هایتان را می‌شنویم؛ پیشنهاد فنی بعد از آن شکل می‌گیرد."
@@ -122,14 +122,15 @@ export function ActionLink({
 
 export function FinalBand({ locale }: { locale: Locale }) {
   return (
-    <section className="relative isolate overflow-hidden bg-[#00364a] py-16 text-white sm:py-24">
-      <div className="absolute inset-0 -z-20 bg-[linear-gradient(105deg,rgba(0,33,46,0.98),rgba(0,54,74,0.82),rgba(0,42,58,0.96))]" />
-      <div className="absolute -top-28 left-[18%] -z-10 size-72 rounded-full bg-[#5fe1d5]/15 blur-3xl" />
+    <section className="relative isolate overflow-hidden bg-[#effbf8] py-16 text-[#073b4c] sm:py-24">
+      <div className="absolute inset-0 -z-20 bg-[linear-gradient(105deg,#e9faf6,#f7fcff_55%,#fff7dc)]" />
+      <div className="absolute -top-28 left-[18%] -z-10 size-72 rounded-full bg-[#5fe1d5]/25 blur-3xl" />
+      <div className="absolute -bottom-32 right-[8%] -z-10 size-80 rounded-full bg-[#dbe7ff]/55 blur-3xl" />
       <Container className="relative">
-        <div className="grid gap-8 rounded-2xl border border-white/12 bg-white/[0.055] p-7 shadow-[0_24px_80px_rgba(0,22,30,0.24)] backdrop-blur-md sm:p-10 lg:grid-cols-[1fr_auto] lg:items-end">
+        <div className="grid gap-8 rounded-2xl border border-white/90 bg-white/72 p-7 shadow-[0_24px_80px_rgba(7,59,76,0.12)] backdrop-blur-md sm:p-10 lg:grid-cols-[1fr_auto] lg:items-end">
           <div>
-            <p className="meta-label text-[#5fe1d5]">RYCODE / START</p>
-            <h2 className="mt-4 max-w-3xl text-[clamp(1.65rem,3vw,3rem)] font-light leading-[1.3] tracking-[-0.025em] text-white">
+            <p className="meta-label text-[#087b83]">RYCODE / START</p>
+            <h2 className="mt-4 max-w-3xl text-[clamp(1.65rem,3vw,3rem)] font-light leading-[1.3] tracking-[-0.025em] text-[#073b4c]">
               {locale === "fa"
                 ? "از اصل مسئله شروع کنیم؛ راهش را با هم پیدا می‌کنیم."
                 : "Clarify the problem first; the engineering path follows."}
@@ -141,7 +142,7 @@ export function FinalBand({ locale }: { locale: Locale }) {
             </ActionLink>
             <Link
               href={localizedHref(locale, "/contact")}
-              className="inline-flex min-h-11 items-center rounded-full border border-white/25 bg-white/[0.04] px-6 text-sm font-bold text-white/85 transition-colors hover:border-white/55 hover:bg-white/[0.09] hover:text-white"
+              className="inline-flex min-h-11 items-center rounded-full border border-[#073b4c]/15 bg-white/75 px-6 text-sm font-bold text-[#174a58] transition-colors hover:border-[#20bfb2]/55 hover:bg-white hover:text-[#073b4c]"
             >
               {locale === "fa" ? "تماس با ما" : "Contact us"}
             </Link>

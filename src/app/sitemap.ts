@@ -12,11 +12,14 @@ const publicPages = [
   "why-rycode",
   "process",
   "technologies",
+  "terms",
+  "privacy",
   "faq",
   "contact",
   "start-project",
   "technical-review",
   "seo-audit",
+  "installment-purchase",
 ] as const;
 
 function baseUrl(): URL {

@@ -448,9 +448,12 @@ export function EnglishHome() {
       <section className="bg-brand-soft py-16 sm:py-20">
         <Container>
           <div className="grid gap-12 lg:grid-cols-[1.2fr_1fr] lg:items-end">
-            <h2 className="display-2 max-w-[14ch]">
-              Commercial milestones can follow delivery milestones
-            </h2>
+            <div>
+              <MetaLabel className="text-brand">INSTALLMENT / 11</MetaLabel>
+              <h2 className="display-2 mt-7 max-w-[14ch]">
+                Pay for digital work in clear delivery stages
+              </h2>
+            </div>
             <div>
               <p className="text-base leading-8 text-muted-foreground">
                 For suitable projects, scope and payment can be divided into explicit stages. Each
@@ -458,10 +461,10 @@ export function EnglishHome() {
                 commitment.
               </p>
               <Link
-                href="/start-project"
+                href="/installment-purchase"
                 className="mt-7 inline-flex items-center gap-2 text-sm font-bold text-brand hover:underline"
               >
-                Discuss an engagement <ArrowRight className="size-4" aria-hidden />
+                See installment options <ArrowRight className="size-4" aria-hidden />
               </Link>
             </div>
           </div>

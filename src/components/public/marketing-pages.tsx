@@ -10,7 +10,15 @@ import { listPublicFaqs } from "@/server/queries/public-content";
 import { ActionLink, FinalBand, JsonLd, PageHero } from "./shared";
 import { LeadForm } from "./lead-form";
 
-export const companyPageSlugs = ["about", "why-rycode", "process", "technologies", "faq"] as const;
+export const companyPageSlugs = [
+  "about",
+  "why-rycode",
+  "process",
+  "technologies",
+  "faq",
+  "terms",
+  "privacy",
+] as const;
 export type CompanyPageSlug = (typeof companyPageSlugs)[number];
 
 type LocalText = { fa: string; en: string };
@@ -186,6 +194,116 @@ const pages: Record<CompanyPageSlug, PageCopy> = {
       },
     ],
   },
+  terms: {
+    eyebrow: { fa: "قوانین استفاده", en: "Terms of use" },
+    title: {
+      fa: "چارچوب روشن استفاده از وب‌سایت و همکاری با رای‌کد",
+      en: "A clear framework for using this website and working with RYCODE",
+    },
+    lead: {
+      fa: "این صفحه قواعد استفاده از سایت را توضیح می‌دهد. تعهدهای هر پروژه، زمان، هزینه و دامنه کار فقط در توافق یا قرارداد همان پروژه قطعی می‌شوند.",
+      en: "These terms govern use of this website. Project scope, timing, fees and commitments become binding only through the written agreement for that engagement.",
+    },
+    sections: [
+      {
+        title: { fa: "پذیرش و دامنه", en: "Acceptance and scope" },
+        body: {
+          fa: "با استفاده از این وب‌سایت می‌پذیرید از آن برای هدف قانونی و بدون آسیب‌زدن به سایت، کاربران یا زیرساخت استفاده کنید. این قواعد فقط استفاده از وب‌سایت را پوشش می‌دهند و جای قرارداد اختصاصی پروژه را نمی‌گیرند.",
+          en: "By using this website, you agree to use it lawfully and without harming the service, its users or infrastructure. These terms cover website use and do not replace a project-specific agreement.",
+        },
+      },
+      {
+        title: { fa: "درخواست، برآورد و شروع همکاری", en: "Requests, estimates and engagement" },
+        body: {
+          fa: "ارسال فرم، پیام یا درخواست بررسی به معنی پذیرش پروژه، رزرو ظرفیت یا ارائه قیمت قطعی نیست. همکاری زمانی شروع می‌شود که دامنه کار، خروجی‌ها، مسئولیت‌ها، مبلغ و زمان‌بندی به‌صورت مکتوب تأیید شده باشند.",
+          en: "Submitting a form or review request does not constitute project acceptance, reserved capacity or a final quote. Work starts only after scope, deliverables, responsibilities, fees and timing are confirmed in writing.",
+        },
+      },
+      {
+        title: { fa: "حساب‌ها و دسترسی‌ها", en: "Accounts and access" },
+        body: {
+          fa: "اگر حساب مشتری دریافت می‌کنید، مسئول نگهداری امن اطلاعات ورود و فعالیت‌هایی هستید که با حساب شما انجام می‌شود. رمز، کلید API یا اطلاعات محرمانه را در فرم‌های عمومی ارسال نکنید؛ انتقال دسترسی حساس باید از مسیر امن توافق‌شده انجام شود.",
+          en: "If you receive a client account, you are responsible for safeguarding its credentials and activity. Do not submit passwords, API keys or confidential material through public forms; sensitive access must use an agreed secure channel.",
+        },
+      },
+      {
+        title: { fa: "محتوا و مالکیت", en: "Content and ownership" },
+        body: {
+          fa: "محتوای عمومی، طراحی و نشان رای‌کد بدون اجازه نباید بازنشر یا به نام دیگری ارائه شوند. مالکیت کد، فایل‌ها و خروجی‌های پروژه مطابق قرارداد همان پروژه تعیین می‌شود و پس از انجام تعهدهای توافق‌شده تحویل خواهد شد.",
+          en: "RYCODE's public content, design and marks may not be republished or misrepresented without permission. Ownership of project code, files and deliverables is governed by that project's written agreement and agreed fulfilment conditions.",
+        },
+      },
+      {
+        title: { fa: "اطلاعات سایت و محدودیت مسئولیت", en: "Website information and limitations" },
+        body: {
+          fa: "تلاش می‌کنیم اطلاعات سایت دقیق و در دسترس باشد، اما مطالب عمومی تضمین نتیجه، رتبه، درآمد یا دسترس‌پذیری بدون وقفه نیستند. تصمیم‌های اجرایی و تعهدهای قابل اتکا باید بر اساس بررسی و توافق مکتوب همان پروژه باشند.",
+          en: "We aim to keep website information accurate and available, but public content does not guarantee outcomes, rankings, revenue or uninterrupted availability. Actionable commitments must be based on the relevant assessment and written agreement.",
+        },
+      },
+      {
+        title: { fa: "تغییرات و ارتباط", en: "Changes and contact" },
+        body: {
+          fa: "ممکن است این قواعد با تغییر خدمات یا امکانات سایت به‌روزرسانی شوند. نسخه منتشرشده در همین صفحه ملاک استفاده بعدی است. برای پرسش درباره این شرایط از صفحه تماس با ما پیام بفرستید.",
+          en: "These terms may be updated as the service or website changes. The version published here applies to subsequent use. Questions about these terms can be sent through the contact page.",
+        },
+      },
+    ],
+  },
+  privacy: {
+    eyebrow: { fa: "حریم خصوصی", en: "Privacy policy" },
+    title: {
+      fa: "داده‌ای را می‌گیریم که برای پاسخ‌گویی و ارائه خدمت لازم است",
+      en: "We collect the data needed to respond and operate the service",
+    },
+    lead: {
+      fa: "اینجا توضیح می‌دهیم چه اطلاعاتی هنگام استفاده از سایت یا ارسال درخواست ثبت می‌شود، چرا از آن استفاده می‌کنیم و چه انتخاب‌هایی دارید.",
+      en: "This policy explains what information is recorded when you use the website or submit a request, why it is used and what choices you have.",
+    },
+    sections: [
+      {
+        title: { fa: "اطلاعاتی که خودتان می‌فرستید", en: "Information you provide" },
+        body: {
+          fa: "در فرم‌های تماس، شروع پروژه، بررسی فنی یا سئو ممکن است نام، راه ارتباطی، نشانی وب‌سایت، توضیح نیاز و فایل‌های مرتبط را دریافت کنیم. در حساب مشتری نیز اطلاعات لازم برای ورود، پروژه، پشتیبانی، فایل‌ها و پیگیری امور ثبت می‌شود.",
+          en: "Contact, project, technical review and SEO forms may collect your name, contact details, website address, request context and relevant files. Client accounts also store the information required for access, projects, support, files and follow-up.",
+        },
+      },
+      {
+        title: { fa: "دلیل استفاده از اطلاعات", en: "How information is used" },
+        body: {
+          fa: "از اطلاعات برای پاسخ به درخواست، بررسی امکان همکاری، ارائه و پشتیبانی خدمت، امنیت حساب، ثبت سابقه تصمیم‌ها و انجام تعهدهای قراردادی استفاده می‌کنیم. داده‌ها برای ارسال پیام تبلیغاتی بدون انتخاب یا رضایت شما استفاده نمی‌شوند.",
+          en: "Information is used to respond, assess an engagement, deliver and support services, secure accounts, record decisions and fulfil contractual obligations. It is not used for promotional messaging without your choice or consent.",
+        },
+      },
+      {
+        title: { fa: "آمار بازدید و کوکی‌ها", en: "Analytics and cookies" },
+        body: {
+          fa: "سایت پیش از فعال‌کردن آمار بازدید از شما اجازه می‌گیرد. در صورت پذیرش، رویدادهای فنی و رفتاری محدود برای بهبود تجربه ثبت می‌شوند و IP خام نگهداری نمی‌شود. کوکی‌های ضروری ورود و امنیت ممکن است برای کارکرد حساب مشتری لازم باشند.",
+          en: "The site asks before enabling usage analytics. If accepted, limited technical and behavioural events are recorded to improve the experience, without retaining your raw IP address. Essential authentication and security cookies may be required for client accounts.",
+        },
+      },
+      {
+        title: { fa: "نگهداری و امنیت", en: "Retention and security" },
+        body: {
+          fa: "اطلاعات را تا زمانی نگه می‌داریم که برای پیگیری درخواست، ارائه خدمت، امنیت، سوابق قراردادی یا الزام قانونی لازم باشد. دسترسی‌ها محدود می‌شوند و برای انتقال اطلاعات حساس باید از مسیر امن استفاده شود؛ با این حال هیچ سامانه‌ای مصونیت مطلق ندارد.",
+          en: "Information is kept while needed for request follow-up, service delivery, security, contractual records or legal obligations. Access is restricted and sensitive transfers use secure channels, although no system can promise absolute security.",
+        },
+      },
+      {
+        title: { fa: "اشتراک‌گذاری", en: "Sharing" },
+        body: {
+          fa: "اطلاعات شخصی فروخته نمی‌شود. داده فقط در حد لازم با ارائه‌دهندگان زیرساختی که برای میزبانی، ارسال پیام، ذخیره فایل یا امنیت استفاده می‌کنیم، یا در صورت الزام قانونی، پردازش و به اشتراک گذاشته می‌شود.",
+          en: "Personal information is not sold. Data is processed or shared only as needed with infrastructure providers used for hosting, messaging, file storage or security, or where disclosure is legally required.",
+        },
+      },
+      {
+        title: { fa: "انتخاب‌ها و درخواست شما", en: "Your choices and requests" },
+        body: {
+          fa: "می‌توانید آمار اختیاری را رد کنید و برای مشاهده، اصلاح یا حذف اطلاعات قابل‌حذف خود از صفحه تماس با ما درخواست بفرستید. ممکن است برای امنیت، احراز هویت درخواست‌کننده لازم باشد و برخی سوابق قراردادی یا قانونی قابل حذف فوری نباشند.",
+          en: "You can decline optional analytics and request access, correction or deletion of eligible information through the contact page. Identity verification may be required for security, and some contractual or legal records may not be immediately deletable.",
+        },
+      },
+    ],
+  },
   faq: {
     eyebrow: { fa: "سوالات متداول", en: "Frequently asked questions" },
     title: {
@@ -254,6 +372,8 @@ export async function CompanyPage({ locale, slug }: { locale: Locale; slug: Comp
     process: "ordering",
     technologies: "integration",
     faq: "support",
+    terms: "article",
+    privacy: "support",
   };
   const isFaq = slug === "faq";
   const managedFaqs = isFaq ? await listPublicFaqs(locale) : [];
@@ -325,6 +445,172 @@ export async function CompanyPage({ locale, slug }: { locale: Locale; slug: Comp
                 </div>
               </article>
             ))}
+          </div>
+        </Container>
+      </section>
+      <FinalBand locale={locale} />
+    </>
+  );
+}
+
+type InstallmentCopy = {
+  eyebrow: LocalText;
+  title: LocalText;
+  lead: LocalText;
+  aside: LocalText;
+  steps: Array<{ title: LocalText; body: LocalText }>;
+  conditions: LocalText[];
+  notes: LocalText[];
+};
+
+const installmentCopy: InstallmentCopy = {
+  eyebrow: { fa: "خرید قسطی خدمات", en: "Installment payment" },
+  title: {
+    fa: "پروژه را شروع کنید؛ هزینه را با خروجی‌های واقعی تقسیم کنید",
+    en: "Start the project and spread the cost across real deliverables",
+  },
+  lead: {
+    fa: "برای پروژه‌های واجد شرایط، هزینه به‌جای یک پرداخت سنگین، بر اساس فازهای مشخص و قابل بررسی پرداخت می‌شود.",
+    en: "For eligible projects, the cost can be split into clear, reviewable stages instead of one large upfront payment.",
+  },
+  aside: {
+    fa: "تعداد قسط و مبلغ هر مرحله بعد از شناخت دامنه، زمان‌بندی و ریسک پروژه مشخص می‌شود.",
+    en: "The number and amount of instalments are defined after scope, timing and project risk are understood.",
+  },
+  steps: [
+    {
+      title: { fa: "۱. شناخت و برآورد", en: "1. Discover and estimate" },
+      body: {
+        fa: "مسئله، دامنه، اولویت‌ها و خروجی‌های قابل تحویل را با هم روشن می‌کنیم.",
+        en: "We clarify the problem, scope, priorities and reviewable deliverables together.",
+      },
+    },
+    {
+      title: { fa: "۲. تقسیم به فازهای واقعی", en: "2. Split into real stages" },
+      body: {
+        fa: "هر فاز هدف، زمان، مبلغ و نقطه پذیرش خودش را دارد؛ نه یک عدد مبهم برای کل پروژه.",
+        en: "Each stage gets its own goal, timing, amount and acceptance point—not an opaque total.",
+      },
+    },
+    {
+      title: { fa: "۳. تحویل و پرداخت مرحله‌ای", en: "3. Review, deliver and pay" },
+      body: {
+        fa: "بعد از ارائه خروجی و تأیید مرحله، پرداخت بعدی طبق توافق انجام می‌شود.",
+        en: "After a stage is demonstrated and accepted, the next payment follows the written agreement.",
+      },
+    },
+  ],
+  conditions: [
+    {
+      fa: "دامنه پروژه و خروجی هر فاز قابل تعریف باشد",
+      en: "The project scope and stage outputs can be defined",
+    },
+    {
+      fa: "زمان‌بندی و مسئولیت‌های دو طرف از ابتدا روشن باشد",
+      en: "Timing and both parties' responsibilities are clear from the start",
+    },
+    {
+      fa: "مبلغ و نقطه پرداخت هر مرحله در توافق مکتوب ثبت شود",
+      en: "Each stage's amount and payment point are recorded in writing",
+    },
+  ],
+  notes: [
+    {
+      fa: "خرید قسطی در این صفحه به معنی پرداخت مرحله‌ای هزینه خدمات است، نه دریافت اعتبار بانکی یا وام.",
+      en: "Installment payment here means staged payment for services, not a bank loan or credit facility.",
+    },
+    {
+      fa: "این امکان برای همه پروژه‌ها خودکار نیست و پس از بررسی دامنه و ریسک تصمیم‌گیری می‌شود.",
+      en: "This option is not automatic for every project; eligibility is decided after scope and risk review.",
+    },
+  ],
+};
+
+export function InstallmentPage({ locale }: { locale: Locale }) {
+  const copy = installmentCopy;
+
+  return (
+    <>
+      <PageHero
+        locale={locale}
+        eyebrow={t(copy.eyebrow, locale)}
+        title={t(copy.title, locale)}
+        lead={t(copy.lead, locale)}
+        aside={t(copy.aside, locale)}
+        visualVariant="dashboard"
+        visualItems={[
+          locale === "fa" ? "دامنه روشن" : "Clear scope",
+          locale === "fa" ? "خروجی قابل بررسی" : "Reviewable output",
+          locale === "fa" ? "پرداخت مرحله‌ای" : "Staged payment",
+        ]}
+      />
+
+      <section className="relative overflow-hidden bg-[#f7fbfa] py-14 sm:py-20">
+        <div className="pointer-events-none absolute inset-0 opacity-70 [background-image:radial-gradient(circle_at_8%_16%,rgba(32,191,178,0.11),transparent_25%),radial-gradient(circle_at_88%_72%,rgba(99,146,255,0.08),transparent_27%)]" />
+        <Container>
+          <div className="relative grid gap-4 lg:grid-cols-3">
+            {copy.steps.map((step, index) => (
+              <article
+                key={step.title.en}
+                className="rounded-2xl border border-[#0b5262]/12 bg-white/80 p-6 shadow-[0_12px_36px_rgba(31,92,105,0.06)] backdrop-blur-sm sm:p-8"
+              >
+                <span className="meta-label text-[#0b766e]">
+                  {String(index + 1).padStart(2, "0")} / RYCODE
+                </span>
+                <h2 className="mt-10 text-xl font-bold leading-8 text-[#073b4c]">
+                  {t(step.title, locale)}
+                </h2>
+                <p className="mt-4 text-sm leading-8 text-muted-foreground">
+                  {t(step.body, locale)}
+                </p>
+              </article>
+            ))}
+          </div>
+
+          <div className="relative mt-10 grid gap-8 rounded-2xl border border-white/90 bg-[linear-gradient(120deg,#e4faf5,#eef5ff_58%,#fff8df)] p-7 text-[#073b4c] shadow-[0_22px_70px_rgba(7,59,76,0.12)] sm:p-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+            <div>
+              <span className="meta-label text-[#087b83]">
+                {locale === "fa" ? "شرایط بررسی" : "ELIGIBILITY"}
+              </span>
+              <h2 className="mt-5 text-2xl font-bold leading-9 sm:text-3xl">
+                {locale === "fa"
+                  ? "چه پروژه‌هایی مناسب این مسیرند؟"
+                  : "Which projects fit this path?"}
+              </h2>
+              <p className="mt-4 text-sm leading-8 text-[#315d68]/78">
+                {locale === "fa"
+                  ? "به‌جای قول ثابت برای همه، شرایط را بر اساس وضعیت واقعی پروژه مشخص می‌کنیم."
+                  : "Instead of making a fixed promise for every project, we assess the real situation first."}
+              </p>
+            </div>
+            <ul className="grid gap-3">
+              {copy.conditions.map((condition) => (
+                <li
+                  key={condition.en}
+                  className="flex items-start gap-3 rounded-xl border border-[#073b4c]/10 bg-white/65 p-4 text-sm leading-7 text-[#315d68]/88"
+                >
+                  <CheckCircle2 className="mt-1 size-4 shrink-0 text-[#0ba99d]" aria-hidden />
+                  {t(condition, locale)}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="relative mt-8 grid gap-3 border-t border-[#0b5262]/12 pt-7 text-sm leading-8 text-muted-foreground sm:grid-cols-2">
+            {copy.notes.map((note) => (
+              <p key={note.en} className="rounded-xl bg-white/65 p-4">
+                {t(note, locale)}
+              </p>
+            ))}
+          </div>
+
+          <div className="relative mt-10 flex flex-wrap items-center gap-4">
+            <ActionLink locale={locale} href="/start-project">
+              {locale === "fa" ? "درخواست بررسی شرایط" : "Request an eligibility review"}
+            </ActionLink>
+            <ActionLink locale={locale} href="/contact" secondary>
+              {locale === "fa" ? "سؤال دارید؟ تماس بگیرید" : "Have a question? Contact us"}
+            </ActionLink>
           </div>
         </Container>
       </section>

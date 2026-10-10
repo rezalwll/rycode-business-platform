@@ -26,9 +26,9 @@ export function ThemeToggle({
   variant?: "default" | "light";
 }) {
   const [mode, setMode] = useState<Mode>(() => {
-    if (typeof window === "undefined") return "system";
+    if (typeof window === "undefined") return "light";
     const stored = localStorage.getItem(KEY);
-    return stored === "light" || stored === "dark" || stored === "system" ? stored : "system";
+    return stored === "light" || stored === "dark" || stored === "system" ? stored : "light";
   });
 
   useEffect(() => {

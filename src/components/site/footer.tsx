@@ -13,15 +13,17 @@ const englishFooter = [
       { label: "Why RYCODE", href: "/why-rycode" },
       { label: "Process", href: "/process" },
       { label: "Technologies", href: "/technologies" },
+      { label: "Terms of use", href: "/terms" },
+      { label: "Privacy policy", href: "/privacy" },
     ],
   },
   {
     title: "Explore",
     items: [
       { label: "Services", href: "/services" },
-      { label: "Solutions", href: "/solutions" },
-      { label: "Problems", href: "/problems" },
-      { label: "Industries", href: "/industries" },
+      { label: "Support", href: "/services/ongoing-support" },
+      { label: "Projects", href: "/projects" },
+      { label: "Businesses and our solutions", href: "/solutions" },
     ],
   },
   {
@@ -37,6 +39,7 @@ const englishFooter = [
     title: "Start",
     items: [
       { label: "Start a project", href: "/start-project" },
+      { label: "Installment payment", href: "/installment-purchase" },
       { label: "Technical review", href: "/technical-review" },
       { label: "SEO audit", href: "/seo-audit" },
       { label: "Client login", href: "/login" },
@@ -49,20 +52,20 @@ export function SiteFooter({ locale }: { locale: Locale }) {
   const groups = isFa ? footerNav : englishFooter;
 
   return (
-    <footer className="relative overflow-hidden bg-[#052f3c] text-white">
+    <footer className="relative overflow-hidden bg-[#eaf8f5] text-[#073b4c]">
       <div
         className="pointer-events-none absolute inset-0 opacity-70"
         style={{
           backgroundImage:
-            "radial-gradient(circle at 88% 4%, rgba(95,225,213,0.16), transparent 28%), radial-gradient(circle at 4% 82%, rgba(125,200,255,0.1), transparent 26%)",
+            "radial-gradient(circle at 88% 4%, rgba(95,225,213,0.28), transparent 28%), radial-gradient(circle at 4% 82%, rgba(125,200,255,0.18), transparent 26%)",
         }}
         aria-hidden
       />
       <div
-        className="pointer-events-none absolute inset-0 opacity-[0.05]"
+        className="pointer-events-none absolute inset-0 opacity-[0.08]"
         style={{
           backgroundImage:
-            "linear-gradient(rgba(255,255,255,.8) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.8) 1px, transparent 1px)",
+            "linear-gradient(rgba(7,59,76,.35) 1px, transparent 1px), linear-gradient(90deg, rgba(7,59,76,.35) 1px, transparent 1px)",
           backgroundSize: "48px 48px",
           maskImage: "linear-gradient(to bottom, black, transparent 72%)",
         }}
@@ -70,11 +73,11 @@ export function SiteFooter({ locale }: { locale: Locale }) {
       />
 
       <Container className="relative z-10 pt-12 pb-7 sm:pt-16">
-        <div className="border-b border-white/12 pb-10 sm:pb-12">
+        <div className="border-b border-[#073b4c]/12 pb-10 sm:pb-12">
           <div dir="ltr" className="flex items-end justify-between gap-6">
             <span className="text-[clamp(3.1rem,9vw,7.8rem)] leading-[0.8] font-extrabold tracking-[-0.055em]">
-              <span className="text-white">RY</span>
-              <span className="text-[#5fe1d5]">CODE</span>
+              <span className="text-[#073b4c]">RY</span>
+              <span className="text-[#0ba99d]">CODE</span>
             </span>
             <span className="hidden pb-1 text-[0.65rem] font-semibold tracking-[0.18em] text-white/36 uppercase sm:block">
               rycode.ir
@@ -89,14 +92,14 @@ export function SiteFooter({ locale }: { locale: Locale }) {
                 ? "یک مسئله واقعی، یک راه‌حل دقیق."
                 : "A real problem deserves a clear solution."}
             </h2>
-            <p className="mt-4 text-sm leading-8 text-white/58">
+            <p className="mt-4 text-sm leading-8 text-[#315d68]/78">
               {isFa
                 ? "از ساخت محصول جدید تا نجات یک پروژه نیمه‌کاره؛ مسئله را می‌فهمیم و مسیر اجرایی روشن برایش می‌سازیم."
                 : "From building a new product to rescuing a stalled one, we turn the problem into a clear path forward."}
             </p>
             <Link
               href="/start-project"
-              className="group mt-7 inline-flex h-11 items-center gap-3 rounded-full bg-[#5fe1d5] px-5 text-sm font-bold text-[#052f3c] transition-colors hover:bg-[#7aebe1]"
+              className="group mt-7 inline-flex h-11 items-center gap-3 rounded-full bg-[#5fe1d5] px-5 text-sm font-bold text-[#073b4c] shadow-[0_10px_26px_rgba(32,191,178,0.18)] transition-colors hover:bg-[#7aebe1]"
             >
               {isFa ? "شروع یک گفت‌وگو" : "Start a conversation"}
               <ArrowUpLeft className="size-4 transition-transform group-hover:-translate-x-1 group-hover:-translate-y-1" />
@@ -115,7 +118,7 @@ export function SiteFooter({ locale }: { locale: Locale }) {
                     <li key={item.label}>
                       <Link
                         href={item.href}
-                        className="group inline-flex items-center gap-2 text-sm text-white/54 transition-colors hover:text-white"
+                        className="group inline-flex items-center gap-2 text-sm text-[#315d68]/75 transition-colors hover:text-[#073b4c]"
                       >
                         <span className="size-1 rounded-full bg-[#5fe1d5]/0 transition-colors group-hover:bg-[#5fe1d5]" />
                         {item.label}
@@ -128,7 +131,7 @@ export function SiteFooter({ locale }: { locale: Locale }) {
           </nav>
         </div>
 
-        <div className="flex flex-col gap-3 border-t border-white/12 pt-6 text-xs text-white/38 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-col gap-3 border-t border-[#073b4c]/12 pt-6 text-xs text-[#315d68]/60 sm:flex-row sm:items-center sm:justify-between">
           <p>
             © {new Date().getFullYear()} RYCODE —{" "}
             {isFa ? "تمام حقوق محفوظ است." : "All rights reserved."}
