@@ -157,9 +157,9 @@
 }
 
 .dark {
-  --brand: oklch(0.72 0.185 47);
-  --brand-foreground: oklch(0.14 0.006 60);
-  --brand-soft: oklch(0.72 0.185 47 / 14%);
+  --brand: oklch(0.76 0.14 181);
+  --brand-foreground: oklch(0.14 0.03 218);
+  --brand-soft: oklch(0.76 0.14 181 / 16%);
 
   --background: oklch(0.145 0.006 60);
   --foreground: oklch(0.965 0.006 85);
@@ -186,22 +186,22 @@
   --destructive-foreground: oklch(0.984 0.003 247.858);
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.72 0.185 47);
+  --ring: oklch(0.76 0.14 181);
 
-  --chart-1: oklch(0.72 0.185 47);
-  --chart-2: oklch(0.7 0.01 70);
-  --chart-3: oklch(0.5 0.012 60);
-  --chart-4: oklch(0.82 0.12 55);
-  --chart-5: oklch(0.9 0.006 85);
+  --chart-1: oklch(0.76 0.14 181);
+  --chart-2: oklch(0.74 0.13 234);
+  --chart-3: oklch(0.74 0.12 145);
+  --chart-4: oklch(0.82 0.12 75);
+  --chart-5: oklch(0.78 0.12 285);
 
   --sidebar: oklch(0.145 0.006 60);
   --sidebar-foreground: oklch(0.965 0.006 85);
-  --sidebar-primary: oklch(0.72 0.185 47);
+  --sidebar-primary: oklch(0.76 0.14 181);
   --sidebar-primary-foreground: oklch(0.14 0.006 60);
   --sidebar-accent: oklch(0.245 0.006 60);
   --sidebar-accent-foreground: oklch(0.965 0.006 85);
   --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.72 0.185 47);
+  --sidebar-ring: oklch(0.76 0.14 181);
 }
 
 @layer base {
@@ -440,6 +440,39 @@
   .hero-fade-rise,
   .hero-scroll-cue {
     animation: none;
+  }
+}
+
+/* Keep the explicit marketing surfaces legible when dark mode is selected.
+ * Most public pages use intentional light hex surfaces instead of semantic
+ * tokens, so this compatibility layer gives them a coherent dark fallback. */
+@layer base {
+  .dark [class*="bg-white"],
+  .dark [class*="bg-[#f"],
+  .dark [class*="bg-[#e"],
+  .dark [class*="bg-[#d"] {
+    background-color: var(--surface) !important;
+  }
+
+  .dark [class*="bg-[linear-gradient(120deg,#"] {
+    background-image: linear-gradient(120deg, #142f39, #17283d 58%, #332f22) !important;
+  }
+
+  .dark [class*="text-[#073b4c]"],
+  .dark [class*="text-[#174a58]"],
+  .dark [class*="text-[#214f5b]"],
+  .dark [class*="text-[#214f5c]"],
+  .dark [class*="text-[#315d68]"],
+  .dark [class*="text-[#52717b]"],
+  .dark [class*="text-[#075264]"],
+  .dark [class*="text-[#0b766e]"] {
+    color: var(--foreground) !important;
+  }
+
+  .dark [class*="border-[#073b4c]"],
+  .dark [class*="border-[#0b5262]"],
+  .dark [class*="border-[#0b6470]"] {
+    border-color: var(--border) !important;
   }
 }
 

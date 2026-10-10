@@ -15,7 +15,7 @@ export function AuthPage({
   return (
     <SiteShell locale={locale}>
       <section className="relative isolate min-h-[calc(100vh-72px)] overflow-hidden bg-[#f7fcfb] text-[#073b4c]">
-        <div className="absolute inset-0 -z-20 bg-[linear-gradient(105deg,#effbf7,#f5f8ff_60%,#fff8e4)]" />
+        <div className="absolute inset-0 -z-20 bg-[linear-gradient(105deg,#effbf7,#f5f8ff_60%,#fff8e4)] dark:bg-[linear-gradient(105deg,#102d35,#14283d_60%,#302d22)]" />
         <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_18%_15%,rgba(95,225,213,0.25),transparent_24%),radial-gradient(circle_at_82%_82%,rgba(99,146,255,0.16),transparent_28%)]" />
         <div className="absolute inset-0 -z-10 opacity-[0.12] [background-image:linear-gradient(rgba(7,59,76,.4)_1px,transparent_1px),linear-gradient(90deg,rgba(7,59,76,.4)_1px,transparent_1px)] [background-size:44px_44px]" />
         <Container className="grid min-h-[calc(100vh-72px)] gap-10 py-14 lg:grid-cols-[minmax(0,1fr)_minmax(400px,0.72fr)] lg:items-center lg:gap-16 lg:py-20">

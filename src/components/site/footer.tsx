@@ -52,7 +52,7 @@ export function SiteFooter({ locale }: { locale: Locale }) {
   const groups = isFa ? footerNav : englishFooter;
 
   return (
-    <footer className="relative overflow-hidden bg-[#eaf8f5] text-[#073b4c]">
+    <footer className="relative overflow-hidden bg-[#eaf8f5] text-[#073b4c] dark:bg-[#0f2027] dark:text-white">
       <div
         className="pointer-events-none absolute inset-0 opacity-70"
         style={{
@@ -76,7 +76,7 @@ export function SiteFooter({ locale }: { locale: Locale }) {
         <div className="border-b border-[#073b4c]/12 pb-10 sm:pb-12">
           <div dir="ltr" className="flex items-end justify-between gap-6">
             <span className="text-[clamp(3.1rem,9vw,7.8rem)] leading-[0.8] font-extrabold tracking-[-0.055em]">
-              <span className="text-[#073b4c]">RY</span>
+              <span className="text-[#073b4c] dark:text-white">RY</span>
               <span className="text-[#0ba99d]">CODE</span>
             </span>
             <span className="hidden pb-1 text-[0.65rem] font-semibold tracking-[0.18em] text-white/36 uppercase sm:block">
@@ -92,7 +92,7 @@ export function SiteFooter({ locale }: { locale: Locale }) {
                 ? "یک مسئله واقعی، یک راه‌حل دقیق."
                 : "A real problem deserves a clear solution."}
             </h2>
-            <p className="mt-4 text-sm leading-8 text-[#315d68]/78">
+            <p className="mt-4 text-sm leading-8 text-[#315d68]/78 dark:text-white/65">
               {isFa
                 ? "از ساخت محصول جدید تا نجات یک پروژه نیمه‌کاره؛ مسئله را می‌فهمیم و مسیر اجرایی روشن برایش می‌سازیم."
                 : "From building a new product to rescuing a stalled one, we turn the problem into a clear path forward."}
@@ -118,7 +118,7 @@ export function SiteFooter({ locale }: { locale: Locale }) {
                     <li key={item.label}>
                       <Link
                         href={item.href}
-                        className="group inline-flex items-center gap-2 text-sm text-[#315d68]/75 transition-colors hover:text-[#073b4c]"
+                        className="group inline-flex items-center gap-2 text-sm text-[#315d68]/75 transition-colors hover:text-[#073b4c] dark:text-white/65 dark:hover:text-white"
                       >
                         <span className="size-1 rounded-full bg-[#5fe1d5]/0 transition-colors group-hover:bg-[#5fe1d5]" />
                         {item.label}

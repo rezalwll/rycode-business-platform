@@ -355,6 +355,10 @@ export function ServicesEditorial() {
         }}
         aria-hidden
       />
+      <div
+        className="pointer-events-none absolute inset-0 hidden bg-[#0d1b21]/88 dark:block"
+        aria-hidden
+      />
 
       <Container className="relative z-10">
         <div className="flex flex-col gap-6 border-b border-[#073b4c]/12 pb-8 sm:flex-row sm:items-end sm:justify-between">
@@ -400,7 +404,7 @@ export function ServicesEditorial() {
                   className="absolute inset-0 min-h-0 opacity-[0.72] transition-[transform,opacity] duration-700 group-hover:scale-[1.025] group-hover:opacity-85"
                 />
                 <span
-                  className="absolute inset-0 bg-[linear-gradient(180deg,rgba(234,247,248,0.12)_0%,rgba(234,247,248,0.8)_48%,rgba(234,247,248,0.99)_100%)]"
+                  className="absolute inset-0 bg-[linear-gradient(180deg,rgba(234,247,248,0.12)_0%,rgba(234,247,248,0.8)_48%,rgba(234,247,248,0.99)_100%)] dark:bg-[linear-gradient(180deg,rgba(12,33,42,0.12)_0%,rgba(12,33,42,0.72)_48%,rgba(12,33,42,0.97)_100%)]"
                   aria-hidden
                 />
 
