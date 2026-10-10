@@ -139,7 +139,7 @@ export function SiteHeader({ locale }: { locale: Locale }) {
             : "border-[#073b4c]/7 bg-white/64 shadow-none backdrop-blur-xl",
         )}
       >
-        <Container className="grid h-14 grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-4 [direction:ltr] sm:h-[72px] lg:gap-7">
+        <Container className="grid h-14 grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-4 [direction:ltr] sm:h-[72px] 2xl:grid-cols-[auto_auto_minmax(0,1fr)] 2xl:gap-5">
           <HeaderActions
             locale={locale}
             pathname={pathname}
@@ -152,10 +152,10 @@ export function SiteHeader({ locale }: { locale: Locale }) {
 
           <nav
             aria-label={isFa ? "ناوبری اصلی" : "Primary navigation"}
-            className="hidden min-w-0 items-center justify-self-end 2xl:flex"
+            className="hidden min-w-0 items-center 2xl:flex 2xl:w-full 2xl:justify-end"
             dir={isFa ? "rtl" : "ltr"}
           >
-            <ul className="flex items-center gap-2 2xl:gap-4">
+            <ul className="flex min-w-0 flex-nowrap items-center gap-4">
               {nav.map((item, index) => (
                 <DesktopNavItem
                   key={`${item.id ?? item.href}-${index}`}
