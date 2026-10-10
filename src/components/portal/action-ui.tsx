@@ -15,7 +15,7 @@ export const fieldClass =
   "mt-2 min-h-11 w-full rounded-xl border border-[#0b5262]/14 bg-[#f9fcfb] px-3 text-sm text-[#073b4c] outline-none transition-[border-color,background-color,box-shadow] focus:border-[#20bfb2]/70 focus:bg-white focus:ring-4 focus:ring-[#5fe1d5]/12";
 export const textAreaClass = `${fieldClass} min-h-24 resize-y py-3`;
 export const primaryButtonClass =
-  "inline-flex min-h-10 items-center justify-center gap-2 rounded-full border border-[#20bfb2]/60 bg-[#5fe1d5] px-5 py-2 text-xs font-bold text-[#00364a] shadow-[0_8px_24px_rgba(32,191,178,0.13)] transition-[background-color,transform] hover:-translate-y-0.5 hover:bg-[#74eadf] disabled:cursor-wait disabled:opacity-60";
+  "inline-flex min-h-10 items-center justify-center gap-2 rounded-full border border-[#20bfb2]/60 bg-[#5fe1d5] px-5 py-2 text-xs font-bold text-[#00364a] shadow-[0_8px_24px_rgba(32,191,178,0.13)] transition-colors hover:bg-[#74eadf] disabled:cursor-wait disabled:opacity-60";
 export const secondaryButtonClass =
   "inline-flex min-h-10 items-center justify-center gap-2 rounded-full border border-[#0b5262]/18 bg-white/65 px-5 py-2 text-xs font-bold text-[#075264] transition-colors hover:border-[#20bfb2]/55 hover:bg-white disabled:cursor-wait disabled:opacity-60";
 

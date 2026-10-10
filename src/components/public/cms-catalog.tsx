@@ -33,7 +33,7 @@ export function PublicContentCards({
           <Link
             key={`${entry.kind}/${entry.slug}`}
             href={localizedHref(locale, `/${entry.kind}/${entry.slug}`)}
-            className="group relative overflow-hidden rounded-2xl border border-[#0b5262]/12 bg-white/75 p-3 shadow-[0_10px_32px_rgba(31,92,105,0.06)] backdrop-blur-sm transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-1 hover:border-[#20bfb2]/45 hover:shadow-[0_20px_50px_rgba(31,92,105,0.12)] sm:p-4"
+            className="group relative overflow-hidden rounded-2xl border border-[#0b5262]/12 bg-white/75 p-3 shadow-[0_10px_32px_rgba(31,92,105,0.06)] backdrop-blur-sm transition-[border-color,box-shadow] duration-300 hover:border-[#20bfb2]/45 hover:shadow-[0_20px_50px_rgba(31,92,105,0.12)] sm:p-4"
           >
             <div className="relative aspect-[16/9] overflow-hidden rounded-[0.9rem] bg-ink">
               {visual ? (
@@ -42,14 +42,14 @@ export function PublicContentCards({
                   alt={localize(visual.alt, locale)}
                   fill
                   sizes="(min-width: 1280px) 33vw, (min-width: 768px) 50vw, 100vw"
-                  className="object-cover opacity-80 transition-transform duration-700 group-hover:scale-105"
+                  className="object-cover opacity-80"
                 />
               ) : (
                 <ContextVisual
                   variant={catalogContextVariant(entry.kind, entry.slug)}
                   title={localize(entry.title, locale)}
                   items={entry.sections.map((section) => localize(section.title, locale))}
-                  className="absolute inset-0 min-h-0 transition-transform duration-700 group-hover:scale-[1.025]"
+                  className="absolute inset-0 min-h-0"
                 />
               )}
               <div className="absolute inset-0 bg-gradient-to-t from-[#00364a]/95 via-[#00364a]/15 to-transparent" />

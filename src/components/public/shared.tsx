@@ -110,12 +110,12 @@ export function ActionLink({
       href={localizedHref(locale, href)}
       className={
         secondary
-          ? "group inline-flex min-h-11 items-center gap-2.5 rounded-full border border-[#0b6470]/25 bg-white/50 px-6 text-sm font-bold text-[#075264] transition-[background-color,border-color,transform] hover:-translate-y-0.5 hover:border-[#20bfb2]/60 hover:bg-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#20bfb2] dark:border-white/20 dark:bg-white/[0.06] dark:text-white"
-          : "group inline-flex min-h-11 items-center gap-2.5 rounded-full border border-[#5fe1d5]/60 bg-[#5fe1d5] px-6 text-sm font-bold text-[#00364a] shadow-[0_10px_30px_rgba(95,225,213,0.16)] transition-[background-color,border-color,transform] hover:-translate-y-0.5 hover:bg-[#74eadf] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#20bfb2]"
+          ? "group inline-flex min-h-11 items-center gap-2.5 rounded-full border border-[#0b6470]/25 bg-white/50 px-6 text-sm font-bold text-[#075264] transition-colors hover:border-[#20bfb2]/60 hover:bg-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#20bfb2] dark:border-white/20 dark:bg-white/[0.06] dark:text-white"
+          : "group inline-flex min-h-11 items-center gap-2.5 rounded-full border border-[#5fe1d5]/60 bg-[#5fe1d5] px-6 text-sm font-bold text-[#00364a] shadow-[0_10px_30px_rgba(95,225,213,0.16)] transition-colors hover:bg-[#74eadf] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#20bfb2]"
       }
     >
       {children}
-      <Icon className="size-4 transition-transform group-hover:translate-x-0.5 rtl:group-hover:-translate-x-0.5" />
+      <Icon className="size-4" />
     </Link>
   );
 }

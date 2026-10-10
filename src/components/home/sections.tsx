@@ -127,12 +127,7 @@ export function CapabilityStrip() {
                 )}
               />
               <span className="flex items-start justify-between gap-3">
-                <span
-                  className={cn(
-                    "grid size-9 place-items-center rounded-lg border transition-transform duration-300 group-hover:-translate-y-0.5",
-                    item.tone,
-                  )}
-                >
+                <span className={cn("grid size-9 place-items-center rounded-lg border", item.tone)}>
                   <item.icon className="size-4" aria-hidden />
                 </span>
                 <span className="font-latin text-[0.62rem] tracking-[0.16em] text-muted-foreground">
@@ -143,7 +138,7 @@ export function CapabilityStrip() {
               <span className="mt-8 block">
                 <span className="flex items-center justify-between gap-3">
                   <strong className="text-sm font-bold">{item.fa}</strong>
-                  <ArrowUpLeft className="size-3.5 text-muted-foreground transition-[color,transform] group-hover:-translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-brand" />
+                  <ArrowUpLeft className="size-3.5 text-muted-foreground group-hover:text-brand" />
                 </span>
                 <span className="mt-2 block text-xs leading-6 text-muted-foreground">
                   {item.description}
@@ -216,7 +211,7 @@ export function PathSelector() {
               key={path.key}
               href={path.cta.to}
               className={cn(
-                "group relative grid min-h-36 grid-cols-[4.5rem_minmax(0,1fr)_2.5rem] items-center gap-x-4 overflow-hidden border-b border-border px-2 py-6 transition-[background-color,transform,box-shadow,padding] duration-200 focus-visible:z-10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand sm:grid-cols-[6rem_minmax(0,1fr)_3rem] sm:px-4 lg:min-h-40 lg:grid-cols-[8.5rem_minmax(220px,0.8fr)_minmax(280px,1.2fr)_3.5rem] lg:gap-x-7 lg:px-6 lg:hover:z-10 lg:hover:scale-[1.008] lg:hover:px-8 lg:hover:shadow-[0_14px_36px_rgba(15,23,42,0.07)]",
+                "group relative grid min-h-36 grid-cols-[4.5rem_minmax(0,1fr)_2.5rem] items-center gap-x-4 overflow-hidden border-b border-border px-2 py-6 transition-[background-color,box-shadow] duration-200 focus-visible:z-10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand sm:grid-cols-[6rem_minmax(0,1fr)_3rem] sm:px-4 lg:min-h-40 lg:grid-cols-[8.5rem_minmax(220px,0.8fr)_minmax(280px,1.2fr)_3.5rem] lg:gap-x-7 lg:px-6 lg:hover:z-10 lg:hover:shadow-[0_14px_36px_rgba(15,23,42,0.07)]",
                 path.wash,
               )}
             >
@@ -244,13 +239,7 @@ export function PathSelector() {
                 </span>
               </span>
 
-              <ArrowUpLeft
-                className={cn(
-                  "size-5 justify-self-end transition-transform duration-200 group-hover:-translate-x-1.5 group-hover:-translate-y-1.5",
-                  path.accent,
-                )}
-                aria-hidden
-              />
+              <ArrowUpLeft className={cn("size-5 justify-self-end", path.accent)} aria-hidden />
             </Link>
           ))}
         </div>
@@ -376,7 +365,7 @@ export function ServicesEditorial() {
             className="group inline-flex min-h-11 w-fit items-center gap-3 rounded-full border border-[#20bfb2]/45 bg-white/65 px-6 text-sm font-semibold text-[#0b766e] shadow-[0_10px_32px_rgba(31,92,105,0.08)] backdrop-blur-md transition-colors hover:border-[#20bfb2]/80 hover:bg-white/90"
           >
             همه خدمات
-            <ArrowUpLeft className="size-4 transition-transform group-hover:-translate-x-1 group-hover:-translate-y-1" />
+            <ArrowUpLeft className="size-4" />
           </Link>
         </div>
 
@@ -393,7 +382,7 @@ export function ServicesEditorial() {
               <Link
                 href="/services"
                 className={cn(
-                  "group relative flex h-full min-h-[300px] flex-col overflow-hidden rounded-xl border border-[#0b5262]/12 p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.75),0_10px_32px_rgba(31,92,105,0.065)] backdrop-blur-md transition-[transform,border-color,background-color,box-shadow] duration-300 hover:-translate-y-0.5 hover:border-[#20bfb2]/45 hover:shadow-[0_18px_48px_rgba(31,92,105,0.12)] sm:p-7",
+                  "group relative flex h-full min-h-[300px] flex-col overflow-hidden rounded-xl border border-[#0b5262]/12 p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.75),0_10px_32px_rgba(31,92,105,0.065)] backdrop-blur-md transition-[border-color,background-color,box-shadow] duration-300 hover:border-[#20bfb2]/45 hover:shadow-[0_18px_48px_rgba(31,92,105,0.12)] sm:p-7",
                   "bg-white/75",
                 )}
               >
@@ -401,7 +390,7 @@ export function ServicesEditorial() {
                   variant={service.visual}
                   title={service.title}
                   decorative
-                  className="absolute inset-0 min-h-0 opacity-[0.72] transition-[transform,opacity] duration-700 group-hover:scale-[1.025] group-hover:opacity-85"
+                  className="absolute inset-0 min-h-0 opacity-[0.72] transition-opacity duration-700 group-hover:opacity-85"
                 />
                 <span
                   className="absolute inset-0 bg-[linear-gradient(180deg,rgba(234,247,248,0.12)_0%,rgba(234,247,248,0.8)_48%,rgba(234,247,248,0.99)_100%)] dark:bg-[linear-gradient(180deg,rgba(12,33,42,0.12)_0%,rgba(12,33,42,0.72)_48%,rgba(12,33,42,0.97)_100%)]"
@@ -439,7 +428,7 @@ export function ServicesEditorial() {
 
                 <span className="relative z-10 flex items-start gap-5">
                   <span
-                    className="grid size-11 place-items-center rounded-xl border backdrop-blur-md transition-[filter,transform] group-hover:scale-105 group-hover:brightness-90"
+                    className="grid size-11 place-items-center rounded-xl border backdrop-blur-md transition-[filter] group-hover:brightness-90"
                     style={{
                       borderColor: `${service.accent}59`,
                       backgroundColor: `${service.accent}18`,
@@ -470,7 +459,7 @@ export function ServicesEditorial() {
                   style={{ color: service.accent }}
                 >
                   جزئیات خدمت
-                  <ArrowUpLeft className="size-3.5 transition-transform group-hover:-translate-x-1 group-hover:-translate-y-1" />
+                  <ArrowUpLeft className="size-3.5" />
                 </span>
               </Link>
             </li>
@@ -602,7 +591,7 @@ export function SolutionExplorer() {
               aria-controls="solution-preview"
               onClick={() => setActive(index)}
               className={cn(
-                "group relative min-h-20 border bg-surface px-4 py-3 text-start transition-[border-color,background-color,transform,box-shadow] duration-200 hover:border-brand/45",
+                "group relative min-h-20 border bg-surface px-4 py-3 text-start transition-[border-color,background-color,box-shadow] duration-200 hover:border-brand/45",
                 active === index
                   ? "-translate-y-0.5 border-2 border-brand bg-brand/[0.045] shadow-[0_8px_24px_rgba(32,191,178,0.1)]"
                   : "border-border",
@@ -680,7 +669,7 @@ export function SolutionExplorer() {
               variant={current.visual}
               title={current.name}
               items={current.modules}
-              className="absolute inset-0 min-h-0 transition-transform duration-700 hover:scale-[1.015]"
+              className="absolute inset-0 min-h-0"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
 
@@ -926,10 +915,7 @@ function CaseVisual({ project, index }: { project: (typeof projects)[number]; in
         src={project.image}
         alt={project.imageAlt}
         fill
-        className={cn(
-          "object-cover transition-transform duration-1000 ease-out group-hover:scale-[1.045]",
-          index === 1 ? "object-left" : "object-center",
-        )}
+        className={cn("object-cover", index === 1 ? "object-left" : "object-center")}
       />
       <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(2,35,47,0.05)_5%,rgba(2,35,47,0.2)_42%,rgba(2,30,40,0.96)_100%)]" />
 
@@ -996,7 +982,7 @@ export function SelectedProjects() {
                 className="group mt-6 inline-flex min-h-11 items-center gap-3 rounded-full border border-[#20bfb2]/45 bg-[#5fe1d5] px-6 text-sm font-semibold text-[#073b4c] shadow-sm backdrop-blur-md transition-colors hover:border-[#0ba99d] hover:bg-[#74eadf]"
               >
                 مشاهده همه پروژه‌ها
-                <ArrowUpLeft className="size-4 transition-transform group-hover:-translate-x-1 group-hover:-translate-y-1" />
+                <ArrowUpLeft className="size-4" />
               </Link>
             </div>
           </div>
@@ -1340,7 +1326,7 @@ export function WhyRycode() {
             <li key={item.title} className={cn("col-span-12", item.layout)}>
               <article
                 className={cn(
-                  "group relative isolate flex h-full min-h-[290px] flex-col overflow-hidden rounded-xl border p-6 transition-[transform,border-color,box-shadow] duration-300 hover:-translate-y-0.5 sm:p-7",
+                  "group relative isolate flex h-full min-h-[290px] flex-col overflow-hidden rounded-xl border p-6 transition-[border-color,box-shadow] duration-300 sm:p-7",
                   item.featured
                     ? "border-white/10 bg-[#073b4c] text-white shadow-[0_24px_70px_rgba(7,59,76,0.2)]"
                     : "border-[#0b5262]/12 bg-white/72 text-[#073b4c] shadow-[0_14px_44px_rgba(31,92,105,0.08)] backdrop-blur-md hover:shadow-[0_24px_65px_rgba(31,92,105,0.14)]",
@@ -1353,7 +1339,7 @@ export function WhyRycode() {
                       variant="software"
                       title={item.title}
                       decorative
-                      className="absolute inset-0 -z-10 min-h-0 opacity-30 transition-transform duration-1000 group-hover:scale-[1.025]"
+                      className="absolute inset-0 -z-10 min-h-0 opacity-30"
                     />
                     <span
                       className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(7,59,76,0.16),rgba(7,40,52,0.94))]"
@@ -1608,7 +1594,7 @@ export function PaymentSection() {
               return (
                 <div
                   key={stage.title}
-                  className="group rounded-[1.25rem] border border-[#073b4c]/10 bg-white/60 p-5 transition duration-300 hover:-translate-y-1 hover:bg-white"
+                  className="group rounded-[1.25rem] border border-[#073b4c]/10 bg-white/60 p-5 transition-colors duration-300 hover:bg-white"
                 >
                   <div className="mb-8 flex items-center justify-between">
                     <span
@@ -1697,7 +1683,7 @@ export function BlogSection() {
             className="group inline-flex min-h-11 w-fit items-center gap-3 rounded-full border border-[#20bfb2]/45 bg-white/75 px-6 text-sm font-semibold text-[#0b766e] shadow-[0_10px_30px_rgba(31,92,105,0.08)] transition-colors hover:border-[#20bfb2]/80 hover:bg-white"
           >
             همه مقاله‌ها
-            <ArrowUpLeft className="size-4 transition-transform group-hover:-translate-x-1 group-hover:-translate-y-1" />
+            <ArrowUpLeft className="size-4" />
           </Link>
         </div>
 
@@ -1707,7 +1693,7 @@ export function BlogSection() {
               <article className="h-full">
                 <Link
                   href="/blog"
-                  className="group flex h-full min-h-[480px] flex-col overflow-hidden rounded-xl border border-[#0b5262]/12 bg-white/78 shadow-[0_12px_36px_rgba(31,92,105,0.075)] backdrop-blur-md transition-[transform,border-color,box-shadow] duration-300 hover:-translate-y-0.5 hover:shadow-[0_20px_52px_rgba(31,92,105,0.12)]"
+                  className="group flex h-full min-h-[480px] flex-col overflow-hidden rounded-xl border border-[#0b5262]/12 bg-white/78 shadow-[0_12px_36px_rgba(31,92,105,0.075)] backdrop-blur-md transition-[border-color,box-shadow] duration-300 hover:shadow-[0_20px_52px_rgba(31,92,105,0.12)]"
                   style={{ borderTopColor: article.accent }}
                 >
                   <div className="relative aspect-[16/10] w-full shrink-0 overflow-hidden bg-[#eaf3f4]">
@@ -1717,13 +1703,13 @@ export function BlogSection() {
                         alt={article.imageAlt ?? article.title}
                         fill
                         sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
-                        className="object-cover transition-transform duration-700 group-hover:scale-[1.045]"
+                        className="object-cover"
                       />
                     ) : (
                       <ContextVisual
                         variant={article.visual}
                         title={article.title}
-                        className="absolute inset-0 min-h-0 transition-transform duration-700 group-hover:scale-[1.025]"
+                        className="absolute inset-0 min-h-0"
                       />
                     )}
                     <span className="absolute inset-0 bg-gradient-to-t from-[#073b4c]/38 via-transparent to-transparent" />
@@ -1751,7 +1737,7 @@ export function BlogSection() {
                     >
                       خواندن مقاله
                       <span
-                        className="grid size-9 place-items-center rounded-full border transition-transform group-hover:-translate-x-1 group-hover:-translate-y-1"
+                        className="grid size-9 place-items-center rounded-full border"
                         style={{ borderColor: `${article.accent}66` }}
                       >
                         <ArrowUpLeft className="size-4" />
@@ -1865,9 +1851,9 @@ export function FaqSection() {
               <div
                 key={f.q}
                 className={cn(
-                  "overflow-hidden rounded-xl border bg-white transition-[border-color,box-shadow,transform] duration-300",
+                  "overflow-hidden rounded-xl border bg-white transition-[border-color,box-shadow] duration-300",
                   open === i
-                    ? "-translate-y-0.5 border-[#073b4c]/16 shadow-[0_20px_60px_rgba(7,59,76,0.09)]"
+                    ? "border-[#073b4c]/16 shadow-[0_20px_60px_rgba(7,59,76,0.09)]"
                     : "border-[#073b4c]/10 hover:border-[#073b4c]/20",
                 )}
               >
@@ -1879,7 +1865,7 @@ export function FaqSection() {
                   aria-controls={`faq-answer-${i}`}
                 >
                   <span
-                    className="grid size-10 shrink-0 place-items-center rounded-xl transition-transform duration-300 group-hover:scale-105"
+                    className="grid size-10 shrink-0 place-items-center rounded-xl"
                     style={{ color: f.accent, backgroundColor: `${f.accent}14` }}
                   >
                     <span

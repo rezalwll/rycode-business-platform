@@ -249,11 +249,7 @@ export function EnglishHome() {
                 <h3 className="mt-10 text-2xl font-bold">{path.title}</h3>
                 <p className="mt-4 text-sm leading-7 text-muted-foreground">{path.text}</p>
                 <span className="mt-8 inline-flex items-center gap-2 text-sm font-bold">
-                  Discuss this path{" "}
-                  <ArrowRight
-                    className="size-4 transition-transform group-hover:translate-x-1"
-                    aria-hidden
-                  />
+                  Discuss this path <ArrowRight className="size-4" aria-hidden />
                 </span>
               </Link>
             ))}

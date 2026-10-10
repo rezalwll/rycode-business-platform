@@ -200,7 +200,7 @@ export function PortalShell({
               <Link
                 key={item.href}
                 href={item.href}
-                className="inline-flex shrink-0 items-center gap-3 rounded-xl border border-transparent px-3.5 py-3 text-sm text-white/62 transition-[background-color,border-color,color,transform] hover:translate-x-0.5 hover:border-white/10 hover:bg-white/[0.07] hover:text-white rtl:hover:-translate-x-0.5 lg:flex"
+                className="inline-flex shrink-0 items-center gap-3 rounded-xl border border-transparent px-3.5 py-3 text-sm text-white/62 transition-[background-color,border-color,color] hover:border-white/10 hover:bg-white/[0.07] hover:text-white lg:flex"
               >
                 <span className="grid size-8 shrink-0 place-items-center rounded-lg border border-[#5fe1d5]/15 bg-[#5fe1d5]/8">
                   <Icon aria-hidden className="size-4 text-[#5fe1d5]" />

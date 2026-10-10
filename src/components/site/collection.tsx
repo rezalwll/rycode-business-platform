@@ -142,7 +142,7 @@ export function ItemCard({
       </div>
       <span className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-brand">
         مشاهده
-        <ArrowLeft className="size-4 transition-transform group-hover:-translate-x-1" />
+        <ArrowLeft className="size-4" />
       </span>
     </Link>
   );

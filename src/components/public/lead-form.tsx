@@ -139,7 +139,7 @@ function SubmitButton({ locale }: { locale: Locale }) {
     <button
       type="submit"
       disabled={pending}
-      className="inline-flex min-h-12 items-center justify-center gap-3 rounded-full border border-[#20bfb2]/60 bg-[#5fe1d5] px-7 text-sm font-bold text-[#00364a] shadow-[0_10px_28px_rgba(32,191,178,0.15)] transition-[background-color,transform] hover:-translate-y-0.5 hover:bg-[#74eadf] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#20bfb2] disabled:cursor-wait disabled:opacity-70"
+      className="inline-flex min-h-12 items-center justify-center gap-3 rounded-full border border-[#20bfb2]/60 bg-[#5fe1d5] px-7 text-sm font-bold text-[#00364a] shadow-[0_10px_28px_rgba(32,191,178,0.15)] transition-colors hover:bg-[#74eadf] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#20bfb2] disabled:cursor-wait disabled:opacity-70"
     >
       {pending && <LoaderCircle className="size-4 animate-spin" aria-hidden />}
       {pending ? text.sending : text.submit}
@@ -433,7 +433,7 @@ export function LeadForm({
           <button
             type="button"
             onClick={nextStep}
-            className="inline-flex min-h-12 items-center gap-2 rounded-full border border-[#20bfb2]/60 bg-[#5fe1d5] px-7 text-sm font-bold text-[#00364a] shadow-[0_10px_28px_rgba(32,191,178,0.15)] transition-[background-color,transform] hover:-translate-y-0.5 hover:bg-[#74eadf] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#20bfb2]"
+            className="inline-flex min-h-12 items-center gap-2 rounded-full border border-[#20bfb2]/60 bg-[#5fe1d5] px-7 text-sm font-bold text-[#00364a] shadow-[0_10px_28px_rgba(32,191,178,0.15)] transition-colors hover:bg-[#74eadf] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#20bfb2]"
           >
             {text.next}
             {locale === "fa" ? (

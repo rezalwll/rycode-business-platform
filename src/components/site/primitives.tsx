@@ -98,7 +98,7 @@ export function CtaLink({
       )}
     >
       {children}
-      <ArrowLeft className="size-4 transition-transform duration-200 group-hover:-translate-x-1" />
+      <ArrowLeft className="size-4" />
     </Link>
   );
 }
@@ -145,7 +145,7 @@ export function ArrowSquare({
         className,
       )}
     >
-      <ArrowLeft className="size-4 transition-transform duration-200 group-hover:-translate-x-0.5" />
+      <ArrowLeft className="size-4" />
     </span>
   );
 }

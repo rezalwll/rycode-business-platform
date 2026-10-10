@@ -202,7 +202,7 @@ async function Projects({ locale, actor }: { locale: Locale; actor: Actor }) {
             <Link
               key={row.id}
               href={`/dashboard/projects/${row.id}`}
-              className="group rounded-2xl border border-[#0b5262]/12 bg-white/80 p-6 shadow-[0_10px_34px_rgba(31,92,105,0.055)] transition-[border-color,box-shadow,transform] hover:-translate-y-1 hover:border-[#20bfb2]/45 hover:shadow-[0_20px_50px_rgba(31,92,105,0.11)]"
+              className="group rounded-2xl border border-[#0b5262]/12 bg-white/80 p-6 shadow-[0_10px_34px_rgba(31,92,105,0.055)] transition-[border-color,box-shadow] hover:border-[#20bfb2]/45 hover:shadow-[0_20px_50px_rgba(31,92,105,0.11)]"
             >
               <div className="flex items-center justify-between gap-4">
                 <span className="meta-label text-[#0b8f87]">{row.number}</span>

@@ -112,7 +112,7 @@ export function CatalogHub({ locale, kind }: { locale: Locale; kind: CatalogKind
                   key={entry.slug}
                   href={localizedHref(locale, `/${kind}/${entry.slug}`)}
                   className={cn(
-                    "group relative overflow-hidden rounded-2xl border p-3 shadow-[0_10px_32px_rgba(31,92,105,0.06)] backdrop-blur-sm transition-[transform,box-shadow,border-color] duration-300 hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(31,92,105,0.12)]",
+                    "group relative overflow-hidden rounded-2xl border p-3 shadow-[0_10px_32px_rgba(31,92,105,0.06)] backdrop-blur-sm transition-[box-shadow,border-color] duration-300 hover:shadow-[0_20px_50px_rgba(31,92,105,0.12)]",
                     contentTone(index).card,
                   )}
                 >
@@ -122,14 +122,14 @@ export function CatalogHub({ locale, kind }: { locale: Locale; kind: CatalogKind
                         src={visual.src}
                         alt={localize(visual.alt, locale)}
                         fill
-                        className="object-cover opacity-80 transition-transform duration-700 group-hover:scale-105"
+                        className="object-cover opacity-80"
                       />
                     ) : (
                       <ContextVisual
                         variant={catalogContextVariant(entry.kind, entry.slug)}
                         title={localize(entry.title, locale)}
                         items={entry.sections.map((section) => localize(section.title, locale))}
-                        className="absolute inset-0 min-h-0 transition-transform duration-700 group-hover:scale-[1.025]"
+                        className="absolute inset-0 min-h-0"
                       />
                     )}
                     <div className="absolute inset-0 bg-gradient-to-t from-[#00364a]/95 via-transparent to-transparent" />

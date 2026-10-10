@@ -205,7 +205,7 @@ export function AuthCard({ locale, mode }: { locale: Locale; mode: Mode }) {
         <button
           type="submit"
           disabled={status === "saving"}
-          className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-full border border-[#20bfb2]/60 bg-[#5fe1d5] px-6 text-sm font-bold text-[#073b4c] shadow-[0_12px_32px_rgba(95,225,213,0.16)] transition-[background-color,transform] hover:-translate-y-0.5 hover:bg-[#74eadf] disabled:opacity-60"
+          className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-full border border-[#20bfb2]/60 bg-[#5fe1d5] px-6 text-sm font-bold text-[#073b4c] shadow-[0_12px_32px_rgba(95,225,213,0.16)] transition-colors hover:bg-[#74eadf] disabled:opacity-60"
         >
           {status === "saving" && <Loader2 aria-hidden className="size-4 animate-spin" />}
           {status === "saving"

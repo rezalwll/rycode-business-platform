@@ -102,7 +102,7 @@ export function SiteFooter({ locale }: { locale: Locale }) {
               className="group mt-7 inline-flex h-11 items-center gap-3 rounded-full bg-[#5fe1d5] px-5 text-sm font-bold text-[#073b4c] shadow-[0_10px_26px_rgba(32,191,178,0.18)] transition-colors hover:bg-[#7aebe1]"
             >
               {isFa ? "شروع یک گفت‌وگو" : "Start a conversation"}
-              <ArrowUpLeft className="size-4 transition-transform group-hover:-translate-x-1 group-hover:-translate-y-1" />
+              <ArrowUpLeft className="size-4" />
             </Link>
           </div>
 

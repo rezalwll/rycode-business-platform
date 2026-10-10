@@ -414,13 +414,13 @@ export async function CompanyPage({ locale, slug }: { locale: Locale; slug: Comp
             {sections.map((section, index) => (
               <article
                 key={section.title}
-                className="group rounded-2xl border border-[#0b5262]/12 bg-white/78 p-6 shadow-[0_10px_34px_rgba(31,92,105,0.055)] backdrop-blur-sm transition-[transform,box-shadow,border-color] duration-300 hover:-translate-y-1 hover:border-[#20bfb2]/45 hover:shadow-[0_20px_50px_rgba(31,92,105,0.12)] sm:p-8"
+                className="group rounded-2xl border border-[#0b5262]/12 bg-white/78 p-6 shadow-[0_10px_34px_rgba(31,92,105,0.055)] backdrop-blur-sm transition-[box-shadow,border-color] duration-300 hover:border-[#20bfb2]/45 hover:shadow-[0_20px_50px_rgba(31,92,105,0.12)] sm:p-8"
               >
                 <div className="flex items-center justify-between gap-4">
                   <span className="meta-label text-[#0b766e]">
                     {String(index + 1).padStart(2, "0")} / RYCODE
                   </span>
-                  <span className="grid size-9 place-items-center rounded-full border border-[#20bfb2]/20 bg-[#5fe1d5]/12 text-[#0b8f87] transition-transform duration-300 group-hover:rotate-12">
+                  <span className="grid size-9 place-items-center rounded-full border border-[#20bfb2]/20 bg-[#5fe1d5]/12 text-[#0b8f87]">
                     <CheckCircle2 className="size-4" aria-hidden />
                   </span>
                 </div>

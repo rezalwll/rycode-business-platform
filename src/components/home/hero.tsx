@@ -3,7 +3,7 @@ import { ArrowLeft } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 
 const heroLinkBase =
-  "group inline-flex min-h-11 items-center justify-center gap-3 rounded-full border px-6 text-sm font-semibold transition-[background-color,border-color,color,transform] duration-300 hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white";
+  "group inline-flex min-h-11 items-center justify-center gap-3 rounded-full border px-6 text-sm font-semibold transition-colors duration-300 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white";
 
 export function Hero() {
   return (
@@ -47,7 +47,7 @@ export function Hero() {
             className={`${heroLinkBase} border-[#5fe1d5]/70 bg-[#5fe1d5]/15 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.16),0_8px_32px_rgba(95,225,213,0.14)] backdrop-blur-md hover:border-[#5fe1d5] hover:bg-[#5fe1d5]/25`}
           >
             شروع یک گفت‌وگو
-            <ArrowLeft className="size-4 transition-transform duration-300 group-hover:-translate-x-1" />
+            <ArrowLeft className="size-4" />
           </Link>
           <Link
             href="/services"
