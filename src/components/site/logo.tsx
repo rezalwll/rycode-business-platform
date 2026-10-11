@@ -1,4 +1,7 @@
+import Image from "next/image";
 import { cn } from "@/lib/utils";
+
+export const LOGO_MARK_SRC = "/brand/rycode-logo.png";
 
 function LogoGlyph({ className }: { className?: string }) {
   return (
@@ -60,9 +63,12 @@ export function Logo({
 
 export function LogoMark({ className }: { className?: string }) {
   return (
-    <span className={cn("inline-flex size-8 items-center justify-center text-brand", className)}>
-      <LogoGlyph className="h-6" />
-      <span className="sr-only">RYCODE</span>
-    </span>
+    <Image
+      src={LOGO_MARK_SRC}
+      alt="RYCODE"
+      width={40}
+      height={30}
+      className={cn("size-8 object-contain", className)}
+    />
   );
 }
