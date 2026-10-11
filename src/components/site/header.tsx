@@ -140,7 +140,7 @@ export function SiteHeader({ locale }: { locale: Locale }) {
             : "border-transparent bg-transparent text-white shadow-none backdrop-blur-none",
         )}
       >
-        <Container className="relative flex h-14 items-center gap-4 [direction:ltr] sm:h-[72px] 2xl:gap-5">
+        <Container className="relative flex h-14 items-center gap-4 [direction:ltr] sm:h-[72px] 2xl:max-w-[1536px] 2xl:gap-5">
           <HeaderActions
             locale={locale}
             pathname={pathname}
@@ -154,10 +154,10 @@ export function SiteHeader({ locale }: { locale: Locale }) {
 
           <nav
             aria-label={isFa ? "ناوبری اصلی" : "Primary navigation"}
-            className="ms-auto hidden min-w-0 items-center 2xl:flex"
+            className="ml-auto hidden min-w-0 items-center 2xl:flex"
             dir={isFa ? "rtl" : "ltr"}
           >
-            <ul className="flex min-w-0 flex-nowrap items-center gap-4">
+            <ul className="flex min-w-0 flex-nowrap items-center gap-3">
               {nav.map((item, index) => (
                 <DesktopNavItem
                   key={`${item.id ?? item.href}-${index}`}
