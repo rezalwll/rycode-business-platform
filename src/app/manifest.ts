@@ -9,6 +9,6 @@ export default function manifest(): MetadataRoute.Manifest {
     display: "standalone",
     background_color: "#f7fcfb",
     theme_color: "#5fe1d5",
-    icons: [{ src: "/favicon.svg", sizes: "any", type: "image/svg+xml" }],
+    icons: [{ src: "/brand/rycode-favicon.png", sizes: "512x512", type: "image/png" }],
   };
 }

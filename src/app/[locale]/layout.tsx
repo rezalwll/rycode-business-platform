@@ -61,7 +61,10 @@ export async function generateMetadata({
     },
     twitter: { card: "summary_large_image", title, description },
     robots: { index: true, follow: true },
-    icons: { icon: "/favicon.svg" },
+    icons: {
+      icon: [{ url: "/brand/rycode-favicon.png", type: "image/png", sizes: "512x512" }],
+      apple: "/brand/rycode-favicon.png",
+    },
   };
 }
 
