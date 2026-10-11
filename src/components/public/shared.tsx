@@ -52,15 +52,15 @@ export function PageHero({
               {lead}
             </p>
           </div>
-          <div className="relative overflow-hidden rounded-2xl border border-white/85 bg-white/72 p-2 shadow-[0_30px_90px_rgba(7,59,76,0.14)] backdrop-blur-md dark:border-white/12 dark:bg-white/[0.06] dark:shadow-[0_30px_90px_rgba(0,0,0,0.32)]">
-            <div className="relative aspect-[16/10] overflow-hidden rounded-xl">
+          <div className="relative overflow-hidden rounded-2xl">
+            <div className="relative aspect-[16/10] overflow-hidden rounded-2xl">
               {imageSrc ? (
                 <Image
                   src={imageSrc}
                   alt={imageAlt}
                   fill
                   sizes="(min-width: 1024px) 40vw, 100vw"
-                  className="object-cover opacity-90 saturate-75"
+                  className="object-cover"
                 />
               ) : (
                 <ContextVisual
@@ -80,7 +80,7 @@ export function PageHero({
                 </p>
               </div>
             </div>
-            <div className="mt-2 rounded-xl border border-[#073b4c]/10 bg-[#e8f9f6] p-4 text-xs leading-6 text-[#315d68]/80 dark:border-white/10 dark:bg-white/[0.06] dark:text-white/65">
+            <div className="mt-4 rounded-xl border border-[#073b4c]/10 bg-[#e8f9f6] p-4 text-xs leading-6 text-[#315d68]/80 dark:border-white/10 dark:bg-white/[0.06] dark:text-white/65">
               {aside ??
                 (locale === "fa"
                   ? "اول حرف‌هایتان را می‌شنویم؛ پیشنهاد فنی بعد از آن شکل می‌گیرد."

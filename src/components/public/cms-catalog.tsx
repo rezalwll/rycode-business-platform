@@ -42,7 +42,7 @@ export function PublicContentCards({
                   alt={localize(visual.alt, locale)}
                   fill
                   sizes="(min-width: 1280px) 33vw, (min-width: 768px) 50vw, 100vw"
-                  className="object-cover opacity-80"
+                  className="object-cover"
                 />
               ) : (
                 <ContextVisual

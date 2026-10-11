@@ -724,7 +724,7 @@ export function PublicLeadPage({
                     alt=""
                     fill
                     sizes="(min-width: 1024px) 20rem, 100vw"
-                    className="object-cover opacity-90"
+                    className="object-cover"
                     aria-hidden
                   />
                 ) : (

@@ -122,7 +122,7 @@ export function CatalogHub({ locale, kind }: { locale: Locale; kind: CatalogKind
                         src={visual.src}
                         alt={localize(visual.alt, locale)}
                         fill
-                        className="object-cover opacity-80"
+                        className="object-cover"
                       />
                     ) : (
                       <ContextVisual
