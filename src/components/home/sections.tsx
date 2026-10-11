@@ -382,18 +382,18 @@ export function ServicesEditorial() {
               <Link
                 href="/services"
                 className={cn(
-                  "group relative flex h-full min-h-[300px] flex-col overflow-hidden rounded-xl border border-[#0b5262]/12 p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.75),0_10px_32px_rgba(31,92,105,0.065)] backdrop-blur-md transition-[border-color,background-color,box-shadow] duration-300 hover:border-[#20bfb2]/45 hover:shadow-[0_18px_48px_rgba(31,92,105,0.12)] sm:p-7",
-                  "bg-white/75",
+                  "group relative flex h-full min-h-[300px] flex-col overflow-hidden rounded-xl border border-[#0b5262]/12 p-6 shadow-[0_10px_32px_rgba(31,92,105,0.065)] backdrop-blur-md transition-[border-color,background-color,box-shadow] duration-300 hover:border-[#20bfb2]/45 hover:shadow-[0_18px_48px_rgba(31,92,105,0.12)] sm:p-7",
+                  "bg-[#052f3c]",
                 )}
               >
                 <ContextVisual
                   variant={service.visual}
                   title={service.title}
                   decorative
-                  className="absolute inset-0 min-h-0 opacity-[0.72] transition-opacity duration-700 group-hover:opacity-85"
+                  className="absolute inset-0 min-h-0 opacity-90 transition-opacity duration-700 group-hover:opacity-100"
                 />
                 <span
-                  className="absolute inset-0 bg-[linear-gradient(180deg,rgba(234,247,248,0.12)_0%,rgba(234,247,248,0.8)_48%,rgba(234,247,248,0.99)_100%)] dark:bg-[linear-gradient(180deg,rgba(12,33,42,0.12)_0%,rgba(12,33,42,0.72)_48%,rgba(12,33,42,0.97)_100%)]"
+                  className="absolute inset-0 bg-[linear-gradient(180deg,rgba(5,47,60,0.02)_0%,rgba(5,47,60,0.22)_45%,rgba(5,47,60,0.94)_100%)]"
                   aria-hidden
                 />
 
@@ -440,10 +440,10 @@ export function ServicesEditorial() {
                 </span>
 
                 <span className="relative z-10 mt-auto pt-14">
-                  <h3 className="text-lg font-bold leading-8 text-[#073b4c] sm:text-xl">
+                  <h3 className="text-lg font-bold leading-8 text-white sm:text-xl">
                     {service.title}
                   </h3>
-                  <p className="mt-4 max-w-2xl text-sm font-medium leading-8 text-[#214f5b]/90">
+                  <p className="mt-4 max-w-2xl text-sm font-medium leading-8 text-white/82">
                     {service.lead}
                   </p>
                   <span
@@ -451,7 +451,7 @@ export function ServicesEditorial() {
                     style={{ backgroundColor: service.accent }}
                     aria-hidden
                   />
-                  <p className="max-w-2xl text-sm leading-7 text-[#52717b]">{service.body}</p>
+                  <p className="max-w-2xl text-sm leading-7 text-white/65">{service.body}</p>
                 </span>
 
                 <span
