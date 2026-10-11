@@ -140,7 +140,7 @@ export function SiteHeader({ locale }: { locale: Locale }) {
             : "border-transparent bg-transparent text-white shadow-none backdrop-blur-none",
         )}
       >
-        <Container className="grid h-14 grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-4 [direction:ltr] sm:h-[72px] 2xl:grid-cols-[auto_auto_minmax(0,1fr)] 2xl:gap-5">
+        <Container className="relative flex h-14 items-center gap-4 [direction:ltr] sm:h-[72px] 2xl:gap-5">
           <HeaderActions
             locale={locale}
             pathname={pathname}
@@ -148,13 +148,13 @@ export function SiteHeader({ locale }: { locale: Locale }) {
             className="hidden min-w-0 justify-self-start 2xl:flex"
           />
 
-          <Link href="/" aria-label="RYCODE" className="col-start-2 justify-self-center">
+          <Link href="/" aria-label="RYCODE" className="absolute left-1/2 -translate-x-1/2">
             <Logo variant={overlay ? "light" : "adaptive"} className="text-[1.05rem]" />
           </Link>
 
           <nav
             aria-label={isFa ? "ناوبری اصلی" : "Primary navigation"}
-            className="hidden min-w-0 items-center 2xl:flex 2xl:w-full 2xl:justify-end"
+            className="ms-auto hidden min-w-0 items-center 2xl:flex"
             dir={isFa ? "rtl" : "ltr"}
           >
             <ul className="flex min-w-0 flex-nowrap items-center gap-4">
@@ -175,7 +175,7 @@ export function SiteHeader({ locale }: { locale: Locale }) {
             aria-label={isFa ? "باز کردن منو" : "Open menu"}
             aria-expanded={mobileOpen}
             className={cn(
-              "col-start-3 row-start-1 grid size-10 justify-self-end place-items-center rounded-xl border shadow-sm transition-colors 2xl:hidden",
+              "ms-auto grid size-10 place-items-center rounded-xl border shadow-sm transition-colors 2xl:hidden",
               overlay
                 ? "border-white/35 bg-transparent text-white hover:border-[#5fe1d5]/75 hover:bg-white/10"
                 : "border-[#073b4c]/15 bg-white/75 text-[#073b4c] backdrop-blur-md hover:border-[#20bfb2]/55 hover:bg-[#dff8f4] dark:border-white/15 dark:bg-white/8 dark:text-white dark:hover:bg-white/12",
