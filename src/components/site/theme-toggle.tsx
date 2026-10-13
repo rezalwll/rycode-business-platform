@@ -79,10 +79,12 @@ export function ThemeToggle({
   return (
     <div
       className={cn(
-        "inline-flex items-center gap-0.5 rounded-full border border-border p-0.5",
-        variant === "light" && "border-white/25",
+        "rycode-theme-toggle inline-flex items-center gap-0.5 rounded-full border border-border/80 bg-surface-2/70 p-0.5",
+        variant === "light" && "border-white/20 bg-black/10",
         className,
       )}
+      role="group"
+      aria-label={locale === "fa" ? "حالت نمایش" : "Theme mode"}
     >
       {options.map(({ value, icon: Icon, label }) => (
         <button
@@ -93,14 +95,14 @@ export function ThemeToggle({
           aria-pressed={mode === value}
           onClick={() => setMode(value)}
           className={cn(
-            "grid size-7 place-items-center rounded-full transition-colors",
+            "grid size-8 place-items-center rounded-full transition-[background-color,color,box-shadow,transform] duration-200",
             mode === value
               ? variant === "light"
-                ? "bg-white text-ink"
-                : "bg-foreground text-background"
+                ? "bg-white text-ink shadow-[0_2px_8px_rgba(0,0,0,0.16)]"
+                : "bg-foreground text-background shadow-[0_2px_8px_rgba(38,48,74,0.16)]"
               : variant === "light"
-                ? "text-white/55 hover:text-white"
-                : "text-muted-foreground hover:text-foreground",
+                ? "text-white/55 hover:bg-white/10 hover:text-white"
+                : "text-muted-foreground hover:bg-brand-soft hover:text-foreground",
           )}
         >
           <Icon className="size-3.5" />

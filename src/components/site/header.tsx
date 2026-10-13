@@ -365,23 +365,34 @@ function HeaderActions({
   const isFa = locale === "fa";
 
   return (
-    <BrandText><div className={cn("items-center gap-3", className)} dir="ltr">
-      <ThemeToggle locale={locale} variant={overlay ? "light" : "default"} />
+    <BrandText><div
+      className={cn(
+        "rycode-header-tools inline-flex items-center gap-1 rounded-full border p-1 backdrop-blur-md",
+        overlay
+          ? "border-white/20 bg-white/[0.08] text-white shadow-[0_8px_24px_rgba(0,0,0,0.12)]"
+          : "border-border/80 bg-surface/80 text-foreground shadow-[0_8px_24px_rgba(38,48,74,0.06)]",
+        className,
+      )}
+      dir="ltr"
+    >
       <Link
         href={pathname}
         locale={isFa ? "en" : "fa"}
         hrefLang={isFa ? "en" : "fa"}
         aria-label={isFa ? "Switch to English" : "تغییر زبان به فارسی"}
+        title={isFa ? "Switch to English" : "تغییر زبان به فارسی"}
         className={cn(
-          "inline-flex h-9 items-center gap-1.5 rounded-full px-3 font-latin text-[0.68rem] font-semibold tracking-[0.12em] transition-colors",
+          "group inline-flex h-9 items-center gap-2 rounded-full px-3 font-latin text-[0.68rem] font-bold tracking-[0.14em] transition-colors",
           overlay
-            ? "bg-transparent text-white/75 hover:bg-white/10 hover:text-white"
-            : "bg-transparent text-foreground/70 hover:bg-surface-2 hover:text-foreground",
+            ? "text-white/75 hover:bg-white/10 hover:text-white"
+            : "text-foreground/70 hover:bg-brand-soft hover:text-foreground",
         )}
       >
-        <Globe2 className="size-3.5" aria-hidden />
+        <Globe2 className="size-3.5 transition-transform duration-200 group-hover:rotate-12" aria-hidden />
         {isFa ? "EN" : "FA"}
       </Link>
+      <span aria-hidden className={cn("h-5 w-px", overlay ? "bg-white/20" : "bg-border")} />
+      <ThemeToggle locale={locale} variant={overlay ? "light" : "default"} />
     </div></BrandText>
   );
 }
@@ -562,10 +573,11 @@ function MobileMenu({
               locale={isFa ? "en" : "fa"}
               hrefLang={isFa ? "en" : "fa"}
               onClick={onClose}
-              className="inline-flex h-9 items-center gap-2 rounded-lg border border-border bg-surface px-3 font-latin text-xs tracking-[0.14em] text-foreground/80"
+              aria-label={isFa ? "Switch to English" : "تغییر زبان به فارسی"}
+              className="inline-flex h-9 items-center gap-2 rounded-full border border-border bg-surface px-3 font-latin text-xs font-semibold tracking-[0.14em] text-foreground/80 transition-colors hover:border-brand hover:bg-brand-soft"
             >
               <Globe2 className="size-4" aria-hidden />
-              {isFa ? "ENGLISH" : "فارسی"}
+              {isFa ? "EN" : "FA"}
             </Link>
           </div>
           <Link
