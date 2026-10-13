@@ -90,9 +90,9 @@ export function CtaLink({
       className={cn(
         base,
         variant === "primary" &&
-          "h-10 rounded-[5px] bg-brand px-5 text-brand-foreground hover:bg-brand/90",
+          "min-h-11 rounded-md bg-brand px-5 text-brand-foreground hover:bg-brand/90",
         variant === "outline" &&
-          "h-10 rounded-[5px] border border-foreground/25 px-5 text-foreground hover:border-foreground hover:bg-foreground/5",
+          "min-h-11 rounded-md border border-foreground/25 px-5 text-foreground hover:border-foreground hover:bg-foreground/5",
         variant === "ghost" && "text-foreground hover:text-brand",
         className,
       )}

@@ -1,14 +1,20 @@
-import { CheckCircle2, ShieldCheck } from "lucide-react";
+import { CheckCircle2, Plus, ShieldCheck } from "lucide-react";
+import { BrandText } from "@/components/site/brand-text";
 import Image from "next/image";
+import Link from "next/link";
 
-import { ContextVisual, type ContextVisualVariant } from "@/components/site/context-visual";
+import type { ContextVisualVariant } from "@/components/site/context-visual";
 import { Container } from "@/components/site/primitives";
+import { ProductScene } from "@/components/site/product-scene";
 import type { LeadKind } from "@/features/leads/schema";
 import type { Locale } from "@/i18n/routing";
 import { listPublicFaqs } from "@/server/queries/public-content";
 
-import { ActionLink, FinalBand, JsonLd, PageHero } from "./shared";
+import { ActionLink, FinalBand, JsonLd, localizedHref, PageHero } from "./shared";
 import { LeadForm } from "./lead-form";
+import ReferenceAboutContent from "@/components/template/reference-about-content";
+import ReferenceFAQ from "@/components/template/reference-faq";
+import { serviceFAQs } from "@/content/service-model";
 
 export const companyPageSlugs = [
   "about",
@@ -58,10 +64,10 @@ const pages: Record<CompanyPageSlug, PageCopy> = {
         ],
       },
       {
-        title: { fa: "صداقت در ارائه", en: "Honest presentation" },
+        title: { fa: "نمونه‌هایی برای شناخت مسیر", en: "Studies that explain our approach" },
         body: {
-          fa: "قرار نیست برای جلب اعتماد، عدد و داستان ساختگی تعریف کنیم. هر وقت نمونه واقعی قابل انتشار داشته باشیم، با جزئیات خودش نشانش می‌دهیم.",
-          en: "This site makes no invented client, outcome or performance claims. Project studies remain explicitly labelled concepts until real work is approved for publication.",
+          fa: "در بخش مطالعات، مسئله، روند کار و انتخاب‌های فنی را کنار هم می‌بینی تا بهتر بتوانی مسیر پروژه‌ات را تصور کنی. نمونه‌های فعلی مفهومی‌اند و پروژهٔ واقعی مشتری نیستند",
+          en: "Our studies connect the problem, workflow and technical choices to help you picture your own project. The current examples are concepts, not client projects.",
         },
       },
     ],
@@ -307,56 +313,14 @@ const pages: Record<CompanyPageSlug, PageCopy> = {
   faq: {
     eyebrow: { fa: "سوالات متداول", en: "Frequently asked questions" },
     title: {
-      fa: "قبل از شروع، جواب سؤال‌هایتان را بگیریم",
-      en: "Resolve the important unknowns before starting",
+      fa: "قبل از شروع، خیالمان را راحت کنیم",
+      en: "A few answers before we get started",
     },
     lead: {
-      fa: "چند سؤال رایج را اینجا جواب داده‌ایم؛ برای برآورد دقیق، اول باید درباره خود پروژه‌تان صحبت کنیم.",
-      en: "These answers describe the general engagement model; an exact estimate follows discovery.",
+      fa: "از هزینه و تحویل کد تا پشتیبانی و سئو؛ جواب سؤال‌های رایج اینجاست. اگر سؤال تو فرق دارد، درباره‌اش با ما حرف بزن",
+      en: "Cost, code handover, support and SEO: find answers to common questions here. If yours is different, let’s talk about it.",
     },
-    sections: [
-      {
-        title: {
-          fa: "هزینه و زمان پروژه چطور مشخص می‌شود؟",
-          en: "How are cost and timing determined?",
-        },
-        body: {
-          fa: "اول درباره چیزی که می‌خواهید، وضعیت فعلی و محدودیت‌ها حرف می‌زنیم. اگر هنوز بخش‌های زیادی مبهم باشد، با یک بررسی کوتاه شروع می‌کنیم تا عدد و زمان الکی تحویلتان ندهیم.",
-          en: "After scope, risk, dependencies and acceptance criteria are known. Where uncertainty is high, a bounded assessment comes first.",
-        },
-      },
-      {
-        title: {
-          fa: "آیا پروژه موجود را ادامه می‌دهید؟",
-          en: "Can you continue an existing project?",
-        },
-        body: {
-          fa: "بله. اول پروژه، دسترسی‌ها و وضعیت کد را بررسی می‌کنیم. بعد صادقانه می‌گوییم ادامه همین مسیر بهتر است، چند بخش باید تعمیر شود یا واقعاً نیاز به بازسازی دارد.",
-          en: "Yes, after auditing runtime viability, security, architecture and access ownership. The evidence may support continuation, targeted correction or partial rebuilding.",
-        },
-      },
-      {
-        title: { fa: "مالکیت کد و حساب‌ها با چه کسی است؟", en: "Who owns the code and accounts?" },
-        body: {
-          fa: "کد، حساب‌ها و دسترسی‌های اصلی برای شماست. از اول هم مشخص می‌کنیم هر کسی به چه چیزی دسترسی دارد تا پروژه به حساب شخصی یک نفر وابسته نماند.",
-          en: "Ownership and access levels are explicit in the agreement. Operational accounts and the final repository should not depend on hidden personal access.",
-        },
-      },
-      {
-        title: { fa: "پشتیبانی پس از انتشار دارید؟", en: "Is post-release support available?" },
-        body: {
-          fa: "بله. می‌توانیم بعد از انتشار هم برای رفع خطا، نگهداری و قابلیت‌های جدید کنارتان بمانیم. فقط از اول روشن می‌کنیم چه چیزهایی داخل پشتیبانی است و پاسخ‌گویی چقدر زمان می‌برد.",
-          en: "Yes; support scope, response expectations and infrastructure responsibility are defined separately and measurably.",
-        },
-      },
-      {
-        title: { fa: "برای شروع چه اطلاعاتی لازم است؟", en: "What is needed to begin?" },
-        body: {
-          fa: "همین که بگویید چه کاری دارید، چه کسانی قرار است از محصول استفاده کنند و الان کجای مسیر هستید کافی است. لازم نیست اسم تکنولوژی بدانید یا از قبل راه‌حل انتخاب کرده باشید.",
-          en: "Business goal, primary users, current state, timing constraints and relevant technical access. You do not need to choose a technology or solution in advance.",
-        },
-      },
-    ],
+    sections: serviceFAQs.map(item => ({ title: item.question, body: item.answer })),
   },
 };
 
@@ -364,7 +328,32 @@ function t(value: LocalText, locale: Locale): string {
   return value[locale];
 }
 
+function AboutOverview({ locale }: { locale: Locale }) {
+  const page = pages.about;
+  return <BrandText><>
+    <PageHero locale={locale} eyebrow={t(page.eyebrow, locale)} title={t(page.title, locale)} lead={t(page.lead, locale)} imageSrc="/coorda-template/about-hero.png" imageAlt="" />
+    <ReferenceAboutContent />
+    <section className="legal-content section-space" aria-label={t(page.title, locale)}>
+      <div className="legal-document">
+        {page.sections.map(section => <section key={section.title.en}>
+          <h2>{t(section.title, locale)}</h2><p>{t(section.body, locale)}</p>
+          {section.items && <ul>{section.items.map(item => <li key={item.en}>{t(item, locale)}</li>)}</ul>}
+        </section>)}
+        {(["why-rycode", "process", "technologies"] as const).map((slug, index) => <section id={["approach", "process", "technology"][index]} key={slug}>
+          <h2>{t(pages[slug].title, locale)}</h2><p>{t(pages[slug].lead, locale)}</p>
+          {pages[slug].sections.map(section => <section key={section.title.en}>
+            <h3>{t(section.title, locale)}</h3><p>{t(section.body, locale)}</p>
+            {section.items && <ul>{section.items.map(item => <li key={item.en}>{t(item, locale)}</li>)}</ul>}
+          </section>)}
+        </section>)}
+      </div>
+    </section>
+    <FinalBand locale={locale} />
+  </></BrandText>;
+}
+
 export async function CompanyPage({ locale, slug }: { locale: Locale; slug: CompanyPageSlug }) {
+  if (slug === "about") return <BrandText><AboutOverview locale={locale} /></BrandText>;
   const page = pages[slug];
   const companyVisual: Record<CompanyPageSlug, ContextVisualVariant> = {
     about: "connected",
@@ -386,7 +375,7 @@ export async function CompanyPage({ locale, slug }: { locale: Locale; slug: Comp
       }));
 
   return (
-    <>
+    <BrandText><>
       {isFaq && (
         <JsonLd
           value={{
@@ -406,50 +395,21 @@ export async function CompanyPage({ locale, slug }: { locale: Locale; slug: Comp
         title={t(page.title, locale)}
         lead={t(page.lead, locale)}
         visualVariant={companyVisual[slug]}
+        tone={isFaq || slug === "terms" || slug === "privacy" ? "abstract" : "photo"}
       />
-      <section className="relative overflow-hidden bg-[#f7fbfa] py-14 sm:py-20">
-        <div className="pointer-events-none absolute inset-0 opacity-70 [background-image:radial-gradient(circle_at_10%_16%,rgba(32,191,178,0.1),transparent_25%),radial-gradient(circle_at_88%_72%,rgba(99,146,255,0.08),transparent_27%)]" />
-        <Container>
-          <div className="relative grid gap-4 lg:grid-cols-2">
-            {sections.map((section, index) => (
-              <article
-                key={section.title}
-                className="group rounded-2xl border border-[#0b5262]/12 bg-white/78 p-6 shadow-[0_10px_34px_rgba(31,92,105,0.055)] backdrop-blur-sm transition-[box-shadow,border-color] duration-300 hover:border-[#20bfb2]/45 hover:shadow-[0_20px_50px_rgba(31,92,105,0.12)] sm:p-8"
-              >
-                <div className="flex items-center justify-between gap-4">
-                  <span className="meta-label text-[#0b766e]">
-                    {String(index + 1).padStart(2, "0")} / RYCODE
-                  </span>
-                  <span className="grid size-9 place-items-center rounded-full border border-[#20bfb2]/20 bg-[#5fe1d5]/12 text-[#0b8f87]">
-                    <CheckCircle2 className="size-4" aria-hidden />
-                  </span>
-                </div>
-                <div className="mt-12 max-w-3xl">
-                  <h2 className="display-3 text-[#073b4c]">{section.title}</h2>
-                  <p className="mt-5 text-base leading-8 text-muted-foreground sm:text-lg sm:leading-9">
-                    {section.body}
-                  </p>
-                  {section.items && (
-                    <ul className="mt-7 grid gap-2">
-                      {section.items.map((item) => (
-                        <li
-                          key={item}
-                          className="flex gap-3 rounded-xl border border-[#0b5262]/10 bg-[#f8fcfb] p-3 text-sm leading-7 text-[#214f5b]"
-                        >
-                          <span className="mt-1 size-1.5 shrink-0 rounded-full bg-[#20bfb2]" />
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </div>
-              </article>
-            ))}
+      {isFaq ? <ReferenceFAQ items={sections.map(section => ({question:section.title, answer:section.body}))} /> : (
+        <section className="legal-content section-space" aria-label={t(page.title, locale)}>
+          <div className="legal-document">
+            <p className="legal-intro">{t(page.lead, locale)}</p>
+            {sections.map(section => <section key={section.title}>
+              <h2>{section.title}</h2><p>{section.body}</p>
+              {section.items && <ul>{section.items.map(item => <li key={item}>{item}</li>)}</ul>}
+            </section>)}
           </div>
-        </Container>
-      </section>
+        </section>
+      )}
       <FinalBand locale={locale} />
-    </>
+    </></BrandText>
   );
 }
 
@@ -530,7 +490,7 @@ export function InstallmentPage({ locale }: { locale: Locale }) {
   const copy = installmentCopy;
 
   return (
-    <>
+    <BrandText><>
       <PageHero
         locale={locale}
         eyebrow={t(copy.eyebrow, locale)}
@@ -545,31 +505,23 @@ export function InstallmentPage({ locale }: { locale: Locale }) {
         ]}
       />
 
-      <section className="relative overflow-hidden bg-[#f7fbfa] py-14 sm:py-20">
-        <div className="pointer-events-none absolute inset-0 opacity-70 [background-image:radial-gradient(circle_at_8%_16%,rgba(32,191,178,0.11),transparent_25%),radial-gradient(circle_at_88%_72%,rgba(99,146,255,0.08),transparent_27%)]" />
+      <section className="coorda-installment-section">
         <Container>
-          <div className="relative grid gap-4 lg:grid-cols-3">
+          <div className="coorda-installment-grid">
             {copy.steps.map((step, index) => (
-              <article
-                key={step.title.en}
-                className="rounded-2xl border border-[#0b5262]/12 bg-white/80 p-6 shadow-[0_12px_36px_rgba(31,92,105,0.06)] backdrop-blur-sm sm:p-8"
-              >
-                <span className="meta-label text-[#0b766e]">
+              <article key={step.title.en} className="coorda-installment-card">
+                <span className="coorda-eyebrow">
                   {String(index + 1).padStart(2, "0")} / RYCODE
                 </span>
-                <h2 className="mt-10 text-xl font-bold leading-8 text-[#073b4c]">
-                  {t(step.title, locale)}
-                </h2>
-                <p className="mt-4 text-sm leading-8 text-muted-foreground">
-                  {t(step.body, locale)}
-                </p>
+                <h2>{t(step.title, locale)}</h2>
+                <p>{t(step.body, locale)}</p>
               </article>
             ))}
           </div>
 
-          <div className="relative mt-10 grid gap-8 rounded-2xl border border-white/90 bg-[linear-gradient(120deg,#e4faf5,#eef5ff_58%,#fff8df)] p-7 text-[#073b4c] shadow-[0_22px_70px_rgba(7,59,76,0.12)] sm:p-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+          <div className="coorda-installment-conditions">
             <div>
-              <span className="meta-label text-[#087b83]">
+              <span className="meta-label text-foreground">
                 {locale === "fa" ? "شرایط بررسی" : "ELIGIBILITY"}
               </span>
               <h2 className="mt-5 text-2xl font-bold leading-9 sm:text-3xl">
@@ -577,7 +529,7 @@ export function InstallmentPage({ locale }: { locale: Locale }) {
                   ? "چه پروژه‌هایی مناسب این مسیرند؟"
                   : "Which projects fit this path?"}
               </h2>
-              <p className="mt-4 text-sm leading-8 text-[#315d68]/78">
+              <p className="mt-4 text-sm leading-8 text-muted-foreground">
                 {locale === "fa"
                   ? "به‌جای قول ثابت برای همه، شرایط را بر اساس وضعیت واقعی پروژه مشخص می‌کنیم."
                   : "Instead of making a fixed promise for every project, we assess the real situation first."}
@@ -587,18 +539,18 @@ export function InstallmentPage({ locale }: { locale: Locale }) {
               {copy.conditions.map((condition) => (
                 <li
                   key={condition.en}
-                  className="flex items-start gap-3 rounded-xl border border-[#073b4c]/10 bg-white/65 p-4 text-sm leading-7 text-[#315d68]/88"
+                  className="flex items-start gap-3 rounded-xl border border-foreground/10 bg-surface p-4 text-sm leading-7 text-muted-foreground"
                 >
-                  <CheckCircle2 className="mt-1 size-4 shrink-0 text-[#0ba99d]" aria-hidden />
+                  <CheckCircle2 className="mt-1 size-4 shrink-0 text-foreground" aria-hidden />
                   {t(condition, locale)}
                 </li>
               ))}
             </ul>
           </div>
 
-          <div className="relative mt-8 grid gap-3 border-t border-[#0b5262]/12 pt-7 text-sm leading-8 text-muted-foreground sm:grid-cols-2">
+          <div className="coorda-installment-notes">
             {copy.notes.map((note) => (
-              <p key={note.en} className="rounded-xl bg-white/65 p-4">
+              <p key={note.en} className="rounded-xl bg-surface p-4">
                 {t(note, locale)}
               </p>
             ))}
@@ -615,7 +567,7 @@ export function InstallmentPage({ locale }: { locale: Locale }) {
         </Container>
       </section>
       <FinalBand locale={locale} />
-    </>
+    </></BrandText>
   );
 }
 
@@ -694,82 +646,35 @@ export function PublicLeadPage({
   sourcePath: string;
 }) {
   const page = leadPages[kind];
-  const visualVariant: Record<LeadKind, ContextVisualVariant> = {
-    project: "software",
-    technical_review: "recovery",
-    seo_audit: "seo",
-    contact: "connected",
-  };
+  const requests = [
+    { kind: "project", href: "/start-project", fa: "شروع یک پروژه", en: "New project" },
+    {
+      kind: "technical_review",
+      href: "/technical-review",
+      fa: "بررسی پروژهٔ موجود",
+      en: "Review a project",
+    },
+    { kind: "seo_audit", href: "/seo-audit", fa: "بررسی سئو", en: "SEO review" },
+    { kind: "contact", href: "/contact", fa: "یک سؤال دارم", en: "General enquiry" },
+  ];
   return (
-    <>
-      <PageHero
-        locale={locale}
-        eyebrow={t(page.eyebrow, locale)}
-        title={t(page.title, locale)}
-        lead={t(page.lead, locale)}
-        visualVariant={visualVariant[kind]}
-      />
-      <section className="relative overflow-hidden bg-[#f7fbfa] py-14 sm:py-20">
-        <div className="pointer-events-none absolute inset-0 opacity-60 [background-image:radial-gradient(circle_at_12%_18%,rgba(32,191,178,0.1),transparent_26%),radial-gradient(circle_at_86%_72%,rgba(99,146,255,0.08),transparent_28%)]" />
-        <Container>
-          <div className="relative grid gap-8 lg:grid-cols-[minmax(0,1fr)_22rem] lg:items-start">
-            <div className="rounded-2xl border border-[#0b5262]/12 bg-white/80 p-6 shadow-[0_18px_55px_rgba(31,92,105,0.08)] backdrop-blur-sm sm:p-9">
-              <LeadForm locale={locale} kind={kind} sourcePath={sourcePath} />
+    <BrandText><section id="top" className="contact-section" aria-labelledby="contact-title">
+      <div className="page-container">
+        <nav className="coorda-request-nav" aria-label={locale === "fa" ? "موضوع گفت‌وگو" : "Conversation topic"}>
+          {requests.map(request => <Link key={request.kind} href={localizedHref(locale,request.href)} aria-current={request.kind === kind ? "page" : undefined}>{request[locale]}</Link>)}
+        </nav>
+        <div className="contact-grid">
+          <div className="contact-panel">
+            <img src={kind === "seo_audit" ? "/images/editorial/seo-growth-workspace.png" : "/images/editorial/rycode-hero-poster.jpg"} alt="" fetchPriority="high" />
+            <div className="contact-intro">
+              <h1 id="contact-title">{t(page.title,locale)}</h1>
+              <p>{t(page.lead,locale)}</p>
             </div>
-            <aside className="overflow-hidden rounded-2xl border border-[#0b5262]/12 bg-white/82 shadow-[0_18px_55px_rgba(31,92,105,0.08)] backdrop-blur-sm lg:sticky lg:top-28">
-              <div className="relative aspect-[4/3] overflow-hidden bg-ink">
-                {kind === "seo_audit" ? (
-                  <Image
-                    src="/images/editorial/seo-growth-workspace.png"
-                    alt=""
-                    fill
-                    sizes="(min-width: 1024px) 20rem, 100vw"
-                    className="object-cover"
-                    aria-hidden
-                  />
-                ) : (
-                  <ContextVisual
-                    variant={visualVariant[kind]}
-                    title={t(page.title, locale)}
-                    decorative
-                    className="absolute inset-0 min-h-0 opacity-90"
-                  />
-                )}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#00364a] via-[#00364a]/15 to-transparent" />
-                <span className="meta-label absolute inset-x-5 bottom-5 text-[#5fe1d5]">
-                  RYCODE / NEXT STEP
-                </span>
-              </div>
-              <div className="p-6">
-                <ShieldCheck className="size-6 text-[#20bfb2]" aria-hidden />
-                <h2 className="mt-5 text-lg font-bold text-[#073b4c]">
-                  {locale === "fa" ? "شفافیت و امنیت" : "Clarity and security"}
-                </h2>
-                <p className="mt-3 text-sm leading-7 text-muted-foreground">
-                  {t(page.note, locale)}
-                </p>
-                {kind === "contact" && (
-                  <div className="mt-6 border-t border-hairline pt-6">
-                    <p className="text-sm leading-7 text-muted-foreground">
-                      {locale === "fa"
-                        ? "برای درخواست تخصصی مسیر مناسب را انتخاب کنید:"
-                        : "For a scoped request, choose the relevant path:"}
-                    </p>
-                    <div className="mt-4 flex flex-col items-start gap-3">
-                      <ActionLink locale={locale} href="/start-project" secondary>
-                        {locale === "fa" ? "شروع پروژه" : "Start a project"}
-                      </ActionLink>
-                      <ActionLink locale={locale} href="/technical-review" secondary>
-                        {locale === "fa" ? "بررسی فنی" : "Technical review"}
-                      </ActionLink>
-                    </div>
-                  </div>
-                )}
-              </div>
-            </aside>
+            <div className="contact-links reference-contact-note"><ShieldCheck aria-hidden/><p>{t(page.note,locale)}</p></div>
           </div>
-        </Container>
-      </section>
-    </>
+          <div className="contact-form"><LeadForm locale={locale} kind={kind} sourcePath={sourcePath}/></div>
+        </div>
+      </div>
+    </section></BrandText>
   );
 }

@@ -1,10 +1,12 @@
 import { ArrowUpLeft, ArrowUpRight } from "lucide-react";
+import { BrandText } from "@/components/site/brand-text";
 import Image from "next/image";
 import Link from "next/link";
 
 import { catalogContextVariant, ContextVisual } from "@/components/site/context-visual";
 import { Container } from "@/components/site/primitives";
 import {
+  catalogPath,
   getCatalogEntries,
   getCatalogVisual,
   kindCopy,
@@ -14,8 +16,11 @@ import {
 } from "@/content/catalog";
 import type { Locale } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
+import { familyForService, serviceEnquiry } from "@/content/service-model";
 
 import { ActionLink, FinalBand, JsonLd, localizedHref, PageHero } from "./shared";
+import { BlogArticle } from "./blog";
+import type { PublicCatalogEntry, PublicContent } from "@/server/queries/public-content";
 
 const contentTones = [
   {
@@ -53,16 +58,16 @@ const labels: Record<
     en: { item: "Service", back: "All services" },
   },
   solutions: {
-    fa: { item: "راهکار", back: "همه راهکارها" },
-    en: { item: "Solution", back: "All solutions" },
+    fa: { item: "راهکار", back: "بازگشت به سیستم‌های قابل ساخت" },
+    en: { item: "Solution", back: "Back to systems we build" },
   },
   problems: {
     fa: { item: "مسئله", back: "همه مسائل" },
     en: { item: "Problem", back: "All problems" },
   },
   industries: {
-    fa: { item: "صنعت", back: "همه صنایع" },
-    en: { item: "Industry", back: "All industries" },
+    fa: { item: "صنعت", back: "بازگشت به خدمات کسب‌وکارها" },
+    en: { item: "Industry", back: "Back to services for your business" },
   },
   integrations: {
     fa: { item: "اتصال", back: "همه اتصال‌ها" },
@@ -81,7 +86,7 @@ export function CatalogHub({ locale, kind }: { locale: Locale; kind: CatalogKind
   const Arrow = locale === "fa" ? ArrowUpLeft : ArrowUpRight;
 
   return (
-    <>
+    <BrandText><>
       <PageHero
         locale={locale}
         eyebrow={localize(copy.eyebrow, locale)}
@@ -101,7 +106,7 @@ export function CatalogHub({ locale, kind }: { locale: Locale; kind: CatalogKind
           </>
         }
       />
-      <section className="relative overflow-hidden bg-[#f7fbfa] py-14 sm:py-20">
+      <section className="relative overflow-hidden bg-surface-2 py-14 sm:py-20">
         <div className="pointer-events-none absolute inset-0 opacity-60 [background-image:radial-gradient(circle_at_15%_12%,rgba(32,191,178,0.1),transparent_26%),radial-gradient(circle_at_86%_72%,rgba(99,146,255,0.08),transparent_28%)]" />
         <Container>
           <div className="relative grid gap-4 md:grid-cols-2 xl:grid-cols-3">
@@ -110,9 +115,9 @@ export function CatalogHub({ locale, kind }: { locale: Locale; kind: CatalogKind
               return (
                 <Link
                   key={entry.slug}
-                  href={localizedHref(locale, `/${kind}/${entry.slug}`)}
+                  href={localizedHref(locale, catalogPath(kind, entry.slug))}
                   className={cn(
-                    "group relative overflow-hidden rounded-2xl border p-3 shadow-[0_10px_32px_rgba(31,92,105,0.06)] backdrop-blur-sm transition-[box-shadow,border-color] duration-300 hover:shadow-[0_20px_50px_rgba(31,92,105,0.12)]",
+                    "group relative overflow-hidden rounded-xl border p-3 shadow-[0_10px_32px_rgba(31,92,105,0.06)] backdrop-blur-sm transition-[box-shadow,border-color] duration-300 ",
                     contentTone(index).card,
                   )}
                 >
@@ -143,7 +148,7 @@ export function CatalogHub({ locale, kind }: { locale: Locale; kind: CatalogKind
                     </div>
                   </div>
                   <div className="p-4 sm:p-5">
-                    <h2 className="display-3 text-[#073b4c]">{localize(entry.title, locale)}</h2>
+                    <h2 className="display-3 text-foreground">{localize(entry.title, locale)}</h2>
                     <p className="mt-4 max-w-md text-sm leading-7 text-muted-foreground">
                       {localize(entry.summary, locale)}
                     </p>
@@ -160,112 +165,64 @@ export function CatalogHub({ locale, kind }: { locale: Locale; kind: CatalogKind
         </Container>
       </section>
       <FinalBand locale={locale} />
-    </>
+    </></BrandText>
   );
 }
 
-export function CatalogDetail({ locale, entry }: { locale: Locale; entry: CatalogEntry }) {
+export function CatalogDetail({ locale, entry, cms = null, related = [] }: { locale: Locale; entry: CatalogEntry; cms?: PublicContent | null; related?: PublicCatalogEntry[] }) {
+  if (entry.kind === "blog") return <BlogArticle locale={locale} entry={entry} cms={cms} related={related} />;
   const kindLabel = labels[entry.kind][locale];
-  const absolutePath = localizedHref(locale, `/${entry.kind}/${entry.slug}`);
   const visual = getCatalogVisual(entry);
-
-  return (
-    <>
-      <JsonLd
-        value={{
-          "@context": "https://schema.org",
-          "@type": entry.kind === "blog" ? "Article" : "WebPage",
-          name: localize(entry.title, locale),
-          description: localize(entry.summary, locale),
-          inLanguage: locale === "fa" ? "fa-IR" : "en",
-          url: absolutePath,
-          ...(entry.kind === "blog" ? { author: { "@type": "Organization", name: "RYCODE" } } : {}),
-        }}
-      />
-      <PageHero
-        locale={locale}
-        eyebrow={localize(entry.eyebrow, locale)}
-        title={localize(entry.title, locale)}
-        lead={localize(entry.summary, locale)}
-        {...(visual
-          ? { imageSrc: visual.src, imageAlt: localize(visual.alt, locale) }
-          : {
-              visualVariant: catalogContextVariant(entry.kind, entry.slug),
-              visualItems: entry.sections.map((section) => localize(section.title, locale)),
-            })}
-        aside={
-          <>
-            {entry.conceptual && (
-              <strong className="mb-4 block text-[#5fe1d5]">
-                {locale === "fa"
-                  ? "این صفحه یک مثال فرضی است، نه پروژه واقعی."
-                  : "This is a concept scenario."}
-              </strong>
-            )}
-            {locale === "fa"
-              ? "بعد از اینکه وضعیت فعلی را دیدیم، درباره زمان و مسیر اجرا دقیق‌تر حرف می‌زنیم."
-              : "Scope and timing are determined after reviewing the current state."}
-          </>
-        }
-      />
-      <section className="relative overflow-hidden bg-[#f7fbfa] py-14 sm:py-20">
-        <div className="pointer-events-none absolute inset-0 opacity-60 [background-image:radial-gradient(circle_at_12%_15%,rgba(32,191,178,0.1),transparent_27%),radial-gradient(circle_at_88%_78%,rgba(99,146,255,0.08),transparent_28%)]" />
-        <Container>
-          <Link
-            href={localizedHref(locale, `/${entry.kind}`)}
-            className="relative inline-flex rounded-full border border-[#0b5262]/15 bg-white/65 px-5 py-2.5 text-sm font-bold text-[#075264] transition-colors hover:border-[#20bfb2]/50 hover:bg-white"
-          >
+  const family = entry.kind === "services" ? familyForService(entry.slug) : undefined;
+  const enquiry = entry.kind === "services" ? serviceEnquiry(entry.slug) : { href: "/start-project", label: { fa: "شروع گفت‌وگو", en: "Start a conversation" } };
+  return <BrandText><>
+    <JsonLd value={{
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      name: localize(entry.title, locale),
+      description: localize(entry.summary, locale),
+      inLanguage: locale === "fa" ? "fa-IR" : "en",
+      url: localizedHref(locale, catalogPath(entry.kind, entry.slug)),
+    }} />
+    <article id="top" className="article-page" aria-labelledby="article-title">
+      <div className="page-container article-container">
+        <div className="article-header">
+          <Link className="article-back" href={localizedHref(locale, family ? `/services#${family.id}` : catalogPath(entry.kind))}>
+            {locale === "fa" ? <ArrowUpRight size={20} strokeWidth={1.5} aria-hidden /> : <ArrowUpLeft size={20} strokeWidth={1.5} aria-hidden />}
             {kindLabel.back}
           </Link>
-          <div className="relative mt-10 grid gap-4">
-            {entry.sections.map((section, index) => (
-              <section
-                key={`${entry.slug}-${index}`}
-                className={cn(
-                  "grid gap-8 rounded-2xl border border-s-[3px] bg-white/80 p-6 shadow-[0_10px_34px_rgba(31,92,105,0.055)] backdrop-blur-sm sm:p-8 lg:grid-cols-[15rem_minmax(0,1fr)] lg:p-10",
-                  contentTone(index).rail,
-                )}
-              >
-                <div className={cn("meta-label", contentTone(index).label)}>
-                  {String(index + 1).padStart(2, "0")} / {kindLabel.item}
-                </div>
-                <div className="max-w-3xl">
-                  <h2 className="display-3 text-[#073b4c]">{localize(section.title, locale)}</h2>
-                  {section.body && (
-                    <p className="mt-6 text-base leading-8 text-muted-foreground sm:text-lg sm:leading-9">
-                      {localize(section.body, locale)}
-                    </p>
-                  )}
-                  {section.items && (
-                    <ol className="mt-8 grid gap-0 border-t border-[#0b5262]/10">
-                      {section.items.map((item, itemIndex) => (
-                        <li
-                          key={localize(item, locale)}
-                          className="grid grid-cols-[2.5rem_1fr] gap-4 border-b border-[#0b5262]/10 py-5 text-base text-[#214f5b]"
-                        >
-                          <span className="meta-label text-[#0b8f87]">
-                            {String(itemIndex + 1).padStart(2, "0")}
-                          </span>
-                          <span>{localize(item, locale)}</span>
-                        </li>
-                      ))}
-                    </ol>
-                  )}
-                </div>
-              </section>
-            ))}
+          <div className="article-heading">
+            <h1 id="article-title">{localize(entry.title, locale).trimEnd().replace(/[.。]+$/, "")}</h1>
+            <div className="article-metadata">
+              <div className="article-byline"><img src="/coorda-template/rycode-black.svg" width={32} height={32} alt="" /><span>RYCODE</span></div>
+              <div><span>{kindLabel.item}</span><span>{localize(entry.eyebrow, locale)}</span></div>
+              {entry.conceptual && <div><span>{locale === "fa" ? "نوع نمونه" : "Study type"}</span><span>{locale === "fa" ? "مطالعهٔ مفهومی، نه پروژهٔ واقعی" : "Concept scenario, not client work"}</span></div>}
+            </div>
           </div>
-          <div className="relative mt-12 flex flex-wrap gap-3">
-            <ActionLink locale={locale} href="/start-project">
-              {locale === "fa" ? "گفت‌وگو درباره این مسیر" : "Discuss this path"}
-            </ActionLink>
-            <ActionLink locale={locale} href={`/${entry.kind}`} secondary>
-              {kindLabel.back}
-            </ActionLink>
-          </div>
-        </Container>
-      </section>
-      <FinalBand locale={locale} />
-    </>
-  );
+        </div>
+        <div className="article-divider" />
+        <img className="article-image" src={visual?.src ?? "/images/editorial/web-experience.png"} width={2048} height={1365} alt={visual ? localize(visual.alt, locale) : ""} fetchPriority="high" />
+        <div className="article-body">
+          <p>{localize(entry.summary, locale)}</p>
+          {entry.sections.map((section, index) => <section key={`${entry.slug}-${index}`} className="reference-content-section">
+            <h2>{localize(section.title, locale)}</h2>
+            {section.body && <p>{localize(section.body, locale)}</p>}
+            {section.items && <ul>{section.items.map(item => <li key={localize(item, locale)}>{localize(item, locale)}</li>)}</ul>}
+          </section>)}
+        </div>
+      </div>
+    </article>
+    <section className="article-related section-space">
+      <div className="page-container">
+        <div className="article-related-heading">
+          <h2 className="page-section-heading">{locale === "fa" ? "دربارهٔ این مسیر حرف بزنیم" : "Discuss this path"}</h2>
+          <Link className="hero-cta" href={localizedHref(locale, enquiry.href)}>
+            <span className="hero-cta-label">{enquiry.label[locale]}</span>
+            <span className="hero-cta-label hero-cta-label-copy" aria-hidden>{enquiry.label[locale]}</span>
+          </Link>
+        </div>
+      </div>
+    </section>
+    <FinalBand locale={locale} />
+  </></BrandText>;
 }

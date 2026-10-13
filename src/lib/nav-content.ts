@@ -1,6 +1,13 @@
+import { getCatalogEntry } from "@/content/catalog";
+import { serviceFamilies } from "@/content/service-model";
+import type { Locale } from "@/i18n/routing";
+
 export type AppPath =
   | "/"
   | "/services"
+  | `/services/${string}`
+  | "/services#solutions"
+  | "/services#industries"
   | "/services/ongoing-support"
   | "/installment-purchase"
   | "/solutions"
@@ -10,6 +17,8 @@ export type AppPath =
   | "/projects"
   | "/blog"
   | "/about"
+  | `/about#${string}`
+  | `/services#${string}`
   | "/terms"
   | "/privacy"
   | "/why-rycode"
@@ -23,65 +32,22 @@ export type AppPath =
   | "/login";
 
 export type NavLink = { label: string; href: AppPath; id?: string };
-export type NavGroup = { title: string; items: NavLink[] };
+export type NavGroup = { title: string; items: NavLink[]; id?: string };
 export type PrimaryNavItem = NavLink & {
   menu?: NavGroup[];
   emphasis?: boolean;
 };
 
-export const serviceGroups: NavGroup[] = [
-  {
-    title: "ساخت",
-    items: [
-      { label: "طراحی سایت", href: "/services" },
-      { label: "فروشگاه اینترنتی", href: "/services" },
-      { label: "سایت شرکتی", href: "/services" },
-      { label: "سایت اختصاصی", href: "/services" },
-      { label: "WordPress", href: "/services" },
-      { label: "WooCommerce", href: "/services" },
-    ],
-  },
-  {
-    title: "توسعه",
-    items: [
-      { label: "نرم‌افزار اختصاصی", href: "/services" },
-      { label: "API", href: "/integrations" },
-      { label: "یکپارچه‌سازی", href: "/integrations" },
-      { label: "توسعه پروژه موجود", href: "/services" },
-      { label: "پنل و Dashboard", href: "/services" },
-    ],
-  },
-  {
-    title: "حل مشکل",
-    items: [
-      { label: "رفع باگ", href: "/problems" },
-      { label: "تکمیل پروژه نیمه‌کاره", href: "/problems" },
-      { label: "افزایش سرعت", href: "/problems" },
-      { label: "مهاجرت", href: "/problems" },
-      { label: "Core Web Vitals", href: "/problems" },
-    ],
-  },
-  {
-    title: "رشد",
-    items: [
-      { label: "سئو", href: "/services" },
-      { label: "سئو تکنیکال", href: "/services" },
-      { label: "سئو فروشگاهی", href: "/services" },
-      { label: "استراتژی محتوا", href: "/services" },
-      { label: "SEO Audit", href: "/seo-audit" },
-    ],
-  },
-  {
-    title: "پشتیبانی",
-    items: [
-      { label: "پشتیبانی سایت", href: "/services" },
-      { label: "پشتیبانی WordPress", href: "/services" },
-      { label: "پشتیبانی فروشگاه", href: "/services" },
-      { label: "نگهداری نرم‌افزار", href: "/services" },
-      { label: "توسعه مستمر", href: "/services" },
-    ],
-  },
-];
+export function getServiceGroups(locale: Locale): NavGroup[] {
+  return serviceFamilies.map(family => ({
+    title: family.title[locale],
+    items: family.slugs.flatMap(slug => {
+      const service = getCatalogEntry("services", slug);
+      return service ? [{ label: service.title[locale], href: `/services/${slug}` as AppPath }] : [];
+    }),
+  }));
+}
+export const serviceGroups = getServiceGroups("fa");
 
 export const solutionGroups: NavGroup[] = [
   {
@@ -137,121 +103,58 @@ export const industries = [
   "املاک",
 ];
 
-const businessSolutionGroups: NavGroup[] = [
-  {
-    title: "راهکارهای ما",
-    items: [
-      { label: "همه راهکارها", href: "/solutions", id: "solutions-all" },
-      ...solutionGroups.flatMap((group) => group.items),
-    ],
-  },
-  {
-    title: "برای چه کسب‌وکارهایی؟",
-    items: [
-      { label: "همه صنایع", href: "/industries", id: "industries-all" },
-      ...industries.map((label, index) => ({
-        label,
-        href: "/industries" as const,
-        id: `industry-${index}`,
-      })),
-    ],
-  },
-];
+export function getPrimaryNav(locale: Locale): PrimaryNavItem[] {
+  const fa = locale === "fa";
+  return [
+    { label: fa ? "خدمات" : "Services", href: "/services", menu: [...getServiceGroups(locale), {
+      title: fa ? "خدمات در عمل" : "Services in context",
+      id: "service-resources",
+      items: [
+        { label: fa ? "نمونه‌ها و مطالعات" : "Project studies", href: "/projects" },
+        { label: fa ? "چه سیستم‌هایی می‌سازیم؟" : "Systems we build", href: "/services#solutions" },
+        { label: fa ? "برای کسب‌وکار شما" : "For your business", href: "/services#industries" },
+        { label: fa ? "شرایط پرداخت مرحله‌ای" : "Installment terms", href: "/installment-purchase" },
+      ],
+    }] },
+    { label: fa ? "نمونه‌کارها" : "Work", href: "/projects" },
+    { label: fa ? "درباره ما" : "About us", href: "/about", menu: [{
+      title: fa ? "آشنایی با رایکد" : "Meet RYCODE",
+      items: [{ label: fa ? "درباره رایکد" : "About RYCODE", href: "/about" }, { label: fa ? "چرا رایکد" : "Why RYCODE", href: "/about#approach" }, { label: fa ? "فرایند همکاری" : "Our process", href: "/about#process" }, { label: fa ? "ابزار و تکنولوژی" : "Our technology", href: "/about#technology" }, { label: fa ? "پرسش‌های متداول" : "FAQ", href: "/faq" }],
+    }] },
+    { label: fa ? "بلاگ" : "Blog", href: "/blog" },
+    { label: fa ? "تماس با ما" : "Contact", href: "/contact" },
+    { label: fa ? "شروع همکاری" : "Get started", href: "/start-project", emphasis: true },
+  ];
+}
+export const primaryNav = getPrimaryNav("fa");
 
-const servicesMenu: NavGroup[] = [
-  ...serviceGroups,
-  {
-    title: "مسیرهای مرتبط",
-    items: [
-      { label: "کسب‌وکارها و راهکارهای ما", href: "/solutions" },
-      { label: "نمونه‌کارها", href: "/projects" },
-      { label: "خرید قسطی خدمات", href: "/installment-purchase" },
-    ],
-  },
-];
-
-const projectsMenu: NavGroup[] = [
-  {
-    title: "نمونه‌کارها",
-    items: [
-      { label: "همه نمونه‌کارها", href: "/projects" },
-      { label: "مطالعات مفهومی", href: "/projects" },
-    ],
-  },
-  {
-    title: "بر اساس کسب‌وکار",
-    items: [
-      { label: "صنایع", href: "/industries" },
-      { label: "راهکارهای ما", href: "/solutions" },
-    ],
-  },
-];
-
-const companyMenu: NavGroup[] = [
-  {
-    title: "درباره و قوانین",
-    items: [
-      { label: "درباره ما", href: "/about" },
-      { label: "قوانین استفاده", href: "/terms" },
-      { label: "حریم خصوصی", href: "/privacy" },
-    ],
-  },
-];
-
-export const primaryNav: PrimaryNavItem[] = [
-  { label: "خدمات", href: "/services", menu: servicesMenu },
-  { label: "نمونه‌کارها", href: "/projects", menu: projectsMenu },
-  { label: "بلاگ", href: "/blog" },
-  { label: "پشتیبانی", href: "/services/ongoing-support" },
-  { label: "سوالات متداول", href: "/faq" },
-  { label: "تماس با ما", href: "/contact" },
-  { label: "درباره ما", href: "/about", menu: companyMenu },
-  { label: "شروع کار", href: "/start-project", emphasis: true },
-  {
-    label: "کسب‌وکارها و راهکارهای ما",
-    href: "/solutions",
-    menu: businessSolutionGroups,
-  },
-];
-
-export const footerNav: NavGroup[] = [
-  {
-    title: "شرکت",
-    items: [
-      { label: "درباره رای‌کد", href: "/about" },
-      { label: "چرا رای‌کد", href: "/why-rycode" },
-      { label: "فرآیند کار", href: "/process" },
-      { label: "تکنولوژی‌ها", href: "/technologies" },
-      { label: "قوانین استفاده", href: "/terms" },
-      { label: "حریم خصوصی", href: "/privacy" },
-    ],
-  },
-  {
-    title: "مسیرها",
-    items: [
-      { label: "خدمات", href: "/services" },
-      { label: "پشتیبانی", href: "/services/ongoing-support" },
-      { label: "نمونه‌کارها", href: "/projects" },
-      { label: "کسب‌وکارها و راهکارهای ما", href: "/solutions" },
-    ],
-  },
-  {
-    title: "منابع",
-    items: [
-      { label: "پروژه‌ها", href: "/projects" },
-      { label: "بلاگ", href: "/blog" },
-      { label: "سوالات متداول", href: "/faq" },
-      { label: "تماس", href: "/contact" },
-    ],
-  },
-  {
-    title: "شروع",
-    items: [
-      { label: "شروع پروژه", href: "/start-project" },
-      { label: "خرید قسطی خدمات", href: "/installment-purchase" },
-      { label: "درخواست بررسی فنی", href: "/technical-review" },
-      { label: "درخواست SEO Audit", href: "/seo-audit" },
-      { label: "ورود مشتری", href: "/login" },
-    ],
-  },
-];
+export function getFooterNav(locale: Locale): NavGroup[] {
+  const fa = locale === "fa";
+  return [
+    { title: fa ? "رایکد" : "Company", items: [
+      { label: fa ? "درباره رایکد" : "About RYCODE", href: "/about" },
+      { label: fa ? "چرا رایکد" : "Why RYCODE", href: "/about#approach" },
+      { label: fa ? "فرایند همکاری" : "Our process", href: "/about#process" },
+      { label: fa ? "ابزار و تکنولوژی" : "Our technology", href: "/about#technology" },
+    ] },
+    { title: fa ? "خدمات" : "Services", items: serviceFamilies.map(family => ({
+      label: family.title[locale], href: `/services#${family.id}` as AppPath,
+    })) },
+    { title: fa ? "بیشتر ببین" : "Resources", items: [
+      { label: fa ? "نمونه‌ها و مطالعات" : "Project studies", href: "/projects" },
+      { label: fa ? "بلاگ" : "Blog", href: "/blog" },
+      { label: fa ? "پرسش‌های متداول" : "FAQ", href: "/faq" },
+      { label: fa ? "حریم خصوصی" : "Privacy policy", href: "/privacy" },
+      { label: fa ? "قوانین استفاده" : "Terms of use", href: "/terms" },
+    ] },
+    { title: fa ? "شروع همکاری" : "Get started", items: [
+      { label: fa ? "درباره پروژه حرف بزنیم" : "Start a conversation", href: "/start-project" },
+      { label: fa ? "بررسی پروژهٔ فعلی" : "Technical review", href: "/technical-review" },
+      { label: fa ? "بررسی سئوی سایت" : "SEO audit", href: "/seo-audit" },
+      { label: fa ? "تماس با ما" : "Contact", href: "/contact" },
+      { label: fa ? "شرایط پرداخت مرحله‌ای" : "Installment terms", href: "/installment-purchase" },
+      { label: fa ? "ورود مشتری" : "Client login", href: "/login" },
+    ] },
+  ];
+}
+export const footerNav = getFooterNav("fa");

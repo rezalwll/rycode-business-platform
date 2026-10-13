@@ -1,4 +1,5 @@
 "use client";
+import { BrandText } from "@/components/site/brand-text";
 
 import { Loader2 } from "lucide-react";
 import { useSearchParams } from "next/navigation";
@@ -114,15 +115,15 @@ export function AuthCard({ locale, mode }: { locale: Locale; mode: Mode }) {
 
   if (status === "done") {
     return (
-      <div
-        className="rounded-2xl border border-[#20bfb2]/25 bg-white/85 p-8 text-[#073b4c] shadow-[0_28px_90px_rgba(7,59,76,0.14)] backdrop-blur-md"
+      <BrandText><div
+        className="coorda-auth-card rounded-2xl border border-brand/25 bg-white/85 p-8 text-foreground shadow-[0_28px_90px_rgba(0,0,0,0.08)] backdrop-blur-md"
         role="status"
       >
-        <span className="grid size-11 place-items-center rounded-full bg-[#5fe1d5] text-[#073b4c]">
+        <span className="grid size-11 place-items-center rounded-full bg-brand text-brand-foreground">
           ✓
         </span>
         <p className="mt-6 text-lg font-bold">{isFa ? "درخواست ثبت شد" : "Request received"}</p>
-        <p className="mt-3 text-sm leading-7 text-[#315d68]/78">
+        <p className="mt-3 text-sm leading-7 text-muted-foreground">
           {mode === "register"
             ? isFa
               ? "برای فعال‌سازی حساب، لینک تأیید ارسال‌شده به ایمیل خود را باز کنید. پوشه هرزنامه را هم بررسی کنید."
@@ -131,15 +132,15 @@ export function AuthCard({ locale, mode }: { locale: Locale; mode: Mode }) {
               ? "اگر حسابی با این ایمیل وجود داشته باشد، راهنمای ادامه برای آن ارسال می‌شود."
               : "If an account exists for this email, reset instructions will be sent."}
         </p>
-      </div>
+      </div></BrandText>
     );
   }
 
   return (
-    <section className="w-full rounded-2xl border border-white/90 bg-white/85 p-7 text-[#073b4c] shadow-[0_28px_90px_rgba(7,59,76,0.14)] backdrop-blur-xl sm:p-9">
-      <p className="meta-label text-[#087b83]">ACCOUNT / RYCODE</p>
+    <BrandText><section className="coorda-auth-card w-full rounded-2xl border border-white/90 bg-white/85 p-7 text-foreground shadow-[0_28px_90px_rgba(0,0,0,0.08)] backdrop-blur-xl sm:p-9">
+      <p className="meta-label text-foreground">ACCOUNT / RYCODE</p>
       <h1 className="mt-5 text-2xl font-light tracking-[-0.02em] sm:text-3xl">{title}</h1>
-      <p className="mt-3 text-sm leading-7 text-[#315d68]/78">{description}</p>
+      <p className="mt-3 text-sm leading-7 text-muted-foreground">{description}</p>
 
       <form className="mt-8 space-y-5" noValidate onSubmit={submit}>
         {mode === "register" && (
@@ -205,7 +206,7 @@ export function AuthCard({ locale, mode }: { locale: Locale; mode: Mode }) {
         <button
           type="submit"
           disabled={status === "saving"}
-          className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-full border border-[#20bfb2]/60 bg-[#5fe1d5] px-6 text-sm font-bold text-[#073b4c] shadow-[0_12px_32px_rgba(95,225,213,0.16)] transition-colors hover:bg-[#74eadf] disabled:opacity-60"
+          className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-full border border-brand/60 bg-brand px-6 text-sm font-bold text-brand-foreground shadow-[0_12px_32px_rgba(0,0,0,0.08)] transition-colors hover:bg-brand/90 disabled:opacity-60"
         >
           {status === "saving" && <Loader2 aria-hidden className="size-4 animate-spin" />}
           {status === "saving"
@@ -230,24 +231,24 @@ export function AuthCard({ locale, mode }: { locale: Locale; mode: Mode }) {
         </button>
       </form>
 
-      <div className="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-xs text-[#315d68]/70">
+      <div className="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-xs text-muted-foreground">
         {mode === "login" && (
-          <Link href="/forgot-password" className="transition-colors hover:text-[#5fe1d5]">
+          <Link href="/forgot-password" className="transition-colors hover:text-foreground">
             {isFa ? "گذرواژه را فراموش کرده‌اید؟" : "Forgot password?"}
           </Link>
         )}
         {mode !== "register" && (
-          <Link href="/register" className="transition-colors hover:text-[#5fe1d5]">
+          <Link href="/register" className="transition-colors hover:text-foreground">
             {isFa ? "ساخت حساب" : "Create account"}
           </Link>
         )}
         {mode !== "login" && (
-          <Link href="/login" className="transition-colors hover:text-[#5fe1d5]">
+          <Link href="/login" className="transition-colors hover:text-foreground">
             {isFa ? "بازگشت به ورود" : "Back to sign in"}
           </Link>
         )}
       </div>
-    </section>
+    </section></BrandText>
   );
 }
 
@@ -269,7 +270,7 @@ function Field({
   dir?: "ltr" | "rtl";
 }) {
   return (
-    <label className="block text-sm font-semibold text-[#214f5b]/90" htmlFor={id}>
+    <BrandText><label className="block text-sm font-semibold text-foreground/90" htmlFor={id}>
       {label}
       <input
         id={id}
@@ -279,8 +280,8 @@ function Field({
         autoComplete={autoComplete}
         dir={dir}
         required
-        className="mt-2 h-12 w-full rounded-xl border border-[#073b4c]/15 bg-[#f4fbfa] px-4 text-sm text-[#073b4c] outline-none transition-[border-color,background-color,box-shadow] focus:border-[#20bfb2]/70 focus:bg-white focus:ring-4 focus:ring-[#5fe1d5]/20"
+        className="mt-2 h-12 w-full rounded-xl border border-foreground/15 bg-surface-2 px-4 text-sm text-foreground outline-none transition-[border-color,background-color,box-shadow] focus:border-brand/70 focus:bg-white focus:ring-4 focus:ring-ring/20"
       />
-    </label>
+    </label></BrandText>
   );
 }

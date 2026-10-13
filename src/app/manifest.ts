@@ -7,8 +7,8 @@ export default function manifest(): MetadataRoute.Manifest {
     description: "Software engineering, digital products and technical growth.",
     start_url: "/",
     display: "standalone",
-    background_color: "#f7fcfb",
-    theme_color: "#5fe1d5",
+    background_color: "#f2f2f2",
+    theme_color: "#f2f2f2",
     icons: [{ src: "/brand/rycode-favicon.png", sizes: "512x512", type: "image/png" }],
   };
 }

@@ -4,6 +4,35 @@ const nextConfig: NextConfig = {
   output: "standalone",
   poweredByHeader: false,
   compress: true,
+  // Redirect before rendering so merged company pages return a real HTTP 308,
+  // including to crawlers, rather than a streamed client-side redirect.
+  redirects: async () => [
+    ...[
+      { source: "why-rycode", anchor: "approach" },
+      { source: "process", anchor: "process" },
+      { source: "technologies", anchor: "technology" },
+    ].flatMap(({ source, anchor }) =>
+      ["", "/fa", "/en"].map((prefix) => ({
+        source: `${prefix}/${source}`,
+        destination: `${prefix === "/en" ? "/en" : ""}/about#${anchor}`,
+        permanent: true,
+      })),
+    ),
+    ...["solutions", "industries"].flatMap((kind) =>
+      ["", "/fa", "/en"].flatMap((prefix) => [
+        {
+          source: `${prefix}/${kind}`,
+          destination: `${prefix === "/en" ? "/en" : ""}/services#${kind}`,
+          permanent: true,
+        },
+        {
+          source: `${prefix}/${kind}/:slug`,
+          destination: `${prefix === "/en" ? "/en" : ""}/services/${kind}/:slug`,
+          permanent: true,
+        },
+      ]),
+    ),
+  ],
   experimental: {
     serverActions: {
       bodySizeLimit: "2mb",

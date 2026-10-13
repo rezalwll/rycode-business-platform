@@ -51,6 +51,8 @@ const catalogVariantBySlug: Record<string, ContextVisualVariant> = {
   "web-development": "web",
   ecommerce: "ecommerce",
   "custom-software": "software",
+  "mobile-app-development": "mobile",
+  "data-analytics": "data",
   "project-rescue": "recovery",
   "api-integration": "integration",
   "seo-growth": "seo",

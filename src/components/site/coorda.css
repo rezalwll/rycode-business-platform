@@ -1,0 +1,1686 @@
+/* Coorda composition transplanted into RYCODE, scoped to public pages only.
+   Source: the user-provided coorda-clone (Hero, AppShowcase, NativeFeatures,
+   PhotoHero, ContactContent, FAQ and InsightCard). No app claims are imported. */
+/* Undo legacy studio overrides and inherit the shared project palette. */
+.rycode-coorda,
+.dark .rycode-coorda {
+  --background: inherit;
+  --foreground: inherit;
+  --surface: inherit;
+  --surface-2: inherit;
+  --muted-foreground: inherit;
+  --border: inherit;
+  --hairline: inherit;
+  --card: inherit;
+  --card-foreground: inherit;
+  --popover: inherit;
+  --popover-foreground: inherit;
+  --studio-wash: inherit;
+  --studio-purple: inherit;
+  --brand: inherit;
+  --brand-foreground: inherit;
+  --brand-soft: inherit;
+  --brand-hover: inherit;
+  --ring: inherit;
+  --input: inherit;
+  --ink: inherit;
+  --ink-foreground: inherit;
+}
+.rycode-coorda > header {
+  background: color-mix(in srgb, var(--surface) 72%, transparent);
+}
+.rycode-coorda h1,
+.rycode-coorda h2,
+.rycode-coorda h3 {
+  text-wrap: balance;
+}
+.rycode-coorda mark {
+  display: inline;
+  padding: 0.04em 0.2em;
+  border-radius: 10px;
+  color: inherit;
+  background: var(--surface);
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+.rycode-coorda .coorda-eyebrow {
+  font-size: 0.7rem;
+  font-weight: 500;
+  line-height: 1.8;
+  color: var(--muted-foreground);
+  margin-bottom: 18px;
+}
+.rycode-coorda .coorda-button,
+.rycode-coorda .studio-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-height: 46px;
+  padding: 12px 22px;
+  border: 0;
+  border-radius: 100px;
+  background: var(--surface);
+  color: var(--foreground);
+  font-size: 0.85rem;
+  font-weight: 600;
+  line-height: 1.6;
+  transition:
+    transform 0.25s,
+    background 0.25s;
+}
+.rycode-coorda .coorda-button:hover,
+.rycode-coorda .studio-button:hover {
+  transform: translateY(-2px);
+  background: var(--brand-soft);
+  box-shadow: none;
+}
+.rycode-coorda .coorda-button svg,
+.rycode-coorda .coorda-text-link svg {
+  width: 17px;
+  height: 17px;
+  flex-shrink: 0;
+}
+.rycode-coorda .coorda-text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding-block: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+.rycode-coorda .coorda-text-link:hover {
+  color: var(--brand);
+}
+.rycode-coorda .coorda-button-secondary {
+  background: transparent;
+  border: 1px solid var(--border);
+}
+.rycode-coorda .coorda-final-band {
+  padding: 30px 0 65px;
+}
+.rycode-coorda .coorda-final-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  padding: 35px;
+  border-radius: 24px;
+  background: var(--surface-2);
+}
+.rycode-coorda .coorda-final-inner h2 {
+  font-size: 1.7rem;
+  font-weight: 500;
+  line-height: 1.7;
+}
+.rycode-coorda .coorda-section {
+  padding-block: 90px;
+}
+.rycode-coorda .coorda-section h2 {
+  font-size: clamp(1.8rem, 3vw, 2.65rem);
+  line-height: 1.6;
+  font-weight: 500;
+  letter-spacing: -0.025em;
+}
+.rycode-coorda .coorda-section h3 {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  font-weight: 600;
+}
+.rycode-coorda .coorda-section-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 48px;
+  margin-bottom: 44px;
+}
+.rycode-coorda .coorda-heading-aside {
+  max-width: 365px;
+}
+.rycode-coorda .coorda-heading-aside > p {
+  font-size: 0.88rem;
+  color: var(--muted-foreground);
+  line-height: 1.9;
+  margin-bottom: 20px;
+}
+.rycode-coorda .coorda-lead {
+  color: var(--muted-foreground);
+  font-size: 0.95rem;
+  line-height: 2;
+}
+/* Rounded, almost viewport-high opening frame and inline photographic title. */
+.rycode-coorda .coorda-hero {
+  padding: 8px;
+}
+.rycode-coorda .coorda-hero-frame {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: calc(100svh - 88px);
+  min-height: 620px;
+  max-height: 900px;
+  padding: 70px 36px 120px;
+  overflow: hidden;
+  border-radius: 24px;
+  color: #fff;
+  background: #294244 url("/images/editorial/rycode-hero-poster.jpg") center / cover;
+}
+.rycode-coorda .coorda-hero-film,
+.rycode-coorda .coorda-hero-shade {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.rycode-coorda .coorda-hero-film {
+  z-index: -2;
+  object-fit: cover;
+}
+.rycode-coorda .coorda-hero-shade {
+  z-index: -1;
+  background: linear-gradient(180deg, #06171945, #05161975 40%, #05171990);
+}
+.rycode-coorda .coorda-hero-copy {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 24px;
+  text-align: center;
+  max-width: 900px;
+}
+.rycode-coorda .coorda-hero-copy .coorda-eyebrow {
+  margin: 0;
+  color: #ffffffa6;
+}
+.rycode-coorda .coorda-hero-copy h1 {
+  font-size: clamp(2.6rem, 5.2vw, 4.6rem);
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: -0.035em;
+}
+.rycode-coorda .coorda-hero-copy h1 > span {
+  display: block;
+}
+.rycode-coorda .coorda-hero-copy h1 .coorda-hero-second {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+.rycode-coorda .coorda-hero-second > svg {
+  width: 52px;
+  height: 52px;
+  transform: rotate(-8deg);
+  stroke-width: 1.5;
+}
+.rycode-coorda .coorda-hero-thumb {
+  display: inline-block;
+  position: relative;
+  width: 135px;
+  height: 76px;
+  flex-shrink: 0;
+  border: 2px solid #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  transform: rotate(8deg);
+  box-shadow: 0 4px 8px #0002;
+}
+.rycode-coorda .coorda-hero-thumb img {
+  object-fit: cover;
+}
+.rycode-coorda .coorda-hero-copy > p:not(.coorda-eyebrow) {
+  max-width: 475px;
+  font-size: 0.98rem;
+  color: #ffffffe0;
+  line-height: 2;
+  text-wrap: balance;
+}
+.rycode-coorda .coorda-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+}
+.rycode-coorda .coorda-button-white {
+  background: #fff;
+  color: #1a1a1a;
+}
+.rycode-coorda .coorda-button-white:hover {
+  background: #e8f5f0;
+  color: #1a1a1a;
+}
+.rycode-coorda .coorda-hero-explore {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  font-size: 0.82rem;
+}
+.rycode-coorda .coorda-hero-explore svg {
+  width: 15px;
+  height: 15px;
+}
+.rycode-coorda .coorda-hero-areas {
+  position: absolute;
+  bottom: 30px;
+  inset-inline: 36px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 28px;
+  padding-top: 23px;
+  border-top: 1px solid #ffffff2e;
+}
+.rycode-coorda .coorda-hero-areas a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  font-size: 0.86rem;
+}
+.rycode-coorda .coorda-hero-areas a > span {
+  width: 6px;
+  height: 6px;
+  background: #b6ebe0;
+  border-radius: 50%;
+}
+.rycode-coorda .coorda-hero-areas svg {
+  width: 15px;
+  height: 15px;
+  opacity: 0.6;
+}
+.rycode-coorda .coorda-film-control {
+  position: absolute;
+  inset-inline-end: 24px;
+  bottom: 100px;
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #ffffff24;
+  color: white;
+  border: 1px solid #ffffff30;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+}
+.rycode-coorda .coorda-film-control svg {
+  width: 16px;
+  height: 16px;
+}
+/* Sticky app-showcase composition, with real service content instead of phone screens. */
+.rycode-coorda .expertise-workspace {
+  grid-template-columns: 300px minmax(0, 1fr);
+  gap: 55px;
+}
+.rycode-coorda .expertise-selector {
+  position: sticky;
+  top: 110px;
+  gap: 12px;
+}
+.rycode-coorda .expertise-selector > button {
+  border: 0;
+  min-height: 84px;
+  border-radius: 16px;
+  padding: 16px;
+  background: transparent;
+  color: var(--muted-foreground);
+  box-shadow: none;
+}
+.rycode-coorda .expertise-selector > button[aria-selected="true"] {
+  background: var(--surface);
+  color: var(--foreground);
+}
+.rycode-coorda .expertise-selector strong {
+  font-size: 1rem;
+  font-weight: 500;
+}
+.rycode-coorda .expertise-selector small {
+  font-size: 0.75rem;
+  font-weight: 400;
+}
+.rycode-coorda .expertise-selector-icon {
+  background: var(--surface);
+  border-radius: 100px;
+}
+.rycode-coorda .expertise-selector [aria-selected="true"] .expertise-selector-icon {
+  background: color-mix(in srgb, var(--family-accent) 10%, var(--surface));
+}
+.rycode-coorda .expertise-selector-note {
+  margin-top: 60px;
+  padding: 14px 16px;
+  font-size: 0.82rem;
+}
+.rycode-coorda .expertise-selector-note > span {
+  font-size: 0.6rem;
+}
+.rycode-coorda .expertise-panel-intro {
+  margin-bottom: 24px;
+  min-height: 40px;
+}
+.rycode-coorda .expertise-panel-intro p {
+  font-size: 0.86rem;
+  line-height: 2;
+}
+.rycode-coorda .service-bento-compact {
+  gap: 16px;
+}
+.rycode-coorda .service-bento-card {
+  border: 0;
+  border-bottom: 3px solid transparent;
+  border-radius: 24px;
+  background: var(--surface);
+}
+.rycode-coorda .service-bento-card:hover {
+  border-bottom-color: var(--family-accent, var(--brand));
+}
+.rycode-coorda .service-bento-heading {
+  padding: 24px 24px 10px;
+  gap: 14px;
+}
+.rycode-coorda .service-bento-heading h3 {
+  font-size: 1.06rem;
+  font-weight: 500;
+}
+.rycode-coorda .service-bento-arrow {
+  background: var(--surface-2);
+  color: var(--foreground);
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+}
+.rycode-coorda .service-bento-pitch {
+  margin-inline: 24px;
+  font-size: 0.78rem;
+  min-height: 4.1em;
+}
+.rycode-coorda .service-bento-scene,
+.rycode-coorda .service-bento-compact .service-bento-scene {
+  height: 240px;
+}
+.rycode-coorda .service-bento-details {
+  margin-inline: 24px;
+}
+.rycode-coorda .service-bento-details summary {
+  font-size: 0.75rem;
+  cursor: pointer;
+  padding-block: 19px;
+}
+.rycode-coorda .service-examples {
+  height: 240px;
+  margin-inline: 14px;
+  border-radius: 14px;
+}
+.rycode-coorda .coorda-rescue {
+  display: flex;
+  gap: 32px;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 40px;
+  padding: 26px 30px;
+  background: var(--surface-2);
+  border-radius: 24px;
+}
+.rycode-coorda .coorda-rescue h3 {
+  font-size: 1rem;
+}
+.rycode-coorda .coorda-rescue p {
+  color: var(--muted-foreground);
+  font-size: 0.8rem;
+  margin-top: 7px;
+  line-height: 1.9;
+}
+/* The impact split becomes a statement of how RYCODE works, without fake statistics. */
+.rycode-coorda .coorda-partnership {
+  background: var(--surface-2);
+  border-radius: 0 0 42px 42px;
+}
+.rycode-coorda .coorda-partnership-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 70px;
+  align-items: stretch;
+}
+.rycode-coorda .coorda-partnership-copy > p.coorda-lead {
+  margin-top: 24px;
+  max-width: 460px;
+}
+.rycode-coorda .coorda-partnership-copy ul {
+  display: grid;
+  gap: 24px;
+  margin-block: 34px;
+}
+.rycode-coorda .coorda-partnership-copy li {
+  display: flex;
+  align-items: start;
+  gap: 15px;
+}
+.rycode-coorda .coorda-partnership-copy li > svg {
+  width: 20px;
+  height: 20px;
+  margin-top: 7px;
+  color: var(--brand);
+  flex-shrink: 0;
+}
+.rycode-coorda .coorda-partnership-copy li h3 {
+  font-size: 1rem;
+  font-weight: 500;
+}
+.rycode-coorda .coorda-partnership-copy li p {
+  font-size: 0.82rem;
+  line-height: 1.8;
+  color: var(--muted-foreground);
+  margin-top: 5px;
+}
+.rycode-coorda .coorda-partnership-image {
+  position: relative;
+  min-height: 580px;
+  margin: 0;
+  overflow: hidden;
+  border-radius: 24px;
+}
+.rycode-coorda .coorda-partnership-image img {
+  object-fit: cover;
+}
+.rycode-coorda .coorda-partnership-image figcaption {
+  position: absolute;
+  inset-inline: 18px;
+  bottom: 18px;
+  padding: 18px;
+  border-radius: 16px;
+  color: #fff;
+  background: #17252685;
+  backdrop-filter: blur(12px);
+  font-size: 0.86rem;
+}
+/* Coorda's widening capability cards, adapted to the four engagement stages. */
+.rycode-coorda .coorda-step-cards {
+  display: flex;
+  gap: 16px;
+}
+.rycode-coorda .coorda-step-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  text-align: start;
+  flex: 1;
+  min-width: 0;
+  min-height: 325px;
+  padding: 28px;
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  color: var(--muted-foreground);
+  background: transparent;
+  transition:
+    flex 0.4s,
+    background 0.3s;
+  cursor: pointer;
+}
+.rycode-coorda .coorda-step-card.is-active {
+  flex: 2;
+  background: var(--surface);
+  color: var(--foreground);
+}
+.rycode-coorda .coorda-step-icon {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+}
+.rycode-coorda .coorda-step-icon svg {
+  width: 20px;
+  height: 20px;
+  stroke-width: 1.5;
+}
+.rycode-coorda .coorda-step-index {
+  position: absolute;
+  inset-inline-end: 24px;
+  top: 38px;
+  font-family: var(--font-latin);
+  font-size: 0.72rem;
+  opacity: 0.55;
+}
+.rycode-coorda .coorda-step-title {
+  font-size: 1.35rem;
+  font-weight: 500;
+  line-height: 1.65;
+  margin-top: 28px;
+}
+.rycode-coorda .coorda-step-description {
+  margin-top: auto;
+  padding-top: 24px;
+  font-size: 0.88rem;
+  line-height: 1.95;
+  color: var(--muted-foreground);
+}
+.rycode-coorda .coorda-step-description[hidden] {
+  display: none;
+}
+.rycode-coorda .coorda-step-arrow {
+  position: absolute;
+  bottom: 28px;
+  inset-inline-start: 28px;
+  width: 22px;
+  height: 22px;
+}
+.rycode-coorda .is-active .coorda-step-arrow {
+  display: none;
+}
+.rycode-coorda .coorda-payment {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 40px;
+  border-top: 1px solid var(--border);
+  margin-top: 36px;
+  padding-top: 26px;
+}
+.rycode-coorda .coorda-payment > p {
+  max-width: 740px;
+  font-size: 0.82rem;
+  color: var(--muted-foreground);
+  line-height: 2;
+}
+.rycode-coorda .coorda-payment > a {
+  flex-shrink: 0;
+}
+.rycode-coorda .coorda-journal {
+  background: var(--surface-2);
+  border-radius: 42px;
+}
+.rycode-coorda .coorda-journal-grid {
+  display: grid;
+  gap: 24px;
+}
+.rycode-coorda .coorda-insight {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 48px;
+  align-items: center;
+}
+.rycode-coorda .coorda-insight-image {
+  position: relative;
+  display: block;
+  min-height: 340px;
+  overflow: hidden;
+  border-radius: 24px;
+}
+.rycode-coorda .coorda-insight-image img {
+  object-fit: cover;
+  transition: transform 0.5s;
+}
+.rycode-coorda .coorda-insight-image:hover img {
+  transform: scale(1.03);
+}
+.rycode-coorda .coorda-insight h3 {
+  font-size: 1.6rem;
+  font-weight: 500;
+  line-height: 1.6;
+}
+.rycode-coorda .coorda-insight p {
+  font-size: 0.87rem;
+  line-height: 2;
+  margin-top: 20px;
+  color: var(--muted-foreground);
+}
+.rycode-coorda .coorda-insight .coorda-text-link {
+  margin-top: 18px;
+}
+.rycode-coorda .coorda-faq {
+  text-align: center;
+}
+.rycode-coorda .coorda-faq-list {
+  max-width: 750px;
+  margin: 40px auto 20px;
+  text-align: start;
+  display: grid;
+  gap: 12px;
+}
+.rycode-coorda .coorda-faq-item {
+  border: 0;
+  border-radius: 20px;
+  background: var(--surface);
+  overflow: hidden;
+}
+.rycode-coorda .coorda-faq-item summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 22px;
+  cursor: pointer;
+  padding: 24px 28px;
+  list-style: none;
+}
+.rycode-coorda .coorda-faq-item summary::-webkit-details-marker {
+  display: none;
+}
+.rycode-coorda .coorda-faq-item summary h3,
+.rycode-coorda .coorda-faq-item summary h2 {
+  font-size: 0.98rem;
+  font-weight: 500;
+}
+.rycode-coorda .coorda-faq-item summary svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  transition: transform 0.25s;
+}
+.rycode-coorda .coorda-faq-item[open] summary svg {
+  transform: rotate(45deg);
+}
+.rycode-coorda .coorda-faq-item > p {
+  padding: 0 28px 25px;
+  margin: 0;
+  color: var(--muted-foreground);
+  font-size: 0.87rem;
+  line-height: 2;
+}
+.rycode-coorda .coorda-support {
+  padding: 8px 8px 35px;
+}
+.rycode-coorda .coorda-support-frame {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 480px;
+  padding: 60px 30px;
+  overflow: hidden;
+  border-radius: 24px;
+  color: white;
+}
+.rycode-coorda .coorda-support-frame > img {
+  z-index: -2;
+  object-fit: cover;
+  filter: brightness(0.4);
+}
+.rycode-coorda .coorda-support-copy {
+  max-width: 650px;
+  text-align: center;
+}
+.rycode-coorda .coorda-support-copy .coorda-eyebrow {
+  color: #ffffffa6;
+}
+.rycode-coorda .coorda-support-copy h2 {
+  font-size: clamp(1.9rem, 3.5vw, 3.1rem);
+  font-weight: 500;
+  line-height: 1.6;
+}
+.rycode-coorda .coorda-support-copy mark {
+  background: #fff;
+  color: #1a1a1a;
+}
+.rycode-coorda .coorda-support-copy > p:not(.coorda-eyebrow) {
+  margin: 24px auto;
+  max-width: 440px;
+  font-size: 0.9rem;
+  line-height: 2;
+  color: #ffffffe0;
+}
+/* Shared public page frames: not a home-only skin. */
+.rycode-coorda .coorda-page-hero {
+  padding: 8px;
+}
+.rycode-coorda .coorda-page-frame {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 440px;
+  padding: 60px 35px;
+  overflow: hidden;
+  border-radius: 24px;
+  color: #fff;
+  background: #294244;
+}
+.rycode-coorda .coorda-page-photo {
+  z-index: -2;
+  object-fit: cover;
+  filter: brightness(0.38);
+}
+.rycode-coorda .coorda-page-frame h1 {
+  font-size: clamp(1.9rem, 3.7vw, 3.5rem);
+  line-height: 1.55;
+  font-weight: 500;
+  max-width: 850px;
+  letter-spacing: -0.025em;
+}
+.rycode-coorda .coorda-page-frame > .coorda-eyebrow {
+  color: #ffffffb3;
+}
+.rycode-coorda .coorda-page-lead {
+  max-width: 630px;
+  font-size: 0.93rem;
+  line-height: 2;
+  margin-top: 22px;
+  color: #ffffffe0;
+}
+.rycode-coorda .coorda-page-note {
+  max-width: 650px;
+  margin-top: 26px;
+  padding-top: 18px;
+  border-top: 1px solid #ffffff30;
+  font-size: 0.77rem;
+  line-height: 1.9;
+  color: #ffffffb3;
+}
+.rycode-coorda .coorda-page-note [class*="text-"] {
+  color: inherit;
+}
+.rycode-coorda .coorda-page-abstract {
+  color: var(--foreground);
+  background: var(--surface-2);
+}
+.rycode-coorda .coorda-page-abstract::before {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  z-index: -1;
+  background: repeating-linear-gradient(
+    120deg,
+    transparent 0 90px,
+    color-mix(in srgb, var(--surface) 45%, transparent) 90px 180px
+  );
+  transform: rotate(-8deg);
+}
+.rycode-coorda .coorda-page-abstract > .coorda-eyebrow,
+.rycode-coorda .coorda-page-abstract .coorda-page-lead {
+  color: var(--muted-foreground);
+}
+.rycode-coorda .coorda-page-abstract .coorda-page-note {
+  color: var(--muted-foreground);
+  border-color: var(--border);
+}
+.rycode-coorda .coorda-public-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 26px 16px;
+}
+.rycode-coorda .coorda-public-card {
+  display: block;
+  padding: 12px 12px 24px;
+  border-radius: 24px;
+  background: var(--surface);
+  border-bottom: 3px solid transparent;
+}
+.rycode-coorda .coorda-public-card:hover {
+  border-bottom-color: var(--brand);
+}
+.rycode-coorda .coorda-public-card-image {
+  position: relative;
+  aspect-ratio: 1.25;
+  overflow: hidden;
+  border-radius: 16px;
+  background: var(--surface-2);
+}
+.rycode-coorda .coorda-public-card-image > img {
+  object-fit: cover;
+  transition: transform 0.5s;
+}
+.rycode-coorda .coorda-public-card:hover img {
+  transform: scale(1.035);
+}
+.rycode-coorda .coorda-public-card-copy {
+  padding: 20px 12px 0;
+}
+.rycode-coorda .coorda-public-card h2 {
+  font-size: 1.2rem;
+  line-height: 1.7;
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+.rycode-coorda .coorda-public-card p {
+  font-size: 0.85rem;
+  color: var(--muted-foreground);
+  line-height: 1.9;
+}
+.rycode-coorda .coorda-public-card-label {
+  display: inline-block;
+  padding: 6px 10px;
+  margin-top: 18px;
+  border-radius: 100px;
+  background: var(--surface-2);
+  color: var(--muted-foreground);
+  font-size: 0.66rem;
+}
+.rycode-coorda .services-family-block {
+  border: 0;
+  padding-block: 40px;
+}
+.rycode-coorda .services-family-heading {
+  margin-bottom: 32px;
+}
+.rycode-coorda .services-family-heading h2 {
+  font-weight: 500;
+}
+.rycode-coorda .services-family-heading .studio-label {
+  color: var(--muted-foreground);
+}
+.rycode-coorda .services-family-block .service-bento {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.rycode-coorda .services-family-block .service-bento-card:only-child {
+  grid-column: 1/-1;
+}
+.rycode-coorda .coorda-catalog-content {
+  padding-block: 60px 90px;
+  background: var(--background);
+}
+.rycode-coorda .coorda-catalog-sections {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+  gap: 16px;
+  margin-top: 32px;
+}
+.rycode-coorda .coorda-catalog-section {
+  background: var(--surface);
+  border-radius: 24px;
+  padding: 32px;
+}
+.rycode-coorda .coorda-catalog-section:first-child {
+  grid-column: 1/-1;
+  display: grid;
+  grid-template-columns: 0.65fr 1.35fr;
+  gap: 40px;
+}
+.rycode-coorda .coorda-catalog-section h2 {
+  font-size: 1.22rem;
+  font-weight: 500;
+  line-height: 1.8;
+  margin-top: 20px;
+}
+.rycode-coorda .coorda-catalog-section p {
+  color: var(--muted-foreground);
+  font-size: 0.9rem;
+  line-height: 2;
+  margin-top: 20px;
+  white-space: pre-line;
+}
+.rycode-coorda .coorda-catalog-section ol {
+  display: grid;
+  gap: 12px;
+  margin-top: 24px;
+}
+.rycode-coorda .coorda-catalog-section li {
+  display: flex;
+  align-items: start;
+  gap: 12px;
+  font-size: 0.85rem;
+  color: var(--muted-foreground);
+  line-height: 1.9;
+}
+.rycode-coorda .coorda-catalog-section li > span:first-child {
+  font-size: 0.68rem;
+  color: var(--brand);
+  padding-top: 3px;
+}
+.rycode-coorda .coorda-info-section {
+  background: var(--background);
+  padding-block: 70px;
+}
+.rycode-coorda .coorda-info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+.rycode-coorda .coorda-info-card {
+  border: 0;
+  border-radius: 24px;
+  background: var(--surface);
+  padding: 32px;
+}
+.rycode-coorda .coorda-info-card h2 {
+  font-size: 1.4rem;
+  font-weight: 500;
+  line-height: 1.7;
+  margin-top: 24px;
+}
+.rycode-coorda .coorda-info-card p,
+.rycode-coorda .coorda-info-card li {
+  color: var(--muted-foreground);
+  font-size: 0.9rem;
+  line-height: 2;
+  margin-top: 16px;
+}
+.rycode-coorda .coorda-info-card li {
+  margin-top: 8px;
+}
+.rycode-coorda .coorda-installment-section {
+  padding-block: 70px;
+}
+.rycode-coorda .coorda-installment-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+.rycode-coorda .coorda-installment-card {
+  padding: 32px;
+  border-radius: 24px;
+  background: var(--surface);
+}
+.rycode-coorda .coorda-installment-card h2 {
+  font-size: 1.4rem;
+  font-weight: 500;
+  line-height: 1.7;
+  margin-top: 35px;
+}
+.rycode-coorda .coorda-installment-card p {
+  color: var(--muted-foreground);
+  font-size: 0.9rem;
+  line-height: 2;
+  margin-top: 20px;
+}
+.rycode-coorda .coorda-installment-conditions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 45px;
+  margin-top: 35px;
+  padding: 35px;
+  border-radius: 24px;
+  background: var(--surface-2);
+}
+.rycode-coorda .coorda-installment-conditions h2 {
+  font-size: 1.7rem;
+  font-weight: 500;
+}
+.rycode-coorda .coorda-installment-conditions li {
+  border: 0;
+  border-radius: 16px;
+}
+.rycode-coorda .coorda-installment-notes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 24px;
+  color: var(--muted-foreground);
+  font-size: 0.85rem;
+  line-height: 2;
+}
+.rycode-coorda .coorda-info-section.coorda-faq {
+  padding-top: 20px;
+}
+.rycode-coorda .coorda-solution-context details {
+  border: 0;
+  border-radius: 24px;
+  background: var(--surface);
+}
+.rycode-coorda .coorda-solution-context details > summary {
+  padding: 26px;
+}
+.rycode-coorda .coorda-solution-context details h3 {
+  font-weight: 500;
+  font-size: 1.1rem;
+}
+.rycode-coorda .coorda-industry-context details {
+  border: 0;
+  border-radius: 20px;
+  background: var(--surface);
+  padding-inline: 22px;
+  margin-bottom: 12px;
+}
+.rycode-coorda .coorda-industry-context details h3 {
+  font-weight: 500;
+}
+.rycode-coorda .coorda-industry-context details > div {
+  background: var(--background);
+  border: 0;
+  border-radius: 16px;
+}
+.rycode-coorda .coorda-legal .coorda-info-grid {
+  max-width: 850px;
+  margin-inline: auto;
+  grid-template-columns: 1fr;
+}
+.rycode-coorda .coorda-legal .coorda-info-card {
+  padding: 36px 40px;
+}
+.rycode-coorda .about-overview {
+  background: var(--background);
+}
+.rycode-coorda .about-overview .about-story {
+  gap: 70px;
+  padding-block: 70px;
+}
+.rycode-coorda .about-overview .about-story-visual {
+  background: var(--surface);
+  border-radius: 24px;
+}
+.rycode-coorda .about-overview .about-story h2 {
+  font-weight: 500;
+  font-size: 1.5rem;
+}
+.rycode-coorda .about-chapter {
+  border: 0;
+  padding-block: 70px;
+}
+.rycode-coorda .about-chapter-heading h2 {
+  font-weight: 500;
+  font-size: 2.2rem;
+}
+.rycode-coorda .about-principles {
+  gap: 16px;
+}
+.rycode-coorda .about-principles article {
+  border: 0;
+  background: var(--surface);
+  border-radius: 24px;
+  padding: 26px;
+}
+.rycode-coorda .about-principles h3 {
+  font-weight: 500;
+}
+.rycode-coorda .about-process {
+  background: var(--surface-2);
+  border-radius: 24px;
+  padding: 36px;
+  gap: 55px;
+}
+.rycode-coorda .about-toolkit article {
+  background: var(--surface);
+  padding: 26px;
+  border: 0;
+  border-radius: 20px;
+  margin-top: 12px;
+}
+.rycode-coorda .coorda-lead-page {
+  padding-block: 55px 80px;
+}
+.rycode-coorda .coorda-request-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+.rycode-coorda .coorda-auth-page {
+  padding-block: 55px 80px;
+}
+.rycode-coorda .coorda-auth-card {
+  border: 0;
+  border-radius: 24px;
+  background: var(--surface);
+  color: var(--foreground);
+  box-shadow: none;
+}
+.rycode-coorda .coorda-auth-card input {
+  background: var(--background);
+  color: var(--foreground);
+  border-color: var(--border);
+}
+.rycode-coorda .coorda-auth-card p:not([role="alert"]) {
+  color: var(--muted-foreground);
+}
+.rycode-coorda .coorda-auth-card label,
+.rycode-coorda .coorda-auth-card a {
+  color: var(--foreground);
+}
+.rycode-coorda .coorda-auth-card h1 {
+  font-weight: 500;
+}
+.rycode-coorda .coorda-contact-panel h2 {
+  font-size: clamp(1.75rem, 2.4vw, 2.3rem);
+  font-weight: 500;
+  line-height: 1.7;
+}
+.rycode-coorda .coorda-auth-benefits {
+  margin-top: auto;
+  padding-top: 40px;
+  display: grid;
+  gap: 15px;
+}
+.rycode-coorda .coorda-auth-benefits li {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  font-size: 0.84rem;
+  color: #ffffffd0;
+}
+.rycode-coorda .coorda-auth-benefits svg {
+  width: 18px;
+  height: 18px;
+}
+.rycode-coorda .coorda-request-nav a {
+  padding: 10px 18px;
+  font-size: 0.8rem;
+  border-radius: 100px;
+  background: var(--surface);
+  color: var(--muted-foreground);
+}
+.rycode-coorda .coorda-request-nav a[aria-current="page"] {
+  background: var(--foreground);
+  color: var(--background);
+}
+.rycode-coorda .coorda-contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  align-items: stretch;
+}
+.rycode-coorda .coorda-contact-panel {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  padding: 35px;
+  min-height: 580px;
+  overflow: hidden;
+  border-radius: 24px;
+  color: white;
+  background: #294244;
+}
+.rycode-coorda .coorda-contact-panel > img {
+  z-index: -1;
+  object-fit: cover;
+  filter: brightness(0.35);
+}
+.rycode-coorda .coorda-contact-panel h1 {
+  font-size: clamp(1.75rem, 2.4vw, 2.3rem);
+  font-weight: 500;
+  line-height: 1.7;
+  max-width: 480px;
+}
+.rycode-coorda .coorda-contact-panel .coorda-eyebrow {
+  color: #ffffff9c;
+}
+.rycode-coorda .coorda-contact-panel > p:not(.coorda-eyebrow) {
+  margin-top: 24px;
+  max-width: 460px;
+  font-size: 0.9rem;
+  color: #ffffffd0;
+  line-height: 2;
+}
+.rycode-coorda .coorda-contact-note {
+  margin-top: auto;
+  padding-top: 65px;
+  font-size: 0.8rem;
+  color: #ffffffba;
+  line-height: 2;
+}
+.rycode-coorda .coorda-contact-note > svg {
+  width: 24px;
+  height: 24px;
+  margin-bottom: 16px;
+}
+.rycode-coorda .coorda-contact-form {
+  background: var(--surface);
+  padding: 32px;
+  border-radius: 24px;
+  min-width: 0;
+}
+.rycode-coorda .coorda-contact-form input:not([type="checkbox"]),
+.rycode-coorda .coorda-contact-form textarea,
+.rycode-coorda .coorda-contact-form select {
+  background: var(--background);
+  border-color: var(--border);
+  border-radius: 12px;
+}
+.rycode-coorda .coorda-contact-form button[type="submit"] {
+  border-radius: 100px;
+}
+.rycode-coorda .coorda-search {
+  padding-block: 65px;
+  background: var(--background);
+}
+.rycode-coorda .coorda-search form {
+  background: var(--surface);
+  box-shadow: none;
+  border: 0;
+  border-radius: 24px;
+}
+.rycode-coorda .coorda-search input {
+  background: var(--background);
+  color: var(--foreground);
+}
+.rycode-coorda .coorda-error {
+  display: grid;
+  place-items: center;
+  min-height: 68svh;
+  text-align: center;
+  padding: 65px 24px;
+}
+.rycode-coorda .coorda-error h1 {
+  font-weight: 500;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  margin-top: 18px;
+}
+.rycode-coorda .coorda-error-code {
+  font-family: var(--font-latin);
+  font-size: clamp(4rem, 12vw, 9rem);
+  font-weight: 500;
+  color: var(--muted-foreground);
+  line-height: 1.1;
+}
+.rycode-coorda .coorda-error p {
+  color: var(--muted-foreground);
+  margin-block: 22px;
+  line-height: 2;
+}
+/* The preserved RYCODE wordmark footer, not Coorda's social/app footer. */
+.rycode-coorda .coorda-legacy-footer {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: var(--background);
+  color: var(--foreground);
+}
+.dark .rycode-coorda .coorda-legacy-footer {
+  background: var(--background);
+  color: var(--foreground);
+}
+.rycode-coorda .coorda-footer-wash {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  opacity: 0.7;
+  background:
+    radial-gradient(
+      circle at 88% 4%,
+      color-mix(in srgb, var(--foreground) 6%, transparent),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 4% 82%,
+      color-mix(in srgb, var(--foreground) 4%, transparent),
+      transparent 26%
+    );
+}
+.rycode-coorda .coorda-footer-brand {
+  padding-block: 60px 38px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 20px;
+}
+.rycode-coorda .coorda-footer-grid {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  opacity: 0.08;
+  background-image:
+    linear-gradient(var(--foreground) 1px, transparent 1px),
+    linear-gradient(90deg, var(--foreground) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: linear-gradient(to bottom, black, transparent 72%);
+}
+.rycode-coorda .coorda-footer-wordmark {
+  font-family: var(--font-latin);
+  font-size: clamp(3.1rem, 9vw, 7.8rem);
+  line-height: 0.8;
+  font-weight: 800;
+  letter-spacing: -0.055em;
+}
+.rycode-coorda .coorda-footer-wordmark > span {
+  color: inherit;
+}
+.rycode-coorda .coorda-footer-brand > small {
+  font-size: 0.7rem;
+  opacity: 0.5;
+}
+.rycode-coorda .coorda-footer-body {
+  display: grid;
+  grid-template-columns: 0.85fr 1.35fr;
+  gap: 75px;
+  padding-block: 55px;
+}
+.rycode-coorda .coorda-footer-body h2 {
+  max-width: 310px;
+  font-size: 1.75rem;
+  line-height: 1.6;
+  font-weight: 600;
+}
+.rycode-coorda .coorda-footer-body p {
+  max-width: 350px;
+  font-size: 0.87rem;
+  line-height: 2;
+  opacity: 0.75;
+  margin-top: 18px;
+}
+.rycode-coorda .coorda-footer-body .coorda-button {
+  margin-top: 24px;
+  background: var(--brand);
+  color: var(--brand-foreground);
+}
+.rycode-coorda .coorda-footer-body nav {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px;
+}
+.rycode-coorda .coorda-footer-body h3 {
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+.rycode-coorda .coorda-footer-body ul {
+  margin-top: 20px;
+  display: grid;
+  gap: 10px;
+}
+.rycode-coorda .coorda-footer-body li a {
+  font-size: 0.73rem;
+  line-height: 1.9;
+  opacity: 0.72;
+}
+.rycode-coorda .coorda-footer-body li a:hover {
+  opacity: 1;
+}
+.rycode-coorda .coorda-footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  border-top: 1px solid var(--border);
+  padding-block: 24px;
+  font-size: 0.72rem;
+  opacity: 0.65;
+}
+@media (max-width: 1199px) {
+  .rycode-coorda .expertise-workspace {
+    grid-template-columns: 240px minmax(0, 1fr);
+    gap: 28px;
+  }
+  .rycode-coorda .coorda-step-card {
+    padding: 24px;
+  }
+  .rycode-coorda .coorda-partnership-grid {
+    gap: 40px;
+  }
+  .rycode-coorda .coorda-footer-body {
+    grid-template-columns: 1fr;
+    gap: 35px;
+  }
+}
+@media (max-width: 1023px) {
+  .rycode-coorda .coorda-section {
+    padding-block: 70px;
+  }
+  .rycode-coorda .expertise-workspace {
+    grid-template-columns: 1fr;
+  }
+  .rycode-coorda .expertise-selector {
+    position: static;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  .rycode-coorda .expertise-selector > button {
+    padding: 12px 10px;
+  }
+  .rycode-coorda .expertise-selector strong {
+    font-size: 0.84rem;
+  }
+  .rycode-coorda .expertise-selector small {
+    font-size: 0.65rem;
+  }
+  .rycode-coorda .expertise-selector-note {
+    display: none;
+  }
+  .rycode-coorda .coorda-step-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .rycode-coorda .coorda-step-card {
+    min-height: 270px;
+  }
+  .rycode-coorda .coorda-step-arrow {
+    bottom: 20px;
+  }
+  .rycode-coorda .coorda-public-grid,
+  .rycode-coorda .services-family-block .service-bento {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .rycode-coorda .coorda-contact-grid {
+    grid-template-columns: 0.85fr 1.15fr;
+  }
+  .rycode-coorda .coorda-contact-panel {
+    padding: 28px;
+  }
+}
+@media (max-width: 767px) {
+  .rycode-coorda .coorda-installment-grid,
+  .rycode-coorda .coorda-installment-conditions,
+  .rycode-coorda .coorda-installment-notes {
+    grid-template-columns: 1fr;
+  }
+  .rycode-coorda .coorda-installment-conditions {
+    padding: 26px;
+    gap: 24px;
+  }
+  .rycode-coorda .coorda-installment-section {
+    padding-block: 45px;
+  }
+  .rycode-coorda .coorda-final-inner {
+    flex-direction: column;
+    align-items: start;
+    gap: 24px;
+    padding: 26px;
+  }
+  .rycode-coorda .coorda-hero-frame {
+    height: calc(100svh - 72px);
+    min-height: 600px;
+    padding: 55px 20px 145px;
+    border-radius: 20px;
+  }
+  .rycode-coorda .coorda-hero-copy {
+    gap: 20px;
+  }
+  .rycode-coorda .coorda-hero-copy h1 {
+    font-size: clamp(2.1rem, 6vw, 3.1rem);
+    line-height: 1.6;
+  }
+  .rycode-coorda .coorda-hero-copy h1 .coorda-hero-second {
+    gap: 10px;
+  }
+  .rycode-coorda .coorda-hero-thumb {
+    width: 75px;
+    height: 48px;
+    border-radius: 10px;
+  }
+  .rycode-coorda .coorda-hero-second > svg {
+    display: none;
+  }
+  .rycode-coorda .coorda-hero-copy > p:not(.coorda-eyebrow) {
+    font-size: 0.86rem;
+    max-width: 350px;
+  }
+  .rycode-coorda .coorda-hero-areas {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px 12px;
+    inset-inline: 20px;
+    bottom: 24px;
+  }
+  .rycode-coorda .coorda-hero-areas a {
+    font-size: 0.73rem;
+    gap: 8px;
+  }
+  .rycode-coorda .coorda-film-control {
+    bottom: 115px;
+    inset-inline-end: 18px;
+    width: 32px;
+    height: 32px;
+  }
+  .rycode-coorda .coorda-section {
+    padding-block: 55px;
+  }
+  .rycode-coorda .coorda-section-heading {
+    align-items: start;
+    flex-direction: column;
+    gap: 24px;
+    margin-bottom: 28px;
+  }
+  .rycode-coorda .coorda-section h2 {
+    font-size: 1.8rem;
+  }
+  .rycode-coorda .expertise-selector {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .rycode-coorda .expertise-selector > button {
+    min-height: 80px;
+    padding: 12px;
+  }
+  .rycode-coorda .expertise-selector-icon {
+    width: 28px;
+    height: 32px;
+  }
+  .rycode-coorda .service-bento-compact,
+  .rycode-coorda .services-family-block .service-bento {
+    grid-template-columns: 1fr;
+  }
+  .rycode-coorda .coorda-rescue {
+    flex-direction: column;
+    align-items: start;
+    gap: 20px;
+    padding: 24px;
+  }
+  .rycode-coorda .coorda-partnership-grid,
+  .rycode-coorda .coorda-insight {
+    grid-template-columns: 1fr;
+    gap: 35px;
+  }
+  .rycode-coorda .coorda-partnership-image {
+    min-height: 370px;
+  }
+  .rycode-coorda .coorda-step-title {
+    font-size: 1.13rem;
+  }
+  .rycode-coorda .coorda-step-index {
+    display: none;
+  }
+  .rycode-coorda .coorda-step-description {
+    font-size: 0.8rem;
+  }
+  .rycode-coorda .coorda-step-card {
+    padding: 20px;
+    min-height: 290px;
+  }
+  .rycode-coorda .coorda-payment {
+    align-items: start;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .rycode-coorda .coorda-insight-image {
+    min-height: 280px;
+  }
+  .rycode-coorda .coorda-insight h3 {
+    font-size: 1.3rem;
+  }
+  .rycode-coorda .coorda-faq-item summary {
+    padding: 20px;
+  }
+  .rycode-coorda .coorda-faq-item summary h3 {
+    font-size: 0.9rem;
+  }
+  .rycode-coorda .coorda-faq-item > p {
+    padding-inline: 20px;
+  }
+  .rycode-coorda .coorda-support-frame {
+    min-height: 400px;
+    padding: 45px 22px;
+  }
+  .rycode-coorda .coorda-page-frame {
+    min-height: 380px;
+    padding: 45px 24px;
+  }
+  .rycode-coorda .coorda-page-frame h1 {
+    font-size: 1.9rem;
+  }
+  .rycode-coorda .coorda-page-lead {
+    font-size: 0.85rem;
+  }
+  .rycode-coorda .coorda-public-grid,
+  .rycode-coorda .coorda-catalog-sections,
+  .rycode-coorda .coorda-info-grid {
+    grid-template-columns: 1fr;
+  }
+  .rycode-coorda .coorda-catalog-section:first-child {
+    display: block;
+  }
+  .rycode-coorda .coorda-catalog-section,
+  .rycode-coorda .coorda-info-card,
+  .rycode-coorda .coorda-legal .coorda-info-card {
+    padding: 26px;
+  }
+  .rycode-coorda .coorda-info-section {
+    padding-block: 45px;
+  }
+  .rycode-coorda .about-overview .about-story,
+  .rycode-coorda .about-chapter {
+    padding-block: 45px;
+  }
+  .rycode-coorda .about-chapter-heading h2 {
+    font-size: 1.7rem;
+  }
+  .rycode-coorda .about-process {
+    padding: 26px;
+  }
+  .rycode-coorda .coorda-contact-grid {
+    grid-template-columns: 1fr;
+  }
+  .rycode-coorda .coorda-contact-panel {
+    min-height: 420px;
+    padding: 28px;
+  }
+  .rycode-coorda .coorda-contact-panel h1 {
+    font-size: 1.7rem;
+  }
+  .rycode-coorda .coorda-contact-note {
+    padding-top: 28px;
+  }
+  .rycode-coorda .coorda-contact-form {
+    padding: 24px;
+  }
+  .rycode-coorda .coorda-lead-page {
+    padding-top: 30px;
+  }
+  .rycode-coorda .coorda-request-nav a {
+    font-size: 0.7rem;
+    padding: 9px 14px;
+  }
+  .rycode-coorda .coorda-footer-brand {
+    padding-block: 42px 30px;
+  }
+  .rycode-coorda .coorda-footer-body {
+    padding-block: 35px;
+  }
+  .rycode-coorda .coorda-footer-body nav {
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+  }
+  .rycode-coorda .coorda-footer-bottom {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+@media (max-width: 359px) {
+  .rycode-coorda .coorda-hero-copy h1 {
+    font-size: 1.95rem;
+  }
+  .rycode-coorda .coorda-hero-thumb {
+    width: 65px;
+    height: 42px;
+  }
+  .rycode-coorda .coorda-step-cards {
+    grid-template-columns: 1fr;
+  }
+  .rycode-coorda .coorda-step-card {
+    min-height: 200px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .rycode-coorda .coorda-hero-film,
+  .rycode-coorda .coorda-film-control {
+    visibility: hidden;
+  }
+  .rycode-coorda *,
+  .rycode-coorda *::before,
+  .rycode-coorda *::after {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

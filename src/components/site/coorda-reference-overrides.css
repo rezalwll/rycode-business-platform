@@ -1,0 +1,363 @@
+/* Only branding, language, integration and explicit user exceptions.
+   Layout and animation values live in the directly transplanted stylesheet. */
+.coorda-reference {
+  --coorda-font: "Open Runde", Arial, Helvetica, sans-serif;
+  font-family: var(--coorda-font);
+}
+[lang="fa"] .coorda-reference {
+  --coorda-font: "IRANYekan", ui-sans-serif, system-ui, sans-serif;
+}
+/* Source rounded paper panels assumed a charcoal section would follow.
+   Public pages also end these panels above light content/the retained footer:
+   expose the neutral canvas there, not a stray black corner wedge. */
+.coorda-reference :is(
+  .features,
+  .desktop-app-section,
+  .insights-section,
+  .pricing-section,
+  .about-team,
+  .download-section,
+  .insights-archive,
+  .article-related,
+  .contact-section,
+  .legal-content
+) {
+  background: transparent;
+}
+/* Keep the original curved transition only at an actual dark-section boundary. */
+.coorda-reference :is(
+  .features,
+  .desktop-app-section,
+  .insights-section,
+  .pricing-section,
+  .about-team,
+  .download-section,
+  .insights-archive,
+  .article-related,
+  .contact-section,
+  .legal-content
+):has(+ :is(.app-showcase, .native-features, .moments-section, .testimonials-section, .about-culture)) {
+  background: #1a1a1a;
+}
+.rycode-coorda > header.reference-overlay-header {
+  background: #08181c24;
+  border-color: #ffffff26;
+}
+/* Neutral navigation; the site's brand palette stays unchanged. */
+.rycode-coorda .rycode-primary-link:hover,
+.rycode-coorda .rycode-primary-link[aria-current="page"] {
+  background: var(--brand-soft);
+}
+.rycode-coorda header.reference-overlay-header .rycode-primary-link:hover,
+.rycode-coorda header.reference-overlay-header .rycode-primary-link[aria-current="page"] {
+  background: #ffffff18;
+}
+.rycode-coorda .rycode-services-menu {
+  max-height: min(70vh, 560px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 8px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface);
+  color: var(--foreground);
+  box-shadow: 0 12px 32px #00000018;
+}
+.rycode-coorda .rycode-services-menu-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.rycode-coorda .rycode-services-menu-link {
+  display: block;
+  padding: 11px 14px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.8;
+}
+.rycode-coorda .rycode-services-menu-link:hover { background: var(--surface-2); }
+.rycode-coorda .rycode-services-menu a:focus-visible {
+  outline: 2px solid var(--foreground);
+  outline-offset: -2px;
+}
+.rycode-coorda .rycode-services-menu-mobile {
+  max-height: none;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  overflow: visible;
+}
+.coorda-reference .hero-scene {
+  background-image: url("/images/editorial/rycode-hero-poster.jpg");
+  filter: brightness(.6);
+}
+.coorda-reference .reference-logo-note {
+  position: absolute;
+  bottom: 8px;
+  inset-inline-start: 20px;
+  color: #ffffff85;
+  font-size: 10px;
+}
+.coorda-reference .hero-title-line {
+  font-family: var(--coorda-font);
+}
+
+/* Original video-hero headline from f714d15, confirmed by the user.
+   Preserve white/48 linking words; the reality accent now uses project blue. */
+.coorda-reference .rycode-hero-title {
+  max-width: 1120px;
+  margin: 0;
+  font-size: clamp(2.15rem, 5vw, 4.9rem);
+  font-weight: 300;
+  line-height: 1.22;
+  letter-spacing: -.035em;
+  color: #fff;
+}
+.coorda-reference .rycode-hero-title .hero-title-desktop {
+  display: block;
+}
+.coorda-reference .rycode-hero-title .hero-title-line {
+  white-space: normal;
+  text-wrap: balance;
+}
+.coorda-reference .rycode-hero-title .hero-title-soft {
+  color: rgb(255 255 255 / 48%);
+}
+.coorda-reference .rycode-hero-title .hero-title-accent {
+  color: var(--accent-blue);
+}
+.coorda-reference .rycode-hero-subtitle {
+  max-width: 42rem;
+  font-size: 14px;
+  line-height: 2rem;
+  color: rgb(255 255 255 / 68%);
+  text-wrap: wrap;
+}
+@media (min-width: 640px) {
+  .coorda-reference .rycode-hero-subtitle {
+    font-size: 16px;
+  }
+}
+@media (max-width: 809px) {
+  .coorda-reference .rycode-hero-title {
+    max-width: 100%;
+  }
+}
+.coorda-reference .feature-card {
+  text-align: start;
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  min-height: 520px;
+  padding: 24px;
+  gap: 12px;
+}
+.coorda-reference .feature-card .feature-card-heading {
+  margin-bottom: 0;
+  gap: 8px;
+}
+.coorda-reference .feature-card-heading h3 {
+  white-space: normal;
+  overflow-wrap: anywhere;
+  line-height: 1.5;
+}
+.coorda-reference .feature-card .feature-card-summary {
+  color: #666;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.8;
+  min-height: 72px;
+}
+.coorda-reference .feature-card-preview {
+  display: flex;
+  justify-content: center;
+  height: 260px;
+  flex: 0 0 260px;
+  overflow: hidden;
+  direction: ltr;
+}
+.coorda-reference .feature-card-preview > div {
+  width: 286px;
+  flex: 0 0 286px;
+  transform: scale(.8);
+  transform-origin: top center;
+}
+.coorda-reference .feature-card-preview .people-preview {
+  transform: none;
+  margin: 0 auto;
+}
+.coorda-reference .feature-card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  align-items: center;
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1px solid #ededed;
+  font-size: 12px;
+  line-height: 1.8;
+}
+.coorda-reference .feature-card-actions a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding-block: 4px;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.coorda-reference .feature-card-actions .feature-related-link {
+  color: #666;
+}
+[lang="fa"] .coorda-reference .feature-card :is(.feature-card-summary, .feature-card-actions) {
+  direction: rtl;
+}
+.coorda-reference .feature-card a:focus-visible {
+  outline: 2px solid var(--accent-blue);
+  outline-offset: 4px;
+}
+.coorda-reference .feature-card-tag {
+  color: #666;
+  font-size: 9px;
+  letter-spacing: .06em;
+  line-height: 1.6;
+}
+.coorda-reference :is(.data-tool-preview, .rescue-tool-preview) {
+  padding: 16px;
+  height: 280px;
+}
+.coorda-reference .data-tool-preview > strong {
+  display: block;
+  font-size: 15px;
+  margin-top: 12px;
+}
+.coorda-reference .data-tool-grid {
+  display: grid;
+  grid-template-columns: 24px repeat(3, 1fr);
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 20px 0;
+}
+.coorda-reference .data-tool-grid span {
+  padding: 8px;
+  font-size: 10px;
+  text-align: center;
+  background: #eee;
+}
+.coorda-reference .data-tool-row { display: contents; }
+.coorda-reference .data-tool-row i {
+  border: 1px solid #eee;
+  background: linear-gradient(#e4e4e4, #e4e4e4) center / 55% 5px no-repeat #fff;
+}
+.coorda-reference .rescue-tool-preview > img {
+  width: 100%;
+  height: 100px;
+  border-radius: 10px;
+  margin-bottom: 12px;
+}
+.coorda-reference .rescue-tool-preview > div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-top: 12px;
+  font-size: 12px;
+}
+.coorda-reference .rescue-tool-preview > div > span { color: #666; }
+.coorda-reference .reference-family-copy {
+  max-width: 600px;
+  min-width: 0;
+  flex: 1;
+}
+.coorda-reference .services-family-heading { align-items: flex-start; }
+.coorda-reference .services-family-heading > div:first-child { flex: 1; }
+.coorda-reference .reference-family-copy > .studio-body { font-size: 15px; line-height: 1.9; }
+.coorda-reference .reference-family-scope {
+  margin-top: 16px;
+  font-size: 13px;
+  line-height: 2;
+  color: #707070;
+}
+.coorda-reference .features-ticker,
+.coorda-reference .features-slider-track {
+  direction: ltr;
+}
+[lang="fa"] .coorda-reference .feature-card-heading {
+  direction: rtl;
+}
+.coorda-reference .showcase-navigation button {
+  font-family: var(--coorda-font);
+}
+.coorda-reference .reference-page-intro {
+  padding: 42px 40px;
+}
+.coorda-reference .reference-page-intro > div {
+  max-width: 700px;
+  font-size: 18px;
+  line-height: 1.6;
+}
+.coorda-reference .reference-page-eyebrow,
+.coorda-reference .reference-placeholder-note {
+  color: #707070;
+  font-size: 14px;
+}
+.coorda-reference .reference-page-note { margin-top: 24px; color: #707070; }
+.coorda-reference .reference-page-note a,
+.coorda-reference .reference-page-note strong,
+.coorda-reference .reference-page-note span { color: inherit; }
+.coorda-reference .reference-service-start > p {
+  margin-bottom: 16px;
+  font-size: 14px;
+  line-height: 1.9;
+}
+.coorda-reference .reference-service-start > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.coorda-reference .reference-service-start .coorda-button {
+  font-size: 12px;
+  min-height: 42px;
+  padding: 10px 16px;
+}
+.coorda-reference .reference-card-summary { margin: 16px 0 0; color: #707070; font-size: 16px; line-height: 1.6; }
+.coorda-reference .reference-family-examples { margin-top: 42px; }
+.coorda-reference .reference-family-examples > h3 { font-size: 24px; font-weight: 500; }
+.coorda-reference .reference-contact-note { flex-direction: row; margin-top: 42px; font-size: 16px; line-height: 1.6; color: #ffffffcc; }
+.coorda-reference .reference-contact-note > svg { width: 18px; height: 18px; }
+.coorda-reference .reference-lead-form input:not([type="hidden"]):not([type="checkbox"]),
+.coorda-reference .reference-lead-form textarea,
+.coorda-reference .reference-lead-form select {
+  border-color: #efefef;
+  background: #fafafa;
+  color: #1a1a1a;
+  font-weight: 500;
+  box-shadow: none;
+}
+.coorda-reference .reference-lead-form button {
+  border-color: #efefef;
+  background: #1a1a1a;
+  color: #fff;
+  box-shadow: none;
+  font-weight: 500;
+}
+.coorda-reference .reference-context-answer h4 { margin: 20px 0 8px; font-size: 18px; font-weight: 500; }
+.coorda-reference .reference-context-answer ul { padding-inline-start: 24px; list-style: disc; }
+.coorda-reference .reference-context-answer a { display: inline-block; margin-top: 20px; text-decoration: underline; text-underline-offset: 4px; }
+.coorda-reference .impact-topic-track,
+.coorda-reference .stories-track,
+.coorda-reference .testimonials-track,
+.coorda-reference .testimonials-group { direction: ltr; }
+[lang="fa"] .coorda-reference :is(.story-card, .testimonial-card, .native-card) { direction: rtl; text-align: start; }
+[lang="fa"] .coorda-reference :is(.article-body, .legal-document) { line-height: 1.85; }
+[lang="fa"] .coorda-reference .article-body ul { padding-left: 0; padding-inline-start: 28px; }
+.coorda-reference .legal-document section[id] { scroll-margin-top: 100px; }
+.coorda-reference .legal-document h3 { margin: 24px 0 12px; font-size: 24px; font-weight: 500; }
+@media (max-width: 809px) {
+  .coorda-reference .reference-page-intro { padding: 32px 20px; }
+  .coorda-reference .reference-family-copy { margin-top: 16px; }
+}

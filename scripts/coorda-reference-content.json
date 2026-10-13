@@ -1,0 +1,427 @@
+{
+  "AppShowcase.tsx": {
+    "variables": {
+      "screens": "[{\"id\":\"meet\",\"label\":\"Your website and app\",\"file\":\"showcase-people.webp\",\"alt\":\"Concept interface preview\"},{\"id\":\"events\",\"label\":\"Connected systems\",\"file\":\"showcase-events.png\",\"alt\":\"Concept interface preview\"},{\"id\":\"activity\",\"label\":\"Search and content\",\"file\":\"showcase-activity.png\",\"alt\":\"Concept interface preview\"},{\"id\":\"messages\",\"label\":\"Support and development\",\"file\":\"showcase-messages.png\",\"alt\":\"Concept interface preview\"}]"
+    },
+    "replacements": [
+      [
+        "Everything your<br /><mark>community</mark> needs<br />in a single place",
+        "Your product,<br /><mark>built around</mark> the way<br />you work"
+      ],
+      [
+        "Your community. Your events.<br />Your activity. All in one place.",
+        "Websites, software and apps.<br />Connected into a useful product."
+      ],
+      [
+        "href=\"/download\"",
+        "href=\"/projects\""
+      ],
+      [
+        "Get the App",
+        "Project studies"
+      ],
+      [
+        "aria-label=\"App capabilities\"",
+        "aria-label=\"Service areas\""
+      ]
+    ]
+  },
+  "Impact.tsx": {
+    "variables": {
+      "topicRows": "[[\"Web design\",\"Ecommerce\",\"Mobile apps\",\"Custom software\",\"Data\"],[\"SEO & content\",\"API integration\",\"Project rescue\",\"Support\",\"Automation\"]]"
+    },
+    "replacements": [
+      [
+        "Built for communities<br />that <mark>never stop</mark> moving",
+        "A technical partner,<br /><mark>not just</mark> a supplier"
+      ],
+      [
+        "Our insights",
+        "Our way of working"
+      ],
+      [
+        "href=\"/insights\"",
+        "href=\"/about#approach\""
+      ],
+      [
+        "aria-label=\"50K+ active members\"",
+        "aria-label=\"Nine service capabilities\""
+      ],
+      [
+        "src=\"/coorda-template/coorda.svg\"",
+        "src=\"/coorda-template/rycode-white.svg\""
+      ],
+      [
+        "alt=\"Coorda\"",
+        "alt=\"RYCODE\""
+      ],
+      [
+        "50K+",
+        "9"
+      ],
+      [
+        "Active members across the network",
+        "Services you can combine"
+      ],
+      [
+        "No more endless group chats to plan a meetup",
+        "Clarity before code"
+      ],
+      [
+        "Finally an app that keeps our whole group in sync without the group chat chaos.",
+        "We understand the need before choosing tools, and make scope, decisions and deliverables visible."
+      ],
+      [
+        "alt=\"Jake Morrison\"",
+        "alt=\"\""
+      ],
+      [
+        "Jake Morrison",
+        "RYCODE"
+      ],
+      [
+        "Community Lead, Barcelona",
+        "Our working principles"
+      ],
+      [
+        "View all testimonials",
+        "Our working principles"
+      ],
+      [
+        "Events Created",
+        "Clear stages of collaboration"
+      ],
+      [
+        "12K+",
+        "4"
+      ],
+      [
+        "Planned, coordinated, and brought to life through Coorda.",
+        "Understand, plan, build, then launch and continue."
+      ],
+      [
+        "aria-label=\"Community capabilities\"",
+        "aria-label=\"RYCODE capabilities\""
+      ]
+    ]
+  },
+  "CommunityCTA.tsx": {
+    "replacements": [
+      [
+        "Ready to coordinate your community?",
+        "Build something useful"
+      ],
+      [
+        "Get the App",
+        "Start a conversation"
+      ]
+    ]
+  },
+  "DesktopApp.tsx": {
+    "replacements": [
+      [
+        "Built to keep your community close",
+        "A foundation you can continue"
+      ],
+      [
+        "Coorda",
+        "RYCODE"
+      ],
+      [
+        "file=\"coorda-black.svg\"",
+        "file=\"rycode-black.svg\""
+      ],
+      [
+        "Get the App",
+        "Explore our services"
+      ],
+      [
+        "href=\"/download\"",
+        "href=\"/services\""
+      ],
+      [
+        "Your community, right on your desktop",
+        "Your product, right where you work"
+      ],
+      [
+        "Your whole community<br />lives right on your <mark>desktop</mark>",
+        "Your workflow,<br />one <mark>clear workspace</mark>"
+      ],
+      [
+        "<p>Join <strong>960+</strong> RYCODE users</p>",
+        "<p>Concept interface preview</p>"
+      ],
+      [
+        "Your community is most active on weekends. Best time to plan events.",
+        "A clearer view of your data helps you choose the next step."
+      ],
+      [
+        "Morning Run",
+        "Project review"
+      ],
+      [
+        "New event",
+        "New request"
+      ],
+      [
+        "Coorda desktop app preview with a calendar, community events, AI insight and navigation sidebar",
+        "Concept interface preview"
+      ],
+      [
+        "RYCODE desktop app preview with a calendar, community events, AI insight and navigation sidebar",
+        "Concept interface preview"
+      ]
+    ],
+    "variables": {
+      "sidebar": "[\n{label:\"Orders\",Icon:CalendarDays},{label:\"Clients\",Icon:UsersRound},{label:\"Reports\",Icon:Activity},{label:\"Requests\",Icon:MessageCircle},{label:\"Settings\",Icon:Settings}\n]"
+    }
+  },
+  "NativeFeatures.tsx": {
+    "variables": {
+      "capabilities": "[\n{title:\"Shared decisions\",icon:Zap,description:\"We clarify the problem, priorities and first deliverables before choosing tools.\"},\n{title:\"Clear ownership\",icon:Laptop,description:\"Code, access and handover responsibilities are agreed from the start.\"},\n{title:\"Reviewable delivery\",icon:BellRing,description:\"See working versions and give feedback while the project is taking shape.\"},\n{title:\"Continuous care\",icon:MessagesSquare,description:\"Maintenance and the next chapter can continue under an agreed support scope.\"}\n]",
+      "metrics": "[{\"value\":9,\"suffix\":\"\",\"label\":\"Services to build and improve\"},{\"value\":4,\"suffix\":\"\",\"label\":\"Connected service areas\"},{\"value\":2,\"suffix\":\"\",\"label\":\"Site languages\"},{\"value\":4,\"suffix\":\"\",\"label\":\"Stages with clear deliverables\"}]"
+    },
+    "replacements": [
+      [
+        "Built to run right<br /><mark>alongside</mark> your life",
+        "Build it right,<br /><mark>continue</mark> with confidence"
+      ],
+      [
+        "METRICS",
+        "RYCODE / IN PRACTICE"
+      ]
+    ]
+  },
+  "Stories.tsx": {
+    "variables": {
+      "stories": "[{\"slug\":\"jake\",\"name\":\"Web design concept\",\"poster\":\"webp\"},{\"slug\":\"sofia\",\"name\":\"Store concept\",\"poster\":\"webp\"},{\"slug\":\"mia\",\"name\":\"Software concept\",\"poster\":\"jpg\"},{\"slug\":\"luna\",\"name\":\"Integration concept\",\"poster\":\"webp\"},{\"slug\":\"sara\",\"name\":\"Mobile concept\",\"poster\":\"webp\"},{\"slug\":\"alex\",\"name\":\"Growth concept\",\"poster\":\"webp\"}]"
+    },
+    "replacements": [
+      [
+        "stories[5]",
+        "stories[5]!"
+      ],
+      [
+        "Know what your <mark>people</mark>{\" \"}<br />are up to in real time",
+        "A glimpse of<br /><mark>what comes next</mark>"
+      ],
+      [
+        "aria-label=\"Community stories\"",
+        "aria-label=\"Placeholder visuals, not customer work\""
+      ]
+    ]
+  },
+  "Pricing.tsx": {
+    "variables": {
+      "plans": "[{\"name\":\"Build a new product\",\"slug\":\"free\",\"monthly\":0,\"yearly\":0,\"alt\":\"Illustrative landscape\",\"features\":[\"Websites and ecommerce\",\"Software and mobile apps\",\"A defined first version\",\"Reviewable deliverables\",\"Clear handover\"]},{\"name\":\"Continue an existing project\",\"slug\":\"pro\",\"monthly\":0,\"yearly\":0,\"alt\":\"Illustrative landscape\",\"features\":[\"Code and infrastructure review\",\"Prioritised repairs\",\"Keep what can be saved\",\"A practical next step\",\"Agreed support scope\"]},{\"name\":\"Get found in search\",\"slug\":\"team\",\"monthly\":0,\"yearly\":0,\"alt\":\"Illustrative landscape\",\"features\":[\"Technical SEO review\",\"Content strategy\",\"Prioritised improvements\",\"Measurement and reporting\",\"No ranking guarantees\"]}]"
+    },
+    "replacements": [
+      [
+        "<span>${yearly ? plan.yearly : plan.monthly}</span><span>/per month</span>",
+        "<span>By scope</span><span>{yearly ? \"Staged payment\" : \"Defined phases\"}</span>"
+      ],
+      [
+        "const Icon = index === 0 ? freeIcons[featureIndex] : CheckCircle2;",
+        "const Icon = index === 0 ? freeIcons[featureIndex]! : CheckCircle2;"
+      ],
+      [
+        "Pricing that grows{\" \"}<br />with your <mark>community</mark>",
+        "Choose a path<br />that fits <mark>your need</mark>"
+      ],
+      [
+        ">Monthly</button>",
+        ">Defined phases</button>"
+      ],
+      [
+        ">Yearly (Save 25%)</button>",
+        ">Staged payment</button>"
+      ],
+      [
+        "aria-label=\"Annual billing\"",
+        "aria-label=\"Staged payment view\""
+      ],
+      [
+        "{index === 0 ? \"Get started\" : \"Start free trial\"}",
+        "{\"Request a proposal\"}"
+      ]
+    ]
+  },
+  "Testimonials.tsx": {
+    "variables": {
+      "reviews": "[{\"name\":\"RYCODE / clarity\",\"role\":\"Our working principles\",\"slug\":\"mia\",\"text\":\"We explain what will be built, why a decision matters and what comes next.\"},{\"name\":\"RYCODE / ownership\",\"role\":\"Our working principles\",\"slug\":\"sofia\",\"text\":\"Ownership of code, data and access is clear from the start.\"},{\"name\":\"RYCODE / delivery\",\"role\":\"Our working principles\",\"slug\":\"alex\",\"text\":\"A working version is better than a vague progress report.\"},{\"name\":\"RYCODE / continuity\",\"role\":\"Our working principles\",\"slug\":\"sara\",\"text\":\"Your product should be understandable and maintainable by the next team.\"},{\"name\":\"RYCODE / decisions\",\"role\":\"Our working principles\",\"slug\":\"lucas\",\"text\":\"Tools follow the problem, not the other way around.\"}]"
+    },
+    "replacements": [
+      [
+        "Loved by communities{\" \"}<br />around the <mark>world</mark>",
+        "Our <mark>working principles</mark><br />not customer testimonials"
+      ],
+      [
+        "aria-label=\"Community testimonials. Focus or hover to pause the moving cards.\"",
+        "aria-label=\"Working principles. Focus or hover to pause.\""
+      ],
+      [
+        "Every person who uses Coorda chose to spend their time with us. That&apos;s not something we take lightly. We build for them — every feature, every fix, every update.",
+        "Your product should work for your business today and remain understandable tomorrow. That is why we start with the problem, make decisions together and hand over a clear foundation."
+      ],
+      [
+        "alt=\"Claire Calloway\"",
+        "alt=\"\""
+      ],
+      [
+        "Claire Calloway",
+        "RYCODE"
+      ],
+      [
+        "Co-founder &amp; CEO",
+        "Our way of working"
+      ],
+      [
+        "About Coorda",
+        "About RYCODE"
+      ]
+    ]
+  },
+  "FAQ.tsx": {
+    "variables": {
+      "questions": "[{\"question\":\"Where do we start?\",\"answer\":\"Tell us what you want to build or what is getting in your way. We clarify the needs and a practical next step together.\"},{\"question\":\"Can you continue a stalled project?\",\"answer\":\"Yes. We review the code, access and infrastructure before recommending what to keep and how to move forward.\"},{\"question\":\"How do you estimate cost and time?\",\"answer\":\"After understanding the scope, we define deliverables, timing and cost. Larger projects can be split into phases.\"},{\"question\":\"Do we own the code and access?\",\"answer\":\"Ownership, access, code and documentation are agreed from the start. Your product should not depend on staying with one team.\"},{\"question\":\"Is support available after launch?\",\"answer\":\"Yes. Maintenance, fixes and further development can continue under a separately agreed support scope.\"},{\"question\":\"Can you build mobile apps too?\",\"answer\":\"Yes. We develop customer and business apps, standalone or connected to your existing systems, for Android and iOS.\"}]"
+    }
+  },
+  "Moments.tsx": {
+    "replacements": [
+      [
+        "Get the App",
+        "Start a conversation"
+      ],
+      [
+        "Coorda",
+        "RYCODE"
+      ],
+      [
+        "Bring your community together. Meet up, plan events, and stay connected — all in one app.",
+        "Concept interface preview"
+      ],
+      [
+        "Your people.",
+        "Your product."
+      ],
+      [
+        "Your plans.",
+        "Your next step."
+      ],
+      [
+        "Your moments.",
+        "Your next chapter."
+      ],
+      [
+        "Catch every moment together",
+        "Your product’s next chapter"
+      ],
+      [
+        "Coordinate people and events anywhere you go",
+        "Design, engineering and growth for your business"
+      ],
+      [
+        "Move together and stay in sync using AI",
+        "From your first idea to your product’s next chapter"
+      ],
+      [
+        "Meet up, plan events, and stay connected — all in one app.",
+        "Support and continuous development for a product you can keep moving forward."
+      ]
+    ]
+  },
+  "Insights.tsx": {
+    "variables": {
+      "articles": "[{\"title\":\"How to audit a stalled software project\",\"image\":\"insight-city.png\",\"imageAlt\":\"Illustrative guide image\",\"author\":\"RYCODE\",\"avatar\":\"rycode-black.svg\",\"date\":\"RYCODE guide\",\"dateTime\":\"technical-review\",\"slug\":\"technical-review\",\"href\":\"/blog/how-to-audit-a-stalled-software-project\"},{\"title\":\"When your project is stalled or unfinished\",\"image\":\"insight-cafe.png\",\"imageAlt\":\"Illustrative guide image\",\"author\":\"RYCODE\",\"avatar\":\"rycode-black.svg\",\"date\":\"RYCODE guide\",\"dateTime\":\"stalled-project\",\"slug\":\"stalled-project\",\"href\":\"/problems/stalled-project\"},{\"title\":\"When your systems are disconnected\",\"image\":\"insight-event.png\",\"imageAlt\":\"Illustrative guide image\",\"author\":\"RYCODE\",\"avatar\":\"rycode-black.svg\",\"date\":\"RYCODE guide\",\"dateTime\":\"disconnected-systems\",\"slug\":\"disconnected-systems\",\"href\":\"/problems/disconnected-systems\"}]"
+    },
+    "replacements": [
+      [
+        "What we&apos;re <br className=\"insights-mobile-break\" /><mark>thinking</mark> about",
+        "Notes for <br className=\"insights-mobile-break\" /><mark>better decisions</mark>"
+      ],
+      [
+        "All insights",
+        "Read our guides"
+      ],
+      [
+        "href={`/insights/${article.slug}`}",
+        "href={article.href}"
+      ],
+      [
+        "<time dateTime={article.dateTime}>{article.date}</time>",
+        "<span>{article.date}</span>"
+      ]
+    ]
+  },
+  "AboutContent.tsx": {
+    "variables": {
+      "members": "[[\"Product design\",\"Design and user experience\",\"claire\"],[\"Engineering\",\"Web and custom software\",\"sofia\"],[\"Mobile development\",\"Android and iOS apps\",\"priya\"],[\"Integration\",\"Systems and data\",\"zara\"],[\"Search and content\",\"SEO and content strategy\",\"marco\"],[\"Continuous care\",\"Support and further development\",\"mina\"]]"
+    },
+    "replacements": [
+      [
+        "Coorda started with a <mark>simple frustration</mark> — <mark>coordinating</mark> a group of friends for a weekend hike took more effort than the hike itself.",
+        "Technology should <mark>make work easier</mark> and the customer experience better — so we start with the <mark>problem</mark>, not a tool."
+      ],
+      [
+        "value={50} suffix=\"K+\" label=\"Active members on the platform\"",
+        "value={9} suffix=\"\" label=\"Services you can combine\""
+      ],
+      [
+        "value={190} suffix=\"+\" label=\"Cities with active Coorda communities\"",
+        "value={4} suffix=\"\" label=\"Connected service areas\""
+      ],
+      [
+        "value={12} suffix=\"K+\" label=\"Events created and coordinated\"",
+        "value={2} suffix=\"\" label=\"Site languages\""
+      ],
+      [
+        "value={4.8} suffix=\"\" label=\"Average App Store rating out of 5\" decimal",
+        "value={4} suffix=\"\" label=\"Stages with clear deliverables\""
+      ],
+      [
+        "Built by a small<br /><mark>team</mark> with a big idea",
+        "The roles behind<br /><mark>your</mark> next product"
+      ],
+      [
+        "<div className=\"about-team-grid\">",
+        "<p className=\"reference-placeholder-note\">Project roles with illustrative portraits, not staff profiles</p><div className=\"about-team-grid\">"
+      ],
+      [
+        "alt={name}",
+        "alt=\"\""
+      ],
+      [
+        "We build for the{\" \"}<br /><mark>people</mark> who are{\" \"}<br />always on the move",
+        "We build for the{\" \"}<br /><mark>people</mark> behind{\" \"}<br />your business"
+      ],
+      [
+        "At Coorda, we care deeply about the communities we serve. We move fast, stay curious, and build things we actually use ourselves. Remote-first, outdoor-obsessed, and always coordinating something.",
+        "We clarify the scope and responsibilities from the start, build in reviewable stages and leave a foundation your next team can continue."
+      ],
+      [
+        "I built Coorda because I kept missing out on things happening right around me. The technology existed — it just wasn&apos;t connected. We&apos;re here to fix that.",
+        "The best technical decision is understandable to the business, maintainable by the team and useful to the customer."
+      ],
+      [
+        "alt=\"Claire Calloway\"",
+        "alt=\"\""
+      ],
+      [
+        "Claire Calloway",
+        "RYCODE"
+      ],
+      [
+        "Co-founder & CEO",
+        "Our working principles"
+      ],
+      [
+        "Friends toasting drinks outdoors on a sunny day",
+        "Illustrative outdoor photograph"
+      ],
+      [
+        "Coorda team exploring a lively city together",
+        "Illustrative city photograph"
+      ]
+    ]
+  }
+}

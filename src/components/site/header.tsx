@@ -1,120 +1,33 @@
 "use client";
+import { BrandText } from "@/components/site/brand-text";
 
 import { ChevronDown, Globe2, Menu, X } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 
 import { Link, usePathname } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
-import { primaryNav, type NavGroup, type PrimaryNavItem } from "@/lib/nav-content";
+import { getPrimaryNav, type PrimaryNavItem } from "@/lib/nav-content";
+import { serviceHighlights } from "@/content/service-offerings";
 import { cn } from "@/lib/utils";
 
 import { Logo } from "./logo";
-import { Container, CtaLink } from "./primitives";
+import { Container } from "./primitives";
 import { ThemeToggle } from "./theme-toggle";
-
-const englishServiceMenu: NavGroup[] = [
-  {
-    title: "Build",
-    items: [
-      { label: "Websites and stores", href: "/services" },
-      { label: "Custom software", href: "/services" },
-      { label: "Existing product development", href: "/services" },
-    ],
-  },
-  {
-    title: "Grow",
-    items: [
-      { label: "Technical SEO", href: "/services" },
-      { label: "SEO audit", href: "/seo-audit" },
-      { label: "Integrations", href: "/integrations" },
-    ],
-  },
-  {
-    title: "Related paths",
-    items: [
-      { label: "Businesses and our solutions", href: "/solutions" },
-      { label: "Projects", href: "/projects" },
-      { label: "Installment payment", href: "/installment-purchase" },
-    ],
-  },
-];
-
-const englishProjectsMenu: NavGroup[] = [
-  {
-    title: "Portfolio",
-    items: [
-      { label: "All projects", href: "/projects" },
-      { label: "Concept studies", href: "/projects" },
-    ],
-  },
-  {
-    title: "Built around the business",
-    items: [
-      { label: "Industries", href: "/industries" },
-      { label: "Our solutions", href: "/solutions" },
-    ],
-  },
-];
-
-const englishCompanyMenu: NavGroup[] = [
-  {
-    title: "About and legal",
-    items: [
-      { label: "About us", href: "/about" },
-      { label: "Terms of use", href: "/terms" },
-      { label: "Privacy policy", href: "/privacy" },
-    ],
-  },
-];
-
-const englishBusinessMenu: NavGroup[] = [
-  {
-    title: "Our solutions",
-    items: [
-      { label: "All solutions", href: "/solutions" },
-      { label: "CRM and customer portals", href: "/solutions" },
-      { label: "Commerce and ordering", href: "/solutions" },
-      { label: "Booking and operations", href: "/solutions" },
-      { label: "Warranty and after-sales", href: "/solutions" },
-    ],
-  },
-  {
-    title: "For businesses like yours",
-    items: [
-      { label: "All industries", href: "/industries" },
-      { label: "Manufacturing", href: "/industries" },
-      { label: "Commerce and export", href: "/industries" },
-      { label: "Healthcare and clinics", href: "/industries" },
-      { label: "Education and real estate", href: "/industries" },
-    ],
-  },
-];
-
-const englishPrimary: PrimaryNavItem[] = [
-  { label: "Services", href: "/services", menu: englishServiceMenu },
-  { label: "Projects", href: "/projects", menu: englishProjectsMenu },
-  { label: "Blog", href: "/blog" },
-  { label: "Support", href: "/services/ongoing-support" },
-  { label: "FAQ", href: "/faq" },
-  { label: "Contact us", href: "/contact" },
-  { label: "About us", href: "/about", menu: englishCompanyMenu },
-  { label: "Get started", href: "/start-project", emphasis: true },
-  {
-    label: "Businesses and our solutions",
-    href: "/solutions",
-    menu: englishBusinessMenu,
-  },
-];
 
 export function SiteHeader({ locale }: { locale: Locale }) {
   const pathname = usePathname();
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const [mobilePath, setMobilePath] = useState<string | null>(null);
   const [scrolled, setScrolled] = useState(false);
+  const [desktopOpen, setDesktopOpen] = useState<{ href: string; pinned: boolean } | null>(null);
+  const headerRef = useRef<HTMLElement>(null);
+  const mobileTrigger = useRef<HTMLButtonElement>(null);
   const isFa = locale === "fa";
-  const nav = isFa ? primaryNav : englishPrimary;
+  const nav = getPrimaryNav(locale);
   const isHome = pathname === "/";
   const elevated = scrolled || !isHome;
-  const overlay = !elevated;
+  const overlay = isHome && !scrolled;
+  const menuPath = `${locale}:${pathname}`;
+  const mobileOpen = mobilePath === menuPath;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 72);
@@ -124,61 +37,110 @@ export function SiteHeader({ locale }: { locale: Locale }) {
   }, []);
 
   useEffect(() => {
-    document.body.style.overflow = mobileOpen ? "hidden" : "";
-    return () => {
-      document.body.style.overflow = "";
+    const closeOutside = (event: PointerEvent) => {
+      if (!headerRef.current?.contains(event.target as Node)) setDesktopOpen(null);
     };
-  }, [mobileOpen]);
+    const desktop = window.matchMedia("(min-width: 1280px)");
+    const closeOnResize = () => {
+      setDesktopOpen(null);
+      setMobilePath(null);
+    };
+    document.addEventListener("pointerdown", closeOutside);
+    desktop.addEventListener("change", closeOnResize);
+    return () => {
+      document.removeEventListener("pointerdown", closeOutside);
+      desktop.removeEventListener("change", closeOnResize);
+    };
+  }, []);
 
   return (
-    <>
+    <BrandText><>
       <header
+        ref={headerRef}
         className={cn(
-          "fixed inset-x-0 top-0 z-50 border-b transition-[background-color,border-color,box-shadow,backdrop-filter,color] duration-500",
-          elevated
-            ? "border-[#073b4c]/10 bg-white/80 text-[#073b4c] shadow-[0_12px_42px_rgba(7,59,76,0.10)] backdrop-blur-2xl backdrop-saturate-150 dark:border-white/10 dark:bg-[#101a20]/82 dark:text-white"
-            : "border-transparent bg-transparent text-white shadow-none backdrop-blur-none",
+          "rycode-header fixed inset-x-0 top-0 z-50 border-b backdrop-blur-xl transition-shadow duration-300",
+          overlay
+            ? "reference-overlay-header border-white/15 bg-black/15 text-white"
+            : "border-border bg-surface/95 text-foreground",
+          elevated ? "shadow-[0_5px_20px_rgba(0,0,0,0.04)]" : "shadow-none",
         )}
       >
-        <Container className="relative flex h-14 items-center gap-4 [direction:ltr] sm:h-[72px] 2xl:max-w-[1536px] 2xl:gap-5">
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:absolute focus:z-[70] focus:bg-surface focus:p-3"
+        >
+          {isFa ? "رفتن به محتوای اصلی" : "Skip to content"}
+        </a>
+        <Container className="rycode-header-inner relative grid h-14 grid-cols-[1fr_auto_1fr] items-center gap-4 [direction:ltr] sm:h-[72px] xl:max-w-[1440px] xl:gap-5">
           <HeaderActions
             locale={locale}
             pathname={pathname}
             overlay={overlay}
-            className="hidden min-w-0 justify-self-start 2xl:flex"
+            className="hidden min-w-0 justify-self-start sm:flex"
           />
+          <div className="sm:hidden" />
 
-          <Link href="/" aria-label="RYCODE" className="absolute left-1/2 -translate-x-1/2">
+          <Link
+            href="/"
+            aria-label="RYCODE"
+            onClick={() => setDesktopOpen(null)}
+            className="justify-self-center"
+          >
             <Logo variant={overlay ? "light" : "adaptive"} className="text-[1.05rem]" />
           </Link>
 
           <nav
             aria-label={isFa ? "ناوبری اصلی" : "Primary navigation"}
-            className="ml-auto hidden min-w-0 items-center 2xl:flex"
+            className="hidden min-w-0 items-center justify-self-end xl:flex"
             dir={isFa ? "rtl" : "ltr"}
           >
-            <ul className="flex min-w-0 flex-nowrap items-center gap-3">
-              {nav.map((item, index) => (
-                <DesktopNavItem
-                  key={`${item.id ?? item.href}-${index}`}
-                  item={item}
-                  pathname={pathname}
-                  overlay={overlay}
-                />
-              ))}
+            <ul className="flex min-w-0 flex-nowrap items-center gap-1">
+              {nav
+                .filter((item) => !item.emphasis)
+                .map((item, index) => (
+                  <DesktopNavItem
+                    key={`${item.id ?? item.href}-${index}`}
+                    item={item}
+                    pathname={pathname}
+                    overlay={overlay}
+                    locale={locale}
+                    open={desktopOpen?.href === item.href}
+                    pinned={desktopOpen?.href === item.href && desktopOpen.pinned}
+                    onOpen={() =>
+                      setDesktopOpen((current) =>
+                        current?.href === item.href ? current : { href: item.href, pinned: false },
+                      )
+                    }
+                    onToggle={() =>
+                      setDesktopOpen((current) =>
+                        current?.href === item.href && current.pinned
+                          ? null
+                          : { href: item.href, pinned: true },
+                      )
+                    }
+                    onClose={() =>
+                      setDesktopOpen((current) => (current?.href === item.href ? null : current))
+                    }
+                  />
+                ))}
             </ul>
           </nav>
 
           <button
+            ref={mobileTrigger}
             type="button"
-            onClick={() => setMobileOpen(true)}
+            onClick={() => {
+              setDesktopOpen(null);
+              setMobilePath(menuPath);
+            }}
+            aria-controls="site-mobile-menu"
             aria-label={isFa ? "باز کردن منو" : "Open menu"}
             aria-expanded={mobileOpen}
             className={cn(
-              "ms-auto grid size-10 place-items-center rounded-xl border shadow-sm transition-colors 2xl:hidden",
+              "grid size-10 place-items-center justify-self-end rounded-md border transition-colors xl:hidden",
               overlay
-                ? "border-white/35 bg-transparent text-white hover:border-[#5fe1d5]/75 hover:bg-white/10"
-                : "border-[#073b4c]/15 bg-white/75 text-[#073b4c] backdrop-blur-md hover:border-[#20bfb2]/55 hover:bg-[#dff8f4] dark:border-white/15 dark:bg-white/8 dark:text-white dark:hover:bg-white/12",
+                ? "border-white/35 bg-transparent text-white hover:border-white/75 hover:bg-white/10"
+                : "border-border bg-surface text-foreground hover:border-brand hover:bg-brand-soft",
             )}
           >
             <Menu className="size-5" aria-hidden />
@@ -191,10 +153,11 @@ export function SiteHeader({ locale }: { locale: Locale }) {
           locale={locale}
           nav={nav}
           pathname={pathname}
-          onClose={() => setMobileOpen(false)}
+          onClose={() => setMobilePath(null)}
+          returnFocusRef={mobileTrigger}
         />
       )}
-    </>
+    </></BrandText>
   );
 }
 
@@ -202,62 +165,163 @@ function DesktopNavItem({
   item,
   pathname,
   overlay,
+  locale,
+  open,
+  pinned,
+  onOpen,
+  onToggle,
+  onClose,
 }: {
   item: PrimaryNavItem;
   pathname: string;
   overlay: boolean;
+  locale: Locale;
+  open: boolean;
+  pinned: boolean;
+  onOpen: () => void;
+  onToggle: () => void;
+  onClose: () => void;
 }) {
   const active = pathname === item.href || pathname.startsWith(`${item.href}/`);
+  const panelId = useId();
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
+  const groups = item.menu?.length ?? 0;
+  const servicesMenu = item.href === "/services";
+  const showLabel = locale === "fa" ? `زیرمنوی ${item.label}` : `${item.label} submenu`;
 
   return (
-    <li className="group relative">
-      <Link
-        href={item.href}
-        aria-current={active ? "page" : undefined}
-        className={cn(
-          "relative flex items-center gap-1 whitespace-nowrap py-3 text-[0.7rem] font-medium transition-colors after:absolute after:inset-x-0 after:bottom-1 after:h-px after:origin-center after:scale-x-0 after:bg-[#5fe1d5] after:transition-transform hover:after:scale-x-100",
-          item.emphasis
-            ? overlay
-              ? "text-[#9cf5ec]"
-              : "text-[#087b83] dark:text-[#9cf5ec]"
-            : active
+    <BrandText><li
+      className="relative flex h-[72px] items-center"
+      onPointerEnter={(event) => {
+        if (event.pointerType === "mouse" && item.menu) onOpen();
+      }}
+      onPointerLeave={() => {
+        if (!pinned && !panelRef.current?.contains(document.activeElement)) onClose();
+      }}
+      onBlur={(event) => {
+        if (pinned && !event.relatedTarget) return;
+        if (!event.currentTarget.contains(event.relatedTarget as Node)) onClose();
+      }}
+      onKeyDown={(event) => {
+        if (event.key === "Escape") {
+          event.preventDefault();
+          onClose();
+          triggerRef.current?.focus();
+        }
+        if (event.key === "ArrowDown" && item.menu) {
+          event.preventDefault();
+          onOpen();
+          requestAnimationFrame(() =>
+            panelRef.current?.querySelector<HTMLAnchorElement>("a")?.focus(),
+          );
+        }
+      }}
+    >
+      <div className="flex items-center gap-0.5">
+        <Link
+          href={item.href}
+          aria-current={active ? "page" : undefined}
+          onFocus={() => {
+            if (item.menu) onOpen();
+            else onClose();
+          }}
+          onClick={onClose}
+          className={cn(
+            "rycode-primary-link relative flex items-center gap-1 whitespace-nowrap rounded-full px-3 py-2 text-[0.75rem] font-medium transition-colors",
+            item.emphasis
               ? overlay
-                ? "text-[#9cf5ec] after:scale-x-100"
-                : "text-[#087b83] after:scale-x-100 dark:text-[#9cf5ec]"
-              : overlay
-                ? "text-white/75 hover:text-white"
-                : "text-[#214f5b]/70 hover:text-[#073b4c] dark:text-white/70 dark:hover:text-white",
-        )}
-      >
-        {item.label}
+                ? "text-white"
+                : "text-foreground"
+              : active
+                ? overlay
+                  ? "text-white after:scale-x-100"
+                  : "text-foreground after:scale-x-100 dark:text-white"
+                : overlay
+                  ? "text-white/75 hover:text-white"
+                  : "text-muted-foreground hover:text-foreground",
+          )}
+        >
+          {item.label}
+        </Link>
         {item.menu && (
-          <ChevronDown
+          <button
+            ref={triggerRef}
+            type="button"
+            aria-label={showLabel}
+            aria-expanded={open}
+            aria-controls={panelId}
+            onClick={onToggle}
             className={cn(
-              "size-3.5",
-              overlay ? "text-white/50" : "text-[#214f5b]/40 dark:text-white/45",
+              "grid size-7 place-items-center rounded-md transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand",
+              overlay
+                ? "text-white/80 hover:bg-white/10"
+                : "text-foreground hover:bg-surface-2 dark:text-white/80 dark:hover:bg-white/10",
             )}
-            aria-hidden
-          />
+          >
+            <ChevronDown
+              className={cn("size-3.5 transition-transform", open && "rotate-180")}
+              aria-hidden
+            />
+          </button>
         )}
-      </Link>
+      </div>
 
       {item.menu && (
         <div
-          className="pointer-events-none invisible absolute end-0 top-full z-50 w-[min(82vw,850px)] translate-y-2 rounded-2xl border border-[#073b4c]/10 bg-white/96 p-5 text-[#073b4c] opacity-0 shadow-[0_24px_70px_rgba(7,59,76,0.16)] backdrop-blur-2xl transition-[opacity,transform,visibility] duration-200 group-hover:pointer-events-auto group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100"
-          dir="rtl"
+          ref={panelRef}
+          id={panelId}
+          role="region"
+          aria-label={showLabel}
+          className={cn(
+            "absolute right-0 top-full z-50 max-w-[calc(100vw-3rem)] pt-2",
+            !open && "hidden",
+            servicesMenu ? "w-[360px]" : groups === 1 ? "w-72" : groups === 2 ? "w-[520px]" : "w-[860px]",
+          )}
+          dir={locale === "fa" ? "rtl" : "ltr"}
         >
-          <div className="grid max-h-[min(70vh,520px)] grid-cols-2 gap-x-8 gap-y-6 overflow-y-auto pe-1 lg:grid-cols-3">
+          {servicesMenu ? <ServicesMenu locale={locale} onClose={onClose} /> : <div
+            className={cn(
+              "grid max-h-[min(70vh,560px)] gap-6 overflow-y-auto rounded-xl border border-border bg-surface p-6 text-foreground shadow-[0_20px_60px_rgba(0,0,0,0.14)]",
+              groups === 1
+                ? "grid-cols-1"
+                : groups === 2
+                  ? "grid-cols-2"
+                  : groups >= 4
+                    ? "grid-cols-4"
+                    : "grid-cols-3",
+            )}
+          >
             {item.menu.map((group) => (
-              <div key={group.title}>
-                <p className="mb-3 text-[0.67rem] font-bold tracking-[0.14em] text-[#5fe1d5]">
+              <div
+                key={group.title}
+                className={
+                  group.id === "service-resources"
+                    ? "col-span-4 flex items-center justify-between gap-6 border-t border-border pt-4"
+                    : undefined
+                }
+              >
+                <p
+                  className={cn(
+                    "text-xs font-semibold text-foreground dark:text-foreground",
+                    group.id === "service-resources"
+                      ? "shrink-0"
+                      : "mb-2 border-b border-border pb-2",
+                  )}
+                >
                   {group.title}
                 </p>
-                <ul className="space-y-2">
+                <ul
+                  className={
+                    group.id === "service-resources" ? "flex flex-wrap gap-2" : "space-y-2"
+                  }
+                >
                   {group.items.map((child, index) => (
                     <li key={`${child.id ?? child.href}-${child.label}-${index}`}>
                       <Link
                         href={child.href}
-                        className="block rounded-lg px-2 py-1.5 text-[0.72rem] leading-5 text-[#214f5b]/68 transition-colors hover:bg-[#e8f9f6] hover:text-[#073b4c]"
+                        onClick={onClose}
+                        className="block rounded-lg px-2 py-2 text-xs leading-5 text-foreground/80 transition-colors hover:bg-brand-soft hover:text-brand-foreground focus-visible:bg-brand-soft focus-visible:outline-2 focus-visible:outline-brand"
                       >
                         {child.label}
                       </Link>
@@ -266,11 +330,25 @@ function DesktopNavItem({
                 </ul>
               </div>
             ))}
-          </div>
+          </div>}
         </div>
       )}
-    </li>
+    </li></BrandText>
   );
+}
+
+function ServicesMenu({ locale, onClose, mobile = false }: {
+  locale: Locale;
+  onClose: () => void;
+  mobile?: boolean;
+}) {
+  return <div className={cn("rycode-services-menu", mobile && "rycode-services-menu-mobile")}>
+    <ul className="rycode-services-menu-list">
+      {serviceHighlights.map(service => <li key={service.id}>
+        <Link href={`/services/${service.slug}`} onClick={onClose} className="rycode-services-menu-link">{service.title[locale]}</Link>
+      </li>)}
+    </ul>
+  </div>;
 }
 
 function HeaderActions({
@@ -287,24 +365,24 @@ function HeaderActions({
   const isFa = locale === "fa";
 
   return (
-    <div className={cn("items-center gap-3", className)} dir="ltr">
-      <ThemeToggle variant={overlay ? "light" : "default"} />
+    <BrandText><div className={cn("items-center gap-3", className)} dir="ltr">
+      <ThemeToggle locale={locale} variant={overlay ? "light" : "default"} />
       <Link
         href={pathname}
         locale={isFa ? "en" : "fa"}
         hrefLang={isFa ? "en" : "fa"}
         aria-label={isFa ? "Switch to English" : "تغییر زبان به فارسی"}
         className={cn(
-          "inline-flex h-9 items-center gap-1.5 rounded-lg border px-3 font-latin text-[0.68rem] font-semibold tracking-[0.14em] shadow-sm transition-colors",
+          "inline-flex h-9 items-center gap-1.5 rounded-full px-3 font-latin text-[0.68rem] font-semibold tracking-[0.12em] transition-colors",
           overlay
-            ? "border-white/30 bg-transparent text-white/75 hover:border-[#5fe1d5]/70 hover:text-white"
-            : "border-[#073b4c]/15 bg-white/70 text-[#214f5b]/70 backdrop-blur-md hover:border-[#20bfb2]/55 hover:text-[#073b4c] dark:border-white/15 dark:bg-white/8 dark:text-white/70 dark:hover:text-white",
+            ? "bg-transparent text-white/75 hover:bg-white/10 hover:text-white"
+            : "bg-transparent text-foreground/70 hover:bg-surface-2 hover:text-foreground",
         )}
       >
         <Globe2 className="size-3.5" aria-hidden />
         {isFa ? "EN" : "FA"}
       </Link>
-    </div>
+    </div></BrandText>
   );
 }
 
@@ -313,34 +391,77 @@ function MobileMenu({
   nav,
   pathname,
   onClose,
+  returnFocusRef,
 }: {
   locale: Locale;
   nav: PrimaryNavItem[];
   pathname: string;
   onClose: () => void;
+  returnFocusRef: React.RefObject<HTMLButtonElement | null>;
 }) {
   const isFa = locale === "fa";
+  const [expanded, setExpanded] = useState<string | null>(null);
+  const dialogRef = useRef<HTMLElement>(null);
+  const closeRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    const previousOverflow = document.body.style.overflow;
+    const previousFocus = returnFocusRef.current;
+    document.body.style.overflow = "hidden";
+    closeRef.current?.focus();
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      previousFocus?.focus();
+    };
+  }, [returnFocusRef]);
 
   return (
-    <div className="fixed inset-0 z-[60] 2xl:hidden" dir="ltr">
+    <BrandText><div className="fixed inset-0 z-[60] xl:hidden" dir="ltr">
       <button
         type="button"
         aria-label={isFa ? "بستن منو" : "Close menu"}
         onClick={onClose}
-        className="absolute inset-0 bg-[#021b24]/70 backdrop-blur-md"
+        className="absolute inset-0 bg-black/70 backdrop-blur-md"
       />
 
       <aside
-        className="relative ml-auto flex h-full w-full max-w-[420px] flex-col border-l border-[#073b4c]/10 bg-[#f8fdfc]/98 text-[#073b4c] shadow-2xl backdrop-blur-2xl"
+        ref={dialogRef}
+        id="site-mobile-menu"
+        role="dialog"
+        aria-modal="true"
+        aria-label={isFa ? "منوی سایت" : "Site menu"}
+        onKeyDown={(event) => {
+          if (event.key === "Escape") {
+            event.preventDefault();
+            onClose();
+          }
+          if (event.key !== "Tab") return;
+          const controls = Array.from(
+            dialogRef.current?.querySelectorAll<HTMLElement>("a[href], button:not([disabled])") ??
+              [],
+          ).filter((element) => !element.closest("[hidden]"));
+          const first = controls[0];
+          const last = controls.at(-1);
+          if (event.shiftKey && document.activeElement === first) {
+            event.preventDefault();
+            last?.focus();
+          }
+          if (!event.shiftKey && document.activeElement === last) {
+            event.preventDefault();
+            first?.focus();
+          }
+        }}
+        className="relative ml-auto flex h-dvh w-full max-w-[420px] flex-col border-l border-border bg-surface text-foreground shadow-2xl"
         dir={isFa ? "rtl" : "ltr"}
       >
-        <div className="flex h-20 shrink-0 items-center justify-between border-b border-[#073b4c]/10 px-6">
+        <div className="flex h-16 shrink-0 items-center justify-between border-b border-border px-5">
           <Logo />
           <button
+            ref={closeRef}
             type="button"
             onClick={onClose}
             aria-label={isFa ? "بستن" : "Close"}
-            className="grid size-10 place-items-center rounded-xl border border-[#073b4c]/15 text-[#073b4c] transition-colors hover:border-[#20bfb2]/60 hover:bg-[#e8f9f6]"
+            className="grid size-10 place-items-center rounded-xl border border-border transition-colors hover:bg-brand-soft"
           >
             <X className="size-5" aria-hidden />
           </button>
@@ -348,7 +469,7 @@ function MobileMenu({
 
         <nav
           aria-label={isFa ? "منوی موبایل" : "Mobile navigation"}
-          className="flex-1 overflow-y-auto px-6 py-6"
+          className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-5 py-3"
         >
           <ul>
             {nav.map((item, index) => {
@@ -356,7 +477,7 @@ function MobileMenu({
               return (
                 <li
                   key={`${item.id ?? item.href}-${index}`}
-                  className="border-b border-[#073b4c]/10 py-1"
+                  className="border-b border-border py-1"
                 >
                   <div className="flex items-center gap-3">
                     <Link
@@ -364,83 +485,98 @@ function MobileMenu({
                       onClick={onClose}
                       aria-current={active ? "page" : undefined}
                       className={cn(
-                        "group flex min-w-0 flex-1 items-center gap-5 py-4 text-2xl font-semibold transition-colors",
+                        "flex min-w-0 flex-1 items-center gap-4 py-3 text-base font-medium transition-colors",
                         item.emphasis
-                          ? "text-[#087b83]"
+                          ? "text-foreground dark:text-foreground"
                           : active
-                            ? "text-[#087b83]"
-                            : "text-[#153f4b]/85 hover:text-[#073b4c]",
+                            ? "text-foreground dark:text-foreground"
+                            : "text-foreground/85 hover:text-foreground",
                       )}
                     >
-                      <span className="font-latin text-[0.65rem] tracking-[0.16em] text-[#214f5b]/38">
+                      <span className="font-latin text-[0.65rem] tracking-[0.16em] text-muted-foreground">
                         {String(index + 1).padStart(2, "0")}
                       </span>
                       <span>{item.label}</span>
                     </Link>
                     {item.menu && (
-                      <details className="group/menu shrink-0">
-                        <summary
-                          aria-label={isFa ? `نمایش ${item.label}` : `Show ${item.label}`}
-                          className="grid size-10 cursor-pointer list-none place-items-center rounded-lg border border-[#073b4c]/15 text-[#214f5b]/55 transition-colors hover:border-[#20bfb2]/55 hover:bg-[#e8f9f6] hover:text-[#087b83] [&::-webkit-details-marker]:hidden"
-                        >
-                          <ChevronDown className="size-5 transition-transform group-open/menu:rotate-180" />
-                        </summary>
-                        <div className="mb-3 mt-1 grid gap-5 border-s-2 border-[#5fe1d5]/25 ps-5">
-                          {item.menu.map((group) => (
-                            <div key={group.title}>
-                              <p className="mb-2 text-[0.66rem] font-bold tracking-[0.14em] text-[#5fe1d5]">
-                                {group.title}
-                              </p>
-                              <ul className="space-y-1">
-                                {group.items.slice(0, 8).map((child, childIndex) => (
-                                  <li
-                                    key={`${child.id ?? child.href}-${child.label}-${childIndex}`}
-                                  >
-                                    <Link
-                                      href={child.href}
-                                      onClick={onClose}
-                                      className="block py-1 text-sm leading-6 text-[#214f5b]/68 transition-colors hover:text-[#087b83]"
-                                    >
-                                      {child.label}
-                                    </Link>
-                                  </li>
-                                ))}
-                              </ul>
-                            </div>
-                          ))}
-                        </div>
-                      </details>
+                      <button
+                        type="button"
+                        aria-label={isFa ? `نمایش ${item.label}` : `Show ${item.label}`}
+                        aria-expanded={expanded === item.href}
+                        aria-controls={`mobile-submenu-${index}`}
+                        onClick={() => setExpanded(expanded === item.href ? null : item.href)}
+                        className="grid size-10 shrink-0 place-items-center rounded-lg border border-border text-foreground/70 transition-colors hover:bg-brand-soft"
+                      >
+                        <ChevronDown
+                          aria-hidden
+                          className={cn(
+                            "size-4 transition-transform",
+                            expanded === item.href && "rotate-180",
+                          )}
+                        />
+                      </button>
                     )}
                   </div>
+                  {item.menu && (
+                    <div
+                      id={`mobile-submenu-${index}`}
+                      hidden={expanded !== item.href}
+                      className={cn(
+                        "mb-3 mt-1 gap-4 rounded-xl border border-border bg-transparent p-3",
+                        expanded === item.href ? "grid" : "hidden",
+                      )}
+                    >
+                      {item.href === "/services" ? <ServicesMenu locale={locale} onClose={onClose} mobile /> : item.menu.map((group) => (
+                        <div key={group.title}>
+                          <p className="mb-2 text-xs font-semibold text-foreground dark:text-foreground">
+                            {group.title}
+                          </p>
+                          <ul className="space-y-1">
+                            {group.items.map((child, childIndex) => (
+                              <li key={`${child.id ?? child.href}-${child.label}-${childIndex}`}>
+                                <Link
+                                  href={child.href}
+                                  onClick={onClose}
+                                  className="block rounded-md px-2 py-2 text-sm leading-6 text-foreground/80 transition-colors hover:bg-surface hover:text-foreground"
+                                >
+                                  {child.label}
+                                </Link>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </li>
               );
             })}
           </ul>
         </nav>
 
-        <div className="shrink-0 border-t border-[#073b4c]/10 bg-[#edfaf7] px-6 py-6">
-          <div className="mb-5 flex items-center justify-between gap-3" dir="ltr">
-            <ThemeToggle />
+        <div className="shrink-0 border-t border-border bg-brand-soft px-5 py-4">
+          <div className="mb-3 flex items-center justify-between gap-3" dir="ltr">
+            <ThemeToggle locale={locale} />
             <Link
               href={pathname}
               locale={isFa ? "en" : "fa"}
               hrefLang={isFa ? "en" : "fa"}
               onClick={onClose}
-              className="inline-flex h-9 items-center gap-2 rounded-lg border border-[#073b4c]/15 bg-white px-3 font-latin text-xs tracking-[0.14em] text-[#214f5b]/75"
+              className="inline-flex h-9 items-center gap-2 rounded-lg border border-border bg-surface px-3 font-latin text-xs tracking-[0.14em] text-foreground/80"
             >
               <Globe2 className="size-4" aria-hidden />
               {isFa ? "ENGLISH" : "فارسی"}
             </Link>
           </div>
-          <CtaLink
-            to="/start-project"
-            variant="outline"
-            className="w-full !rounded-full !border-[#20bfb2]/55 !bg-[#5fe1d5] !text-[#073b4c] hover:!border-[#20bfb2] hover:!bg-[#77e9df]"
+          <Link
+            href="/start-project"
+            onClick={onClose}
+            className="inline-flex h-10 w-full items-center justify-center rounded-full border border-brand/55 bg-brand text-sm font-semibold text-brand-foreground transition-colors hover:bg-brand/90"
           >
             {isFa ? "شروع یک پروژه" : "Start a project"}
-          </CtaLink>
+          </Link>
         </div>
       </aside>
-    </div>
+    </div></BrandText>
   );
 }

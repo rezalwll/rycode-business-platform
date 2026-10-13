@@ -1,4 +1,5 @@
 import type { Locale } from "@/i18n/routing";
+import { additionalServices, enrichService } from "./service-model";
 
 export const catalogKinds = [
   "services",
@@ -11,6 +12,29 @@ export const catalogKinds = [
 ] as const;
 
 export type CatalogKind = (typeof catalogKinds)[number];
+
+/** Solutions and industries belong to services, including their detail pages. */
+export function catalogPath(kind: CatalogKind, slug?: string): string {
+  if (kind === "solutions" || kind === "industries") {
+    return slug ? `/services/${kind}/${slug}` : `/services#${kind}`;
+  }
+  return slug ? `/${kind}/${slug}` : `/${kind}`;
+}
+
+export function resolveCatalogDetail(path: string[]): { kind: CatalogKind; slug: string } | null {
+  if (
+    path.length === 3 &&
+    path[0] === "services" &&
+    (path[1] === "solutions" || path[1] === "industries") &&
+    path[2]
+  ) {
+    return { kind: path[1], slug: path[2] };
+  }
+  if (path.length === 2 && path[0] && isCatalogKind(path[0]) && path[1]) {
+    return { kind: path[0], slug: path[1] };
+  }
+  return null;
+}
 
 export type LocalizedText = { fa: string; en: string };
 
@@ -72,12 +96,12 @@ export const kindCopy: Record<
   services: {
     eyebrow: { fa: "خدمات", en: "Services" },
     title: {
-      fa: "هر چیزی که برای ساختن، درست‌کردن یا رشد محصولتان لازم دارید",
-      en: "Engineering paths to build, rescue and grow",
+      fa: "از طراحی سایت تا نرم‌افزار و رشد کسب‌وکارت",
+      en: "Websites, software and your next stage of growth",
     },
     lead: {
-      fa: "اول می‌شنویم الان کجای کارید و چه چیزی اذیتتان می‌کند؛ بعد درباره ابزار و مسیر اجرا تصمیم می‌گیریم.",
-      en: "We start with the business situation, then choose the tools, architecture and delivery scope.",
+      fa: "از سایت و فروشگاه تا نرم‌افزار اختصاصی، سئو، رفع باگ، ربات، اکسل و پشتیبانی؛ اینجا می‌تونی ببینی برای هر بخش از کارت چه کمکی از دست ما برمیاد",
+      en: "Websites and stores, custom software, SEO, bug fixes, bots, Excel and ongoing support. Find out how we can help with each part of your work.",
     },
   },
   solutions: {
@@ -131,19 +155,19 @@ export const kindCopy: Record<
       en: "Problem, decision and architecture",
     },
     lead: {
-      fa: "فعلاً اینجا چند سناریوی شفاف و مفهومی می‌بینید؛ نه اسم مشتری ساختگی داریم، نه عددی که نتوانیم ثابتش کنیم.",
-      en: "Until real work is approved for publication, this archive contains clearly labelled concepts with no invented client or metric.",
+      fa: "این مطالعات مفهومی نشان می‌دهند یک فروشگاه، سامانهٔ سفارش یا پرتال خدمات چطور می‌تواند کار کند؛ از مسئله و طراحی مسیر تا تصمیم‌های فنی. هر نمونه با برچسب مفهومی مشخص شده و پروژهٔ مشتری نیست",
+      en: "These concept studies explore how a store, ordering system or service portal could work, from the problem and user journey to technical choices. Each is labelled as a concept, not client work.",
     },
   },
   blog: {
-    eyebrow: { fa: "مجله رای‌کد", en: "RYCODE Journal" },
+    eyebrow: { fa: "بلاگ رایکد", en: "RYCODE Blog" },
     title: {
       fa: "چیزهایی که موقع ساختن و بهترکردن محصول یاد گرفته‌ایم",
       en: "Notes on engineering, product and growth",
     },
     lead: {
       fa: "یادداشت‌های کوتاه و کاربردی درباره سایت، نرم‌افزار و رشد؛ از همان چیزهایی که در کار واقعی به درد می‌خورند.",
-      en: "Practical writing on building, maintaining and growing digital products—without invented evidence.",
+      en: "Practical notes on websites, software and growth, focused on decisions that help in real projects.",
     },
   },
 };
@@ -834,11 +858,16 @@ export function localize(text: LocalizedText, locale: Locale): string {
 }
 
 export function getCatalogEntries(kind: CatalogKind): CatalogEntry[] {
-  return entries.filter((entry) => entry.kind === kind);
+  return [...entries, ...additionalServices]
+    .filter((entry) => entry.kind === kind)
+    .map(enrichService);
 }
 
 export function getCatalogEntry(kind: CatalogKind, slug: string): CatalogEntry | undefined {
-  return entries.find((entry) => entry.kind === kind && entry.slug === slug);
+  const entry = [...entries, ...additionalServices].find(
+    (entry) => entry.kind === kind && entry.slug === slug,
+  );
+  return entry ? enrichService(entry) : undefined;
 }
 
 export function isCatalogKind(value: string): value is CatalogKind {
@@ -846,5 +875,5 @@ export function isCatalogKind(value: string): value is CatalogKind {
 }
 
 export function allCatalogEntries(): readonly CatalogEntry[] {
-  return entries;
+  return [...entries, ...additionalServices].map(enrichService);
 }

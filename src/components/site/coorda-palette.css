@@ -1,0 +1,197 @@
+/* Restore the supplied Coorda UI. Its transplanted stylesheet owns section
+   backgrounds, cards, typography, photography and motion.
+   The accents below affect text, controls and details, never section canvases. */
+.rycode-coorda {
+  --background: #f2f2f2;
+  --foreground: #1a1a1a;
+  --surface: #fff;
+  --surface-2: #fafafa;
+  --muted-foreground: #707070;
+  --brand: #1a1a1a;
+  --brand-foreground: #fff;
+  --brand-soft: #e8e8e8;
+  --brand-hover: #363636;
+  --border: #1a1a1a1a;
+  --hairline: #1a1a1a1a;
+  --input: #dedede;
+  --ring: #1a1a1a;
+  --studio-wash: #f2f2f2;
+  --studio-purple: #1a1a1a;
+  /* The source has light and charcoal sections in either theme; ink follows
+     the actual surface, not a per-section color cycle. */
+  --detail-blue: color-mix(in srgb, var(--accent-blue) 50%, #1a1a1a);
+  --detail-purple: #6d4cdb;
+  --detail-blue-on-dark: var(--accent-blue);
+  --detail-purple-on-dark: #c1afff;
+}
+/* The template itself retains its original light/dark section rhythm.
+   Theme switching still adapts the surrounding navigation and retained footer. */
+.dark .rycode-coorda {
+  --background: #1a1a1a;
+  --foreground: #fff;
+  --surface: #242424;
+  --surface-2: #303030;
+  --muted-foreground: #b7b7b7;
+  --brand: #fff;
+  --brand-foreground: #1a1a1a;
+  --brand-soft: #303030;
+  --brand-hover: #e8e8e8;
+  --border: #ffffff26;
+  --hairline: #ffffff26;
+  --input: #ffffff40;
+  --ring: #fff;
+  --studio-wash: #1a1a1a;
+  --studio-purple: #fff;
+}
+.rycode-coorda .rycode-logo,
+.rycode-coorda .rycode-wordmark-suffix {
+  color: var(--logo-color);
+}
+.rycode-coorda .coorda-footer-wash {
+  background: none;
+}
+/* Menu chrome is neutral; logo and page accents still use the brand blue. */
+.rycode-coorda header nav :is(a, button),
+.rycode-coorda #site-mobile-menu nav :is(a, button) {
+  color: var(--foreground);
+}
+.rycode-coorda header nav a::after {
+  background-color: currentColor;
+}
+.rycode-coorda header.reference-overlay-header nav :is(a, button) {
+  color: #fff;
+}
+.rycode-coorda header.reference-overlay-header nav [role="region"] :is(a, button) {
+  color: var(--foreground);
+}
+.rycode-coorda header button[aria-controls="site-mobile-menu"] {
+  color: var(--foreground);
+  border-color: var(--border);
+}
+.rycode-coorda header.reference-overlay-header button[aria-controls="site-mobile-menu"] {
+  color: #fff;
+  border-color: #ffffff40;
+}
+.rycode-coorda header nav .rycode-brand-name,
+.rycode-coorda #site-mobile-menu nav .rycode-brand-name {
+  color: inherit;
+}
+/* Keep the requested bottom-rail hover, not a full-card recolor. */
+.rycode-coorda .coorda-reference :is(.feature-card-1, .feature-card-5, .feature-card-6) {
+  --feature-accent: var(--accent-blue);
+}
+.rycode-coorda .coorda-reference :is(.feature-card-2, .feature-card-3) {
+  --feature-accent: var(--accent-purple);
+}
+.rycode-coorda .coorda-reference :is(.feature-card-4, .feature-card-7) {
+  --feature-accent: var(--accent-orange);
+}
+.rycode-coorda .coorda-reference .feature-card:hover {
+  box-shadow: inset 0 -3px 0 var(--feature-accent);
+}
+/* Public account/lead integration keeps its behavior; colors stay neutral. */
+.rycode-coorda .coorda-auth-card,
+.rycode-coorda .coorda-search form {
+  background-color: var(--surface);
+  color: var(--foreground);
+  border-color: var(--border);
+}
+.rycode-coorda .coorda-auth-card input,
+.rycode-coorda .coorda-search input {
+  background-color: var(--surface-2);
+  color: var(--foreground);
+  border-color: var(--input);
+}
+
+/* Orange: primary next-step actions. Button geometry and motion are unchanged. */
+.rycode-coorda header a.bg-brand,
+.rycode-coorda .coorda-reference :is(.hero-cta, .pricing-cta),
+.rycode-coorda .coorda-footer-body .coorda-button,
+.rycode-coorda .coorda-reference .reference-lead-form button.bg-brand,
+.rycode-coorda .coorda-auth-card button[type="submit"] {
+  background-color: var(--action);
+  color: var(--action-foreground);
+  border-color: var(--action);
+}
+.rycode-coorda header a.bg-brand:hover,
+.rycode-coorda .coorda-reference :is(.hero-cta, .pricing-cta):hover,
+.rycode-coorda .coorda-footer-body .coorda-button:hover,
+.rycode-coorda .coorda-reference .reference-lead-form button.bg-brand:hover,
+.rycode-coorda .coorda-auth-card button[type="submit"]:hover {
+  background-color: var(--action-hover);
+}
+
+/* Only the opening video hero uses the requested blue action. */
+.rycode-coorda .coorda-reference .hero .hero-cta {
+  background-color: var(--accent-blue);
+  border-color: var(--accent-blue);
+  color: #1a1a1a;
+}
+.rycode-coorda .coorda-reference .hero .hero-cta:hover {
+  background-color: color-mix(in srgb, var(--accent-blue) 90%, #fff);
+  border-color: color-mix(in srgb, var(--accent-blue) 90%, #fff);
+}
+
+/* Blue: selected editorial emphasis and small light-surface links/icons. */
+.rycode-coorda
+  .coorda-reference
+  :is(
+    .features-heading mark,
+    .impact-heading mark,
+    .about-story mark,
+    .feature-card-heading > span,
+    .features-about-link,
+    .impact-insights,
+    .impact-icon,
+    .impact-member-number,
+    .story-arrow,
+    .reference-context-answer a
+  ) {
+  color: var(--detail-blue);
+}
+.rycode-coorda .coorda-footer-body nav a:hover {
+  color: var(--detail-blue);
+}
+.dark .rycode-coorda .coorda-footer-body nav a:hover {
+  color: var(--detail-blue-on-dark);
+}
+
+/* Purple: a few highlighted words and interactive details, not whole headings. */
+.rycode-coorda
+  .coorda-reference
+  :is(
+    .desktop-section-heading mark,
+    .pricing-heading mark,
+    .faq-container h2 > span,
+    .insights-heading mark,
+    .native-features h2 mark,
+    .testimonials-section h2 mark,
+    .about-team h2 mark,
+    .about-culture-intro h2 mark,
+    .pricing-card li svg,
+    .insight-date svg,
+    .pricing-billing > button.is-selected
+  ) {
+  color: var(--detail-purple);
+}
+.rycode-coorda .coorda-reference .faq-toggle {
+  background-color: var(--detail-purple);
+}
+
+/* Brighter accents only where the original template has a charcoal surface. */
+.rycode-coorda
+  .coorda-reference
+  :is(.showcase-navigation button[aria-current="step"], .native-metric-number) {
+  color: var(--detail-blue-on-dark);
+}
+.rycode-coorda .coorda-reference .showcase-navigation button[aria-current="step"] {
+  border-color: var(--detail-blue-on-dark);
+}
+.rycode-coorda
+  .coorda-reference
+  :is(.native-card-icon, .testimonials-section .testimonial-card > div > svg) {
+  color: var(--detail-purple-on-dark);
+}
+.rycode-coorda .coorda-reference :is(.moments-star, .moments-notice > svg) {
+  color: var(--action);
+}

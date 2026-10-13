@@ -3,10 +3,12 @@ import { describe, expect, it } from "vitest";
 import {
   allCatalogEntries,
   catalogKinds,
+  catalogPath,
   getCatalogEntries,
   getCatalogEntry,
   isCatalogKind,
   localize,
+  resolveCatalogDetail,
 } from "@/content/catalog";
 
 describe("public catalog", () => {
@@ -39,5 +41,22 @@ describe("public catalog", () => {
     expect(getCatalogEntry("services", "web-development")?.kind).toBe("services");
     expect(getCatalogEntry("services", "missing")).toBeUndefined();
     expect(catalogKinds).toContain("blog");
+  });
+
+  it("keeps every catalog detail reachable after moving business content into services", () => {
+    for (const entry of allCatalogEntries()) {
+      const path = catalogPath(entry.kind, entry.slug);
+      expect(resolveCatalogDetail(path.slice(1).split("/"))).toEqual({
+        kind: entry.kind,
+        slug: entry.slug,
+      });
+      if (entry.kind === "solutions" || entry.kind === "industries") {
+        expect(path.startsWith(`/services/${entry.kind}/`)).toBe(true);
+      }
+    }
+    expect(catalogPath("solutions")).toBe("/services#solutions");
+    expect(catalogPath("industries")).toBe("/services#industries");
+    expect(resolveCatalogDetail(["services", "blog", "crm"])).toBeNull();
+    expect(resolveCatalogDetail(["services", "solutions", "crm", "extra"])).toBeNull();
   });
 });

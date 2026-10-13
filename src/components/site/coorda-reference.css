@@ -1,0 +1,1068 @@
+@font-face {
+  font-family: "Open Runde";
+  src: url("/coorda-template/open-runde-regular.woff2") format("woff2");
+  font-style: normal; font-weight: 400; font-display: swap;
+}
+@font-face {
+  font-family: "Open Runde";
+  src: url("/coorda-template/open-runde-medium.woff2") format("woff2");
+  font-style: normal; font-weight: 500; font-display: swap;
+}
+@font-face {
+  font-family: "Open Runde";
+  src: url("/coorda-template/open-runde-semibold.woff2") format("woff2");
+  font-style: normal; font-weight: 600; font-display: swap;
+}
+.coorda-reference { color-scheme: light; --foreground: #1a1a1a; }
+.coorda-reference * { box-sizing: border-box; }
+.coorda-reference { scroll-behavior: smooth; }
+.coorda-reference { margin: 0; color: var(--foreground); background: #f2f2f2; font-family: "Open Runde", Arial, Helvetica, sans-serif; }
+.coorda-reference a, .coorda-reference button { -webkit-tap-highlight-color: transparent; }
+.coorda-reference button { cursor: pointer; }
+
+.coorda-reference .hero { padding: 8px; }
+.coorda-reference .hero-frame {
+  position: relative; isolation: isolate; display: flex; align-items: center; justify-content: center;
+  height: 98vh; min-height: 600px; padding: 40px; overflow: clip; border-radius: 24px; color: white;
+}
+.coorda-reference .hero-scene {
+  position: absolute; inset: -4px; z-index: -1;
+  background: #556471 url("/coorda-template/hero.webp") center / cover; filter: blur(3px) brightness(.6);
+}
+.coorda-reference .hero-video { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center; }
+
+.coorda-reference .hero-header { position: fixed; top: 36px; left: 0; z-index: 50; display: flex; justify-content: center; width: 100%; }
+.coorda-reference .hero-nav { display: flex; align-items: center; gap: 0; }
+.coorda-reference .nav-pill {
+  display: inline-flex; align-items: center; justify-content: center; height: 42px; padding: 0 22px;
+  border: 0; border-radius: 100px; background: rgb(116 123 135 / 80%); backdrop-filter: blur(10px);
+  color: #fff; text-decoration: none; font-size: 14px; font-weight: 500; line-height: 1.3; letter-spacing: -.01em;
+  transition: background .2s, transform .2s;
+}
+.coorda-reference .nav-pill:hover { background: rgb(145 151 162 / 85%); transform: translateY(-2px); }
+.coorda-reference .nav-logo img { display: block; width: 68px; height: 21px; }
+.coorda-reference .nav-more { gap: 8px; }
+.coorda-reference .nav-more span { width: 6px; height: 6px; border-radius: 50%; background: #e5e7eb; }
+.coorda-reference .nav-dropdown {
+  position: absolute; top: 54px; left: calc(50% + 54px); width: 190px; padding: 8px;
+  border: 1px solid rgb(255 255 255 / 20%); border-radius: 20px; background: rgb(74 81 92 / 92%);
+  backdrop-filter: blur(16px); box-shadow: 0 12px 30px rgb(0 0 0 / 15%);
+}
+.coorda-reference .nav-dropdown a { display: block; padding: 10px 14px; border-radius: 12px; font-size: 14px; }
+.coorda-reference .nav-dropdown a:hover { background: rgb(255 255 255 / 12%); }
+.coorda-reference .nav-pill:focus-visible, .coorda-reference .hero-cta:focus-visible, .coorda-reference .nav-dropdown a:focus-visible { outline: 2px solid white; outline-offset: 4px; }
+
+.coorda-reference .hero-content { display: flex; flex-direction: column; align-items: center; gap: 24px; width: 100%; text-align: center; }
+.coorda-reference .hero-title { margin: 0; max-width: 900px; font-size: 78px; font-weight: 500; letter-spacing: -.02em; line-height: 1.3; }
+.coorda-reference .hero-title-line { display: block; white-space: nowrap; }
+.coorda-reference .hero-title-second { display: flex; justify-content: center; align-items: center; gap: 22px; }
+.coorda-reference .hero-title-mobile { display: none; }
+.coorda-reference .hero-thumb-wrap { position: relative; display: inline-block; width: 146px; height: 76px; flex-shrink: 0; }
+.coorda-reference .hero-thumb {
+  position: absolute; left: 5.5px; top: 0; width: 135px; height: 80px;
+  border: 2px solid white; border-radius: 16px; background: url("/coorda-template/hero.webp") left top / cover;
+  transform: rotate(9deg); box-shadow: 0 4px 8px rgb(0 0 0 / 10%);
+}
+.coorda-reference .hero-message-wrap { width: 60px; height: 60px; flex-shrink: 0; }
+.coorda-reference .hero-message { width: 60px; height: 60px; transform: translateY(9px) rotate(8deg); }
+.coorda-reference .hero-subtitle { margin: 0; max-width: 350px; font-size: 18px; font-weight: 400; line-height: 1.4; letter-spacing: -.02em; text-wrap: balance; }
+.coorda-reference .hero-cta {
+  position: relative; display: block; padding: 12px 22px; overflow: hidden; border-radius: 100px;
+  background: white; color: #1a1a1a; font-size: 16px; font-weight: 500; line-height: 1.4;
+  text-decoration: none; letter-spacing: -.03em; transition: transform .25s;
+}
+.coorda-reference .hero-cta:hover { transform: translateY(-2px); }
+.coorda-reference .hero-cta-label { display: block; transition: transform .35s, opacity .35s, filter .35s; }
+.coorda-reference .hero-cta-label-copy { position: absolute; inset: 12px 22px; transform: translateY(32px); opacity: 0; filter: blur(4px); }
+.coorda-reference .hero-cta:hover .hero-cta-label { transform: translateY(-32px); opacity: 0; filter: blur(4px); }
+.coorda-reference .hero-cta:hover .hero-cta-label-copy { transform: translateY(0); opacity: 1; filter: blur(0); }
+
+.coorda-reference .hero-brands { position: absolute; bottom: 40px; left: 0; width: 100%; height: 32px; overflow: hidden; }
+.coorda-reference .hero-brands-track { display: flex; width: max-content; animation: brands-scroll 40s linear infinite; }
+.coorda-reference .hero-brands-group { display: flex; align-items: center; gap: 80px; margin: 0; padding: 0 80px 0 0; list-style: none; }
+.coorda-reference .hero-brands-group li { flex-shrink: 0; }
+.coorda-reference .hero-brands-group img { display: block; height: 32px; max-width: none; }
+.coorda-reference .hero-brands:hover .hero-brands-track { animation-play-state: paused; }
+@keyframes brands-scroll { to { transform: translateX(-50%); } }
+
+@media (min-width: 810px) and (max-width: 1199px) {
+  .coorda-reference .hero { padding: 0; }
+  .coorda-reference .hero-frame { border-radius: 0 0 24px 24px; padding: 30px; }
+  .coorda-reference .hero-header { top: 36px; }
+  .coorda-reference .hero-brands { bottom: 30px; }
+}
+@media (max-width: 809px) {
+  .coorda-reference .hero { padding: 0; }
+  .coorda-reference .hero-frame { min-height: 560px; padding: 20px; border-radius: 0 0 24px 24px; }
+  .coorda-reference .hero-header { top: 20px; }
+  .coorda-reference .nav-more { display: none; }
+  .coorda-reference .hero-content { gap: 24px; }
+  .coorda-reference .hero-title { max-width: 500px; margin-bottom: -8px; font-size: 50px; line-height: 1.1; }
+  .coorda-reference .hero-title-desktop { display: none; }
+  .coorda-reference .hero-title-mobile { display: block; text-wrap: balance; }
+  .coorda-reference .hero-subtitle { width: 100%; max-width: 350px; }
+  .coorda-reference .hero-brands { bottom: 20px; }
+}
+@media (max-width: 359px) {
+  .coorda-reference .hero-title { font-size: 44px; }
+  .coorda-reference .nav-pill { padding-inline: 18px; }
+  .coorda-reference .hero-subtitle { font-size: 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .coorda-reference { scroll-behavior: auto; }
+  .coorda-reference *, .coorda-reference *::before, .coorda-reference *::after { animation: none !important; transition-duration: .01ms !important; }
+  .coorda-reference .hero-video { visibility: hidden; }
+}
+
+/* Features: the reference's six miniature app interfaces. */
+.coorda-reference .features { position: relative; padding: 120px 40px; background: #1a1a1a; overflow: clip; scroll-margin-top: 0; }
+.coorda-reference .features::before { content: ""; position: absolute; inset: 0; background: #f2f2f2; border-radius: 0 0 42px 42px; }
+.coorda-reference .features-container { position: relative; max-width: 1440px; margin: 0 auto; display: flex; flex-direction: column; gap: 42px; }
+.coorda-reference .features-heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 32px; }
+.coorda-reference .features-heading h2 { margin: 0; max-width: 700px; font-size: 34px; font-weight: 500; line-height: 1.5; letter-spacing: 0; }
+.coorda-reference .features-heading mark { display: inline-block; padding: 6px 8px; border-radius: 12px; line-height: 1; color: inherit; background: white; }
+.coorda-reference .features-title-mobile { display: none; }
+.coorda-reference .features-about-link { flex-shrink: 0; padding: 12px 22px; border-radius: 100px; background: white; font-size: 16px; font-weight: 500; line-height: 1.4; letter-spacing: -.03em; text-decoration: none; transition: transform .2s, background .2s; }
+.coorda-reference .features-about-link:hover { transform: translateY(-2px); background: #e7e7e7; }
+.coorda-reference .features-about-link:focus-visible, .coorda-reference .features-arrow:focus-visible, .coorda-reference .device-download:focus-visible { outline: 2px solid #1a1a1a; outline-offset: 4px; }
+.coorda-reference .features-desktop { width: calc(100% + 80px); margin-left: -40px; overflow: hidden; }
+.coorda-reference .features-gallery { width: 100%; scroll-margin-top: 110px; }
+.coorda-reference .features-ticker { display: flex; width: max-content; animation: features-scroll 65s linear infinite; }
+.coorda-reference .features-ticker-group { display: flex; gap: 16px; padding-right: 16px; }
+.coorda-reference .features-desktop:hover .features-ticker, .coorda-reference .features-desktop:focus-within .features-ticker { animation-play-state: paused; }
+@keyframes features-scroll { to { transform: translateX(-50%); } }
+.coorda-reference .feature-card { width: 350px; height: 420px; padding: 32px; border-radius: 24px; background: #fff; flex-shrink: 0; overflow: hidden; font-weight: 500; }
+.coorda-reference .feature-card-heading { display: flex; flex-direction: column; gap: 12px; margin-bottom: 16px; }
+.coorda-reference .feature-card-heading > span { font-size: 14px; line-height: 1.3; letter-spacing: -.01em; color: #777; }
+.coorda-reference .feature-card-heading h3 { margin: 0; font-size: 20px; line-height: 1.3; font-weight: 500; white-space: nowrap; }
+.coorda-reference .feature-card p { margin: 0; }
+.coorda-reference .feature-card strong { font-weight: 500; }
+.coorda-reference .feature-card img { display: block; object-fit: cover; }
+.coorda-reference .preview-small { font-size: 10px; line-height: 1.2; letter-spacing: -.01em; }
+.coorda-reference .preview-shell { width: 270px; margin: 0 auto; padding: 8px; background: #fafafa; border: 1px solid #f2f2f2; border-radius: 16px; }
+.coorda-reference .preview-tags { display: flex; gap: 4px; }
+.coorda-reference .preview-tags span { padding: 3px 8px; border-radius: 4px; background: #eee; color: #666; font-size: 10px; line-height: 1.2; letter-spacing: -.01em; }
+
+.coorda-reference .people-preview { position: relative; width: 260px; height: 300px; margin: 0 auto; }
+.coorda-reference .person-card { position: absolute; top: 7px; left: 4px; width: 240px; padding: 8px; border: 1px solid #f0f0f0; border-radius: 16px; background: #fafafa; }
+.coorda-reference .person-card-0 { left: 23px; top: 0; transform: rotate(1deg); }
+.coorda-reference .person-card-1 { transform: rotate(-2deg); }
+.coorda-reference .person-photo { width: 100%; height: 180px; border-radius: 12px; }
+.coorda-reference .person-info { padding: 8px 4px 4px; }
+.coorda-reference .person-info > strong { display: block; font-size: 14px; line-height: 1.3; letter-spacing: -.01em; }
+.coorda-reference .person-info p { display: flex; align-items: center; gap: 4px; margin: 4px 0 16px; font-size: 10px; line-height: 1.2; letter-spacing: -.01em; color: #666; white-space: nowrap; }
+
+.coorda-reference .event-preview { position: relative; height: 285px; }
+.coorda-reference .event-photo { width: 100%; height: 85px; border-radius: 16px 16px 0 0; object-position: center 12%; }
+.coorda-reference .event-info { position: relative; margin-top: -20px; padding: 16px; border: 1px solid #f2f2f2; border-radius: 16px; background: white; }
+.coorda-reference .event-info > strong { display: block; margin-top: 6px; font-size: 14px; line-height: 1.3; letter-spacing: -.01em; }
+.coorda-reference .event-description { margin-top: 10px !important; padding-top: 10px; border-top: 1px solid #f2f2f2; font-size: 12px; line-height: 1.3; color: #666; }
+.coorda-reference .event-attendees { display: flex; justify-content: space-between; align-items: center; margin: 14px 0 10px; font-size: 10px; line-height: 1.2; color: #666; }
+.coorda-reference .avatar-stack { display: flex; padding-left: 0; }
+.coorda-reference .avatar-stack img, .coorda-reference .avatar-stack span { width: 24px; height: 24px; border: 1px solid white; border-radius: 50%; margin-left: -12px; }
+.coorda-reference .avatar-stack img:first-child { margin-left: 0; }
+.coorda-reference .avatar-stack span { display: grid; place-items: center; font-size: 8px; background: #f4f4f4; }
+
+.coorda-reference .feature-card-3 { padding-bottom: 24px; }
+.coorda-reference .activity-preview { height: 292px; }
+.coorda-reference .activity-row { display: flex; align-items: center; gap: 8px; min-height: 50px; padding: 8px; border-radius: 8px; background: white; margin-bottom: 4px; }
+.coorda-reference .activity-date { flex-shrink: 0; width: 26px; color: #666; font-size: 10px; line-height: 1.2; }
+.coorda-reference .activity-row img { width: 24px; height: 24px; border-radius: 4px; flex-shrink: 0; }
+.coorda-reference .activity-label { flex: 1; font-size: 12px; line-height: 1.3; }
+.coorda-reference .activity-label span { display: block; font-size: 10px; line-height: 1.2; color: #666; }
+.coorda-reference .activity-row > svg { color: #888; flex-shrink: 0; }
+.coorda-reference .activity-lock { display: grid; place-items: center; width: 20px; height: 20px; border: 1px solid #e4e4e4; border-radius: 5px; color: #ccc; }
+.coorda-reference .activity-footer { display: flex; align-items: center; gap: 6px; font-size: 10px; line-height: 1.2; color: #666; padding: 3px 4px; }
+
+.coorda-reference .feature-card-4 { padding-bottom: 0; }
+.coorda-reference .chat-preview { height: 316px; padding-bottom: 0; border-radius: 32px 32px 0 0; }
+.coorda-reference .chat-screen { height: 100%; padding: 16px; border: 1px solid #f0f0f0; border-bottom: 0; border-radius: 24px 24px 0 0; background: white; }
+.coorda-reference .chat-header { display: flex; align-items: center; gap: 8px; }
+.coorda-reference .chat-header > svg { flex-shrink: 0; color: #666; }
+.coorda-reference .chat-header > svg:last-child { margin-left: auto; }
+.coorda-reference .chat-header strong { display: block; font-size: 12px; line-height: 1.3; white-space: nowrap; letter-spacing: -.02em; }
+.coorda-reference .chat-header p { font-size: 10px; line-height: 1.2; }
+.coorda-reference .chat-group-photo { position: relative; width: 18px; height: 24px; flex-shrink: 0; }
+.coorda-reference .chat-group-photo img { position: absolute; width: 15px; height: 15px; border: 1px solid white; border-radius: 50%; }
+.coorda-reference .chat-group-photo img:last-child { left: 5px; top: 8px; }
+.coorda-reference .chat-messages { margin-top: 16px; font-size: 11px; line-height: 1.2; letter-spacing: -.01em; }
+.coorda-reference .chat-incoming { display: flex; align-items: flex-end; gap: 6px; }
+.coorda-reference .chat-incoming > img { width: 20px; height: 20px; border-radius: 50%; flex-shrink: 0; }
+.coorda-reference .chat-incoming p { max-width: 166px; padding: 8px; border-radius: 8px; background: #f2f2f2; margin-bottom: 6px; }
+.coorda-reference .chat-outgoing { margin-top: 12px; display: flex; flex-direction: column; align-items: flex-end; gap: 4px; }
+.coorda-reference .chat-outgoing span { font-size: 10px; line-height: 1.2; color: #777; }
+.coorda-reference .chat-outgoing p { max-width: 136px; background: #1a1a1a; padding: 8px; border-radius: 8px; color: white; }
+.coorda-reference .chat-compose { display: flex; gap: 4px; margin-top: 14px; color: #888; }
+.coorda-reference .chat-compose > span { width: 30px; height: 30px; display: grid; place-items: center; background: #f2f2f2; border-radius: 50%; }
+.coorda-reference .chat-compose > div { display: flex; align-items: center; justify-content: space-between; flex: 1; padding: 8px 12px; border-radius: 100px; background: #f2f2f2; font-size: 12px; line-height: 1.2; }
+
+.coorda-reference .feature-card-5 .feature-card-heading { margin-bottom: 24px; }
+.coorda-reference .ai-preview { display: flex; flex-direction: column; gap: 8px; }
+.coorda-reference .ai-prompt { display: flex; justify-content: flex-end; gap: 8px; }
+.coorda-reference .ai-prompt p { width: 196px; background: #f2f2f2; border-radius: 12px; padding: 16px 12px; font-size: 12px; line-height: 1.3; }
+.coorda-reference .ai-prompt img { width: 80px; height: 62px; border-radius: 12px; }
+.coorda-reference .ai-planner { position: relative; width: 100%; height: 150px; padding: 24px 16px; border: 1px solid #f0f0f0; border-radius: 24px; background: #fafafa; }
+.coorda-reference .ai-planner > p { font-size: 20px; line-height: 1.2; color: #777; text-align: center; }
+.coorda-reference .ai-planner > span { position: absolute; left: 8px; bottom: 8px; display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; background: #1a1a1a; color: white; }
+.coorda-reference .ai-members { display: flex; align-items: center; gap: 12px; }
+.coorda-reference .ai-members img { width: 50px; height: 50px; border-radius: 12px; }
+.coorda-reference .ai-members strong { font-size: 26px; line-height: 1.2; letter-spacing: -.03em; }
+.coorda-reference .ai-members p { font-size: 12px; line-height: 1.3; }
+
+.coorda-reference .feature-card-6 .feature-card-heading { margin-bottom: 32px; }
+.coorda-reference .devices-preview { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.coorda-reference .device-illustration { position: relative; width: 286px; height: 212px; }
+.coorda-reference .desktop-device { position: absolute; top: 0; left: 0; width: 270px; height: 205px; padding: 8px; border: 1px solid #f1f1f1; border-radius: 16px; background: #fafafa; }
+.coorda-reference .desktop-toolbar { display: flex; align-items: center; gap: 3px; height: 30px; padding: 8px; border: 1px solid #f1f1f1; border-radius: 8px; background: white; }
+.coorda-reference .desktop-toolbar i { width: 8px; height: 8px; border-radius: 50%; background: #ff6058; }
+.coorda-reference .desktop-toolbar i:nth-child(2) { background: #ffbd2e; }
+.coorda-reference .desktop-toolbar i:nth-child(3) { background: #28c840; }
+.coorda-reference .desktop-skeleton { display: flex; gap: 8px; height: 150px; padding: 8px; border: 1px solid #f1f1f1; border-radius: 8px; background: white; margin-top: 4px; }
+.coorda-reference .desktop-skeleton > span { width: 28px; border-radius: 4px; background: #fafafa; }
+.coorda-reference .desktop-skeleton > div { flex: 1; display: flex; flex-direction: column; gap: 6px; }
+.coorda-reference .desktop-skeleton i { height: 28px; border-radius: 4px; background: #fafafa; }
+.coorda-reference .desktop-skeleton i:last-child { flex: 1; }
+.coorda-reference .phone-device { position: absolute; right: 0; bottom: -10px; width: 112px; height: 186px; padding: 8px; border: 1px solid #f1f1f1; border-radius: 28px; background: #fafafa; box-shadow: 0 0 0 6px #fafafa; }
+.coorda-reference .phone-notch { height: 16px; border-radius: 8px; background: #f5f5f5; }
+.coorda-reference .phone-skeleton { margin-top: 6px; height: 144px; border: 5px solid white; border-radius: 16px; background: #fafafa; }
+.coorda-reference .device-download { display: block; border-radius: 100px; padding: 12px 22px; font-size: 16px; line-height: 1.4; letter-spacing: -.03em; text-decoration: none; transition: background .2s; }
+.coorda-reference .device-download:hover { background: #f2f2f2; }
+.coorda-reference .features-slider { display: none; }
+
+@media (min-width: 810px) and (max-width: 1199px) {
+  .coorda-reference .features { padding: 100px 30px; }
+  .coorda-reference .features-heading { flex-direction: column; align-items: flex-start; gap: 16px; }
+  .coorda-reference .features-desktop { width: calc(100% + 60px); margin-left: -30px; }
+}
+@media (max-width: 809px) {
+  .coorda-reference .features-desktop { display: none; }
+  .coorda-reference .features-slider { position: relative; display: block; width: 100%; overflow: hidden; border-radius: 24px; touch-action: pan-y; }
+  .coorda-reference .features-slider-track { display: flex; gap: 16px; transition: transform .6s ease; }
+  .coorda-reference .feature-slide { width: 100%; flex-shrink: 0; display: flex; justify-content: center; }
+  .coorda-reference .features-arrow { position: absolute; top: 50%; transform: translateY(-50%); width: 40px; height: 40px; display: grid; place-items: center; padding: 0; border: 0; border-radius: 50%; background: rgb(54 54 54 / 24%); color: white; backdrop-filter: blur(2px); transition: background .2s; }
+  .coorda-reference .features-arrow:hover { background: rgb(54 54 54 / 45%); }
+  .coorda-reference .features-arrow-prev { left: 20px; }
+  .coorda-reference .features-arrow-next { right: 20px; }
+}
+@media (max-width: 809px) {
+  .coorda-reference .features { padding: 80px 20px; }
+  .coorda-reference .features-container { gap: 32px; }
+  .coorda-reference .features-heading { flex-direction: column; align-items: flex-start; gap: 16px; }
+  .coorda-reference .features-heading h2 { font-size: 26px; line-height: 1.6; }
+  .coorda-reference .features-title-desktop { display: none; }
+  .coorda-reference .features-title-mobile { display: block; }
+  .coorda-reference .feature-card { width: 100%; }
+  .coorda-reference .feature-card-heading h3 { font-size: 20px; letter-spacing: -.025em; }
+  .coorda-reference .preview-shell { max-width: 100%; }
+  .coorda-reference .device-illustration { max-width: 100%; }
+  .coorda-reference .desktop-device { width: calc(100% - 16px); }
+  .coorda-reference .ai-prompt p { flex: 1; }
+  .coorda-reference .ai-members { gap: 10px; }
+  .coorda-reference .ai-members p { font-size: 11px; }
+}
+@media (max-width: 359px) {
+  .coorda-reference .features-heading h2 { font-size: 22px; }
+  .coorda-reference .feature-card { padding: 24px; }
+  .coorda-reference .feature-card-heading h3 { font-size: 18px; }
+  .coorda-reference .people-preview { transform: scale(.88); transform-origin: top center; margin-left: calc(50% - 130px); }
+  .coorda-reference .chat-header { gap: 5px; }
+  .coorda-reference .chat-header strong { font-size: 10px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .coorda-reference .features-desktop { overflow-x: auto; }
+  .coorda-reference .features-ticker-group[aria-hidden="true"] { display: none; }
+}
+
+/* App showcase: sticky copy and four scroll-linked phone previews. */
+.coorda-reference .app-showcase { position: relative; background: #1a1a1a; color: #fff; }
+.coorda-reference .showcase-container { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; gap: 96px; max-width: 1440px; margin: 0 auto; padding: 120px 40px; }
+.coorda-reference .showcase-copy { align-self: stretch; min-width: 0; }
+.coorda-reference .showcase-sticky { position: sticky; top: 96px; display: flex; flex-direction: column; justify-content: space-between; height: 80vh; }
+.coorda-reference .showcase-heading { display: flex; flex-direction: column; align-items: flex-start; gap: 32px; }
+.coorda-reference .showcase-heading h2 { width: 500px; max-width: 100%; margin: 0; font-size: 42px; font-weight: 500; line-height: 1.4; letter-spacing: -.01em; }
+.coorda-reference .showcase-heading mark { display: inline-block; padding: 6px 8px; border-radius: 12px; color: #1a1a1a; background: white; line-height: 1; }
+.coorda-reference .showcase-navigation { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; }
+.coorda-reference .showcase-navigation button { padding: 8px 12px; border: 0; border-radius: 8px; background: transparent; color: rgb(255 255 255 / 65%); font: 400 16px/1.4 "Open Runde", Arial, sans-serif; letter-spacing: -.03em; text-align: left; transition: color .25s, background .25s; }
+.coorda-reference .showcase-navigation button:hover { color: #fff; background: rgb(255 255 255 / 4%); }
+.coorda-reference .showcase-navigation button[aria-current="step"] { box-shadow: inset 0 0 0 1px rgb(255 255 255 / 4%); background: rgb(255 255 255 / 6%); color: #fff; font-weight: 500; }
+.coorda-reference .showcase-navigation button:focus-visible { outline: 2px solid white; outline-offset: 4px; }
+.coorda-reference .showcase-cta { display: flex; flex-direction: column; align-items: flex-start; gap: 24px; }
+.coorda-reference .showcase-cta p { width: 250px; max-width: 100%; margin: 0; font-size: 16px; font-weight: 400; line-height: 1.4; letter-spacing: -.03em; }
+.coorda-reference .showcase-visuals { position: relative; display: flex; flex-direction: column; gap: 120px; min-width: 0; }
+.coorda-reference .showcase-screen { position: relative; display: flex; align-items: center; justify-content: center; flex-shrink: 0; height: 80vh; margin: 0; padding: 60px 0; border: 1px solid rgb(255 255 255 / 6%); border-radius: 16px; background: rgb(255 255 255 / 2%); overflow: clip; scroll-margin-top: 96px; }
+.coorda-reference .showcase-screen img { display: block; width: 280px; height: 565px; max-width: 90%; object-fit: contain; flex-shrink: 0; }
+@media (min-width: 810px) and (max-width: 1199px) {
+  .coorda-reference .showcase-container { grid-template-columns: minmax(0, 1fr); gap: 56px; padding: 100px 30px; }
+  .coorda-reference .showcase-visuals { gap: 42px; }
+  .coorda-reference .showcase-screen { height: auto; padding: 50px 0; }
+}
+@media (max-width: 1199px) {
+  .coorda-reference .showcase-sticky { position: relative; top: auto; height: auto; gap: 24px; }
+  .coorda-reference .showcase-navigation { display: none; }
+}
+@media (max-width: 809px) {
+  .coorda-reference .showcase-container { grid-template-columns: minmax(0, 1fr); gap: 48px; padding: 80px 20px; }
+  .coorda-reference .showcase-heading h2 { font-size: 34px; }
+  .coorda-reference .showcase-visuals { gap: 32px; }
+  .coorda-reference .showcase-screen { height: auto; padding: 48px 0; }
+}
+@media (max-width: 359px) {
+  .coorda-reference .showcase-heading h2 { font-size: 28px; }
+  .coorda-reference .showcase-screen img { width: 240px; height: auto; aspect-ratio: 280 / 565; }
+}
+@media (min-width: 1200px) and (max-height: 650px) {
+  .coorda-reference .showcase-sticky { height: auto; gap: 40px; }
+  .coorda-reference .showcase-screen { min-height: 565px; }
+}
+
+/* Impact: member photo, testimonial, event statistic and opposing topic tickers. */
+.coorda-reference .impact { padding: 120px 40px; background: #f2f2f2; color: #1a1a1a; }
+.coorda-reference .impact-container { display: flex; flex-direction: column; gap: 42px; max-width: 1440px; margin: 0 auto; }
+.coorda-reference .impact-heading { display: flex; justify-content: space-between; align-items: flex-end; gap: 32px; }
+.coorda-reference .impact-heading h2 { width: 600px; max-width: 100%; margin: 0; font-size: 42px; line-height: 1.4; font-weight: 500; letter-spacing: 0; text-wrap: balance; }
+.coorda-reference .impact-heading mark { display: inline-block; padding: 6px 8px; border-radius: 12px; background: #fff; color: inherit; line-height: 1; }
+.coorda-reference .impact-insights { padding: 12px 22px; flex-shrink: 0; border-radius: 100px; background: #fff; font-size: 16px; line-height: 1.4; font-weight: 500; letter-spacing: -.03em; text-decoration: none; transition: transform .2s, background .2s; }
+.coorda-reference .impact-insights:hover { transform: translateY(-2px); background: #e8e8e8; }
+.coorda-reference .impact-cards { display: flex; gap: 16px; }
+.coorda-reference .impact-left { display: flex; flex: 2 0 0; gap: 16px; min-width: 0; }
+.coorda-reference .impact-members-card, .coorda-reference .impact-testimonial-card { position: relative; display: flex; flex: 1 0 0; flex-direction: column; justify-content: space-between; align-items: flex-start; min-width: 0; height: 400px; padding: 32px; border-radius: 24px; overflow: clip; }
+.coorda-reference .impact-members-card { isolation: isolate; }
+.coorda-reference .impact-member-photo { position: absolute; inset: 0; z-index: -1; display: block; width: 100%; height: 100%; object-fit: cover; }
+.coorda-reference .impact-member-top { display: flex; justify-content: space-between; align-items: center; width: 100%; }
+.coorda-reference .impact-member-top > img { display: block; width: 68px; height: 21px; }
+.coorda-reference .impact-icon { display: grid; place-items: center; width: 38px; height: 38px; flex-shrink: 0; border-radius: 50%; background: #f2f2f2; }
+.coorda-reference .impact-icon-white { background: #fff; }
+.coorda-reference .impact-member-stat { display: flex; flex-direction: column; gap: 10px; width: 100%; padding: 18px; border-radius: 12px; background: #fff; }
+.coorda-reference .impact-member-stat p { margin: 0; color: #424242; font-size: 18px; line-height: 1.4; font-weight: 500; letter-spacing: -.02em; text-wrap: balance; }
+.coorda-reference .impact-member-stat .impact-member-number { color: #1a1a1a; font-size: 34px; line-height: 1.1; letter-spacing: -.02em; }
+.coorda-reference .impact-testimonial-card { background: #fff; }
+.coorda-reference .impact-testimonial-content { display: flex; flex-direction: column; gap: 24px; width: 100%; }
+.coorda-reference .impact-testimonial-content h3 { margin: 0; font-size: 24px; line-height: 1.3; font-weight: 500; letter-spacing: -.01em; text-wrap: balance; }
+.coorda-reference .impact-testimonial-content blockquote { margin: 0; font-size: 18px; line-height: 1.4; color: #424242; letter-spacing: -.02em; text-wrap: balance; }
+.coorda-reference .impact-author { display: flex; align-items: center; gap: 12px; }
+.coorda-reference .impact-author img { display: block; width: 46px; height: 46px; object-fit: cover; border-radius: 50%; flex-shrink: 0; }
+.coorda-reference .impact-author > div { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.coorda-reference .impact-author p { margin: 0; font-size: 18px; line-height: 1.4; letter-spacing: -.02em; font-weight: 500; }
+.coorda-reference .impact-author p:last-child { color: #424242; font-size: 16px; letter-spacing: -.03em; font-weight: 400; }
+.coorda-reference .impact-testimonials-link { display: inline-flex; align-items: center; gap: 8px; font-size: 16px; line-height: 1.4; color: #424242; font-weight: 500; letter-spacing: -.03em; text-decoration: none; }
+.coorda-reference .impact-testimonials-link svg { transition: transform .2s; }
+.coorda-reference .impact-testimonials-link:hover svg { transform: translateX(4px); }
+.coorda-reference .impact-testimonials-link:hover { color: #1a1a1a; }
+.coorda-reference .impact-insights:focus-visible, .coorda-reference .impact-testimonials-link:focus-visible { outline: 2px solid #1a1a1a; outline-offset: 5px; border-radius: 8px; }
+.coorda-reference .impact-right { display: flex; flex: 1 0 0; flex-direction: column; gap: 16px; min-width: 0; height: 400px; }
+.coorda-reference .impact-events-card { display: flex; flex: 2 0 0; flex-direction: column; justify-content: space-between; min-height: 0; padding: 32px; border-radius: 24px; background: #fff; }
+.coorda-reference .impact-events-heading { display: flex; flex-direction: column; gap: 18px; }
+.coorda-reference .impact-events-label { display: flex; align-items: center; gap: 13px; }
+.coorda-reference .impact-events-label h3 { margin: 0; font-size: 18px; line-height: 1.4; font-weight: 500; letter-spacing: -.02em; }
+.coorda-reference .impact-events-number { margin: 0; font-size: 42px; line-height: 1.2; font-weight: 500; letter-spacing: -.02em; }
+.coorda-reference .impact-events-description { margin: 0; font-size: 18px; line-height: 1.4; font-weight: 500; letter-spacing: -.02em; color: #424242; text-wrap: balance; }
+.coorda-reference .impact-topics-card { position: relative; flex: 1 0 0; min-height: 0; padding: 32px; border-radius: 24px; background: #fff; overflow: hidden; }
+.coorda-reference .impact-topic-tickers { position: absolute; top: 50%; left: 0; width: 100%; display: flex; flex-direction: column; gap: 16px; transform: translateY(-50%); }
+.coorda-reference .impact-topic-row { width: 100%; overflow: hidden; }
+.coorda-reference .impact-topic-track { display: flex; width: max-content; animation: impact-topics-scroll 32s linear infinite; }
+.coorda-reference .impact-topic-row-reverse .impact-topic-track { animation-direction: reverse; animation-duration: 36s; }
+.coorda-reference .impact-topic-group { display: flex; gap: 12px; margin: 0; padding: 0 12px 0 0; list-style: none; }
+.coorda-reference .impact-topic-group li { display: flex; align-items: center; white-space: nowrap; }
+.coorda-reference .impact-topic-group li > span:first-child { padding: 8px 16px; border-radius: 100px; background: #f2f2f2; color: #707070; font-size: 16px; line-height: 1.4; font-weight: 500; letter-spacing: -.03em; }
+.coorda-reference .impact-topic-plus { display: grid; place-items: center; width: 42px; height: 42px; border-radius: 50%; background: #f2f2f2; color: #909090; }
+.coorda-reference .impact-topics-card:hover .impact-topic-track { animation-play-state: paused; }
+@keyframes impact-topics-scroll { to { transform: translateX(-50%); } }
+@media (min-width: 810px) and (max-width: 1199px) {
+  .coorda-reference .impact { padding: 100px 30px; }
+  .coorda-reference .impact-cards { flex-direction: column; }
+  .coorda-reference .impact-left { flex: none; }
+  .coorda-reference .impact-right { flex: none; flex-direction: row; height: auto; }
+  .coorda-reference .impact-events-card { flex: 1 0 0; gap: 42px; }
+  .coorda-reference .impact-topics-card { flex: 1 0 0; }
+}
+@media (max-width: 809px) {
+  .coorda-reference .impact { padding: 80px 20px; }
+  .coorda-reference .impact-container { gap: 32px; }
+  .coorda-reference .impact-heading { flex-direction: column; align-items: flex-start; gap: 24px; }
+  .coorda-reference .impact-heading h2 { font-size: 34px; }
+  .coorda-reference .impact-cards, .coorda-reference .impact-left, .coorda-reference .impact-right { flex-direction: column; flex: none; }
+  .coorda-reference .impact-members-card { flex: none; width: 100%; height: auto; justify-content: center; gap: 100px; }
+  .coorda-reference .impact-member-number { font-size: 28px !important; }
+  .coorda-reference .impact-testimonial-card { flex: none; width: 100%; height: auto; gap: 42px; }
+  .coorda-reference .impact-right { height: auto; }
+  .coorda-reference .impact-events-card { flex: none; gap: 42px; }
+  .coorda-reference .impact-events-number { font-size: 34px; }
+  .coorda-reference .impact-topics-card { flex: none; height: 164px; }
+}
+@media (max-width: 359px) {
+  .coorda-reference .impact-heading h2 { font-size: 30px; }
+  .coorda-reference .impact-members-card, .coorda-reference .impact-testimonial-card, .coorda-reference .impact-events-card { padding: 24px; }
+  .coorda-reference .impact-testimonial-content h3 { font-size: 22px; }
+}
+
+/* Community CTA: responsive photo banner with a restrained parallax crop. */
+.coorda-reference .community-cta { position: relative; isolation: isolate; display: flex; align-items: flex-end; justify-content: center; width: 100%; aspect-ratio: 24 / 11; padding: 40px 40px 64px; overflow: clip; border-radius: 24px; background: #263641; color: #fff; }
+.coorda-reference .community-cta-photo { position: absolute; top: 0; left: 0; z-index: -1; display: block; width: 100%; height: 105%; max-width: none; object-fit: cover; object-position: center; filter: brightness(.6); }
+.coorda-reference .community-cta-content { display: flex; flex-direction: column; align-items: flex-start; gap: 24px; width: 100%; max-width: 1440px; }
+.coorda-reference .community-cta-content h2 { width: 500px; max-width: 100%; margin: 0; font-size: 42px; line-height: 1.2; font-weight: 500; letter-spacing: -.02em; text-wrap: balance; }
+@media (min-width: 810px) and (max-width: 1199px) {
+  .coorda-reference .community-cta { aspect-ratio: 3 / 2; padding: 30px; }
+}
+@media (max-width: 809px) {
+  .coorda-reference .community-cta { aspect-ratio: 15 / 16; padding: 20px; }
+  .coorda-reference .community-cta-content h2 { font-size: 34px; }
+}
+@media (max-width: 359px) {
+  .coorda-reference .community-cta-content h2 { font-size: 30px; }
+}
+
+/* Desktop app: a native window built from editable interface elements. */
+.coorda-reference .desktop-app-section { position: relative; padding: 120px 40px; background: #1a1a1a; }
+.coorda-reference .desktop-app-section::before { content: ""; position: absolute; inset: 0; border-radius: 0 0 42px 42px; background: #f2f2f2; }
+.coorda-reference .desktop-section-container { position: relative; display: flex; flex-direction: column; gap: 42px; max-width: 1440px; margin: 0 auto; }
+.coorda-reference .desktop-section-heading { display: flex; justify-content: space-between; align-items: flex-end; gap: 32px; }
+.coorda-reference .desktop-section-heading h2 { width: 600px; max-width: 100%; margin: 0; font-size: 42px; line-height: 1.3; letter-spacing: -.02em; font-weight: 500; text-wrap: balance; }
+.coorda-reference .desktop-section-heading mark { display: inline-block; padding: 6px 8px; border-radius: 12px; background: #fff; color: inherit; line-height: 1; }
+.coorda-reference .desktop-members { display: flex; align-items: center; gap: 8px; min-height: 30px; flex-shrink: 0; }
+.coorda-reference .desktop-members-avatars { display: flex; align-items: center; }
+.coorda-reference .desktop-members-avatars img { display: block; width: 24px; height: 24px; object-fit: cover; border: 2px solid #f2f2f2; border-radius: 50%; margin-left: -8px; }
+.coorda-reference .desktop-members-avatars img:first-child { margin-left: 0; }
+.coorda-reference .desktop-members p { margin: 0; font-size: 16px; line-height: 1.4; letter-spacing: -.03em; font-weight: 500; white-space: nowrap; }
+.coorda-reference .desktop-members strong { font-weight: 500; }
+.coorda-reference .desktop-scene { position: relative; isolation: isolate; border-radius: 24px; overflow: clip; background: #87adc1; }
+.coorda-reference .desktop-wallpaper { position: absolute; inset: 0; z-index: -1; display: block; width: 100%; height: 100%; object-fit: cover; }
+.coorda-reference .desktop-scene-content { display: flex; flex-direction: column; align-items: center; gap: 64px; padding: 24px 24px 64px; }
+.coorda-reference .desktop-mac-menu { display: flex; justify-content: space-between; align-items: center; width: 100%; height: 16px; color: #fff; font-size: 12px; line-height: 1.3; letter-spacing: -.01em; }
+.coorda-reference .desktop-mac-menu > div { display: flex; align-items: center; gap: 12px; }
+.coorda-reference .desktop-mac-menu strong { font-weight: 500; }
+.coorda-reference .desktop-app-window { width: 100%; max-width: 900px; height: 565px; flex-shrink: 0; padding: 8px; border-radius: 16px; background: rgb(255 255 255 / 16%); box-shadow: inset 0 0 0 1px white; backdrop-filter: blur(16px); overflow: clip; }
+.coorda-reference .desktop-app-shell { width: 100%; height: 100%; border-radius: 12px; overflow: hidden; background: #fff; }
+.coorda-reference .desktop-window-titlebar { display: flex; align-items: center; gap: 6px; height: 44px; padding: 0 16px; }
+.coorda-reference .desktop-window-titlebar span { width: 12px; height: 12px; border-radius: 50%; background: #ff6058; }
+.coorda-reference .desktop-window-titlebar span:nth-child(2) { background: #ffbd2e; }
+.coorda-reference .desktop-window-titlebar span:nth-child(3) { background: #28c840; }
+.coorda-reference .desktop-window-body { display: flex; gap: 6px; padding: 12px; height: calc(100% - 44px); background: #fafafa; font-size: 10px; line-height: 1.2; letter-spacing: -.01em; }
+.coorda-reference .desktop-sidebar { display: flex; flex-direction: column; justify-content: space-between; width: 160px; flex-shrink: 0; padding: 16px; border-radius: 12px; background: #fff; }
+.coorda-reference .desktop-sidebar-logo { display: block; width: 68px; height: 21px; margin-bottom: 24px; }
+.coorda-reference .desktop-sidebar-items { display: flex; flex-direction: column; gap: 11px; }
+.coorda-reference .desktop-sidebar-items > div { display: flex; align-items: center; gap: 8px; padding: 8px; border-radius: 4px; }
+.coorda-reference .desktop-sidebar-items svg, .coorda-reference .desktop-sidebar-settings svg { color: #777; flex-shrink: 0; }
+.coorda-reference .desktop-sidebar-selected { background: #fafafa; font-weight: 500; }
+.coorda-reference .desktop-sidebar-settings { display: flex; align-items: center; gap: 8px; padding: 8px; }
+.coorda-reference .desktop-workspace { position: relative; flex: 1; min-width: 0; padding: 16px; overflow: hidden; border-radius: 12px; background: #fff; }
+.coorda-reference .desktop-workspace-header { display: flex; justify-content: space-between; align-items: center; height: 24px; margin-bottom: 16px; }
+.coorda-reference .desktop-workspace-header > div { display: flex; align-items: center; gap: 12px; color: #888; }
+.coorda-reference .desktop-workspace-header > div > span { padding: 6px 8px; }
+.coorda-reference .desktop-workspace-selected { background: #fafafa; border-radius: 4px; color: #1a1a1a; }
+.coorda-reference .desktop-new-event { display: inline-flex; align-items: center; gap: 3px; padding: 6px 8px; border-radius: 6px; background: #1a1a1a; color: #fff; font-weight: 500; }
+.coorda-reference .desktop-workspace-content { display: grid; grid-template-columns: 263px minmax(0, 1fr); gap: 8px; }
+.coorda-reference .desktop-calendar-column { display: flex; flex-direction: column; gap: 8px; }
+.coorda-reference .desktop-calendar-card { height: 251.2px; padding: 16px 14px 14px; border-radius: 12px; background: #fafafa; }
+.coorda-reference .desktop-calendar-heading { display: flex; align-items: center; justify-content: space-between; height: 24px; margin-bottom: 10px; }
+.coorda-reference .desktop-calendar-heading strong { font-size: 14px; line-height: 1.3; font-weight: 500; }
+.coorda-reference .desktop-calendar-heading strong > span { color: #666; }
+.coorda-reference .desktop-month { display: flex; align-items: center; gap: 4px; padding: 4px 6px; border-radius: 4px; background: white; }
+.coorda-reference .desktop-weekdays { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; margin-bottom: 6px; text-align: center; font-size: 8px; line-height: 14px; color: #777; }
+.coorda-reference .desktop-calendar-grid { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 6px; }
+.coorda-reference .desktop-calendar-grid > span { display: grid; place-items: center; height: 28px; border-radius: 4px; background: #fff; font-size: 10px; line-height: 14px; color: #666; }
+.coorda-reference .desktop-calendar-grid .calendar-muted { color: #ccc; }
+.coorda-reference .desktop-calendar-grid .calendar-selected { background: #1a1a1a; color: #fff; }
+.coorda-reference .desktop-ai-insight { padding: 16px; border-radius: 12px; background: #fafafa; font-size: 12px; line-height: 1.3; letter-spacing: 0; }
+.coorda-reference .desktop-ai-insight strong { display: flex; align-items: center; gap: 6px; font-weight: 500; }
+.coorda-reference .desktop-ai-insight p { margin: 10px 0 0; color: #666; text-wrap: balance; }
+.coorda-reference .desktop-events-column { padding: 14px; border-radius: 12px; background: #fafafa; }
+.coorda-reference .desktop-events-heading { display: flex; align-items: center; justify-content: space-between; height: 24px; margin-bottom: 14px; }
+.coorda-reference .desktop-events-heading > strong { font-size: 14px; line-height: 1.3; font-weight: 500; }
+.coorda-reference .desktop-events-heading > div { display: flex; align-items: center; gap: 4px; }
+.coorda-reference .desktop-events-heading > div > span { display: grid; place-items: center; width: 28px; height: 28px; border-radius: 6px; background: #eee; color: #666; }
+.coorda-reference .desktop-events-heading > div > .desktop-view-selected { background: #1a1a1a; color: #fff; }
+.coorda-reference .desktop-event-photo { position: relative; height: 195px; border-radius: 8px; overflow: hidden; }
+.coorda-reference .desktop-event-photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.coorda-reference .desktop-event-photo > span { position: absolute; top: 8px; right: 8px; display: grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; background: rgb(255 255 255 / 16%); color: white; }
+.coorda-reference .desktop-event-details { display: flex; justify-content: space-between; align-items: center; margin-top: 12px; padding-bottom: 11px; }
+.coorda-reference .desktop-event-details strong { display: block; font-size: 14px; line-height: 1.3; font-weight: 500; }
+.coorda-reference .desktop-event-details p { display: flex; align-items: center; gap: 4px; margin: 6px 0 0; font-size: 10px; line-height: 1.2; color: #777; }
+.coorda-reference .desktop-event-details > span { padding: 6px 10px; border-radius: 100px; background: #fff; color: #777; }
+.coorda-reference .desktop-event-divider { border-top: 1px solid #eee; margin: 16px 0; }
+.coorda-reference .desktop-workspace-fade { position: absolute; bottom: 0; left: 0; width: 100%; height: 75px; background: linear-gradient(transparent, white); pointer-events: none; }
+@media (min-width: 810px) and (max-width: 1199px) {
+  .coorda-reference .desktop-app-section { padding: 100px 30px; }
+  .coorda-reference .desktop-scene-content { gap: 56px; padding-bottom: 56px; }
+  .coorda-reference .desktop-app-window { padding: 6px; }
+}
+@media (max-width: 1199px) {
+  .coorda-reference .desktop-section-heading { flex-direction: column; align-items: flex-start; gap: 24px; }
+  .coorda-reference .desktop-section-heading h2 { width: 100%; max-width: 500px; }
+}
+@media (max-width: 809px) {
+  .coorda-reference .desktop-app-section { padding: 80px 20px; }
+  .coorda-reference .desktop-section-container { gap: 32px; }
+  .coorda-reference .desktop-section-heading h2 { max-width: 400px; font-size: 34px; }
+  .coorda-reference .desktop-scene-content { align-items: flex-start; gap: 48px; padding: 12px; }
+  .coorda-reference .desktop-mac-menu { display: none; }
+  .coorda-reference .desktop-app-window { width: 900px; max-width: none; padding: 6px; }
+}
+@media (max-width: 359px) {
+  .coorda-reference .desktop-section-heading h2 { font-size: 30px; }
+  .coorda-reference .desktop-members { gap: 6px; }
+  .coorda-reference .desktop-members p { font-size: 14px; }
+}
+
+.coorda-reference .faq-section { padding: 120px 40px; background: #f2f2f2; color: #1a1a1a; scroll-margin-top: 20px; }
+.coorda-reference .faq-container { display: flex; flex-direction: column; align-items: center; gap: 42px; width: 100%; max-width: 1440px; margin: 0 auto; }
+.coorda-reference .faq-container h2 { width: 100%; max-width: 500px; margin: 0; text-align: center; font-size: 42px; font-weight: 500; line-height: 1.3; letter-spacing: -.01em; text-wrap: balance; }
+.coorda-reference .faq-container h2 > span { display: inline-block; padding: 6px 8px; border-radius: 12px; background: #fff; line-height: 1; }
+.coorda-reference .faq-list { display: flex; flex-direction: column; gap: 8px; width: 100%; max-width: 600px; }
+.coorda-reference .faq-card { padding: 24px; border-radius: 24px; background: #fff; }
+.coorda-reference .faq-card h3 { margin: 0; }
+.coorda-reference .faq-question { position: relative; display: flex; align-items: center; width: 100%; min-height: 28px; padding: 0 78px 0 0; border: 0; background: transparent; color: inherit; text-align: left; font-family: inherit; font-size: 18px; font-weight: 500; line-height: 1.4; letter-spacing: -.02em; cursor: pointer; }
+.coorda-reference .faq-question > span:first-child { flex: 1; min-width: 0; }
+.coorda-reference .faq-question:focus-visible { outline: 2px solid #1a1a1a; outline-offset: 8px; border-radius: 4px; }
+.coorda-reference .faq-card[data-open="true"] .faq-question { min-height: 0; }
+.coorda-reference .faq-toggle { position: absolute; top: 50%; right: 0; transform: translateY(-50%); width: 36px; height: 28px; border-radius: 40px; background: #1a1a1a; }
+.coorda-reference .faq-card[data-open="true"] .faq-toggle { top: 0; transform: none; }
+.coorda-reference .faq-toggle-horizontal, .coorda-reference .faq-toggle-vertical { position: absolute; top: 13px; left: 12px; width: 12px; height: 2px; border-radius: 1px; background: #fff; }
+.coorda-reference .faq-toggle-vertical { transform: rotate(90deg); transition: transform .3s, opacity .3s; }
+.coorda-reference .faq-card[data-open="true"] .faq-toggle-vertical { transform: rotate(0); opacity: 0; }
+.coorda-reference .faq-answer { width: calc(100% - 78px); max-width: 400px; overflow: hidden; }
+.coorda-reference .faq-answer p { margin: 0; padding-top: 12px; color: #707070; font-size: 16px; font-weight: 500; line-height: 1.4; letter-spacing: -.03em; }
+@media (min-width: 810px) and (max-width: 1199px) {
+  .coorda-reference .faq-section { padding: 100px 30px; }
+}
+@media (max-width: 809px) {
+  .coorda-reference .faq-section { padding: 80px 20px; }
+  .coorda-reference .faq-container { gap: 32px; }
+  .coorda-reference .faq-container h2 { max-width: 400px; font-size: 34px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .coorda-reference .faq-toggle-vertical { transition: none; }
+}
+
+.coorda-reference .insights-section { position: relative; isolation: isolate; padding: 120px 40px; background: #1a1a1a; color: #1a1a1a; scroll-margin-top: 20px; }
+.coorda-reference .insights-section::before { content: ""; position: absolute; inset: 0; z-index: -1; border-radius: 0 0 42px 42px; background: #f2f2f2; }
+.coorda-reference .insights-container { display: flex; flex-direction: column; gap: 42px; width: 100%; max-width: 1440px; margin: 0 auto; }
+.coorda-reference .insights-heading { display: flex; justify-content: space-between; align-items: flex-end; width: 100%; }
+.coorda-reference .insights-heading h2 { width: 100%; max-width: 600px; margin: 0; font-size: 42px; font-weight: 500; line-height: 1.3; letter-spacing: -.02em; text-wrap: balance; }
+.coorda-reference .insights-heading mark { display: inline-block; padding: 6px 8px; border-radius: 12px; background: #fff; color: inherit; line-height: 1; }
+.coorda-reference .insights-heading .hero-cta { flex-shrink: 0; }
+.coorda-reference .insights-mobile-break { display: none; }
+.coorda-reference .insights-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; align-items: start; }
+.coorda-reference .insight-article { min-width: 0; }
+.coorda-reference .insight-card { display: flex; flex-direction: column; gap: 16px; color: inherit; text-decoration: none; }
+.coorda-reference .insight-card:focus-visible { outline: 2px solid #1a1a1a; outline-offset: 8px; border-radius: 24px; }
+.coorda-reference .insight-photo { aspect-ratio: 1.12564; overflow: hidden; border-radius: 24px; }
+.coorda-reference .insight-photo img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .5s ease; }
+.coorda-reference .insight-card:hover .insight-photo img, .coorda-reference .insight-card:focus-visible .insight-photo img { transform: scale(1.05); }
+.coorda-reference .insight-content { display: flex; flex-direction: column; gap: 16px; padding: 4px; }
+.coorda-reference .insight-content h3 { margin: 0; font-size: 24px; font-weight: 500; line-height: 1.3; letter-spacing: -.01em; text-wrap: balance; }
+.coorda-reference .insight-meta { display: flex; align-items: center; gap: 12px; min-height: 28px; color: #707070; font-size: 16px; font-weight: 500; line-height: 1.4; letter-spacing: -.03em; }
+.coorda-reference .insight-author, .coorda-reference .insight-date { display: inline-flex; align-items: center; gap: 5px; white-space: nowrap; }
+.coorda-reference .insight-author img { display: block; width: 44px; height: 28px; border-radius: 100px; object-fit: cover; flex-shrink: 0; }
+.coorda-reference .insight-divider { width: 1px; height: 28px; background: rgb(26 26 26 / 20%); flex-shrink: 0; }
+.coorda-reference .insight-date svg { flex-shrink: 0; }
+@media (min-width: 810px) and (max-width: 1199px) {
+  .coorda-reference .insights-section { padding: 100px 30px; }
+  .coorda-reference .insights-heading h2 { max-width: 500px; }
+}
+@media (max-width: 1199px) {
+  .coorda-reference .insights-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .coorda-reference .insight-article:nth-child(3) { display: none; }
+}
+@media (max-width: 809px) {
+  .coorda-reference .insights-section { padding: 80px 20px; }
+  .coorda-reference .insights-container { gap: 32px; }
+  .coorda-reference .insights-heading { flex-direction: column; align-items: flex-start; gap: 24px; }
+  .coorda-reference .insights-heading h2 { max-width: 400px; font-size: 34px; }
+  .coorda-reference .insights-mobile-break { display: block; }
+  .coorda-reference .insights-grid { grid-template-columns: minmax(0, 1fr); gap: 32px; }
+}
+@media (max-width: 359px) {
+  .coorda-reference .insight-meta { flex-wrap: wrap; column-gap: 8px; row-gap: 4px; font-size: 14px; }
+  .coorda-reference .insight-author img { width: 36px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .coorda-reference .insight-photo img { transition: none; }
+  .coorda-reference .insight-card:hover .insight-photo img, .coorda-reference .insight-card:focus-visible .insight-photo img { transform: none; }
+}
+
+.coorda-reference .moments-section { position: relative; isolation: isolate; display: flex; justify-content: center; padding: 120px 40px; background: #1a1a1a; color: #fff; overflow: clip; scroll-margin-top: 20px; }
+.coorda-reference .moments-stage { position: relative; z-index: 2; width: 300px; height: 625px; flex-shrink: 0; }
+.coorda-reference .moments-text { position: absolute; z-index: 1; top: 323px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; gap: 18px; width: 90%; max-width: 1440px; padding: 8px 0; border-block: 1px solid rgb(255 255 255 / 25%); }
+.coorda-reference .moments-text::after { content: ""; position: absolute; top: 50%; left: 0; width: 100%; height: 1px; background: rgb(255 255 255 / 25%); }
+.coorda-reference .moments-text-row { display: flex; padding-left: 100px; }
+.coorda-reference .moments-text-row-reverse { justify-content: flex-end; padding-left: 0; padding-right: 100px; }
+.coorda-reference .moments-text-row p { margin: 0; white-space: nowrap; font-size: 100px; font-weight: 400; line-height: 1.2; letter-spacing: 0; text-transform: uppercase; }
+.coorda-reference .moments-phone { position: relative; width: 300px; height: 625px; border: 2px solid #515151; border-radius: 49px; background: #080808; box-shadow: inset 0 0 0 2px #202020, inset 0 0 0 5px #050505; }
+.coorda-reference .moments-phone-screen { position: absolute; top: 7px; left: 7px; width: 285px; height: 607px; overflow: hidden; border-radius: 38.5px; background: #1a1a1a; }
+.coorda-reference .moments-side-button { position: absolute; left: -4px; width: 3px; border-radius: 2px; background: linear-gradient(90deg, #888, #111); }
+.coorda-reference .moments-side-silent { top: 98px; height: 20px; }
+.coorda-reference .moments-side-volume-one { top: 150px; height: 38px; }
+.coorda-reference .moments-side-volume-two { top: 198px; height: 38px; }
+.coorda-reference .moments-side-power { top: 174px; left: auto; right: -4px; height: 62px; background: linear-gradient(90deg, #111, #888); }
+.coorda-reference .moments-status { position: absolute; top: 16px; left: 40px; right: 28px; display: flex; align-items: center; justify-content: space-between; height: 14px; font-size: 12px; line-height: 1; font-weight: 600; letter-spacing: -.03em; }
+.coorda-reference .moments-status > div { display: flex; align-items: center; gap: 3px; }
+.coorda-reference .moments-island { position: absolute; top: 10px; left: 50%; transform: translateX(-50%); width: 80px; height: 23px; border-radius: 100px; background: #000; }
+.coorda-reference .moments-island > span { position: absolute; top: 7px; right: 9px; width: 9px; height: 9px; border-radius: 50%; background: radial-gradient(circle at 50% 50%, #272547 0, #100e23 45%, #030308 70%); }
+.coorda-reference .moments-phone-content { display: flex; flex-direction: column; align-items: center; width: 100%; height: 100%; padding: 64px 16px 12px; }
+.coorda-reference .moments-phone-top { display: flex; align-items: center; justify-content: space-between; width: 100%; height: 30px; flex-shrink: 0; }
+.coorda-reference .moments-phone-top > img { display: block; width: 30px; height: 30px; object-fit: cover; border: 1px solid #e8e8e8; border-radius: 50%; }
+.coorda-reference .moments-phone-top > div { display: flex; align-items: center; gap: 4px; }
+.coorda-reference .moments-phone-top > div > span { display: grid; place-items: center; width: 30px; height: 30px; border: 1px solid #303030; border-radius: 50%; color: rgb(255 255 255 / 55%); }
+.coorda-reference .moments-phone-main { display: flex; flex-direction: column; align-items: center; gap: 24px; width: 100%; margin-top: 42px; }
+.coorda-reference .moments-photos { position: relative; width: 200px; height: 198px; }
+.coorda-reference .moments-photos img { position: absolute; width: 130px; height: 160px; border: 2px solid #fff; border-radius: 12px; object-fit: cover; }
+.coorda-reference .moments-photos .moments-photo-city { z-index: 1; top: 2px; left: 16px; transform: rotate(-6deg); }
+.coorda-reference .moments-photos .moments-photo-trip { z-index: 0; top: 11px; left: 51px; transform: rotate(13deg); }
+.coorda-reference .moments-photos .moments-photo-friends { z-index: 2; bottom: 8px; left: 34.5px; width: 131px; transform: rotate(6deg); }
+.coorda-reference .moments-phone-copy { display: flex; flex-direction: column; gap: 10px; width: 100%; padding-inline: 16px; text-align: center; }
+.coorda-reference .moments-phone-copy p { margin: 0; font-size: 16px; font-weight: 500; line-height: 1.4; letter-spacing: -.03em; color: rgb(255 255 255 / 80%); }
+.coorda-reference .moments-phone-copy .moments-phone-heading { font-size: 22px; font-weight: 500; line-height: 1.2; letter-spacing: 0; color: #fff; text-wrap: balance; }
+.coorda-reference .moments-phone-bottom { display: flex; flex-direction: column; align-items: center; gap: 24px; width: 100%; margin-top: auto; }
+.coorda-reference .moments-phone-tabs { display: flex; align-items: center; gap: 2px; width: 101px; height: 34px; padding: 2px; border: 1px solid #303030; border-radius: 100px; }
+.coorda-reference .moments-phone-tabs > span { display: grid; place-items: center; width: 30px; height: 28px; color: rgb(255 255 255 / 40%); }
+.coorda-reference .moments-phone-tabs > span:first-child { border-radius: 100px; background: #2b2b2b; color: #fff; }
+.coorda-reference .moments-home-indicator { width: 95px; height: 4px; border-radius: 100px; background: #fff; }
+.coorda-reference .moments-notice { position: absolute; z-index: 3; width: 52px; height: 52px; }
+.coorda-reference .moments-notice svg { position: absolute; width: 34px; height: 34px; top: 0; left: 0; }
+.coorda-reference .moments-notice > span { position: absolute; display: block; width: max-content; padding: 6px 20px; border-radius: 100px; background: #fff; color: #1a1a1a; font-size: 16px; font-weight: 500; line-height: 1.4; letter-spacing: -.03em; }
+.coorda-reference .moments-notice-in { bottom: 32px; left: -86px; width: 56px; height: 55px; }
+.coorda-reference .moments-notice-in svg { left: auto; right: 0; }
+.coorda-reference .moments-notice-in > span { top: 40px; right: 24px; background: #f2f2f2; }
+.coorda-reference .moments-notice-events { top: 78px; right: -66px; }
+.coorda-reference .moments-notice-events > span { top: 38px; left: 32px; }
+.coorda-reference .moments-star { position: absolute; z-index: 3; top: 32px; right: 500px; width: 54px; height: 66px; cursor: grab; touch-action: none; }
+.coorda-reference .moments-star svg { display: block; width: 100%; height: 100%; }
+.coorda-reference .moments-eyes { position: absolute; z-index: 3; bottom: 40px; left: 500px; display: flex; cursor: grab; touch-action: none; }
+.coorda-reference .moments-star:active, .coorda-reference .moments-eyes:active { cursor: grabbing; }
+.coorda-reference .moments-eye { display: grid; place-items: center; width: 55px; height: 55px; }
+.coorda-reference .moments-eye > span { position: relative; display: block; width: 49px; height: 49px; border-radius: 50%; background: #fff; box-shadow: 0 0 0 2px rgb(255 255 255 / 30%), 0 0 30px rgb(0 0 0 / 45%); }
+.coorda-reference .moments-eye i { position: absolute; bottom: 18px; right: 15px; display: block; width: 27px; height: 27px; border-radius: 50%; background: #1a1a1a; }
+@media (min-width: 810px) and (max-width: 1199px) {
+  .coorda-reference .moments-section { padding: 100px 30px 100px 39px; }
+  .coorda-reference .moments-star, .coorda-reference .moments-eyes { display: none; }
+}
+@media (max-width: 809px) {
+  .coorda-reference .moments-section { padding: 80px 20px; }
+  .coorda-reference .moments-text-row p { font-size: 80px; }
+  .coorda-reference .moments-star, .coorda-reference .moments-eyes, .coorda-reference .moments-notice { display: none; }
+}
+@media (max-width: 339px) {
+  .coorda-reference .moments-section { padding-inline: 10px; }
+  .coorda-reference .moments-stage { width: 280px; height: 583.34px; }
+  .coorda-reference .moments-phone { transform-origin: top left; scale: .933333; }
+}
+
+.coorda-reference .page-container { width: 100%; max-width: 1440px; margin-inline: auto; }
+.coorda-reference .native-features { background: #1a1a1a; color: #fff; }
+.coorda-reference .native-features > div { display: flex; flex-direction: column; gap: 42px; }
+.coorda-reference .native-features h2 { max-width: 500px; line-height: 1.4; }
+.coorda-reference .native-features h2 mark, .coorda-reference .testimonials-section h2 mark { color: #1a1a1a; }
+.coorda-reference .native-cards { display: flex; gap: 16px; }
+.coorda-reference .native-card { position: relative; display: flex; flex-direction: column; align-items: flex-start; flex: 0 0 calc((100% - 64px) / 5); min-width: 0; height: 365px; padding: 32px; border: 1px solid rgb(255 255 255 / 8%); border-radius: 24px; background: transparent; color: rgb(255 255 255 / 50%); text-align: left; transition: flex-basis .5s ease, color .3s; overflow: hidden; }
+.coorda-reference .native-card.is-active { flex-basis: calc((100% - 64px) * 2 / 5 + 16px); color: #fff; }
+.coorda-reference .native-card-icon { display: grid; place-items: center; flex-shrink: 0; width: 42px; height: 42px; border: 1px solid rgb(255 255 255 / 8%); border-radius: 50%; }
+.coorda-reference .native-card-title { display: block; max-width: 160px; margin-top: 24px; font-size: 24px; font-weight: 500; line-height: 1.3; letter-spacing: -.01em; }
+.coorda-reference .native-card.is-active .native-card-title { max-width: none; font-size: 28px; line-height: 1.2; }
+.coorda-reference .native-card-description { display: block; max-width: 350px; margin-top: auto; color: rgb(255 255 255 / 80%); font-size: 20px; font-weight: 500; line-height: 1.3; letter-spacing: -.02em; }
+.coorda-reference .native-card-description[hidden] { display: none; }
+.coorda-reference .native-card-arrow { position: absolute; bottom: 32px; left: 32px; }
+.coorda-reference .native-card.is-active .native-card-arrow { display: none; }
+.coorda-reference .native-card:focus-visible, .coorda-reference .pricing-billing button:focus-visible, .coorda-reference .pricing-cta:focus-visible, .coorda-reference .story-arrow:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
+.coorda-reference .native-metrics { display: flex; flex-direction: column; gap: 64px; margin-top: 78px; }
+.coorda-reference .native-metrics-heading { display: flex; align-items: center; gap: 10px; margin: 0; font-size: 18px; font-weight: 500; line-height: 1.4; }
+.coorda-reference .native-metrics-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 64px; }
+.coorda-reference .native-metric { display: flex; flex-direction: column; gap: 24px; }
+.coorda-reference .native-metric-number { margin: 0; font-size: 48px; font-weight: 500; line-height: 1.2; letter-spacing: -.07em; }
+.coorda-reference .native-metric-divider { height: 1px; background: rgb(255 255 255 / 10%); }
+.coorda-reference .native-metric-label { max-width: 250px; margin: 0; color: rgb(255 255 255 / 80%); font-size: 18px; font-weight: 500; line-height: 1.4; letter-spacing: -.02em; text-wrap: balance; }
+.coorda-reference .stories-section { display: flex; flex-direction: column; gap: 42px; padding-block: 120px; background: #f2f2f2; color: #1a1a1a; overflow: clip; }
+.coorda-reference .stories-section h2 { max-width: 600px; margin-inline: auto; text-align: center; }
+.coorda-reference .stories-carousel { position: relative; container-type: inline-size; padding-inline: 40px; touch-action: pan-y; }
+.coorda-reference .stories-track { --story-width: calc((100cqw - 32px) / 3); display: flex; gap: 16px; transition: transform .65s cubic-bezier(.22, 1, .36, 1); }
+.coorda-reference .stories-track.is-instant { transition: none; }
+.coorda-reference .story-card { position: relative; isolation: isolate; flex: 0 0 var(--story-width); width: var(--story-width); height: 601px; overflow: hidden; border-radius: 24px; background: #707070; }
+.coorda-reference .story-card video { display: block; width: 100%; height: 100%; object-fit: cover; filter: brightness(.65); }
+.coorda-reference .story-shade { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(transparent 0%, rgb(112 112 112 / 80%) 99.18%); }
+.coorda-reference .story-play { position: absolute; inset: 0; display: grid; place-items: center; width: 100%; border: 0; background: transparent; color: #fff; }
+.coorda-reference .story-play > span { display: grid; place-items: center; width: 64px; height: 64px; border: 1px solid rgb(255 255 255 / 16%); border-radius: 50%; background: rgb(255 255 255 / 32%); opacity: 0; transition: opacity .25s; }
+.coorda-reference .story-play:hover > span, .coorda-reference .story-play:focus-visible > span { opacity: 1; }
+.coorda-reference .story-play:focus-visible { outline: 2px solid #fff; outline-offset: -6px; border-radius: 24px; }
+.coorda-reference .story-user { position: absolute; z-index: 2; bottom: 24px; left: 24px; display: flex; align-items: center; gap: 6px; margin: 0; font-size: 12px; font-weight: 500; line-height: 1.3; color: #fff; pointer-events: none; }
+.coorda-reference .story-user img { width: 32px; height: 32px; border: 1px solid #fff; border-radius: 50%; object-fit: cover; }
+.coorda-reference .story-arrow { position: absolute; z-index: 3; top: 50%; display: grid; place-items: center; width: 40px; height: 40px; padding: 0; border: 0; border-radius: 50%; background: #fff; color: #1a1a1a; transform: translateY(-50%); transition: background .2s; }
+.coorda-reference .story-arrow:hover { background: #ddd; }
+.coorda-reference .story-arrow-prev { left: 20px; }
+.coorda-reference .story-arrow-next { right: 20px; }
+.coorda-reference .story-error { position: absolute; bottom: 72px; left: 24px; right: 24px; margin: 0; color: #fff; font-size: 14px; }
+.coorda-reference .pricing-section { position: relative; isolation: isolate; background: #1a1a1a; }
+.coorda-reference .pricing-section::before { content: ""; position: absolute; inset: 0; z-index: -1; background: #f2f2f2; border-radius: 0 0 42px 42px; }
+.coorda-reference .pricing-section > div { display: flex; flex-direction: column; gap: 42px; }
+.coorda-reference .pricing-heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; }
+.coorda-reference .pricing-heading h2 { max-width: 600px; }
+.coorda-reference .pricing-billing { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+.coorda-reference .pricing-billing > button { padding: 0; border: 0; color: #707070; background: transparent; font-family: inherit; font-size: 16px; font-weight: 500; line-height: 1.4; letter-spacing: -.03em; }
+.coorda-reference .pricing-billing > button.is-selected { color: #1a1a1a; }
+.coorda-reference .pricing-billing .pricing-switch { width: 56px; height: 30px; padding: 3px; border-radius: 100px; background: #fff; }
+.coorda-reference .pricing-switch span { display: block; width: 24px; height: 24px; border-radius: 50%; background: #1a1a1a; transition: transform .3s; }
+.coorda-reference .pricing-switch[aria-checked="true"] span { transform: translateX(26px); }
+.coorda-reference .pricing-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.coorda-reference .pricing-card { display: flex; flex-direction: column; gap: 8px; padding: 8px; border-radius: 24px; background: #fff; }
+.coorda-reference .pricing-photo { position: relative; isolation: isolate; aspect-ratio: 2.01153; overflow: hidden; padding: 16px; border-radius: 16px; color: #fff; }
+.coorda-reference .pricing-photo img { position: absolute; inset: 0; z-index: -1; display: block; width: 100%; height: 100%; object-fit: cover; filter: brightness(.68); }
+.coorda-reference .pricing-photo p { margin: 0 0 10px; font-size: 24px; font-weight: 500; line-height: 1.3; }
+.coorda-reference .pricing-photo h3 { margin: 0; font-size: 28px; font-weight: 500; line-height: 1.2; }
+.coorda-reference .pricing-card-content { display: flex; flex-direction: column; align-items: flex-start; flex: 1; gap: 16px; padding: 16px; }
+.coorda-reference .pricing-price { display: flex; align-items: baseline; gap: 6px; height: 38px; margin: 0; }
+.coorda-reference .pricing-price span:first-child { font-size: 36px; font-weight: 500; line-height: 1.2; letter-spacing: -.04em; }
+.coorda-reference .pricing-price span:last-child { color: #707070; font-size: 18px; font-weight: 500; line-height: 1.4; letter-spacing: -.02em; }
+.coorda-reference .pricing-card ul { display: flex; flex-direction: column; gap: 12px; margin: 0; padding: 0; list-style: none; }
+.coorda-reference .pricing-card li { display: flex; align-items: flex-start; gap: 8px; font-size: 16px; font-weight: 500; line-height: 1.4; letter-spacing: -.03em; }
+.coorda-reference .pricing-card li svg { flex-shrink: 0; margin-top: 2px; color: #707070; }
+.coorda-reference .pricing-cta { display: inline-flex; align-items: center; justify-content: center; min-height: 46px; margin-top: 16px; padding: 12px 22px; border-radius: 100px; background: #1a1a1a; color: #fff; text-decoration: none; font-size: 16px; font-weight: 500; line-height: 1.4; letter-spacing: -.03em; transition: background .2s; }
+.coorda-reference .pricing-cta:hover { background: #444; }
+.coorda-reference .testimonials-section { display: flex; flex-direction: column; gap: 42px; padding: 120px 40px; overflow: clip; background: #1a1a1a; color: #fff; }
+.coorda-reference .testimonials-heading h2 { max-width: 600px; }
+.coorda-reference .testimonials-ticker { width: calc(100% + 80px); margin-left: -40px; }
+.coorda-reference .testimonials-track { display: flex; gap: 16px; width: max-content; animation: testimonials-scroll 60s linear infinite; }
+.coorda-reference .testimonials-ticker:hover .testimonials-track, .coorda-reference .testimonials-ticker:focus .testimonials-track { animation-play-state: paused; }
+.coorda-reference .testimonials-ticker:focus-visible { outline: 2px solid #fff; outline-offset: 4px; }
+.coorda-reference .testimonials-group { display: flex; gap: 16px; }
+.coorda-reference .testimonial-card { display: flex; flex-direction: column; justify-content: space-between; width: 340px; height: 390px; margin: 0; padding: 32px; border: 1px solid rgb(255 255 255 / 12%); border-radius: 24px; }
+.coorda-reference .testimonial-card > div > svg { opacity: .8; margin-bottom: 32px; }
+.coorda-reference .testimonial-card blockquote { margin: 0; font-size: 20px; font-weight: 500; line-height: 1.3; letter-spacing: -.02em; color: rgb(255 255 255 / 90%); }
+.coorda-reference .testimonial-card figcaption, .coorda-reference .testimonials-founder figcaption { display: flex; align-items: center; gap: 12px; }
+.coorda-reference .testimonial-card figcaption img, .coorda-reference .testimonials-founder figcaption img { display: block; width: 85px; height: 50px; object-fit: cover; border: 1px solid rgb(255 255 255 / 12%); border-radius: 50px; flex-shrink: 0; }
+.coorda-reference .testimonial-card figcaption p, .coorda-reference .testimonials-founder figcaption p { margin: 0; font-size: 16px; font-weight: 500; line-height: 1.4; letter-spacing: -.03em; }
+.coorda-reference .testimonial-card figcaption p + p, .coorda-reference .testimonials-founder figcaption p + p { margin-top: 4px; color: rgb(255 255 255 / 68%); font-size: 14px; line-height: 1.3; }
+.coorda-reference .testimonials-founder { display: flex; align-items: center; justify-content: space-between; gap: 42px; margin-top: 78px; }
+.coorda-reference .testimonials-founder figure { display: flex; flex-direction: column; gap: 24px; margin: 0; }
+.coorda-reference .testimonials-founder blockquote { max-width: 700px; margin: 0; font-size: 24px; font-weight: 500; line-height: 1.3; letter-spacing: -.01em; }
+.coorda-reference .testimonials-founder figcaption p:first-child { font-size: 18px; }
+.coorda-reference .testimonials-founder .hero-cta { flex-shrink: 0; }
+@keyframes testimonials-scroll { to { transform: translateX(calc(-50% - 8px)); } }
+@media (min-width: 810px) and (max-width: 1199px) {
+  .coorda-reference .native-metrics-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 56px; }
+  .coorda-reference .stories-section { padding-block: 100px; }
+  .coorda-reference .stories-carousel { padding-inline: 30px; }
+  .coorda-reference .stories-track { --story-width: calc((100cqw - 16px) / 2); }
+  .coorda-reference .pricing-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .coorda-reference .pricing-card:last-child { grid-column: 1 / -1; }
+  .coorda-reference .testimonials-section { padding: 100px 30px; }
+  .coorda-reference .testimonials-ticker { width: calc(100% + 60px); margin-left: -30px; }
+}
+@media (max-width: 1199px) {
+  .coorda-reference .native-cards { flex-direction: column; }
+  .coorda-reference .native-card { flex: none; height: 154px; }
+  .coorda-reference .native-card.is-active { flex: none; height: auto; }
+  .coorda-reference .native-card-title, .coorda-reference .native-card.is-active .native-card-title { max-width: none; font-size: 24px; line-height: 1.2; }
+  .coorda-reference .native-card-arrow { left: auto; bottom: 32px; right: 32px; }
+  .coorda-reference .native-card-description { max-width: 700px; margin-top: 42px; }
+  .coorda-reference .pricing-heading { flex-direction: column; align-items: flex-start; }
+  .coorda-reference .testimonials-founder { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 809px) {
+  .coorda-reference .native-features > div { gap: 32px; }
+  .coorda-reference .native-features h2 { font-size: 34px; line-height: 1.4; }
+  .coorda-reference .native-metrics { gap: 48px; margin-top: 48px; }
+  .coorda-reference .native-metrics-grid { grid-template-columns: 1fr; gap: 48px; }
+  .coorda-reference .stories-section { gap: 32px; padding-block: 80px; }
+  .coorda-reference .stories-section h2 { padding-inline: 20px; font-size: 34px; }
+  .coorda-reference .stories-section h2 br { display: none; }
+  .coorda-reference .stories-carousel { padding-inline: 20px; }
+  .coorda-reference .stories-track { --story-width: 100cqw; }
+  .coorda-reference .story-arrow-prev { left: 0; }
+  .coorda-reference .story-arrow-next { right: 0; }
+  .coorda-reference .pricing-heading h2 { font-size: 34px; }
+  .coorda-reference .pricing-heading h2 br { display: none; }
+  .coorda-reference .pricing-section > div { gap: 32px; }
+  .coorda-reference .pricing-grid { grid-template-columns: 1fr; }
+  .coorda-reference .testimonials-section { padding: 80px 20px; gap: 32px; }
+  .coorda-reference .testimonials-heading h2 { font-size: 34px; }
+  .coorda-reference .testimonials-heading h2 br { display: none; }
+  .coorda-reference .testimonials-ticker { width: calc(100% + 40px); margin-left: -20px; }
+  .coorda-reference .testimonial-card { height: 376px; }
+  .coorda-reference .testimonials-founder { margin-top: 48px; gap: 32px; }
+  .coorda-reference .testimonials-founder blockquote { font-size: 22px; line-height: 1.2; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .coorda-reference .native-card, .coorda-reference .stories-track, .coorda-reference .pricing-switch span { transition: none; }
+  .coorda-reference .testimonials-track { animation: none; }
+  .coorda-reference .testimonials-ticker { overflow-x: auto; }
+  .coorda-reference .testimonials-group[aria-hidden="true"] { display: none; }
+}
+.coorda-reference .section-space { padding: 120px 40px; }
+.coorda-reference .page-section-heading { margin: 0; font-size: 42px; font-weight: 500; line-height: 1.3; letter-spacing: -.01em; text-wrap: balance; }
+.coorda-reference .page-section-heading mark, .coorda-reference .about-story mark { display: inline-block; padding: 6px 8px; border-radius: 12px; color: inherit; background: #fff; line-height: 1; }
+.coorda-reference .photo-hero { padding: 8px; }
+.coorda-reference .photo-hero-frame { position: relative; isolation: isolate; display: flex; align-items: center; justify-content: center; height: 98vh; height: 98svh; padding: 40px; overflow: hidden; border-radius: 24px; color: #fff; background: #2d383a; }
+.coorda-reference .photo-hero-image { position: absolute; inset: 0; z-index: -1; display: block; width: 100%; height: 100%; object-fit: cover; filter: brightness(.42); }
+.coorda-reference .photo-hero h1 { width: 100%; max-width: 700px; margin: 0; font-size: 78px; font-weight: 500; line-height: 1.1; text-align: center; letter-spacing: 0; text-wrap: balance; }
+.coorda-reference .about-story { color: #1a1a1a; background: #f2f2f2; }
+.coorda-reference .about-story > div { display: flex; flex-direction: column; gap: 72px; }
+.coorda-reference .about-story h2 { width: 100%; max-width: 800px; margin: 0; font-size: 34px; font-weight: 500; line-height: 1.6; letter-spacing: 0; text-wrap: balance; }
+.coorda-reference .about-stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 64px; }
+.coorda-reference .about-stat { display: flex; flex-direction: column; gap: 16px; }
+.coorda-reference .about-stat-value { margin: 0; font-size: 74px; font-weight: 500; line-height: normal; letter-spacing: -.04em; white-space: nowrap; }
+.coorda-reference .about-stat > div { height: 1px; background: rgb(26 26 26 / 10%); }
+.coorda-reference .about-stat-label { max-width: 250px; margin: 0; color: #707070; font-size: 18px; font-weight: 500; line-height: 1.4; letter-spacing: -.02em; text-wrap: balance; }
+.coorda-reference .about-toast { position: relative; aspect-ratio: 2.18182; overflow: hidden; border-radius: 0 0 8px 8px; }
+.coorda-reference .about-toast img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.coorda-reference .about-team { position: relative; isolation: isolate; color: #1a1a1a; background: #1a1a1a; }
+.coorda-reference .about-team::before { content: ""; position: absolute; inset: 0; z-index: -1; background: #f2f2f2; border-radius: 0 0 42px 42px; }
+.coorda-reference .about-team > div { display: flex; flex-direction: column; align-items: center; gap: 42px; }
+.coorda-reference .about-team h2 { width: 100%; max-width: 600px; text-align: center; }
+.coorda-reference .about-team-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 42px 16px; width: 100%; }
+.coorda-reference .about-team-photo { aspect-ratio: 1.05714; overflow: hidden; border-radius: 16px; }
+.coorda-reference .about-team-photo img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .5s; }
+.coorda-reference .about-team-card:hover .about-team-photo img { transform: scale(1.04); }
+.coorda-reference .about-team-info { display: flex; flex-direction: column; gap: 8px; padding: 16px 4px 4px; }
+.coorda-reference .about-team-info h3 { margin: 0; font-size: 24px; font-weight: 500; line-height: 1.3; letter-spacing: -.01em; }
+.coorda-reference .about-team-info p { margin: 0; color: #707070; font-size: 16px; font-weight: 500; line-height: 1.4; letter-spacing: -.03em; }
+.coorda-reference .about-culture { background: #1a1a1a; color: #fff; }
+.coorda-reference .about-culture-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: stretch; gap: 64px; }
+.coorda-reference .about-culture-photo { display: block; width: 100%; height: 100%; object-fit: cover; border-radius: 24px; }
+.coorda-reference .about-culture-content { display: flex; flex-direction: column; gap: 96px; }
+.coorda-reference .about-culture-intro { max-width: 500px; }
+.coorda-reference .about-culture-intro h2 mark { color: #1a1a1a; }
+.coorda-reference .about-culture-intro > p { margin: 24px 0 0; color: rgb(255 255 255 / 80%); font-size: 18px; font-weight: 500; line-height: 1.4; letter-spacing: -.02em; }
+.coorda-reference .about-founder-quote { display: flex; flex-direction: column; width: 85%; margin: 0; padding: 32px; border: 1px solid rgb(255 255 255 / 12%); border-radius: 24px; box-shadow: 0 10px 18px -3px rgb(0 0 0 / 4%); }
+.coorda-reference .about-founder-quote > svg { color: rgb(255 255 255 / 35%); margin-bottom: 16px; }
+.coorda-reference .about-founder-quote blockquote { max-width: 400px; margin: 0; font-size: 18px; font-weight: 500; line-height: 1.4; letter-spacing: -.02em; }
+.coorda-reference .about-founder-quote figcaption { display: flex; align-items: center; gap: 12px; margin-top: 32px; }
+.coorda-reference .about-founder-quote figcaption img { display: block; width: 85px; height: 50px; border-radius: 50px; object-fit: cover; flex-shrink: 0; }
+.coorda-reference .about-founder-quote figcaption p { margin: 0; font-size: 18px; font-weight: 500; line-height: 1.4; letter-spacing: -.02em; }
+.coorda-reference .about-founder-quote figcaption p + p { margin-top: 4px; color: rgb(255 255 255 / 60%); font-size: 14px; line-height: 1.3; }
+.coorda-reference .site-footer { position: relative; isolation: isolate; overflow: hidden; padding: 120px 40px 40px; background: #1a1a1a; color: #fff; }
+.coorda-reference .site-footer-image { position: absolute; inset: -3px; z-index: -1; width: calc(100% + 6px); height: calc(100% + 6px); object-fit: cover; filter: brightness(.24) blur(3px); }
+.coorda-reference .site-footer-container { display: flex; flex-direction: column; gap: 64px; width: 100%; max-width: 1440px; margin-inline: auto; }
+.coorda-reference .site-footer-content { display: flex; flex-direction: column; gap: 96px; }
+.coorda-reference .site-footer-cta { display: flex; flex-direction: column; align-items: center; gap: 32px; text-align: center; }
+.coorda-reference .site-footer-cta > div { display: flex; flex-direction: column; align-items: center; gap: 16px; width: 100%; }
+.coorda-reference .site-footer-cta h2 { max-width: 600px; margin: 0; font-size: 42px; font-weight: 500; line-height: 1.2; letter-spacing: -.02em; text-wrap: balance; }
+.coorda-reference .site-footer-cta p { max-width: 350px; margin: 0; color: rgb(255 255 255 / 80%); font-size: 18px; font-weight: 500; line-height: 1.4; letter-spacing: -.02em; text-wrap: balance; }
+.coorda-reference .site-footer-columns { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.coorda-reference .site-footer-columns h3 { margin: 0 0 12px; font-size: 16px; font-weight: 500; line-height: 1.4; letter-spacing: -.03em; }
+.coorda-reference .site-footer-columns ul { display: flex; flex-direction: column; gap: 12px; margin: 0; padding: 0; list-style: none; }
+.coorda-reference .site-footer-columns a { color: rgb(255 255 255 / 80%); text-decoration: none; font-size: 18px; font-weight: 500; line-height: 1.4; letter-spacing: -.02em; transition: color .2s; }
+.coorda-reference .site-footer a:hover { color: #fff; }
+.coorda-reference .site-footer .hero-cta:hover { color: #1a1a1a; }
+.coorda-reference .site-footer a:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; border-radius: 2px; }
+.coorda-reference .site-footer-bottom { display: flex; justify-content: space-between; align-items: center; gap: 24px; padding-top: 24px; border-top: 1px solid rgb(255 255 255 / 20%); font-size: 16px; font-weight: 500; line-height: 1.4; letter-spacing: -.03em; }
+.coorda-reference .site-footer-bottom > div { display: flex; flex-wrap: wrap; gap: 8px; }
+.coorda-reference .site-footer-bottom p { margin: 0; }
+.coorda-reference .site-footer-bottom a { color: inherit; text-decoration: none; }
+@media (min-width: 810px) and (max-width: 1199px) {
+  .coorda-reference .section-space { padding: 100px 30px; }
+  .coorda-reference .photo-hero { padding: 0; }
+  .coorda-reference .photo-hero-frame { border-radius: 0 0 24px 24px; padding: 30px; }
+  .coorda-reference .photo-hero h1 { max-width: 500px; font-size: 64px; }
+  .coorda-reference .about-team-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .coorda-reference .about-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 42px 64px; }
+  .coorda-reference .about-toast { aspect-ratio: 1.7234; }
+  .coorda-reference .about-culture-grid { grid-template-columns: minmax(0, 1fr); gap: 56px; }
+  .coorda-reference .about-culture-photo { aspect-ratio: 1.63043; height: auto; }
+  .coorda-reference .site-footer { padding: 100px 30px 30px; }
+  .coorda-reference .site-footer-content { gap: 64px; }
+}
+@media (max-width: 809px) {
+  .coorda-reference .section-space { padding: 80px 20px; }
+  .coorda-reference .page-section-heading { font-size: 34px; }
+  .coorda-reference .photo-hero { padding: 0; }
+  .coorda-reference .photo-hero-frame { border-radius: 0 0 24px 24px; padding: 30px; }
+  .coorda-reference .photo-hero h1 { max-width: 500px; font-size: 50px; }
+  .coorda-reference .about-story h2 { font-size: 28px; line-height: 1.6; }
+  .coorda-reference .about-story > div { gap: 48px; }
+  .coorda-reference .about-stats { grid-template-columns: minmax(0, 1fr); gap: 42px; }
+  .coorda-reference .about-stat-value { font-size: 60px; }
+  .coorda-reference .about-toast { aspect-ratio: .975; }
+  .coorda-reference .about-team > div { gap: 32px; }
+  .coorda-reference .about-team-grid { grid-template-columns: minmax(0, 1fr); gap: 32px; }
+  .coorda-reference .about-culture-grid { grid-template-columns: minmax(0, 1fr); gap: 48px; }
+  .coorda-reference .about-culture-photo { aspect-ratio: 1.09375; height: auto; }
+  .coorda-reference .about-culture-content { gap: 64px; }
+  .coorda-reference .about-culture-intro h2 br { display: none; }
+  .coorda-reference .about-founder-quote { width: 100%; }
+  .coorda-reference .about-founder-quote figcaption { flex-wrap: wrap; }
+  .coorda-reference .site-footer { padding: 80px 20px 20px; }
+  .coorda-reference .site-footer-content { gap: 64px; }
+  .coorda-reference .site-footer-cta h2 { font-size: 34px; }
+  .coorda-reference .site-footer-columns { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 42px 16px; }
+  .coorda-reference .site-footer-bottom { flex-direction: column; align-items: flex-start; gap: 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .coorda-reference .about-team-photo img { transition: none; }
+  .coorda-reference .about-team-card:hover .about-team-photo img { transform: none; }
+}
+
+.coorda-reference .download-section { position: relative; isolation: isolate; padding: 160px 40px 120px; color: #1a1a1a; background: #1a1a1a; }
+.coorda-reference .download-section::before { content: ""; position: absolute; inset: 0; z-index: -1; border-radius: 0 0 42px 42px; background: #f2f2f2; }
+.coorda-reference .download-heading { display: flex; flex-direction: column; align-items: center; gap: 16px; text-align: center; margin-bottom: 42px; }
+.coorda-reference .download-label { padding: 8px 12px; border-radius: 4px; background: #e8e8e8; color: #707070; font-size: 14px; font-weight: 500; line-height: 1.3; letter-spacing: -.01em; }
+.coorda-reference .download-heading > div { display: flex; flex-direction: column; align-items: center; gap: 12px; width: 100%; }
+.coorda-reference .download-heading h1 { width: 100%; max-width: 700px; margin: 0; font-size: 42px; font-weight: 500; line-height: 1.5; letter-spacing: -.03em; text-wrap: balance; }
+.coorda-reference .download-heading h1 mark { display: inline-block; padding: 6px 8px; border-radius: 12px; background: #fff; color: inherit; line-height: 1; }
+.coorda-reference .download-heading p { width: 100%; max-width: 500px; margin: 0; font-size: 18px; font-weight: 500; line-height: 1.4; letter-spacing: -.02em; text-wrap: balance; color: #707070; }
+.coorda-reference .download-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; width: 100%; max-width: 700px; margin-inline: auto; }
+.coorda-reference .download-device { display: flex; flex-direction: column; align-items: center; gap: 24px; padding: 32px; border-radius: 24px; background: #fff; }
+.coorda-reference .download-device h2 { display: flex; align-items: center; gap: 6px; width: 100%; margin: 0; font-size: 20px; font-weight: 500; line-height: 1.3; letter-spacing: -.02em; }
+.coorda-reference .download-visual { display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 10px; width: 100%; height: 190px; padding: 24px; border-radius: 16px; background: #fafafa; }
+.coorda-reference .download-visual > span { display: grid; place-items: center; width: 68px; height: 68px; border-radius: 12px; background: #fff; }
+.coorda-reference .download-visual p, .coorda-reference .download-device-action p { margin: 0; font-size: 14px; font-weight: 500; line-height: 1.3; letter-spacing: -.01em; color: #707070; text-align: center; }
+.coorda-reference .download-device-action { display: flex; flex-direction: column; align-items: center; gap: 10px; width: 100%; }
+.coorda-reference .download-button { display: flex; justify-content: center; width: 100%; background: #1a1a1a; color: #fff; }
+.coorda-reference .download-button:focus-visible { outline: 2px solid #1a1a1a; outline-offset: 4px; }
+.coorda-reference .download-included { grid-column: 1 / -1; display: flex; flex-direction: column; gap: 18px; padding: 32px; border-radius: 24px; background: #fafafa; }
+.coorda-reference .download-included h2 { margin: 0; font-size: 16px; font-weight: 500; line-height: 1.4; letter-spacing: -.03em; }
+.coorda-reference .download-included ul { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin: 0; padding: 0; list-style: none; }
+.coorda-reference .download-included li { display: flex; align-items: center; gap: 8px; font-size: 16px; font-weight: 500; line-height: 1.4; letter-spacing: -.03em; color: #707070; }
+.coorda-reference .download-included li svg { flex-shrink: 0; color: #1a1a1a; }
+@media (min-width: 810px) and (max-width: 1199px) {
+  .coorda-reference .download-section { padding: 160px 30px 100px; }
+}
+@media (max-width: 809px) {
+  .coorda-reference .download-section { padding: 150px 20px 80px; }
+  .coorda-reference .download-heading { margin-bottom: 32px; }
+  .coorda-reference .download-heading h1 { font-size: 34px; }
+  .coorda-reference .download-heading p { max-width: 250px; }
+  .coorda-reference .download-grid { grid-template-columns: minmax(0, 1fr); }
+  .coorda-reference .download-included ul { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+}
+
+.coorda-reference .insights-archive, .coorda-reference .article-related { position: relative; isolation: isolate; color: #1a1a1a; background: #1a1a1a; }
+.coorda-reference .insights-archive::before, .coorda-reference .article-related::before { content: ""; position: absolute; inset: 0; z-index: -1; border-radius: 0 0 42px 42px; background: #f2f2f2; }
+.coorda-reference .archive-heading { display: flex; justify-content: space-between; align-items: center; gap: 24px; padding-bottom: 42px; border-bottom: 1px solid rgb(26 26 26 / 10%); }
+.coorda-reference .archive-filters { display: flex; align-items: center; gap: 12px; color: #707070; font-size: 14px; font-weight: 500; line-height: 1.2; letter-spacing: -.01em; }
+.coorda-reference .archive-filters label { position: relative; display: block; width: 180px; border: 1px solid #909090; border-radius: 100px; }
+.coorda-reference .archive-filters select { display: block; appearance: none; width: 100%; padding: 12px 40px 12px 16px; border: 0; border-radius: inherit; background: transparent; color: inherit; font: inherit; cursor: pointer; }
+.coorda-reference .archive-filters select:focus-visible { outline: 2px solid #1a1a1a; outline-offset: 4px; }
+.coorda-reference .archive-filters label > svg { position: absolute; top: 50%; right: 16px; transform: translateY(-50%); pointer-events: none; }
+.coorda-reference .archive-grid { margin-top: 42px; row-gap: 42px; }
+.coorda-reference .insights-archive .insight-article:nth-child(3) { display: block; }
+.coorda-reference .archive-empty { display: flex; flex-direction: column; align-items: center; gap: 20px; padding: 64px 20px; color: #707070; text-align: center; }
+.coorda-reference .archive-empty p { margin: 0; }
+.coorda-reference .archive-empty button { padding: 12px 22px; border: 0; border-radius: 100px; background: #fff; color: #1a1a1a; font-weight: 500; cursor: pointer; }
+.coorda-reference .archive-empty button:focus-visible { outline: 2px solid #1a1a1a; outline-offset: 4px; }
+.coorda-reference .article-page { padding: 180px 40px 120px; background: #f2f2f2; color: #1a1a1a; }
+.coorda-reference .article-container { display: flex; flex-direction: column; gap: 42px; }
+.coorda-reference .article-header { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; align-items: start; }
+.coorda-reference .article-back { display: inline-flex; align-items: center; gap: 8px; color: inherit; text-decoration: none; font-size: 16px; font-weight: 500; line-height: 1.4; letter-spacing: -.03em; }
+.coorda-reference .article-back:focus-visible { outline: 2px solid #1a1a1a; outline-offset: 4px; }
+.coorda-reference .article-heading { grid-column: span 2; }
+.coorda-reference .article-heading h1 { margin: 0 0 42px; font-size: 42px; font-weight: 500; line-height: 1.2; letter-spacing: -.02em; text-wrap: balance; }
+.coorda-reference .article-metadata { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; font-size: 16px; font-weight: 500; line-height: 1.4; letter-spacing: -.03em; }
+.coorda-reference .article-metadata > div { display: flex; align-items: center; gap: 12px; }
+.coorda-reference .article-metadata > div:not(.article-byline) > span:first-child { color: #707070; }
+.coorda-reference .article-byline img { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
+.coorda-reference .article-divider { height: 1px; background: rgb(26 26 26 / 10%); }
+.coorda-reference .article-image { display: block; width: 100%; height: auto; aspect-ratio: 2.2405; object-fit: cover; border-radius: 24px; }
+.coorda-reference .article-body { width: 100%; max-width: 700px; margin-inline: auto; font-size: 18px; font-weight: 400; line-height: 1.4; letter-spacing: -.02em; }
+.coorda-reference .article-body p { margin: 0; }
+.coorda-reference .article-body p + p, .coorda-reference .article-body ul + p { margin-top: 16px; }
+.coorda-reference .article-body h2 { margin: 40px 0 16px; font-size: 28px; font-weight: 500; line-height: 1.2; letter-spacing: -.01em; }
+.coorda-reference .article-body ul { margin: 16px 0; padding-left: 28px; list-style: disc; }
+.coorda-reference .article-body li + li { margin-top: 8px; }
+.coorda-reference .article-related > div { display: flex; flex-direction: column; gap: 42px; }
+.coorda-reference .article-related-heading { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; }
+@media (min-width: 810px) and (max-width: 1199px) {
+  .coorda-reference .article-page { padding: 160px 30px 100px; }
+  .coorda-reference .article-header { grid-template-columns: minmax(0, 1fr); gap: 42px; }
+  .coorda-reference .article-heading { grid-column: auto; }
+  .coorda-reference .archive-heading { align-items: flex-start; flex-direction: column; }
+}
+@media (max-width: 809px) {
+  .coorda-reference .archive-heading { align-items: flex-start; flex-direction: column; padding-bottom: 32px; }
+  .coorda-reference .archive-filters { flex-wrap: wrap; width: 100%; }
+  .coorda-reference .archive-filters > span { flex-basis: 100%; }
+  .coorda-reference .archive-filters label { width: calc((100% - 12px) / 2); }
+  .coorda-reference .archive-filters select { padding-right: 30px; }
+  .coorda-reference .archive-filters label > svg { right: 12px; }
+  .coorda-reference .archive-grid { margin-top: 32px; row-gap: 32px; }
+  .coorda-reference .article-page { padding: 150px 20px 80px; }
+  .coorda-reference .article-container { gap: 32px; }
+  .coorda-reference .article-header { grid-template-columns: minmax(0, 1fr); gap: 32px; }
+  .coorda-reference .article-heading { grid-column: auto; }
+  .coorda-reference .article-heading h1 { margin-bottom: 32px; font-size: 34px; }
+  .coorda-reference .article-metadata { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+  .coorda-reference .article-image { aspect-ratio: 1.4; }
+  .coorda-reference .article-body h2 { font-size: 24px; }
+  .coorda-reference .article-related > div { gap: 32px; }
+  .coorda-reference .article-related-heading { align-items: flex-start; flex-direction: column; }
+}
+
+.coorda-reference .contact-section { position: relative; isolation: isolate; padding: 120px 40px; color: #1a1a1a; background: #1a1a1a; }
+.coorda-reference .contact-section::before { content: ""; position: absolute; inset: 0; z-index: -1; border-radius: 0 0 42px 42px; background: #f2f2f2; }
+.coorda-reference .contact-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; align-items: stretch; }
+.coorda-reference .contact-panel { position: relative; isolation: isolate; display: flex; flex-direction: column; justify-content: space-between; align-items: flex-start; padding: 32px; overflow: hidden; border-radius: 24px; color: #fff; background: #37414c; }
+.coorda-reference .contact-panel > img { position: absolute; inset: -3px; z-index: -1; width: calc(100% + 6px); height: calc(100% + 6px); object-fit: cover; filter: brightness(.42) blur(3px); }
+.coorda-reference .contact-intro h1 { width: 100%; max-width: 400px; margin: 0; font-size: 34px; font-weight: 500; line-height: 1.5; letter-spacing: 0; text-wrap: balance; }
+.coorda-reference .contact-intro mark { display: inline-block; padding: 6px 8px; border-radius: 12px; color: #1a1a1a; background: #fff; line-height: 1; }
+.coorda-reference .contact-intro p { margin: 16px 0 0; color: rgb(255 255 255 / 80%); font-size: 18px; font-weight: 500; line-height: 1.4; letter-spacing: -.02em; }
+.coorda-reference .contact-links { display: flex; flex-direction: column; gap: 12px; }
+.coorda-reference .contact-links a { display: flex; align-items: center; gap: 12px; color: rgb(255 255 255 / 80%); text-decoration: none; font-size: 16px; font-weight: 500; line-height: 1.4; letter-spacing: -.03em; }
+.coorda-reference .contact-links svg { flex-shrink: 0; }
+.coorda-reference .contact-links a:hover { color: #fff; }
+.coorda-reference .contact-links a:focus-visible { outline: 2px solid #fff; outline-offset: 4px; border-radius: 2px; }
+.coorda-reference .contact-form { display: flex; flex-direction: column; gap: 24px; min-width: 0; padding: 32px; border-radius: 24px; background: #fff; }
+.coorda-reference .contact-field { display: flex; flex-direction: column; gap: 8px; }
+.coorda-reference .contact-field > label, .coorda-reference .contact-sources legend { font-size: 16px; font-weight: 500; line-height: 1.4; letter-spacing: -.03em; }
+.coorda-reference .contact-field input, .coorda-reference .contact-field textarea, .coorda-reference .contact-field select { display: block; width: 100%; min-width: 0; padding: 14px 16px; border: 1px solid #efefef; border-radius: 12px; background: #fafafa; color: #1a1a1a; font: inherit; font-size: 16px; font-weight: 500; line-height: 1.2; letter-spacing: -.03em; }
+.coorda-reference .contact-field input::placeholder, .coorda-reference .contact-field textarea::placeholder { color: #999; opacity: 1; }
+.coorda-reference .contact-field textarea { height: 122px; resize: vertical; }
+.coorda-reference .contact-field select { appearance: none; padding-right: 40px; }
+.coorda-reference .contact-field select:invalid { color: #999; }
+.coorda-reference .contact-field input:focus-visible, .coorda-reference .contact-field textarea:focus-visible, .coorda-reference .contact-field select:focus-visible { outline: 2px solid #1a1a1a; outline-offset: 2px; }
+.coorda-reference .contact-select { position: relative; }
+.coorda-reference .contact-select > svg { position: absolute; top: 50%; right: 16px; transform: translateY(-50%); color: #999; pointer-events: none; }
+.coorda-reference .contact-sources { min-width: 0; margin: 0; padding: 0; border: 0; }
+.coorda-reference .contact-sources legend { padding: 0; margin-bottom: 12px; }
+.coorda-reference .contact-sources > div { display: flex; flex-direction: column; gap: 12px; }
+.coorda-reference .contact-sources label { display: flex; align-items: center; gap: 10px; color: #707070; font-size: 16px; font-weight: 500; line-height: 1.4; letter-spacing: -.03em; cursor: pointer; }
+.coorda-reference .contact-sources input { appearance: none; position: relative; width: 16px; height: 16px; margin: 0; border: 0; border-radius: 50%; background: #ededed; cursor: pointer; flex-shrink: 0; }
+.coorda-reference .contact-sources input:checked { background: #1a1a1a; }
+.coorda-reference .contact-sources input:focus-visible { outline: 2px solid #1a1a1a; outline-offset: 3px; }
+.coorda-reference .contact-submit { display: flex; justify-content: center; width: 100%; border: 0; background: #1a1a1a; color: #fff; cursor: pointer; }
+.coorda-reference .contact-submit:focus-visible { outline: 2px solid #1a1a1a; outline-offset: 4px; }
+.coorda-reference .contact-form-error { margin: 0; color: #a53131; font-size: 14px; }
+.coorda-reference .contact-prepared { padding: 16px; border-radius: 12px; background: #f2f2f2; font-size: 14px; line-height: 1.5; }
+.coorda-reference .contact-prepared p { margin: 0 0 12px; }
+.coorda-reference .contact-prepared a { color: #1a1a1a; font-weight: 500; text-underline-offset: 3px; }
+@media (min-width: 810px) and (max-width: 1199px) {
+  .coorda-reference .contact-section { padding: 120px 30px 100px; }
+  .coorda-reference .contact-grid { grid-template-columns: minmax(0, 1fr); }
+  .coorda-reference .contact-panel { height: 440px; }
+}
+@media (max-width: 809px) {
+  .coorda-reference .contact-section { padding: 100px 20px 80px; }
+  .coorda-reference .contact-grid { grid-template-columns: minmax(0, 1fr); }
+  .coorda-reference .contact-panel { justify-content: center; gap: 64px; padding: 24px; }
+  .coorda-reference .contact-intro h1 { font-size: 28px; line-height: 1.5; }
+  .coorda-reference .contact-form { padding: 24px; }
+}
+
+.coorda-reference .legal-hero-content { display: flex; flex-direction: column; align-items: center; gap: 12px; width: 100%; text-align: center; }
+.coorda-reference .legal-hero-content time { color: rgb(255 255 255 / 80%); font-size: 18px; font-weight: 500; line-height: 1.4; letter-spacing: -.02em; }
+.coorda-reference .legal-abstract { position: absolute; inset: 0; z-index: -1; overflow: hidden; background: #171717; }
+.coorda-reference .legal-abstract::before { content: ""; position: absolute; inset: -35%; background: radial-gradient(ellipse at 15% 22%, #292929 0, #1a1a1a 22%, transparent 38%), radial-gradient(ellipse at 58% 100%, #333 0, #1f1f1f 22%, transparent 36%), radial-gradient(ellipse at 110% 32%, #292929 0, #181818 30%, transparent 45%); filter: blur(24px); transform: rotate(-15deg); animation: legal-folds 22s ease-in-out infinite alternate; }
+.coorda-reference .legal-abstract::after { content: ""; position: absolute; inset: -25%; background: linear-gradient(125deg, transparent 30%, rgb(0 0 0 / 35%) 43%, transparent 59%); filter: blur(12px); transform: rotate(-15deg); }
+@keyframes legal-folds { from { transform: translate(-2%, -3%) rotate(-15deg); } to { transform: translate(4%, 4%) rotate(8deg); } }
+.coorda-reference .legal-content { position: relative; isolation: isolate; color: #1a1a1a; background: #1a1a1a; }
+.coorda-reference .legal-content::before { content: ""; position: absolute; inset: 0; z-index: -1; border-radius: 0 0 42px 42px; background: #f2f2f2; }
+.coorda-reference .legal-document { width: 100%; max-width: 700px; margin-inline: auto; font-size: 18px; font-weight: 500; line-height: 1.4; letter-spacing: -.02em; }
+.coorda-reference .legal-document .legal-intro { margin: 0; font-size: 24px; font-weight: 500; line-height: 1.3; letter-spacing: -.01em; }
+.coorda-reference .legal-document > section { margin-top: 40px; }
+.coorda-reference .legal-document > section:first-of-type { margin-top: 42px; }
+.coorda-reference .legal-document h2 { margin: 0; font-size: 24px; font-weight: 500; line-height: 1.3; letter-spacing: -.01em; }
+.coorda-reference .legal-document p { margin: 20px 0 0; }
+.coorda-reference .legal-document ul { margin: 8px 0 0; padding-left: 24px; list-style: disc; }
+.coorda-reference .legal-document strong { font-weight: 600; }
+.coorda-reference .legal-document a { color: inherit; text-underline-offset: 3px; }
+.coorda-reference .legal-document a:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
+.coorda-reference .not-found-hero .photo-hero-image { filter: brightness(.32); }
+.coorda-reference .not-found-content { display: flex; flex-direction: column; align-items: center; gap: 24px; width: 100%; text-align: center; }
+.coorda-reference .not-found-number { margin: 0; font-size: 200px; font-weight: 600; line-height: 1; letter-spacing: -.04em; }
+.coorda-reference .not-found-hero h1 { max-width: 600px; font-size: 34px; font-weight: 500; line-height: 1.1; letter-spacing: -.02em; }
+.coorda-reference .not-found-content > div { display: flex; flex-direction: column; align-items: center; gap: 16px; width: 100%; }
+.coorda-reference .not-found-content > div > p { max-width: 400px; margin: 0; font-size: 16px; font-weight: 400; line-height: 1.4; letter-spacing: -.03em; }
+@media (max-width: 809px) {
+  .coorda-reference .not-found-number { font-size: 150px; }
+  .coorda-reference .not-found-hero h1 { font-size: 28px; }
+  .coorda-reference .legal-document .legal-intro, .coorda-reference .legal-document h2 { font-size: 22px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .coorda-reference .legal-abstract::before { animation: none; }
+}

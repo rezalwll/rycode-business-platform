@@ -5,7 +5,7 @@ export default function Loading() {
       role="status"
       aria-live="polite"
     >
-      <span className="meta-label animate-pulse text-[#087b83]">RYCODE / LOADING</span>
+      <span className="meta-label animate-pulse text-muted-foreground"><span className="rycode-brand-name">RYCODE</span> / LOADING</span>
     </div>
   );
 }

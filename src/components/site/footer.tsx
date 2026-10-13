@@ -1,128 +1,52 @@
 import { ArrowUpLeft } from "lucide-react";
+import { BrandText } from "@/components/site/brand-text";
 
 import { Link } from "@/i18n/navigation";
 import { Container } from "./primitives";
-import { footerNav } from "@/lib/nav-content";
+import { LogoWordmark } from "./wordmark";
+import { FooterFluid } from "./footer-fluid";
+import "./footer-fluid.css";
+import { getFooterNav } from "@/lib/nav-content";
 import type { Locale } from "@/i18n/routing";
-
-const englishFooter = [
-  {
-    title: "Company",
-    items: [
-      { label: "About RYCODE", href: "/about" },
-      { label: "Why RYCODE", href: "/why-rycode" },
-      { label: "Process", href: "/process" },
-      { label: "Technologies", href: "/technologies" },
-      { label: "Terms of use", href: "/terms" },
-      { label: "Privacy policy", href: "/privacy" },
-    ],
-  },
-  {
-    title: "Explore",
-    items: [
-      { label: "Services", href: "/services" },
-      { label: "Support", href: "/services/ongoing-support" },
-      { label: "Projects", href: "/projects" },
-      { label: "Businesses and our solutions", href: "/solutions" },
-    ],
-  },
-  {
-    title: "Resources",
-    items: [
-      { label: "Projects", href: "/projects" },
-      { label: "Journal", href: "/blog" },
-      { label: "FAQ", href: "/faq" },
-      { label: "Contact", href: "/contact" },
-    ],
-  },
-  {
-    title: "Start",
-    items: [
-      { label: "Start a project", href: "/start-project" },
-      { label: "Installment payment", href: "/installment-purchase" },
-      { label: "Technical review", href: "/technical-review" },
-      { label: "SEO audit", href: "/seo-audit" },
-      { label: "Client login", href: "/login" },
-    ],
-  },
-] as const;
 
 export function SiteFooter({ locale }: { locale: Locale }) {
   const isFa = locale === "fa";
-  const groups = isFa ? footerNav : englishFooter;
-
+  const groups = getFooterNav(locale);
   return (
-    <footer className="relative overflow-hidden bg-[#eaf8f5] text-[#073b4c] dark:bg-[#0f2027] dark:text-white">
-      <div
-        className="pointer-events-none absolute inset-0 opacity-70"
-        style={{
-          backgroundImage:
-            "radial-gradient(circle at 88% 4%, rgba(95,225,213,0.28), transparent 28%), radial-gradient(circle at 4% 82%, rgba(125,200,255,0.18), transparent 26%)",
-        }}
-        aria-hidden
-      />
-      <div
-        className="pointer-events-none absolute inset-0 opacity-[0.08]"
-        style={{
-          backgroundImage:
-            "linear-gradient(rgba(7,59,76,.35) 1px, transparent 1px), linear-gradient(90deg, rgba(7,59,76,.35) 1px, transparent 1px)",
-          backgroundSize: "48px 48px",
-          maskImage: "linear-gradient(to bottom, black, transparent 72%)",
-        }}
-        aria-hidden
-      />
-
-      <Container className="relative z-10 pt-12 pb-7 sm:pt-16">
-        <div className="border-b border-[#073b4c]/12 pb-10 sm:pb-12">
-          <div dir="ltr" className="flex items-end justify-between gap-6">
-            <span className="text-[clamp(3.1rem,9vw,7.8rem)] leading-[0.8] font-extrabold tracking-[-0.055em]">
-              <span className="text-[#073b4c] dark:text-white">RY</span>
-              <span className="text-[#0ba99d]">CODE</span>
-            </span>
-            <span className="hidden pb-1 text-[0.65rem] font-semibold tracking-[0.18em] text-white/36 uppercase sm:block">
-              rycode.ir
-            </span>
-          </div>
+    <BrandText><footer className="coorda-legacy-footer">
+      <FooterFluid />
+      <Container className="coorda-footer-content">
+        <div className="coorda-footer-brand" dir="ltr">
+          <span className="coorda-footer-wordmark">
+            <LogoWordmark />
+          </span>
+          <small>rycode.ir</small>
         </div>
-
-        <div className="grid gap-12 py-12 lg:grid-cols-[0.85fr_1.35fr] lg:gap-20 lg:py-14">
-          <div className="lg:max-w-sm">
-            <h2 className="max-w-[13ch] text-2xl font-bold leading-[1.5] tracking-[-0.025em] sm:text-[2rem]">
+        <div className="coorda-footer-body">
+          <div>
+            <h2>
               {isFa
-                ? "یک مسئله واقعی، یک راه‌حل دقیق."
-                : "A real problem deserves a clear solution."}
+                ? "بگو کجای کار هستی"
+                : "Tell us where you are today"}
             </h2>
-            <p className="mt-4 text-sm leading-8 text-[#315d68]/78 dark:text-white/65">
+            <p>
               {isFa
-                ? "از ساخت محصول جدید تا نجات یک پروژه نیمه‌کاره؛ مسئله را می‌فهمیم و مسیر اجرایی روشن برایش می‌سازیم."
-                : "From building a new product to rescuing a stalled one, we turn the problem into a clear path forward."}
+                ? "یک ایدهٔ تازه داری، پروژه‌ات متوقف شده یا سایتت نیاز به بهبود دارد؟ از همین‌جا دربارهٔ قدم بعدی حرف بزنیم"
+                : "A new idea, an unfinished project or a site that needs improvement? Let’s talk about the next step."}
             </p>
-            <Link
-              href="/start-project"
-              className="group mt-7 inline-flex h-11 items-center gap-3 rounded-full bg-[#5fe1d5] px-5 text-sm font-bold text-[#073b4c] shadow-[0_10px_26px_rgba(32,191,178,0.18)] transition-colors hover:bg-[#7aebe1]"
-            >
+            <Link href="/start-project" className="coorda-button">
               {isFa ? "شروع یک گفت‌وگو" : "Start a conversation"}
-              <ArrowUpLeft className="size-4" />
+              <ArrowUpLeft className="size-4 rtl:rotate-0 ltr:rotate-90" aria-hidden />
             </Link>
           </div>
-
-          <nav
-            aria-label={isFa ? "پیوندهای پایین سایت" : "Footer navigation"}
-            className="grid grid-cols-2 gap-x-8 gap-y-10 sm:grid-cols-4"
-          >
+          <nav aria-label={isFa ? "پیوندهای پایین سایت" : "Footer navigation"}>
             {groups.map((group) => (
               <div key={group.title}>
-                <h3 className="text-xs font-bold text-[#5fe1d5]">{group.title}</h3>
-                <ul className="mt-5 space-y-3.5">
+                <h3>{group.title}</h3>
+                <ul>
                   {group.items.map((item) => (
                     <li key={item.label}>
-                      <Link
-                        href={item.href}
-                        className="group inline-flex items-center gap-2 text-sm text-[#315d68]/75 transition-colors hover:text-[#073b4c] dark:text-white/65 dark:hover:text-white"
-                      >
-                        <span className="size-1 rounded-full bg-[#5fe1d5]/0 transition-colors group-hover:bg-[#5fe1d5]" />
-                        {item.label}
-                      </Link>
+                      <Link href={item.href}>{item.label}</Link>
                     </li>
                   ))}
                 </ul>
@@ -130,18 +54,14 @@ export function SiteFooter({ locale }: { locale: Locale }) {
             ))}
           </nav>
         </div>
-
-        <div className="flex flex-col gap-3 border-t border-[#073b4c]/12 pt-6 text-xs text-[#315d68]/60 sm:flex-row sm:items-center sm:justify-between">
+        <div className="coorda-footer-bottom">
           <p>
             © {new Date().getFullYear()} RYCODE —{" "}
-            {isFa ? "تمام حقوق محفوظ است." : "All rights reserved."}
+            {isFa ? "تمام حقوق محفوظ است" : "All rights reserved"}
           </p>
-          <p className="inline-flex items-center gap-2">
-            <span className="size-1.5 rounded-full bg-[#5fe1d5]" />
-            {isFa ? "ساخته‌شده در ایران" : "Built in Iran"}
-          </p>
+          <p>{isFa ? "ساخته‌شده در ایران" : "Built in Iran"}</p>
         </div>
       </Container>
-    </footer>
+    </footer></BrandText>
   );
 }

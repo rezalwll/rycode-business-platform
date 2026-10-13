@@ -1,4 +1,5 @@
 "use client";
+import { BrandText } from "@/components/site/brand-text";
 
 import { usePathname } from "next/navigation";
 import { useEffect, useState, useSyncExternalStore } from "react";
@@ -221,9 +222,9 @@ function ConsentBanner({ locale }: { locale: "fa" | "en" }): React.ReactElement 
   const isPersian = locale === "fa";
 
   return (
-    <aside
+    <BrandText><aside
       aria-label={isPersian ? "تنظیمات تحلیل بازدید" : "Analytics preference"}
-      className="fixed inset-x-4 bottom-4 z-[100] mx-auto max-w-2xl rounded-2xl border border-[#0b5262]/15 bg-white/95 p-5 text-[#073b4c] shadow-[0_22px_70px_rgba(0,54,74,0.2)] backdrop-blur-xl dark:border-white/15 dark:bg-[#073b4c]/95 dark:text-white"
+      className="analytics-consent fixed inset-x-4 bottom-4 z-[100] mx-auto max-w-2xl rounded-2xl border border-[#0b5262]/15 bg-white/95 p-5 text-[#073b4c] shadow-[0_22px_70px_rgba(0,54,74,0.2)] backdrop-blur-xl dark:border-white/15 dark:bg-[#073b4c]/95 dark:text-white"
       dir={isPersian ? "rtl" : "ltr"}
       role="dialog"
     >
@@ -254,16 +255,16 @@ function ConsentBanner({ locale }: { locale: "fa" | "en" }): React.ReactElement 
           {isPersian ? "رد می‌کنم" : "Decline"}
         </button>
       </div>
-    </aside>
+    </aside></BrandText>
   );
 }
 
 export function AnalyticsProvider({ locale }: { locale: "fa" | "en" }): React.ReactElement {
   const pathname = usePathname();
   return (
-    <>
+    <BrandText><>
       <AnalyticsTracker path={pathname} />
       <ConsentBanner locale={locale} />
-    </>
+    </></BrandText>
   );
 }

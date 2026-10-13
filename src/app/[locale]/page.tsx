@@ -1,17 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-import { EnglishHome } from "@/components/home/english-home";
-import { Hero } from "@/components/home/hero";
-import {
-  BlogSection,
-  FaqSection,
-  FinalCta,
-  PaymentSection,
-  SelectedProjects,
-  ServicesEditorial,
-  WhyRycode,
-} from "@/components/home/sections";
+import { StudioHome } from "@/components/home/studio-home";
 import { SiteShell } from "@/components/site/site-shell";
 import { isLocale, type Locale } from "@/i18n/routing";
 
@@ -29,8 +19,8 @@ export async function generateMetadata({
       ? "توسعه نرم‌افزار، طراحی سایت و رشد دیجیتال"
       : "Software engineering and digital growth",
     description: isFa
-      ? "سایت، فروشگاه، نرم‌افزار یا سئوی کسب‌وکارتان را با رای‌کد جلو ببرید؛ حتی اگر پروژه‌تان وسط راه مانده باشد."
-      : "From idea to execution: web platforms, ecommerce, custom software, integrations and technical SEO.",
+      ? "طراحی سایت، فروشگاه، نرم‌افزار و اپلیکیشن؛ اتصال سیستم‌ها و داده، سئو و محتوا، نجات پروژه و پشتیبانی با رایکد."
+      : "Websites, ecommerce, software and mobile apps; integrations, data, SEO, content, project rescue and ongoing support with RYCODE.",
     alternates: {
       canonical: isFa ? "/" : "/en",
       languages: { "fa-IR": "/", en: "/en", "x-default": "/" },
@@ -43,21 +33,8 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   if (!isLocale(rawLocale)) notFound();
   const locale: Locale = rawLocale;
   return (
-    <SiteShell locale={locale}>
-      {locale === "en" ? (
-        <EnglishHome />
-      ) : (
-        <>
-          <Hero />
-          <ServicesEditorial />
-          <SelectedProjects />
-          <WhyRycode />
-          <PaymentSection />
-          <BlogSection />
-          <FaqSection />
-          <FinalCta />
-        </>
-      )}
+    <SiteShell locale={locale} heroUnderHeader>
+      <StudioHome locale={locale} />
     </SiteShell>
   );
 }

@@ -11,6 +11,9 @@ vi.mock("server-only", () => ({}));
 vi.mock("@/db/client", () => ({ db: database }));
 
 import { CatalogDetail } from "@/components/public/catalog-pages";
+import { ServiceContext } from "@/components/public/service-context";
+import { CompanyPage } from "@/components/public/marketing-pages";
+import { PublicCatalogHub } from "@/components/public/cms-catalog";
 import {
   findPublicCatalogEntry,
   findPublicRedirect,
@@ -66,6 +69,82 @@ beforeEach(() => {
 afterEach(() => vi.unstubAllEnvs());
 
 describe("public CMS visibility", () => {
+  it("consolidates company information into about without losing the original chapters", async () => {
+    for (const locale of ["fa", "en"] as const) {
+      const html = renderToStaticMarkup(await CompanyPage({ locale, slug: "about" }));
+      for (const anchor of ["approach", "process", "technology"])
+        expect(html).toContain(`id="${anchor}"`);
+      expect(html).toContain("PostgreSQL");
+      expect(html).toContain("Docker");
+      expect(html).toContain(locale === "fa" ? "تحویل قابل بررسی" : "Reviewable delivery");
+      expect(html).toContain(locale === "fa" ? "ساخت و بازبینی" : "Build and review");
+    }
+  });
+
+  it("groups services while preserving published custom services and CMS wording", async () => {
+    database.contentItem.findMany.mockResolvedValue([
+      content(),
+      content({
+        slug: "special-service",
+        translations: [{ ...translation(), title: "خدمت ویژه" }],
+      }),
+    ]);
+    const entries = await listPublicCatalog("services", "fa");
+    const html = renderToStaticMarkup(
+      <PublicCatalogHub locale="fa" kind="services" entries={entries} />,
+    );
+    for (const anchor of ["build", "grow", "software", "rescue", "connect", "data", "continue"])
+      expect(html).toContain(`id="${anchor}"`);
+    expect(html).toContain("ربات تلگرام");
+    expect(html).toContain("فرمول‌نویسی");
+    expect(html).toContain("سئو محلی");
+    expect(html).toContain("عنوان تأییدشده");
+    expect(html).toContain("خدمت ویژه");
+    expect(html).toContain('href="/services/special-service"');
+  });
+
+  it("renders the full published business content within services, including CMS sections", async () => {
+    database.contentItem.findMany.mockImplementation(async ({ where }) =>
+      where.kind === "SOLUTION"
+        ? [
+            content({
+              kind: "SOLUTION",
+              slug: "crm",
+              translations: [
+                {
+                  ...translation(),
+                  title: "راهکار منتشرشده",
+                  body: {
+                    sections: [
+                      { title: "امکانات ویژه", body: "شرح کامل راهکار", items: ["قابلیت سفارشی"] },
+                    ],
+                  },
+                },
+              ],
+            }),
+          ]
+        : [],
+    );
+    const [solutions, industries] = await Promise.all([
+      listPublicCatalog("solutions", "fa"),
+      listPublicCatalog("industries", "fa"),
+    ]);
+    const html = renderToStaticMarkup(
+      <ServiceContext locale="fa" solutions={solutions} industries={industries} />,
+    );
+    expect(html).toContain('id="solutions"');
+    expect(html).toContain('id="industries"');
+    expect(html).toContain("راهکار منتشرشده");
+    expect(html).toContain("شرح کامل راهکار");
+    expect(html).toContain("قابلیت سفارشی");
+    expect(html).toContain('href="/services/solutions/crm"');
+    expect(html).not.toContain('href="/solutions/');
+    expect(html).not.toContain('href="/industries/');
+    for (const { entry } of [...solutions, ...industries]) {
+      expect(html).toContain(entry.title.fa);
+    }
+  });
+
   it("uses the approved catalog only when no CMS record owns the route", async () => {
     expect((await findPublicCatalogEntry("services", "web-development", "fa"))?.source).toBe(
       "static",

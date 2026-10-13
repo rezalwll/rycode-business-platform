@@ -1,0 +1,565 @@
+/* Adapted from the user-supplied paknevis-blog-ui index/single templates.
+   The editorial structure lives inside RYCODE's original PhotoHero, page-container
+   and section-space primitives. No WordPress reset/header/footer is imported. */
+.rycode-blog {
+  --pn-bg: #f2f2f2;
+  --pn-surface: #fff;
+  --pn-title: #171717;
+  --pn-text: #333;
+  --pn-muted: #707070;
+  --pn-border: #e5e5e5;
+  --pn-link: var(--detail-blue);
+  --pn-purple: var(--detail-purple);
+  --pn-radius-xl: 1.5rem;
+  background: var(--pn-bg);
+  color: var(--pn-text);
+  font-size: 15px;
+  line-height: 1.75;
+  text-align: start;
+}
+.dark .rycode-blog {
+  --pn-bg: #1a1a1a;
+  --pn-surface: #242424;
+  --pn-title: #fff;
+  --pn-text: #e2e2e2;
+  --pn-muted: #b7b7b7;
+  --pn-border: #ffffff26;
+  --pn-link: var(--accent-blue);
+  --pn-purple: var(--detail-purple-on-dark);
+}
+.dark .rycode-blog .reference-page-eyebrow {
+  color: var(--pn-muted);
+}
+.rycode-blog :is(a, button, input) {
+  -webkit-tap-highlight-color: transparent;
+}
+.rycode-blog :is(a, button, input):focus-visible {
+  outline: 2px solid var(--pn-link);
+  outline-offset: 4px;
+}
+.rycode-blog .pn-archive-title {
+  margin: 0;
+  color: var(--pn-title);
+  font-size: clamp(1.4rem, 2.5vw, 2rem);
+  font-weight: 500;
+  line-height: 1.5;
+}
+.rycode-blog .pn-hero {
+  margin-bottom: 1.5rem;
+}
+.rycode-blog .pn-hero-main {
+  display: flex;
+  flex-direction: column;
+  gap: 1.8rem;
+}
+.rycode-blog .pn-h1 {
+  margin: 0;
+  color: var(--pn-title);
+  font-size: 1.65rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+.rycode-blog .pn-lead {
+  margin: 0.75rem 0 0;
+  max-width: 42rem;
+  color: var(--pn-muted);
+  font-size: 0.92rem;
+  line-height: 1.95;
+}
+.rycode-blog .pn-search-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 100%;
+  max-width: 30rem;
+}
+.rycode-blog .pn-search-input {
+  flex: 1;
+  min-width: 0;
+  padding: 0.7rem 1rem;
+  border: 1px solid var(--pn-border);
+  border-radius: 9999px;
+  background: var(--pn-surface);
+  color: var(--pn-title);
+  font: inherit;
+  font-size: 0.92rem;
+}
+.rycode-blog .pn-search-input:focus {
+  border-color: var(--accent-blue);
+}
+.rycode-blog .pn-btn {
+  display: inline-flex;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: center;
+  padding: 0.7rem 1.25rem;
+  min-height: 44px;
+  border: 1px solid transparent;
+  border-radius: 9999px;
+  font: inherit;
+  font-size: 0.92rem;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  transition:
+    background-color 0.18s ease,
+    border-color 0.18s ease;
+}
+.rycode-blog .pn-btn-blue {
+  background: var(--accent-blue);
+  color: #171717;
+}
+.rycode-blog .pn-btn-blue:hover {
+  background: color-mix(in srgb, var(--accent-blue) 85%, white);
+}
+.rycode-blog .pn-btn-orange {
+  background: var(--action);
+  color: var(--action-foreground);
+}
+.rycode-blog .pn-btn-orange:hover {
+  background: var(--action-hover);
+}
+.rycode-blog .pn-btn-outline {
+  background: transparent;
+  border-color: var(--pn-border);
+  color: var(--pn-title);
+}
+.rycode-blog .pn-btn-outline:hover {
+  border-color: var(--accent-blue);
+  background: var(--pn-surface);
+}
+.rycode-blog .pn-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.1rem;
+  padding-bottom: 0.75rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--pn-border);
+  color: var(--pn-muted);
+  font-size: 0.92rem;
+}
+.rycode-blog .pn-tab {
+  padding: 0.5rem 0 0.55rem;
+  border-bottom: 2px solid transparent;
+  text-decoration: none;
+}
+.rycode-blog .pn-tab:hover {
+  color: var(--pn-link);
+}
+.rycode-blog .pn-tab.is-active {
+  color: var(--pn-link);
+  font-weight: 600;
+  border-bottom-color: var(--accent-blue);
+}
+.rycode-blog .pn-results {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  color: var(--pn-muted);
+  font-size: 0.85rem;
+}
+.rycode-blog .pn-results p {
+  margin: 0;
+}
+.rycode-blog .pn-results a {
+  color: var(--pn-link);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.rycode-blog .pn-post-grid {
+  display: grid;
+  gap: 1.5rem;
+}
+.rycode-blog .pn-card {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 1rem;
+}
+.rycode-blog .pn-card-media {
+  position: relative;
+  overflow: hidden;
+  display: block;
+  border-radius: var(--pn-radius-xl);
+  background: var(--pn-surface);
+  isolation: isolate;
+}
+.rycode-blog .pn-card-media > img {
+  display: block;
+  width: 100%;
+  height: 14rem;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+.rycode-blog .pn-card-media:hover > img {
+  transform: scale(1.025);
+}
+.rycode-blog .pn-card-overlay {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  height: 42%;
+  pointer-events: none;
+  background: linear-gradient(to top, #171717d9, #17171773, transparent);
+}
+.rycode-blog .pn-card-meta {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 1rem;
+  color: #fff;
+  font-size: 0.75rem;
+}
+.rycode-blog .pn-card-meta-right {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+.rycode-blog .pn-card-author {
+  margin: 0;
+  font-weight: 600;
+}
+.rycode-blog .pn-card-date {
+  color: #ffffffd9;
+}
+.rycode-blog .pn-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.35rem 0.75rem;
+  border-radius: 9999px;
+  background: #ffffff29;
+  color: #fff;
+  font-size: 0.7rem;
+  overflow-wrap: anywhere;
+}
+.rycode-blog .pn-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex: 1;
+}
+.rycode-blog .pn-h2 {
+  margin: 0;
+  font-size: 1.1rem;
+  line-height: 1.65;
+  font-weight: 600;
+  color: var(--pn-title);
+}
+.rycode-blog .pn-h2 a:hover {
+  color: var(--pn-link);
+}
+.rycode-blog .pn-excerpt {
+  margin: 0;
+  color: var(--pn-muted);
+  font-size: 0.9rem;
+  line-height: 1.9;
+}
+.rycode-blog .pn-readmore {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  align-self: flex-start;
+  margin-top: auto;
+  padding-top: 0.35rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--pn-link);
+}
+.rycode-blog .pn-readmore:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.rycode-blog .pn-empty {
+  padding: 3rem 1rem;
+  text-align: center;
+  border: 1px dashed var(--pn-border);
+  border-radius: 24px;
+  color: var(--pn-muted);
+}
+.rycode-blog .pn-empty h2 {
+  margin: 0;
+  color: var(--pn-title);
+  font-size: 1.2rem;
+}
+.rycode-blog .pn-empty p {
+  margin: 0.75rem 0 1.5rem;
+}
+.rycode-blog .pn-pagination {
+  margin-top: 3rem;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.rycode-blog .pn-page-number {
+  display: inline-flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+.rycode-blog .page-numbers {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  padding-inline: 0.7rem;
+  border: 1px solid var(--pn-border);
+  border-radius: 0.75rem;
+  font-size: 0.88rem;
+  color: var(--pn-muted);
+}
+.rycode-blog .page-numbers:hover {
+  border-color: var(--accent-blue);
+  color: var(--pn-link);
+}
+.rycode-blog .page-numbers.current {
+  background: var(--accent-blue);
+  border-color: var(--accent-blue);
+  color: #171717;
+}
+.rycode-blog .pn-page-gap {
+  color: var(--pn-muted);
+}
+.rycode-blog .pn-single-wrap {
+  width: 100%;
+  min-width: 0;
+}
+.rycode-blog .pn-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 1.25rem;
+  color: var(--pn-link);
+  font-size: 0.85rem;
+}
+.rycode-blog .pn-single-hero {
+  margin: 0 0 1.5rem;
+  overflow: hidden;
+  border-radius: var(--pn-radius-xl);
+  background: transparent;
+}
+.rycode-blog .pn-single-hero img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 340px;
+  margin-inline: auto;
+  border-radius: var(--pn-radius-xl);
+}
+.rycode-blog .pn-single-header {
+  margin-bottom: 1.1rem;
+}
+.rycode-blog .pn-single-title {
+  margin: 0;
+  font-size: clamp(1.8rem, 3vw, 2.625rem);
+  line-height: 1.5;
+  font-weight: 500;
+  color: var(--pn-title);
+}
+.rycode-blog .pn-single-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.65rem;
+  color: var(--pn-muted);
+  font-size: 0.82rem;
+}
+.rycode-blog .pn-single-meta a {
+  color: var(--pn-purple);
+}
+.rycode-blog .pn-single-content {
+  width: 100%;
+  max-width: 700px;
+  margin-inline: auto;
+  font-size: 0.98rem;
+  line-height: 1.9;
+  overflow-wrap: anywhere;
+}
+.rycode-blog .pn-single-content .pn-article-lead {
+  color: var(--pn-muted);
+}
+.rycode-blog .pn-single-content :is(h2, h3, h4) {
+  margin-top: 1.7rem;
+  line-height: 1.5;
+  color: var(--pn-title);
+  font-weight: 600;
+}
+.rycode-blog .pn-single-content h2 {
+  font-size: 1.35rem;
+}
+.rycode-blog .pn-single-content :is(p, ul, ol, blockquote, figure, pre, table) {
+  margin: 1rem 0;
+}
+.rycode-blog .pn-single-content :is(ul, ol) {
+  padding-inline-start: 1.4rem;
+}
+.rycode-blog .pn-single-content ul {
+  list-style: disc;
+}
+.rycode-blog .pn-single-content ol {
+  list-style: decimal;
+}
+.rycode-blog .pn-single-content blockquote {
+  margin-inline: 0;
+  padding: 0.75rem 1rem;
+  border-inline-start: 3px solid var(--accent-blue);
+  background: var(--pn-surface);
+}
+.rycode-blog .pn-single-content a {
+  color: var(--pn-link);
+  text-decoration: underline;
+}
+.rycode-blog .pn-single-content pre {
+  direction: ltr;
+  text-align: left;
+  overflow-x: auto;
+  padding: 0.8rem 1rem;
+  border-radius: 0.75rem;
+  background: #171717;
+  color: #fff;
+  font-size: 0.9rem;
+}
+.rycode-blog .pn-single-content code {
+  font-family: Consolas, Monaco, monospace;
+  font-size: 0.9em;
+}
+.rycode-blog .pn-download-banner {
+  margin-top: 2.5rem;
+  padding-bottom: 1rem;
+}
+.rycode-blog .pn-download-banner-inner {
+  border: 1px solid var(--pn-border);
+  border-top: 2px solid var(--accent-blue);
+  border-radius: 18px;
+  background: var(--pn-surface);
+  padding: 2rem 1rem;
+  text-align: center;
+}
+.rycode-blog .pn-download-banner-title {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--pn-title);
+}
+.rycode-blog .pn-download-banner-text {
+  margin: 0.75rem auto 0;
+  max-width: 48rem;
+  color: var(--pn-muted);
+  font-size: 0.95rem;
+  line-height: 1.9;
+}
+.rycode-blog .pn-download-banner-actions {
+  margin-top: 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+}
+.rycode-blog .pn-related-posts {
+  margin-top: 2rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--pn-border);
+}
+.rycode-blog .pn-related-title {
+  margin: 0 0 1rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--pn-title);
+}
+@media (min-width: 640px) {
+  .rycode-blog .pn-h1 {
+    font-size: 1.9rem;
+  }
+  .rycode-blog .pn-lead {
+    font-size: 1rem;
+  }
+  .rycode-blog .pn-search-form {
+    flex-direction: row;
+    align-items: center;
+  }
+  .rycode-blog .pn-card-media > img {
+    height: 16rem;
+  }
+  .rycode-blog .pn-card-meta {
+    padding: 1.25rem;
+    font-size: 0.84rem;
+  }
+  .rycode-blog .pn-chip {
+    font-size: 0.8rem;
+  }
+  .rycode-blog .pn-h2 {
+    font-size: 1.2rem;
+  }
+}
+@media (min-width: 768px) {
+  .rycode-blog {
+    font-size: 16px;
+  }
+  .rycode-blog .pn-hero {
+    margin-bottom: 2rem;
+  }
+  .rycode-blog .pn-post-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .rycode-blog .pn-excerpt {
+    font-size: 0.95rem;
+  }
+  .rycode-blog .pn-download-banner-inner {
+    padding: 2rem;
+  }
+  .rycode-blog .pn-download-banner-title {
+    font-size: 1.5rem;
+  }
+}
+@media (min-width: 1024px) {
+  .rycode-blog .pn-hero-main {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+  .rycode-blog .pn-search-form {
+    flex: 0 1 30rem;
+  }
+  .rycode-blog .pn-h1 {
+    font-size: 2.25rem;
+  }
+  .rycode-blog .pn-card-media > img {
+    height: 18rem;
+  }
+  .rycode-blog .pn-h2 {
+    font-size: 1.3rem;
+  }
+  .rycode-blog .pn-excerpt,
+  .rycode-blog .pn-single-content {
+    font-size: 1rem;
+  }
+}
+@media (min-width: 1280px) {
+  .rycode-blog .pn-h1 {
+    font-size: 2.35rem;
+  }
+  .rycode-blog .pn-card-media > img {
+    height: 20rem;
+  }
+  .rycode-blog .pn-h2 {
+    font-size: 1.35rem;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .rycode-blog .pn-card-media > img {
+    transition: none;
+  }
+  .rycode-blog .pn-card-media:hover > img {
+    transform: none;
+  }
+}

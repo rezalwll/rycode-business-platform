@@ -1,97 +1,75 @@
 import { ArrowUpLeft, ArrowUpRight } from "lucide-react";
+import { BrandText } from "@/components/site/brand-text";
 import Image from "next/image";
 import Link from "next/link";
+import type { CSSProperties } from "react";
 
-import { catalogContextVariant, ContextVisual } from "@/components/site/context-visual";
+import { catalogContextVariant } from "@/components/site/context-visual";
 import { Container } from "@/components/site/primitives";
-import { getCatalogVisual, kindCopy, localize, type CatalogKind } from "@/content/catalog";
+import {
+  catalogPath,
+  getCatalogVisual,
+  kindCopy,
+  localize,
+  type CatalogKind,
+} from "@/content/catalog";
 import type { Locale } from "@/i18n/routing";
 import type { PublicCatalogEntry } from "@/server/queries/public-content";
 
-import { FinalBand, localizedHref, PageHero } from "./shared";
+import { ActionLink, FinalBand, localizedHref, PageHero } from "./shared";
+import { ServiceContext } from "./service-context";
+import { ServiceShowcase } from "@/components/home/service-showcase";
+import { serviceFamilies, serviceExampleEntries } from "@/content/service-model";
+import { BlogIndex } from "./blog";
+import type { BlogQuery } from "./blog-model";
 
-export function PublicContentCards({
-  locale,
-  entries,
-}: {
-  locale: Locale;
-  entries: PublicCatalogEntry[];
-}) {
-  const Arrow = locale === "fa" ? ArrowUpLeft : ArrowUpRight;
-  if (!entries.length) {
-    return (
-      <p className="rounded-2xl border border-[#0b5262]/12 bg-white/75 px-6 py-12 text-muted-foreground shadow-[0_12px_40px_rgba(31,92,105,0.06)]">
-        {locale === "fa" ? "محتوایی برای نمایش وجود ندارد." : "No content is available yet."}
-      </p>
-    );
-  }
-  return (
-    <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-      {entries.map(({ entry }, index) => {
-        const visual = getCatalogVisual(entry);
-        return (
-          <Link
-            key={`${entry.kind}/${entry.slug}`}
-            href={localizedHref(locale, `/${entry.kind}/${entry.slug}`)}
-            className="group relative overflow-hidden rounded-2xl border border-[#0b5262]/12 bg-white/75 p-3 shadow-[0_10px_32px_rgba(31,92,105,0.06)] backdrop-blur-sm transition-[border-color,box-shadow] duration-300 hover:border-[#20bfb2]/45 hover:shadow-[0_20px_50px_rgba(31,92,105,0.12)] sm:p-4"
-          >
-            <div className="relative aspect-[16/9] overflow-hidden rounded-[0.9rem] bg-ink">
-              {visual ? (
-                <Image
-                  src={visual.src}
-                  alt={localize(visual.alt, locale)}
-                  fill
-                  sizes="(min-width: 1280px) 33vw, (min-width: 768px) 50vw, 100vw"
-                  className="object-cover"
-                />
-              ) : (
-                <ContextVisual
-                  variant={catalogContextVariant(entry.kind, entry.slug)}
-                  title={localize(entry.title, locale)}
-                  items={entry.sections.map((section) => localize(section.title, locale))}
-                  className="absolute inset-0 min-h-0"
-                />
-              )}
-              <div className="absolute inset-0 bg-gradient-to-t from-[#00364a]/95 via-[#00364a]/15 to-transparent" />
-              <div className="absolute inset-x-4 bottom-4 flex items-end justify-between gap-5">
-                <span className="meta-label text-white/75">
-                  {String(index + 1).padStart(2, "0")} / {localize(entry.eyebrow, locale)}
-                </span>
-                <span className="grid size-10 place-items-center rounded-full border border-white/25 bg-[#00364a]/35 text-white backdrop-blur-sm transition-colors group-hover:border-[#5fe1d5] group-hover:bg-[#5fe1d5] group-hover:text-[#00364a]">
-                  <Arrow className="size-4" aria-hidden />
-                </span>
-              </div>
+export function PublicContentCards({ locale, entries }: { locale: Locale; entries: PublicCatalogEntry[] }) {
+  if (!entries.length) return <BrandText><div className="archive-empty"><p>{locale === "fa" ? "محتوایی برای نمایش وجود ندارد" : "No content is available yet"}</p></div></BrandText>;
+  return <BrandText><div className="insights-grid archive-grid">
+    {entries.map(({ entry }) => {
+      const visual = getCatalogVisual(entry);
+      const id = `catalog-${entry.kind}-${entry.slug}`;
+      return <article className="insight-article" key={id}>
+        <Link className="insight-card" href={localizedHref(locale, catalogPath(entry.kind, entry.slug))} aria-labelledby={id}>
+          <div className="insight-photo">
+            <img src={visual?.src ?? "/images/editorial/web-experience.png"} width={1024} height={683} alt={visual ? localize(visual.alt, locale) : ""} loading="lazy" />
+          </div>
+          <div className="insight-content">
+            <h3 id={id}>{localize(entry.title, locale)}</h3>
+            <div className="insight-meta">
+              <span className="insight-author"><img src="/coorda-template/rycode-black.svg" width={44} height={28} alt="" /><span>{localize(entry.eyebrow, locale)}</span></span>
+              {entry.conceptual && <><span className="insight-divider" aria-hidden="true" /><span>{locale === "fa" ? "مطالعه مفهومی" : "Concept study"}</span></>}
             </div>
-            <div className="p-4 sm:p-5">
-              <h2 className="display-3 text-[#073b4c]">{localize(entry.title, locale)}</h2>
-              <p className="mt-4 max-w-md text-sm leading-7 text-muted-foreground">
-                {localize(entry.summary, locale)}
-              </p>
-              {entry.conceptual && (
-                <span className="mt-5 inline-flex rounded-full border border-[#20bfb2]/35 bg-[#5fe1d5]/10 px-3 py-1 text-xs font-semibold text-[#0b766e]">
-                  {locale === "fa" ? "مطالعه مفهومی" : "Concept study"}
-                </span>
-              )}
-            </div>
-          </Link>
-        );
-      })}
-    </div>
-  );
+            <p className="reference-card-summary">{localize(entry.summary, locale)}</p>
+          </div>
+        </Link>
+      </article>;
+    })}
+  </div></BrandText>;
 }
 
 export function PublicCatalogHub({
   locale,
   kind,
   entries,
+  solutions = [],
+  industries = [],
+  projects = [],
+  blogQuery,
 }: {
   locale: Locale;
   kind: CatalogKind;
   entries: PublicCatalogEntry[];
+  solutions?: PublicCatalogEntry[];
+  industries?: PublicCatalogEntry[];
+  projects?: PublicCatalogEntry[];
+  blogQuery?: BlogQuery;
 }) {
+  if (kind === "blog") return <BlogIndex locale={locale} entries={entries} query={blogQuery ?? {}} />;
   const copy = kindCopy[kind];
+  const examples = serviceExampleEntries(projects.map(({ entry }) => entry));
   return (
-    <>
+    <BrandText><>
       <PageHero
         locale={locale}
         eyebrow={localize(copy.eyebrow, locale)}
@@ -99,12 +77,19 @@ export function PublicCatalogHub({
         lead={localize(copy.lead, locale)}
         visualVariant={catalogContextVariant(kind, "")}
         aside={
-          <>
-            <span className="meta-label block text-[#5fe1d5]">
+          kind === "services" ? <div className="reference-service-start">
+            <p>{locale === "fa" ? "هنوز نمی‌دانی کدام خدمت مناسب توست؟ از وضعیت فعلی‌ات شروع کن" : "Not sure which service fits? Start with where you are today."}</p>
+            <div>
+              <ActionLink locale={locale} href="/start-project" secondary>{locale === "fa" ? "یک پروژهٔ تازه دارم" : "I have a new project"}</ActionLink>
+              <ActionLink locale={locale} href="/technical-review" secondary>{locale === "fa" ? "پروژه‌ام نیاز به بررسی دارد" : "My project needs a review"}</ActionLink>
+              <ActionLink locale={locale} href="/seo-audit" secondary>{locale === "fa" ? "می‌خواهم سایتم بهتر دیده شود" : "I want my site to get found"}</ActionLink>
+            </div>
+          </div> : <>
+            <span className="meta-label block text-foreground">
               {String(entries.length).padStart(2, "0")} / {kind.toUpperCase()}
             </span>
             <Link
-              className="mt-4 inline-flex font-semibold text-white/80 transition-colors hover:text-[#5fe1d5]"
+              className="mt-4 inline-flex font-semibold text-white/80 transition-colors hover:text-foreground"
               href={localizedHref(locale, "/search")}
             >
               {locale === "fa" ? "جست‌وجوی سایت" : "Search the site"}
@@ -112,15 +97,115 @@ export function PublicCatalogHub({
           </>
         }
       />
-      <section className="relative overflow-hidden bg-[#f7fbfa] py-14 sm:py-20">
-        <div className="pointer-events-none absolute inset-0 opacity-60 [background-image:radial-gradient(circle_at_15%_15%,rgba(32,191,178,0.11),transparent_28%),radial-gradient(circle_at_85%_70%,rgba(99,146,255,0.08),transparent_30%)]" />
+      <section
+        id={kind === "services" ? "services" : undefined}
+        className="insights-archive section-space"
+      >
         <Container>
           <div className="relative">
-            <PublicContentCards locale={locale} entries={entries} />
+            {kind === "services" && (
+              <nav
+                aria-label={locale === "fa" ? "بخش‌های خدمات" : "Service sections"}
+                className="mb-8 flex flex-wrap gap-2"
+              >
+                {[
+                  ...serviceFamilies.map((family) => ({
+                    id: family.id,
+                    label: family.title[locale],
+                    available: entries.some(({ entry }) =>
+                      (family.slugs as readonly string[]).includes(entry.slug),
+                    ),
+                  })),
+                  {
+                    id: "solutions",
+                    label: locale === "fa" ? "سیستم‌های قابل ساخت" : "Systems we build",
+                    available: solutions.length > 0,
+                  },
+                  {
+                    id: "industries",
+                    label: locale === "fa" ? "برای کسب‌وکار شما" : "For your business",
+                    available: industries.length > 0,
+                  },
+                ]
+                  .filter((item) => item.available)
+                  .map((item) => (
+                    <a
+                      key={item.id}
+                      href={`#${item.id}`}
+                      className="rounded-full border border-border bg-surface px-4 py-2 text-sm font-medium text-foreground transition-colors hover:border-brand hover:bg-brand-soft"
+                    >
+                      {item.label}
+                    </a>
+                  ))}
+              </nav>
+            )}
+            {kind === "services" ? (
+              <>
+                {serviceFamilies.map((family) => {
+                  const familyEntries = family.slugs.flatMap((slug) => {
+                    const found = entries.find(({ entry }) => entry.slug === slug);
+                    return found ? [found] : [];
+                  });
+                  return familyEntries.length > 0 ? (
+                    <section
+                      key={family.id}
+                      id={family.id}
+                      className="services-family-block"
+                      style={{ "--family-accent": family.accent } as CSSProperties}
+                      aria-labelledby={`family-${family.id}-title`}
+                    >
+                      <div className="services-family-heading">
+                        <div>
+                          <span className="studio-label">{family.tagline[locale]}</span>
+                          <h2 id={`family-${family.id}-title`}>{family.title[locale]}</h2>
+                        </div>
+                        <div className="reference-family-copy">
+                          <p className="studio-body">{family.description[locale]}</p>
+                          <p className="reference-family-scope">{family.scope[locale]}</p>
+                        </div>
+                      </div>
+                      <PublicContentCards locale={locale} entries={familyEntries} />
+                      {family.slugs.some(slug => examples[slug]?.length) && (
+                        <div className="reference-family-examples">
+                          <h3>{locale === "fa" ? "این خدمت در یک سناریوی مفهومی" : "This service in a concept study"}</h3>
+                          <PublicContentCards locale={locale} entries={projects.filter(({entry}) => family.slugs.some(slug => examples[slug]?.some(example => example.slug === entry.slug)))} />
+                        </div>
+                      )}
+                    </section>
+                  ) : null;
+                })}
+                {entries.some(
+                  ({ entry }) =>
+                    !serviceFamilies.some((family) =>
+                      (family.slugs as readonly string[]).includes(entry.slug),
+                    ),
+                ) && (
+                  <section className="services-family-block">
+                    <h2 className="display-2 mb-6">
+                      {locale === "fa" ? "خدمات دیگر" : "More services"}
+                    </h2>
+                    <PublicContentCards
+                      locale={locale}
+                      entries={entries.filter(
+                        ({ entry }) =>
+                          !serviceFamilies.some((family) =>
+                            (family.slugs as readonly string[]).includes(entry.slug),
+                          ),
+                      )}
+                    />
+                  </section>
+                )}
+              </>
+            ) : (
+              <PublicContentCards locale={locale} entries={entries} />
+            )}
           </div>
         </Container>
       </section>
+      {kind === "services" && (
+        <ServiceContext locale={locale} solutions={solutions} industries={industries} />
+      )}
       <FinalBand locale={locale} />
-    </>
+    </></BrandText>
   );
 }

@@ -1,4 +1,5 @@
 "use client";
+import { BrandText } from "@/components/site/brand-text";
 
 import { Check, ChevronLeft, ChevronRight, LoaderCircle } from "lucide-react";
 import { useActionState, useEffect, useRef, useState } from "react";
@@ -126,9 +127,9 @@ function FieldError({ state, name }: { state: LeadActionState; name: string }) {
   const error = state.fieldErrors?.[name]?.[0];
   if (!error) return null;
   return (
-    <span id={`${name}-error`} className="mt-2 block text-xs font-semibold text-destructive">
+    <BrandText><span id={`${name}-error`} className="mt-2 block text-xs font-semibold text-destructive">
       {error}
-    </span>
+    </span></BrandText>
   );
 }
 
@@ -136,19 +137,19 @@ function SubmitButton({ locale }: { locale: Locale }) {
   const { pending } = useFormStatus();
   const text = copy[locale];
   return (
-    <button
+    <BrandText><button
       type="submit"
       disabled={pending}
-      className="inline-flex min-h-12 items-center justify-center gap-3 rounded-full border border-[#20bfb2]/60 bg-[#5fe1d5] px-7 text-sm font-bold text-[#00364a] shadow-[0_10px_28px_rgba(32,191,178,0.15)] transition-colors hover:bg-[#74eadf] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#20bfb2] disabled:cursor-wait disabled:opacity-70"
+      className="inline-flex min-h-12 items-center justify-center gap-3 rounded-full border border-brand/60 bg-brand px-7 text-sm font-bold text-brand-foreground shadow-[0_10px_28px_rgba(0,0,0,0.08)] transition-colors hover:bg-brand/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring disabled:cursor-wait disabled:opacity-70"
     >
       {pending && <LoaderCircle className="size-4 animate-spin" aria-hidden />}
       {pending ? text.sending : text.submit}
-    </button>
+    </button></BrandText>
   );
 }
 
 const inputClass =
-  "mt-2 min-h-12 w-full rounded-xl border border-[#0b5262]/14 bg-[#f9fcfb] px-4 text-base text-[#073b4c] outline-none transition-[border-color,background-color,box-shadow] placeholder:text-muted-foreground/60 focus:border-[#20bfb2]/70 focus:bg-white focus:ring-4 focus:ring-[#5fe1d5]/12";
+  "mt-2 min-h-12 w-full rounded-xl border border-foreground/14 bg-surface-2 px-4 text-base text-foreground outline-none transition-[border-color,background-color,box-shadow] placeholder:text-muted-foreground/60 focus:border-brand/70 focus:bg-white focus:ring-4 focus:ring-ring/12";
 
 function labelText(label: string, optional: string, isOptional = false) {
   return (
@@ -204,23 +205,23 @@ export function LeadForm({
 
   if (state.status === "success") {
     return (
-      <div
+      <BrandText><div
         role="status"
-        className="rounded-2xl border border-[#20bfb2]/30 bg-[#5fe1d5]/10 p-8 sm:p-10"
+        className="rounded-2xl border border-brand/30 bg-brand/10 p-8 sm:p-10"
       >
-        <span className="grid size-11 place-items-center rounded-full bg-[#5fe1d5] text-[#00364a]">
+        <span className="grid size-11 place-items-center rounded-full bg-brand text-brand-foreground">
           <Check className="size-5" aria-hidden />
         </span>
         <h2 className="mt-6 text-xl font-bold">
           {locale === "fa" ? "رسید دستمان 🙌" : "Request submitted"}
         </h2>
         <p className="mt-3 max-w-xl leading-8 text-muted-foreground">{state.message}</p>
-      </div>
+      </div></BrandText>
     );
   }
 
   return (
-    <form ref={formRef} action={formAction} className="space-y-7" noValidate>
+    <BrandText><form ref={formRef} action={formAction} className="reference-lead-form space-y-7" noValidate>
       <input type="hidden" name="kind" value={kind} />
       <input type="hidden" name="locale" value={locale} />
       <input type="hidden" name="sourcePath" value={sourcePath} />
@@ -233,7 +234,7 @@ export function LeadForm({
       )}
 
       <div
-        className="flex items-center gap-2 border-b border-[#0b5262]/10 pb-6"
+        className="flex items-center gap-2 border-b border-foreground/10 pb-6"
         aria-label="Form progress"
       >
         {stepLabels.map((label, index) => (
@@ -241,8 +242,8 @@ export function LeadForm({
             <span
               className={`grid size-8 shrink-0 place-items-center rounded-full border text-xs font-bold transition-colors ${
                 index <= step
-                  ? "border-[#20bfb2] bg-[#5fe1d5] text-[#00364a]"
-                  : "border-[#0b5262]/14 bg-[#f7fbfa] text-muted-foreground"
+                  ? "border-brand bg-brand text-brand-foreground"
+                  : "border-foreground/14 bg-surface-2 text-muted-foreground"
               }`}
             >
               {index + 1}
@@ -419,7 +420,7 @@ export function LeadForm({
           <button
             type="button"
             onClick={() => setStep((current) => Math.max(0, current - 1))}
-            className="inline-flex min-h-12 items-center gap-2 rounded-full border border-[#0b5262]/18 bg-white/50 px-6 text-sm font-bold text-[#075264] transition-[border-color,background-color] hover:border-[#20bfb2]/60 hover:bg-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#20bfb2]"
+            className="inline-flex min-h-12 items-center gap-2 rounded-full border border-foreground/18 bg-white/50 px-6 text-sm font-bold text-[#075264] transition-[border-color,background-color] hover:border-brand/60 hover:bg-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
           >
             {locale === "fa" ? (
               <ChevronRight className="size-4" aria-hidden />
@@ -433,7 +434,7 @@ export function LeadForm({
           <button
             type="button"
             onClick={nextStep}
-            className="inline-flex min-h-12 items-center gap-2 rounded-full border border-[#20bfb2]/60 bg-[#5fe1d5] px-7 text-sm font-bold text-[#00364a] shadow-[0_10px_28px_rgba(32,191,178,0.15)] transition-colors hover:bg-[#74eadf] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#20bfb2]"
+            className="inline-flex min-h-12 items-center gap-2 rounded-full border border-brand/60 bg-brand px-7 text-sm font-bold text-brand-foreground shadow-[0_10px_28px_rgba(0,0,0,0.08)] transition-colors hover:bg-brand/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
           >
             {text.next}
             {locale === "fa" ? (
@@ -451,6 +452,6 @@ export function LeadForm({
           ? "اطلاعات فقط برای بررسی همین درخواست در سامانه داخلی رای‌کد ذخیره می‌شود."
           : "Your information is stored in RYCODE's internal system only for reviewing this request."}
       </p>
-    </form>
+    </form></BrandText>
   );
 }

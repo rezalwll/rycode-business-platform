@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 
-import { catalogKinds } from "@/content/catalog";
+import { catalogKinds, catalogPath } from "@/content/catalog";
 import type { Locale } from "@/i18n/routing";
 import { listPublicSitemapContent } from "@/server/queries/public-content";
 
@@ -9,9 +9,6 @@ export const dynamic = "force-dynamic";
 const publicPages = [
   "",
   "about",
-  "why-rycode",
-  "process",
-  "technologies",
   "terms",
   "privacy",
   "faq",
@@ -67,13 +64,21 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticItems = publicPages.flatMap((path) =>
     locales.map((locale) => item(path, path === "" ? 1 : 0.7, locale)),
   );
-  const hubs = catalogKinds.flatMap((kind) => locales.map((locale) => item(kind, 0.8, locale)));
+  const hubs = catalogKinds
+    .filter((kind) => kind !== "solutions" && kind !== "industries")
+    .flatMap((kind) => locales.map((locale) => item(kind, 0.8, locale)));
   const content = await listPublicSitemapContent();
   const details = content
     .filter((entry) => !entry.noIndex)
     .flatMap((entry) =>
       entry.locales.map((locale) =>
-        item(`${entry.kind}/${entry.slug}`, 0.65, locale, entry.locales, entry.updatedAt),
+        item(
+          catalogPath(entry.kind, entry.slug).slice(1),
+          0.65,
+          locale,
+          entry.locales,
+          entry.updatedAt,
+        ),
       ),
     );
 

@@ -12,7 +12,13 @@ import {
 } from "@/components/public/marketing-pages";
 import { localizedHref } from "@/components/public/shared";
 import { SiteShell } from "@/components/site/site-shell";
-import { isCatalogKind, kindCopy, localize } from "@/content/catalog";
+import {
+  catalogPath,
+  isCatalogKind,
+  kindCopy,
+  localize,
+  resolveCatalogDetail,
+} from "@/content/catalog";
 import { isLocale, type Locale } from "@/i18n/routing";
 import {
   findPublicCatalogEntry,
@@ -193,6 +199,33 @@ async function applyPublicRedirect(
   path: string[],
   searchParams: PageProps["searchParams"],
 ): Promise<void> {
+  const companyAnchors: Record<string, string> = {
+    "why-rycode": "approach",
+    process: "process",
+    technologies: "technology",
+  };
+  if (path.length === 1 && path[0] && companyAnchors[path[0]]) {
+    permanentRedirect(
+      redirectDestination(
+        {
+          destination: localizedHref(locale, `/about#${companyAnchors[path[0]]}`),
+          permanent: true,
+          preserveQuery: true,
+        },
+        await searchParams,
+      ),
+    );
+  }
+  const legacyKind = path[0];
+  if ((legacyKind === "solutions" || legacyKind === "industries") && path.length <= 2) {
+    const destination = localizedHref(locale, catalogPath(legacyKind, path[1]));
+    permanentRedirect(
+      redirectDestination(
+        { destination, permanent: true, preserveQuery: true },
+        await searchParams,
+      ),
+    );
+  }
   const rule = await findPublicRedirect(localizedHref(locale, `/${path.join("/")}`));
   if (!rule) return;
   const destination = redirectDestination(rule, await searchParams);
@@ -205,7 +238,7 @@ export async function generateMetadata({ params, searchParams }: PageProps): Pro
   if (!isLocale(rawLocale) || path.length === 0) notFound();
   const locale = rawLocale;
   await applyPublicRedirect(locale, path, searchParams);
-  if (path.length > 2) notFound();
+  if (path.length > 3) notFound();
   const route = `/${path.join("/")}`;
 
   if (path.length === 1) {
@@ -240,8 +273,9 @@ export async function generateMetadata({ params, searchParams }: PageProps): Pro
     notFound();
   }
 
-  const [kind, slug] = path;
-  if (!kind || !slug || !isCatalogKind(kind)) notFound();
+  const detail = resolveCatalogDetail(path);
+  if (!detail) notFound();
+  const { kind, slug } = detail;
   const resolved = await findPublicCatalogEntry(kind, slug, locale);
   if (!resolved) notFound();
   const { entry, cms } = resolved;
@@ -274,7 +308,7 @@ export default async function PublicPage({ params, searchParams }: PageProps) {
   if (!isLocale(rawLocale) || path.length === 0) notFound();
   const locale = rawLocale;
   await applyPublicRedirect(locale, path, searchParams);
-  if (path.length > 2) notFound();
+  if (path.length > 3) notFound();
   let content: React.ReactNode;
 
   if (path.length === 1) {
@@ -282,11 +316,21 @@ export default async function PublicPage({ params, searchParams }: PageProps) {
     if (!segment) notFound();
 
     if (isCatalogKind(segment)) {
+      const [entries, solutions, industries, projects] = await Promise.all([
+        listPublicCatalog(segment, locale),
+        segment === "services" ? listPublicCatalog("solutions", locale) : Promise.resolve([]),
+        segment === "services" ? listPublicCatalog("industries", locale) : Promise.resolve([]),
+        segment === "services" ? listPublicCatalog("projects", locale) : Promise.resolve([]),
+      ]);
       content = (
         <PublicCatalogHub
           locale={locale}
           kind={segment}
-          entries={await listPublicCatalog(segment, locale)}
+          entries={entries}
+          solutions={solutions}
+          industries={industries}
+          projects={projects}
+          blogQuery={segment === "blog" ? Object.fromEntries(Object.entries(await searchParams).map(([key, value]) => [key, (Array.isArray(value) ? value[0] : value) ?? ""])) : {}}
         />
       );
     } else if (isCompanyPage(segment)) {
@@ -307,11 +351,12 @@ export default async function PublicPage({ params, searchParams }: PageProps) {
       notFound();
     }
   } else {
-    const [kind, slug] = path;
-    if (!kind || !slug || !isCatalogKind(kind)) notFound();
+    const detail = resolveCatalogDetail(path);
+    if (!detail) notFound();
+    const { kind, slug } = detail;
     const resolved = await findPublicCatalogEntry(kind, slug, locale);
     if (!resolved) notFound();
-    content = <CatalogDetail locale={locale} entry={resolved.entry} />;
+    content = <CatalogDetail locale={locale} entry={resolved.entry} cms={resolved.cms} related={kind === "blog" ? await listPublicCatalog("blog", locale) : []} />;
   }
 
   return <SiteShell locale={locale}>{content}</SiteShell>;

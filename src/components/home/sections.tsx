@@ -660,7 +660,7 @@ export function SolutionExplorer() {
             </div>
 
             <div className="mt-auto pt-9">
-              <TextLink to="/solutions">جزئیات راهکارها</TextLink>
+              <TextLink to="/services#solutions">جزئیات این خدمات</TextLink>
             </div>
           </div>
 
@@ -1105,8 +1105,8 @@ export function IndustriesSection() {
             <MetaLabel className="text-brand">INDUSTRIES</MetaLabel>
             <h2 className="display-2 mt-6 max-w-2xl">راه‌حل خوب باید به کسب‌وکار شما بخورد</h2>
           </div>
-          <TextLink to="/industries" className="text-foreground dark:text-ink-foreground">
-            همه صنایع
+          <TextLink to="/services#industries" className="text-foreground dark:text-ink-foreground">
+            خدمات مناسب کسب‌وکار شما
           </TextLink>
         </div>
 
@@ -1167,7 +1167,7 @@ export function IndustriesSection() {
           {industries.map((name, i) => (
             <Link
               key={name}
-              href="/industries"
+              href="/services#industries"
               className="grid grid-cols-[1.6fr_repeat(4,minmax(0,1fr))] items-center border-b border-border py-5 transition-colors hover:bg-brand-soft dark:border-white/10 dark:hover:bg-white/5"
             >
               <span className="text-base font-semibold">{name}</span>
@@ -1188,7 +1188,7 @@ export function IndustriesSection() {
           {industries.map((name, i) => (
             <li key={name}>
               <Link
-                href="/industries"
+                href="/services#industries"
                 className="flex items-center justify-between gap-4 border-b border-border py-5 dark:border-white/10"
               >
                 <span className="text-base font-semibold">{name}</span>
