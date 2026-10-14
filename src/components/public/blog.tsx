@@ -10,7 +10,8 @@ import {
 } from "@/content/catalog";
 import type { Locale } from "@/i18n/routing";
 import type { PublicCatalogEntry, PublicContent } from "@/server/queries/public-content";
-import { FinalBand, JsonLd, localizedHref, PageHero } from "./shared";
+import { FinalBand, JsonLd, localizedHref } from "./shared";
+import ReferencePhotoHero from "@/components/template/reference-photo-hero";
 import {
   blogArchive,
   blogArchiveHref,
@@ -113,55 +114,46 @@ export function BlogIndex({
   return (
     <BrandText>
       <div className="rycode-blog" dir={fa ? "rtl" : "ltr"}>
-        <PageHero
-          locale={locale}
-          eyebrow={localize(kindCopy.blog.eyebrow, locale)}
+        <ReferencePhotoHero
+          className="pn-blog-hero"
           title={fa ? "بلاگ رایکد" : "RYCODE blog"}
-          lead={localize(kindCopy.blog.lead, locale)}
-          imageSrc="/images/editorial/data-dashboard.png"
-        />
+          image="/images/editorial/data-dashboard.png"
+          alt=""
+        >
+          <p className="pn-lead">{localize(kindCopy.blog.lead, locale)}</p>
+          <form
+            className="pn-search-form"
+            action={localizedHref(locale, "/blog")}
+            method="get"
+            role="search"
+            aria-label={fa ? "جست‌وجوی بلاگ" : "Search the blog"}
+          >
+            <label className="sr-only" htmlFor="blog-search">
+              {fa ? "جست‌وجوی موضوع، کلیدواژه یا عنوان" : "Search topics, keywords or titles"}
+            </label>
+            <input
+              className="pn-search-input"
+              id="blog-search"
+              type="search"
+              name="q"
+              defaultValue={archive.q}
+              maxLength={200}
+              placeholder={
+                fa ? "جست‌وجوی موضوع، کلیدواژه یا عنوان…" : "Search topics, keywords or titles…"
+              }
+            />
+            {archive.category && <input type="hidden" name="category" value={archive.category} />}
+            <button className="pn-btn pn-btn-blue" type="submit">
+              <Search size={17} aria-hidden />
+              {fa ? "جست‌وجو" : "Search"}
+            </button>
+          </form>
+        </ReferencePhotoHero>
         <section className="pn-archive section-space" aria-labelledby="blog-archive-title">
           <div className="page-container pn-main">
-            <section className="pn-hero" aria-labelledby="blog-archive-title">
-              <div className="pn-hero-main">
-                <div>
-                  <h2 className="pn-archive-title" id="blog-archive-title">
-                    {fa ? "آخرین یادداشت‌ها و راهنماها" : "Latest notes and guides"}
-                  </h2>
-                </div>
-                <form
-                  className="pn-search-form"
-                  action={localizedHref(locale, "/blog")}
-                  method="get"
-                  role="search"
-                  aria-label={fa ? "جست‌وجوی بلاگ" : "Search the blog"}
-                >
-                  <label className="sr-only" htmlFor="blog-search">
-                    {fa ? "جست‌وجوی موضوع، کلیدواژه یا عنوان" : "Search topics, keywords or titles"}
-                  </label>
-                  <input
-                    className="pn-search-input"
-                    id="blog-search"
-                    type="search"
-                    name="q"
-                    defaultValue={archive.q}
-                    maxLength={200}
-                    placeholder={
-                      fa
-                        ? "جست‌وجوی موضوع، کلیدواژه یا عنوان…"
-                        : "Search topics, keywords or titles…"
-                    }
-                  />
-                  {archive.category && (
-                    <input type="hidden" name="category" value={archive.category} />
-                  )}
-                  <button className="pn-btn pn-btn-blue" type="submit">
-                    <Search size={17} aria-hidden />
-                    {fa ? "جست‌وجو" : "Search"}
-                  </button>
-                </form>
-              </div>
-            </section>
+            <h2 className="pn-archive-title pn-archive-heading" id="blog-archive-title">
+              {fa ? "آخرین یادداشت‌ها و راهنماها" : "Latest notes and guides"}
+            </h2>
             <nav className="pn-tabs" aria-label={fa ? "دسته‌بندی‌های بلاگ" : "Blog categories"}>
               {["", ...archive.categories].map((category) => (
                 <Link

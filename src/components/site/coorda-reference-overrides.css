@@ -44,6 +44,59 @@
   border-color: #ffffff26;
 }
 /* Neutral navigation; the site's brand palette stays unchanged. */
+.rycode-coorda {
+  --ui-ease: cubic-bezier(.22, 1, .36, 1);
+  --ui-duration: 280ms;
+}
+.rycode-coorda .rycode-header {
+  transition-property: background-color, border-color, color, box-shadow;
+  transition-duration: var(--ui-duration);
+  transition-timing-function: var(--ui-ease);
+}
+.rycode-coorda :is(
+  .rycode-primary-link,
+  .rycode-services-menu-link,
+  .rycode-header-tools a,
+  .rycode-theme-toggle button,
+  .coorda-button,
+  .studio-button,
+  .pn-btn,
+  .pn-tab,
+  .pn-readmore
+) {
+  transition-property: background-color, border-color, color, box-shadow, transform;
+  transition-duration: var(--ui-duration);
+  transition-timing-function: var(--ui-ease);
+}
+.rycode-coorda :is(.feature-card, .insight-card) {
+  transition: box-shadow var(--ui-duration) var(--ui-ease), border-color var(--ui-duration) var(--ui-ease);
+}
+.rycode-coorda :is(.rycode-primary-link, .rycode-header-tools, #site-mobile-menu button) svg,
+.rycode-coorda .coorda-reference .hero-cta-label,
+.rycode-coorda .rycode-blog .pn-card-media > img {
+  transition-duration: 320ms;
+  transition-timing-function: var(--ui-ease);
+}
+.rycode-coorda .rycode-desktop-submenu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  transform-origin: top right;
+  transition: opacity 200ms var(--ui-ease), transform 240ms var(--ui-ease), visibility 0s;
+}
+.rycode-coorda .rycode-desktop-submenu[data-state="closed"] {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(-6px);
+  transition: opacity 140ms ease-out, transform 180ms var(--ui-ease), visibility 0s linear 180ms;
+}
+@media (prefers-reduced-motion: reduce) {
+  .rycode-coorda :is(.rycode-desktop-submenu, .rycode-desktop-submenu[data-state="closed"]) {
+    transition: none;
+    transform: none;
+  }
+}
 .rycode-coorda .rycode-primary-link:hover,
 .rycode-coorda .rycode-primary-link[aria-current="page"] {
   background: var(--brand-soft);
@@ -225,6 +278,121 @@
   font-size: 9px;
   letter-spacing: .06em;
   line-height: 1.6;
+}
+/* Capability cards retain the original neutral section and bottom-rail hover.
+   JS advances by measured distance; CSS retiming would jump the loop on hover. */
+.coorda-reference .features-expanded .features-ticker {
+  animation: none;
+  transition: none;
+  align-items: stretch;
+}
+.coorda-reference .features-expanded .features-ticker-group {
+  gap: 16px;
+  padding-right: 16px;
+  flex-shrink: 0;
+  align-items: stretch;
+}
+.coorda-reference .features-expanded .capability-card {
+  width: 320px;
+  min-height: 410px;
+  padding: 24px;
+  gap: 14px;
+}
+.coorda-reference .capability-card .capability-card-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  color: #777;
+  font-size: 10px;
+  line-height: 1.8;
+}
+.coorda-reference .capability-card-label > span:first-child {
+  color: var(--feature-accent);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+.coorda-reference .capability-card .feature-card-heading h3 {
+  font-size: 18px;
+  line-height: 1.65;
+  min-height: 30px;
+}
+.coorda-reference .capability-card .feature-card-summary {
+  min-height: 72px;
+}
+.coorda-reference .capability-card-image {
+  position: relative;
+  height: 150px;
+  flex: 0 0 150px;
+  overflow: hidden;
+  border-radius: 14px;
+  direction: ltr;
+}
+.coorda-reference .capability-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.coorda-reference .capability-card .feature-card-actions .capability-card-link {
+  width: 100%;
+  min-height: 48px;
+  justify-content: space-between;
+  gap: 14px;
+  padding-block: 2px;
+  text-decoration: none;
+  color: #1a1a1a;
+}
+.coorda-reference .capability-card-link-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  text-align: start;
+}
+.coorda-reference .capability-card-link-copy > span {
+  color: #777;
+  font-size: 10px;
+  line-height: 1.6;
+}
+.coorda-reference .capability-card-link-copy > strong {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.7;
+  text-wrap: pretty;
+}
+.coorda-reference .capability-card-link-arrow {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  flex: 0 0 34px;
+  border: 1px solid #e7e7e7;
+  border-radius: 50%;
+  background: #fff;
+  transition: background-color var(--ui-duration) var(--ui-ease), border-color var(--ui-duration) var(--ui-ease);
+}
+.coorda-reference .capability-card-link-arrow svg {
+  transition: transform var(--ui-duration) var(--ui-ease);
+}
+.coorda-reference .capability-card-link:is(:hover, :focus-visible) .capability-card-link-arrow {
+  background: color-mix(in srgb, var(--feature-accent) 12%, #fff);
+  border-color: color-mix(in srgb, var(--feature-accent) 45%, #e7e7e7);
+}
+.coorda-reference .capability-card-link:is(:hover, :focus-visible) .capability-card-link-arrow svg {
+  transform: translateX(2px);
+}
+.coorda-reference .capability-card[dir="rtl"] .capability-card-link:is(:hover, :focus-visible) .capability-card-link-arrow svg {
+  transform: translateX(-2px);
+}
+@media (max-width: 809px) {
+  .coorda-reference .features-expanded .capability-card { width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .coorda-reference .features-expanded .features-ticker { transform: none !important; }
+  .coorda-reference .features-expanded .features-desktop { overflow-x: auto; }
+  .coorda-reference .features-expanded .features-ticker-group[aria-hidden="true"] { display: none; }
+  .coorda-reference .capability-card-link-arrow,
+  .coorda-reference .capability-card-link-arrow svg { transition: none; }
+  .coorda-reference .capability-card[dir] .capability-card-link:is(:hover, :focus-visible) .capability-card-link-arrow svg { transform: none; }
 }
 .coorda-reference :is(.data-tool-preview, .rescue-tool-preview) {
   padding: 16px;

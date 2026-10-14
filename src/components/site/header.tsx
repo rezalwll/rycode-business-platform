@@ -3,6 +3,7 @@ import { BrandText } from "@/components/site/brand-text";
 
 import { ChevronDown, Globe2, Menu, X } from "lucide-react";
 import { useEffect, useId, useRef, useState } from "react";
+import { AnimatePresence, motion, useIsPresent, useReducedMotion } from "motion/react";
 
 import { Link, usePathname } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
@@ -148,15 +149,16 @@ export function SiteHeader({ locale }: { locale: Locale }) {
         </Container>
       </header>
 
-      {mobileOpen && (
+      <AnimatePresence initial={false}>{mobileOpen && (
         <MobileMenu
+          key="mobile-navigation"
           locale={locale}
           nav={nav}
           pathname={pathname}
           onClose={() => setMobilePath(null)}
           returnFocusRef={mobileTrigger}
         />
-      )}
+      )}</AnimatePresence>
     </></BrandText>
   );
 }
@@ -218,54 +220,37 @@ function DesktopNavItem({
         }
       }}
     >
-      <div className="flex items-center gap-0.5">
+      {item.menu ? (
+        <button
+          ref={triggerRef}
+          type="button"
+          aria-label={showLabel}
+          aria-expanded={open}
+          aria-controls={panelId}
+          aria-current={active ? "page" : undefined}
+          onClick={onToggle}
+          className={cn(
+            "rycode-primary-link inline-flex items-center gap-2 whitespace-nowrap rounded-full px-3 py-2 text-[0.75rem] font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2",
+            overlay ? "text-white/80 focus-visible:outline-white" : "text-foreground focus-visible:outline-brand",
+          )}
+        >
+          <span>{item.label}</span>
+          <ChevronDown className={cn("size-3.5 transition-transform", open && "rotate-180")} aria-hidden />
+        </button>
+      ) : (
         <Link
           href={item.href}
           aria-current={active ? "page" : undefined}
-          onFocus={() => {
-            if (item.menu) onOpen();
-            else onClose();
-          }}
+          onFocus={onClose}
           onClick={onClose}
           className={cn(
             "rycode-primary-link relative flex items-center gap-1 whitespace-nowrap rounded-full px-3 py-2 text-[0.75rem] font-medium transition-colors",
-            item.emphasis
-              ? overlay
-                ? "text-white"
-                : "text-foreground"
-              : active
-                ? overlay
-                  ? "text-white after:scale-x-100"
-                  : "text-foreground after:scale-x-100 dark:text-white"
-                : overlay
-                  ? "text-white/75 hover:text-white"
-                  : "text-muted-foreground hover:text-foreground",
+            overlay ? "text-white/75 hover:text-white" : "text-muted-foreground hover:text-foreground",
           )}
         >
           {item.label}
         </Link>
-        {item.menu && (
-          <button
-            ref={triggerRef}
-            type="button"
-            aria-label={showLabel}
-            aria-expanded={open}
-            aria-controls={panelId}
-            onClick={onToggle}
-            className={cn(
-              "grid size-7 place-items-center rounded-md transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand",
-              overlay
-                ? "text-white/80 hover:bg-white/10"
-                : "text-foreground hover:bg-surface-2 dark:text-white/80 dark:hover:bg-white/10",
-            )}
-          >
-            <ChevronDown
-              className={cn("size-3.5 transition-transform", open && "rotate-180")}
-              aria-hidden
-            />
-          </button>
-        )}
-      </div>
+      )}
 
       {item.menu && (
         <div
@@ -273,9 +258,11 @@ function DesktopNavItem({
           id={panelId}
           role="region"
           aria-label={showLabel}
+          aria-hidden={!open}
+          inert={!open ? true : undefined}
+          data-state={open ? "open" : "closed"}
           className={cn(
-            "absolute right-0 top-full z-50 max-w-[calc(100vw-3rem)] pt-2",
-            !open && "hidden",
+            "rycode-desktop-submenu absolute right-0 top-full z-50 max-w-[calc(100vw-3rem)] pt-2",
             servicesMenu ? "w-[360px]" : groups === 1 ? "w-72" : groups === 2 ? "w-[520px]" : "w-[860px]",
           )}
           dir={locale === "fa" ? "rtl" : "ltr"}
@@ -301,7 +288,7 @@ function DesktopNavItem({
                     : undefined
                 }
               >
-                <p
+                {group.id !== "about-links" && <p
                   className={cn(
                     "text-xs font-semibold text-foreground dark:text-foreground",
                     group.id === "service-resources"
@@ -310,7 +297,7 @@ function DesktopNavItem({
                   )}
                 >
                   {group.title}
-                </p>
+                </p>}
                 <ul
                   className={
                     group.id === "service-resources" ? "flex flex-wrap gap-2" : "space-y-2"
@@ -411,11 +398,14 @@ function MobileMenu({
   returnFocusRef: React.RefObject<HTMLButtonElement | null>;
 }) {
   const isFa = locale === "fa";
+  const present = useIsPresent();
+  const reduceMotion = useReducedMotion();
   const [expanded, setExpanded] = useState<string | null>(null);
   const dialogRef = useRef<HTMLElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
+    if (!present) return;
     const previousOverflow = document.body.style.overflow;
     const previousFocus = returnFocusRef.current;
     document.body.style.overflow = "hidden";
@@ -424,10 +414,20 @@ function MobileMenu({
       document.body.style.overflow = previousOverflow;
       previousFocus?.focus();
     };
-  }, [returnFocusRef]);
+  }, [present, returnFocusRef]);
 
   return (
-    <BrandText><div className="fixed inset-0 z-[60] xl:hidden" dir="ltr">
+    <BrandText><motion.div
+      className="fixed inset-0 z-[60] xl:hidden"
+      dir="ltr"
+      aria-hidden={!present}
+      inert={!present ? true : undefined}
+      initial={reduceMotion ? false : { opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: reduceMotion ? 0 : .18, ease: [.22, 1, .36, 1] }}
+      style={{ pointerEvents: present ? "auto" : "none" }}
+    >
       <button
         type="button"
         aria-label={isFa ? "بستن منو" : "Close menu"}
@@ -435,7 +435,7 @@ function MobileMenu({
         className="absolute inset-0 bg-black/70 backdrop-blur-md"
       />
 
-      <aside
+      <motion.aside
         ref={dialogRef}
         id="site-mobile-menu"
         role="dialog"
@@ -464,6 +464,10 @@ function MobileMenu({
         }}
         className="relative ml-auto flex h-dvh w-full max-w-[420px] flex-col border-l border-border bg-surface text-foreground shadow-2xl"
         dir={isFa ? "rtl" : "ltr"}
+        initial={reduceMotion ? false : { x: 24 }}
+        animate={{ x: 0 }}
+        exit={{ x: 24 }}
+        transition={{ duration: reduceMotion ? 0 : .24, ease: [.22, 1, .36, 1] }}
       >
         <div className="flex h-16 shrink-0 items-center justify-between border-b border-border px-5">
           <Logo />
@@ -491,41 +495,29 @@ function MobileMenu({
                   className="border-b border-border py-1"
                 >
                   <div className="flex items-center gap-3">
-                    <Link
-                      href={item.href}
-                      onClick={onClose}
-                      aria-current={active ? "page" : undefined}
-                      className={cn(
-                        "flex min-w-0 flex-1 items-center gap-4 py-3 text-base font-medium transition-colors",
-                        item.emphasis
-                          ? "text-foreground dark:text-foreground"
-                          : active
-                            ? "text-foreground dark:text-foreground"
-                            : "text-foreground/85 hover:text-foreground",
-                      )}
-                    >
-                      <span className="font-latin text-[0.65rem] tracking-[0.16em] text-muted-foreground">
-                        {String(index + 1).padStart(2, "0")}
-                      </span>
-                      <span>{item.label}</span>
-                    </Link>
-                    {item.menu && (
+                    {item.menu ? (
                       <button
                         type="button"
                         aria-label={isFa ? `نمایش ${item.label}` : `Show ${item.label}`}
                         aria-expanded={expanded === item.href}
                         aria-controls={`mobile-submenu-${index}`}
                         onClick={() => setExpanded(expanded === item.href ? null : item.href)}
-                        className="grid size-10 shrink-0 place-items-center rounded-lg border border-border text-foreground/70 transition-colors hover:bg-brand-soft"
+                        className="flex min-w-0 flex-1 items-center gap-4 rounded-lg py-3 text-base font-medium text-foreground transition-colors hover:bg-brand-soft"
                       >
-                        <ChevronDown
-                          aria-hidden
-                          className={cn(
-                            "size-4 transition-transform",
-                            expanded === item.href && "rotate-180",
-                          )}
-                        />
+                        <span className="font-latin text-[0.65rem] tracking-[0.16em] text-muted-foreground">{String(index + 1).padStart(2, "0")}</span>
+                        <span>{item.label}</span>
+                        <ChevronDown aria-hidden className={cn("ms-auto size-4 shrink-0 transition-transform", expanded === item.href && "rotate-180")} />
                       </button>
+                    ) : (
+                      <Link
+                        href={item.href}
+                        onClick={onClose}
+                        aria-current={active ? "page" : undefined}
+                        className="flex min-w-0 flex-1 items-center gap-4 py-3 text-base font-medium text-foreground/85 transition-colors hover:text-foreground"
+                      >
+                        <span className="font-latin text-[0.65rem] tracking-[0.16em] text-muted-foreground">{String(index + 1).padStart(2, "0")}</span>
+                        <span>{item.label}</span>
+                      </Link>
                     )}
                   </div>
                   {item.menu && (
@@ -539,9 +531,9 @@ function MobileMenu({
                     >
                       {item.href === "/services" ? <ServicesMenu locale={locale} onClose={onClose} mobile /> : item.menu.map((group) => (
                         <div key={group.title}>
-                          <p className="mb-2 text-xs font-semibold text-foreground dark:text-foreground">
+                          {group.id !== "about-links" && <p className="mb-2 text-xs font-semibold text-foreground dark:text-foreground">
                             {group.title}
-                          </p>
+                          </p>}
                           <ul className="space-y-1">
                             {group.items.map((child, childIndex) => (
                               <li key={`${child.id ?? child.href}-${child.label}-${childIndex}`}>
@@ -588,7 +580,7 @@ function MobileMenu({
             {isFa ? "شروع یک پروژه" : "Start a project"}
           </Link>
         </div>
-      </aside>
-    </div></BrandText>
+      </motion.aside>
+    </motion.div></BrandText>
   );
 }

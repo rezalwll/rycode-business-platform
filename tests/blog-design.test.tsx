@@ -10,7 +10,7 @@ import {
   blogReadingMinutes,
   relatedBlogEntries,
 } from "@/components/public/blog-model";
-import { getCatalogEntries, type CatalogEntry } from "@/content/catalog";
+import { getCatalogEntries, kindCopy, type CatalogEntry } from "@/content/catalog";
 import { PublicCatalogHub } from "@/components/public/cms-catalog";
 import { CatalogDetail } from "@/components/public/catalog-pages";
 import type { PublicCatalogEntry, PublicContent } from "@/server/queries/public-content";
@@ -79,6 +79,7 @@ describe("Paknevis blog structure adapted to RYCODE", () => {
       ),
     );
     const form = doc.querySelector('form[role="search"]')!;
+    expect(form.closest(".photo-hero-frame")).toBeTruthy();
     expect(form.getAttribute("action")).toBe("/en/blog");
     expect(form.getAttribute("method")).toBe("get");
     expect(form.querySelector('input[name="q"]')?.getAttribute("value")).toBe("web");
@@ -93,7 +94,7 @@ describe("Paknevis blog structure adapted to RYCODE", () => {
     expect(doc.querySelector('.pn-tab[aria-current="page"]')?.textContent).toBe("Design");
     expect(blogArchiveHref("fa", { q: "a&b", category: "<test>" })).toContain("q=a%26b");
   });
-  it("embeds search/tabs/two-column cards in the original PhotoHero and section structure", () => {
+  it("overlays the title, lead and search on the retained hero image without changing the archive", () => {
     for (const locale of ["fa", "en"] as const) {
       const doc = documentFor(
         renderToStaticMarkup(<PublicCatalogHub locale={locale} kind="blog" entries={articles} />),
@@ -102,11 +103,21 @@ describe("Paknevis blog structure adapted to RYCODE", () => {
         locale === "fa" ? "rtl" : "ltr",
       );
       expect(doc.querySelectorAll("h1")).toHaveLength(1);
-      expect(doc.querySelector(".pn-hero-main form")).toBeTruthy();
+      const hero = doc.querySelector(".pn-blog-hero .photo-hero-frame")!;
+      expect(hero.querySelector("h1")?.textContent).toBe(
+        locale === "fa" ? "بلاگ رایکد" : "RYCODE blog",
+      );
+      expect(hero.querySelector(".pn-lead")?.textContent).toBe(kindCopy.blog.lead[locale]);
+      expect(hero.querySelector('form[role="search"]')).toBeTruthy();
+      expect(hero.querySelector(".photo-hero-image")?.getAttribute("src")).toBe(
+        "/images/editorial/data-dashboard.png",
+      );
+      expect(doc.querySelectorAll('form[role="search"]')).toHaveLength(1);
+      expect(doc.querySelector(".pn-archive form")).toBeNull();
       expect(doc.querySelector(".pn-tabs")).toBeTruthy();
       expect(doc.querySelectorAll(".pn-post-grid .pn-card")).toHaveLength(6);
       expect(doc.querySelector(".photo-hero")).toBeTruthy();
-      expect(doc.querySelector(".reference-page-intro")).toBeTruthy();
+      expect(doc.querySelector(".reference-page-intro")).toBeNull();
       expect(doc.querySelector(".pn-archive.section-space > .page-container")).toBeTruthy();
       expect(doc.querySelector(".community-cta")).toBeTruthy();
       expect(doc.querySelector(".pn-archive h1")).toBeNull();

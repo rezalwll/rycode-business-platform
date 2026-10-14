@@ -118,6 +118,7 @@ export function getPrimaryNav(locale: Locale): PrimaryNavItem[] {
     }] },
     { label: fa ? "نمونه‌کارها" : "Work", href: "/projects" },
     { label: fa ? "درباره ما" : "About us", href: "/about", menu: [{
+      id: "about-links",
       title: fa ? "آشنایی با رایکد" : "Meet RYCODE",
       items: [{ label: fa ? "درباره رایکد" : "About RYCODE", href: "/about" }, { label: fa ? "چرا رایکد" : "Why RYCODE", href: "/about#approach" }, { label: fa ? "فرایند همکاری" : "Our process", href: "/about#process" }, { label: fa ? "ابزار و تکنولوژی" : "Our technology", href: "/about#technology" }, { label: fa ? "پرسش‌های متداول" : "FAQ", href: "/faq" }],
     }] },

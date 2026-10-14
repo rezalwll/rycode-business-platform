@@ -50,6 +50,63 @@ afterEach(() => {
 });
 
 describe("site navigation", () => {
+  it("keeps a closing dropdown mounted for its fade but immediately removes interaction", () => {
+    const { container } = render(<SiteHeader locale="fa" />);
+    const trigger = screen.getByRole("button", { name: "زیرمنوی خدمات" });
+    const panel = container.querySelector('.rycode-desktop-submenu[aria-label="زیرمنوی خدمات"]')!;
+    expect(panel.getAttribute("aria-hidden")).toBe("true");
+    expect(panel.hasAttribute("inert")).toBe(true);
+    fireEvent.click(trigger);
+    expect(panel.getAttribute("data-state")).toBe("open");
+    expect(panel.hasAttribute("inert")).toBe(false);
+    fireEvent.keyDown(trigger, {key: "Escape"});
+    expect(panel.isConnected).toBe(true);
+    expect(panel.getAttribute("data-state")).toBe("closed");
+    expect(panel.getAttribute("aria-hidden")).toBe("true");
+    expect(panel.hasAttribute("inert")).toBe(true);
+    expect(screen.queryByRole("region", {name: "زیرمنوی خدمات"})).toBeNull();
+  });
+  it("keeps each dropdown label and chevron inside one shared click target", () => {
+    for (const locale of ["fa", "en"] as const) {
+      const { unmount } = render(<SiteHeader locale={locale} />);
+      const trigger = screen.getByRole("button", { name: locale === "fa" ? "زیرمنوی خدمات" : "Services submenu" });
+      const label = within(trigger).getByText(locale === "fa" ? "خدمات" : "Services");
+      const arrow = trigger.querySelector("svg")!;
+      expect(trigger.querySelector("a, button")).toBeNull();
+      expect(trigger.classList.contains("rycode-primary-link")).toBe(true);
+      fireEvent.click(label);
+      expect(trigger.getAttribute("aria-expanded")).toBe("true");
+      fireEvent.click(arrow);
+      expect(trigger.getAttribute("aria-expanded")).toBe("false");
+      fireEvent.click(screen.getByRole("button", { name: locale === "fa" ? "باز کردن منو" : "Open menu" }));
+      const dialog = screen.getByRole("dialog");
+      const mobile = within(dialog).getByRole("button", { name: locale === "fa" ? "نمایش خدمات" : "Show Services" });
+      fireEvent.click(within(mobile).getByText(locale === "fa" ? "خدمات" : "Services"));
+      expect(mobile.getAttribute("aria-expanded")).toBe("true");
+      fireEvent.click(mobile.querySelector("svg")!);
+      expect(mobile.getAttribute("aria-expanded")).toBe("false");
+      unmount();
+    }
+  });
+  it("omits the extra about-group heading while preserving all five links on desktop and mobile", () => {
+    for (const locale of ["fa", "en"] as const) {
+      const { unmount } = render(<SiteHeader locale={locale} />);
+      fireEvent.click(screen.getByRole("button", { name: locale === "fa" ? "زیرمنوی درباره ما" : "About us submenu" }));
+      const panel = screen.getByRole("region", { name: locale === "fa" ? "زیرمنوی درباره ما" : "About us submenu" });
+      expect(within(panel).getAllByRole("link")).toHaveLength(5);
+      expect(panel.textContent).not.toContain(locale === "fa" ? "آشنایی با رایکد" : "Meet RYCODE");
+      expect(panel.querySelector("p")).toBeNull();
+      fireEvent.click(screen.getByRole("button", { name: locale === "fa" ? "باز کردن منو" : "Open menu" }));
+      const dialog = screen.getByRole("dialog");
+      const trigger = within(dialog).getByRole("button", { name: locale === "fa" ? "نمایش درباره ما" : "Show About us" });
+      fireEvent.click(trigger);
+      const mobilePanel = document.getElementById(trigger.getAttribute("aria-controls")!)!;
+      expect(within(mobilePanel).getAllByRole("link")).toHaveLength(5);
+      expect(mobilePanel.textContent).not.toContain(locale === "fa" ? "آشنایی با رایکد" : "Meet RYCODE");
+      expect(mobilePanel.querySelector("p")).toBeNull();
+      unmount();
+    }
+  });
   it("retains work in the main menu and renders only plain service links", () => {
     for (const locale of ["fa", "en"] as const) {
       const { container, unmount } = render(<SiteHeader locale={locale} />);
@@ -88,7 +145,9 @@ describe("site navigation", () => {
         expect(panel.querySelector(`a[href="${href}"]`)).toBeNull();
       }
       fireEvent.click(choices[0]!);
-      expect(panel.classList.contains("hidden")).toBe(true);
+      expect(panel.getAttribute("data-state")).toBe("closed");
+      expect(panel.getAttribute("aria-hidden")).toBe("true");
+      expect(panel.hasAttribute("inert")).toBe(true);
       expect(screen.getByRole("button", { name: locale === "fa" ? "زیرمنوی خدمات" : "Services submenu" }).getAttribute("aria-expanded")).toBe("false");
       fireEvent.click(screen.getByRole("button", { name: locale === "fa" ? "باز کردن منو" : "Open menu" }));
       const dialog = screen.getByRole("dialog");

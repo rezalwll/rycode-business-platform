@@ -26,7 +26,8 @@ import { PageHero } from "@/components/public/shared";
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { getCatalogEntries, getCatalogEntry } from "@/content/catalog";
-import { serviceHighlights, serviceFAQs } from "@/content/service-model";
+import { serviceFAQs } from "@/content/service-model";
+import { serviceCards } from "@/content/service-cards";
 
 beforeEach(() => {
   vi.stubGlobal("IntersectionObserver", class {
@@ -44,14 +45,22 @@ describe("Coorda-inspired public experience with RYCODE content", () => {
     for (const locale of ["fa", "en"] as const) {
       const { container, unmount } = render(<StudioHome locale={locale} />);
       const cards = container.querySelectorAll(".features-ticker-group:first-child .feature-card");
-      expect(cards).toHaveLength(serviceHighlights.length);
+      expect(cards).toHaveLength(serviceCards.length);
       cards.forEach((card, index) => {
-        const service = serviceHighlights[index]!;
+        const service = serviceCards[index]!;
         expect(card.querySelector("h3")?.textContent).toBe(service.title[locale]);
         expect(card.querySelector(".feature-card-summary")?.textContent).toBe(service.summary[locale]);
         expect(card.querySelector(".feature-card-tag")?.textContent).toBe(service.tag);
+        expect(card.querySelector(".capability-card-image img")).toBeTruthy();
+        expect(card.querySelector(".capability-card-image > span")).toBeNull();
         expect(card.querySelectorAll(".feature-card-preview a, .feature-card-preview button")).toHaveLength(0);
-        for (const related of service.related) expect(card.querySelector(`a[href="${locale === "en" ? "/en" : ""}/services/${related.slug}"]`)).toBeTruthy();
+        expect(card.querySelector(`a[href="${locale === "en" ? "/en" : ""}/services/${service.slug}"]`)).toBeTruthy();
+        const detailLink = card.querySelector(".capability-card-link")!;
+        expect(detailLink.getAttribute("href")).toBe(`${locale === "en" ? "/en" : ""}/services/${service.slug}`);
+        expect(detailLink.getAttribute("aria-label")).toBe(`${locale === "en" ? "More about" : "بیشتر دربارهٔ"} ${service.categoryTitle[locale]}`);
+        expect(detailLink.querySelector("strong")?.textContent).toBe(service.linkTitle[locale]);
+        expect(detailLink.querySelector(".capability-card-link-arrow svg")).toBeTruthy();
+        expect(detailLink.textContent).not.toContain("جزئیات خدمت");
       });
       const faq = container.querySelector("#faq")!;
       for (const item of serviceFAQs) {
@@ -70,8 +79,8 @@ describe("Coorda-inspired public experience with RYCODE content", () => {
       "hero", "features", "app-showcase", "impact", "community-cta", "desktop-app-section", "native-features", "stories-section", "pricing-section", "testimonials-section", "faq-section", "insights-section", "moments-section"
     ]);
     expect(container.querySelectorAll(".hero-brands-group")).toHaveLength(0);
-    expect(container.querySelectorAll(".features-ticker-group .feature-card")).toHaveLength(14);
-    expect(container.querySelectorAll(".features-slider .feature-card")).toHaveLength(7);
+    expect(container.querySelectorAll(".features-ticker-group .feature-card")).toHaveLength(serviceCards.length * 2);
+    expect(container.querySelectorAll(".features-slider .feature-card")).toHaveLength(serviceCards.length);
     expect(container.querySelectorAll(".showcase-screen")).toHaveLength(4);
     expect(container.querySelectorAll(".impact-topic-group")).toHaveLength(4);
     expect(container.querySelectorAll(".native-card")).toHaveLength(4);
