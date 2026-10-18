@@ -226,8 +226,8 @@ describe("Coorda-inspired public experience with RYCODE content", () => {
       const hero = container.querySelector(".hero")! as HTMLElement;
       const subtitle = hero.querySelector(".rycode-hero-subtitle");
       expect(subtitle?.textContent).toBe(locale === "fa"
-        ? "برای کسب‌وکارهایی که بزرگ فکر می‌کنند، فضای دیجیتال می‌سازیم؛ از سایت و فروشگاه تا نرم‌افزار اختصاصی—با تمرکز، دقت و مهندسی واقعی."
-        : "We build digital experiences for businesses that think big, from websites and stores to custom software—with focus, care and real engineering.");
+        ? "برای کسب‌وکارهایی که بزرگ فکر می‌کنند، فضای دیجیتال می‌سازیم؛ از سایت و فروشگاه تا نرم‌افزار اختصاصی با تمرکز، دقت و مهندسی."
+        : "We build digital experiences for businesses that think big, from websites and stores to custom software with focus, care and engineering.");
       expect(hero.querySelector(".hero-content > .hero-cta")).toBeTruthy();
       const video = hero.querySelector("video")!;
       expect(video.autoplay).toBe(true);

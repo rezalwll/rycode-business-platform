@@ -76,8 +76,8 @@ export default function ReferenceHero() {
           </motion.h1>
           <motion.p {...appear(0.22)} className="hero-subtitle rycode-hero-subtitle">
             {text(
-              "برای کسب‌وکارهایی که بزرگ فکر می‌کنند، فضای دیجیتال می‌سازیم؛ از سایت و فروشگاه تا نرم‌افزار اختصاصی—با تمرکز، دقت و مهندسی واقعی.",
-              "We build digital experiences for businesses that think big, from websites and stores to custom software—with focus, care and real engineering.",
+              "برای کسب‌وکارهایی که بزرگ فکر می‌کنند، فضای دیجیتال می‌سازیم؛ از سایت و فروشگاه تا نرم‌افزار اختصاصی با تمرکز، دقت و مهندسی.",
+              "We build digital experiences for businesses that think big, from websites and stores to custom software with focus, care and engineering.",
             )}
           </motion.p>
           <motion.a {...appear(0.34)} href={href("/start-project")} className="hero-cta">

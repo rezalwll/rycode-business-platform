@@ -38,7 +38,7 @@ export function Hero() {
 
         <p className="hero-fade-rise hero-fade-rise-delay-1 mt-6 max-w-2xl text-sm leading-8 text-white/68 sm:text-base sm:leading-8">
           برای کسب‌وکارهایی که بزرگ فکر می‌کنند، فضای دیجیتال می‌سازیم؛ از سایت و فروشگاه تا
-          نرم‌افزار اختصاصی—با تمرکز، دقت و مهندسی واقعی.
+          نرم‌افزار اختصاصی با تمرکز، دقت و مهندسی.
         </p>
 
         <div className="hero-fade-rise hero-fade-rise-delay-2 mt-8 flex w-full max-w-md flex-col items-stretch justify-center gap-3 sm:mt-9 sm:w-auto sm:max-w-none sm:flex-row">
