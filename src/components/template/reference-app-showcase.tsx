@@ -2,11 +2,12 @@
 
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
-import { useRef } from "react";
-import { motion, useReducedMotion, useScroll, useTransform, type MotionStyle } from "motion/react";
+import { useEffect, useRef } from "react";
+import { motion, useMotionValue, useReducedMotion, useScroll, useSpring, useTransform, type MotionStyle } from "motion/react";
 import { BrandText } from "@/components/site/brand-text";
 import { getCatalogEntries, getCatalogVisual, type CatalogEntry } from "@/content/catalog";
 import { useReferenceLocale } from "./reference-locale";
+import { projectStudyPhase, projectStudySpring } from "./project-study-motion";
 import "./project-studies.css";
 
 const categories: Record<string, { fa: string; en: string }> = {
@@ -19,11 +20,31 @@ function ProjectStudy({ project }: { project: CatalogEntry }) {
   const { locale, href, text } = useReferenceLocale();
   const frameRef = useRef<HTMLElement>(null);
   const reduceMotion = useReducedMotion();
-  // Measure a stable wrapper, never the transformed card. The reference tilts
-  // on both entry and exit; the local clone only implemented the first half.
+  // Stable layout measurements, not the tilted image's changing bounding box.
   const { scrollYProgress } = useScroll({ target: frameRef, offset: ["start end", "end start"] });
-  const rotation = useTransform(scrollYProgress, [0, .5, 1], [-1, 0, 1]);
-  const edge = useTransform(scrollYProgress, [0, .5, 1], [1, 0, 1]);
+  const dimensions = useMotionValue({ viewport: 0, height: 0 });
+  const targetRotation = useTransform(() => {
+    const { viewport, height } = dimensions.get();
+    return projectStudyPhase(scrollYProgress.get(), viewport, height);
+  });
+  const targetEdge = useTransform(targetRotation, Math.abs);
+  // Smooth the two channels independently: scale must not abruptly reverse
+  // velocity at the flat/full-size point or when scroll direction changes.
+  const rotation = useSpring(targetRotation, projectStudySpring);
+  const edge = useSpring(targetEdge, projectStudySpring);
+  useEffect(() => {
+    const frame = frameRef.current;
+    if (!frame || reduceMotion) return;
+    const measure = () => dimensions.set({ viewport: window.innerHeight, height: frame.getBoundingClientRect().height });
+    measure();
+    const observer = typeof ResizeObserver === "undefined" ? undefined : new ResizeObserver(measure);
+    observer?.observe(frame);
+    window.addEventListener("resize", measure, { passive: true });
+    return () => {
+      observer?.disconnect();
+      window.removeEventListener("resize", measure);
+    };
+  }, [dimensions, reduceMotion]);
   const visual = getCatalogVisual(project);
   if (!visual) return null;
   const titleId = `study-${project.slug}-title`;

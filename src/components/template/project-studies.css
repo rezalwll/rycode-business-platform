@@ -9,12 +9,14 @@
 .coorda-reference .project-studies-heading > p { max-width: 650px; margin: 0; color: #666; font-size: 15px; line-height: 1.9; text-wrap: pretty; }
 .coorda-reference .project-studies-heading small { max-width: 650px; color: #707070; font-size: 11px; line-height: 1.8; }
 .coorda-reference .project-studies-list { display: flex; flex-direction: column; gap: 20px; }
-.coorda-reference .project-study-item { min-width: 0; scroll-margin-top: 88px; }
+.coorda-reference .project-study-item { position: relative; min-width: 0; scroll-margin-top: 88px; }
 .coorda-reference .project-study-motion {
   --case-tilt: 50deg;
   --case-shrink: .2;
   transform: perspective(2000px) scale(calc(1 - var(--case-edge, 0) * var(--case-shrink))) rotateX(calc(var(--case-rotation, 0) * var(--case-tilt)));
   transform-origin: center;
+  will-change: transform;
+  backface-visibility: hidden;
 }
 .coorda-reference .project-study-card { position: relative; display: flex; align-items: flex-end; isolation: isolate; width: 100%; aspect-ratio: 2 / 1; border-radius: 24px; overflow: clip; background: #102c3b; color: #fff; text-decoration: none; }
 .coorda-reference .project-study-card::after { content: ""; position: absolute; z-index: 0; inset: 0; pointer-events: none; background: linear-gradient(180deg, transparent 28%, #08151d38 52%, #08151de8 100%); }
@@ -54,7 +56,7 @@
   .coorda-reference .project-studies-all { margin-top: 28px; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .coorda-reference .project-study-motion { transform: none; }
+  .coorda-reference .project-study-motion { transform: none; will-change: auto; }
   .coorda-reference .project-study-image, .coorda-reference .project-study-arrow, .coorda-reference .project-studies-all { transition: none; }
   .coorda-reference .project-study-card:is(:hover, :focus-visible) .project-study-image { transform: none; }
 }

@@ -1,5 +1,5 @@
 // @vitest-environment jsdom
-import { cleanup, render, screen, within } from "@testing-library/react";
+import { act, cleanup, render, screen, within } from "@testing-library/react";
 import { readFileSync, existsSync } from "node:fs";
 import { resolve } from "node:path";
 import type { ImgHTMLAttributes } from "react";
@@ -9,13 +9,20 @@ import AppShowcase from "@/components/template/reference-app-showcase";
 import { ReferenceLocale } from "@/components/template/reference-locale";
 import { getCatalogEntries, getCatalogVisual } from "@/content/catalog";
 
+const motionPreference = vi.hoisted(() => ({ reduced: true }));
+vi.mock("motion/react", async importOriginal => ({
+  ...await importOriginal<typeof import("motion/react")>(),
+  useReducedMotion: () => motionPreference.reduced,
+}));
+
 vi.mock("next/image", () => ({
   default: ({ fill: _fill, ...props }: ImgHTMLAttributes<HTMLImageElement> & { fill?: boolean }) => <img {...props} />,
 }));
 beforeEach(() => {
+  motionPreference.reduced = true;
   vi.stubGlobal("matchMedia", () => ({ matches: true, addListener() {}, removeListener() {}, addEventListener() {}, removeEventListener() {} }));
 });
-afterEach(() => { cleanup(); vi.unstubAllGlobals(); });
+afterEach(() => { cleanup(); vi.unstubAllGlobals(); vi.restoreAllMocks(); });
 
 const css = postcss.parse(readFileSync(resolve(process.cwd(), "src/components/template/project-studies.css"), "utf8"));
 function declarations(selector: string, media?: string) {
@@ -30,6 +37,41 @@ function declarations(selector: string, media?: string) {
 }
 
 describe("ImpactFlow-inspired RYCODE project studies", () => {
+  it("measures stable card wrappers on layout changes and disconnects observers on unmount", () => {
+    motionPreference.reduced = false;
+    const cards: { callback: ResizeObserverCallback; target: Element; disconnect: ReturnType<typeof vi.fn> }[] = [];
+    vi.stubGlobal("ResizeObserver", class {
+      callback: ResizeObserverCallback;
+      disconnect = vi.fn();
+      constructor(callback: ResizeObserverCallback) { this.callback = callback; }
+      observe(target: Element) {
+        if (target.classList.contains("project-study-item")) cards.push({ callback: this.callback, target, disconnect: this.disconnect });
+      }
+      unobserve() {}
+    });
+    const originalRect = HTMLElement.prototype.getBoundingClientRect;
+    let height = 600;
+    const measurement = vi.spyOn(HTMLElement.prototype, "getBoundingClientRect").mockImplementation(function (this: HTMLElement) {
+      const rect = originalRect.call(this);
+      return this.classList.contains("project-study-item") ? {
+        x: rect.x, y: rect.y, width: rect.width, height,
+        top: rect.top, right: rect.right, bottom: rect.top + height, left: rect.left,
+        toJSON: () => ({ height }),
+      } : rect;
+    });
+    const removeListener = vi.spyOn(window, "removeEventListener");
+    const { unmount } = render(<AppShowcase />);
+    expect(cards).toHaveLength(3);
+    expect(cards.every(card => card.target.className === "project-study-item")).toBe(true);
+    measurement.mockClear();
+    height = 450;
+    act(() => cards.forEach(card => card.callback([], {} as ResizeObserver)));
+    expect(measurement.mock.instances.filter(target => (target as HTMLElement).classList.contains("project-study-item"))).toHaveLength(3);
+    unmount();
+    expect(cards.every(card => card.disconnect.mock.calls.length === 1)).toBe(true);
+    expect(removeListener.mock.calls.filter(([type]) => type === "resize").length).toBeGreaterThanOrEqual(3);
+  });
+
   it.each(["fa", "en"] as const)("shows existing project visuals and working localized study links for %s", locale => {
     const { container } = render(<ReferenceLocale locale={locale}><AppShowcase /></ReferenceLocale>);
     const section = container.querySelector("#app-showcase")!;
@@ -84,8 +126,11 @@ describe("ImpactFlow-inspired RYCODE project studies", () => {
     expect(declarations(".coorda-reference .project-study-motion", "(prefers-reduced-motion: reduce)").transform).toBe("none");
     const source = readFileSync(resolve(process.cwd(), "src/components/template/reference-app-showcase.tsx"), "utf8");
     expect(source).toContain('offset: ["start end", "end start"]');
-    expect(source).toContain("[0, .5, 1], [-1, 0, 1]");
-    expect(source).toContain("[0, .5, 1], [1, 0, 1]");
+    expect(source).toContain("projectStudyPhase(scrollYProgress.get(), viewport, height)");
+    expect(source).toContain("useSpring(targetRotation, projectStudySpring)");
+    expect(source).toContain("useSpring(targetEdge, projectStudySpring)");
+    expect(declarations(".coorda-reference .project-study-motion")["will-change"]).toBe("transform");
+    expect(declarations(".coorda-reference .project-study-motion", "(prefers-reduced-motion: reduce)")["will-change"]).toBe("auto");
     expect(source).not.toContain("scrollTo(");
   });
 });
