@@ -107,7 +107,7 @@ describe("site navigation", () => {
       unmount();
     }
   });
-  it("retains work in the main menu and renders only plain service links", () => {
+  it("retains work in the main menu and adds decorative icons without extra service content", () => {
     for (const locale of ["fa", "en"] as const) {
       const { container, unmount } = render(<SiteHeader locale={locale} />);
       const header = container.querySelector("header")!;
@@ -115,14 +115,17 @@ describe("site navigation", () => {
       fireEvent.click(screen.getByRole("button", {name: locale === "fa" ? "زیرمنوی خدمات" : "Services submenu"}));
       const panel = screen.getByRole("region", {name: locale === "fa" ? "زیرمنوی خدمات" : "Services submenu"});
       expect(within(panel).getAllByRole("link")).toHaveLength(7);
-      expect(panel.querySelector("img, svg, aside, h3, p, .rycode-services-menu-related")).toBeNull();
+      expect(panel.querySelector("img, aside, h3, p, .rycode-services-menu-related")).toBeNull();
+      expect(panel.querySelectorAll(".rycode-submenu-icon svg")).toHaveLength(7);
+      expect(panel.querySelectorAll('.rycode-submenu-arrow[aria-hidden="true"]')).toHaveLength(7);
       fireEvent.click(screen.getByRole("button", {name: locale === "fa" ? "باز کردن منو" : "Open menu"}));
       const dialog = screen.getByRole("dialog");
       expect(within(dialog).getByRole("link", {name: locale === "fa" ? /نمونه‌کارها/ : /Work/}).getAttribute("href")).toBe("/projects");
       fireEvent.click(within(dialog).getByRole("button", {name: locale === "fa" ? "نمایش خدمات" : "Show Services"}));
       const mobileMenu = dialog.querySelector(".rycode-services-menu")!;
       expect(within(mobileMenu as HTMLElement).getAllByRole("link")).toHaveLength(7);
-      expect(mobileMenu.querySelector("img, svg, aside, h3, p")).toBeNull();
+      expect(mobileMenu.querySelector("img, aside, h3, p")).toBeNull();
+      expect(mobileMenu.querySelectorAll(".rycode-submenu-icon svg")).toHaveLength(7);
       unmount();
     }
   });
@@ -172,6 +175,25 @@ describe("site navigation", () => {
       expect(within(header).getByRole("link", { name: "RYCODE" })).toBeTruthy();
       unmount();
     }
+  });
+
+  it.each(["fa", "en"] as const)("marks the current service and keeps redesigned links keyboard-accessible for %s", (locale) => {
+    route.pathname = "/services/custom-software";
+    render(<SiteHeader locale={locale} />);
+    const trigger = screen.getByRole("button", { name: locale === "fa" ? "زیرمنوی خدمات" : "Services submenu" });
+    fireEvent.keyDown(trigger, { key: "ArrowDown" });
+    const panel = screen.getByRole("region", { name: trigger.getAttribute("aria-label")! });
+    const links = within(panel).getAllByRole("link");
+    expect(document.activeElement).toBe(links[0]);
+    expect(links.filter(link => link.getAttribute("aria-current") === "page")).toEqual([links[2]]);
+    links.forEach((link, index) => {
+      expect(link.textContent).toBe(serviceHighlights[index]!.title[locale]);
+      expect(link.querySelector('.rycode-submenu-icon[aria-hidden="true"]')).toBeTruthy();
+      expect(link.querySelector("a, button")).toBeNull();
+    });
+    fireEvent.keyDown(links[0]!, { key: "Escape" });
+    expect(document.activeElement).toBe(trigger);
+    expect(panel.hasAttribute("inert")).toBe(true);
   });
 
   it("opens one submenu on pointer enter and closes on leave", () => {

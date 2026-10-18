@@ -1,8 +1,12 @@
 "use client";
 import { BrandText } from "@/components/site/brand-text";
 
-import { ChevronDown, Globe2, Menu, X } from "lucide-react";
-import { useEffect, useId, useRef, useState } from "react";
+import {
+  ArrowRight, Blocks, Bot, ChartNoAxesCombined, ChevronDown, CircleHelp,
+  CodeXml, FileSpreadsheet, Globe2, Headset, Menu, Route, ScanLine,
+  ShieldCheck, UsersRound, Wrench, X, type LucideIcon,
+} from "lucide-react";
+import { useEffect, useId, useRef, useState, type ReactNode } from "react";
 import { AnimatePresence, motion, useIsPresent, useReducedMotion } from "motion/react";
 
 import { Link, usePathname } from "@/i18n/navigation";
@@ -263,13 +267,13 @@ function DesktopNavItem({
           data-state={open ? "open" : "closed"}
           className={cn(
             "rycode-desktop-submenu absolute right-0 top-full z-50 max-w-[calc(100vw-3rem)] pt-2",
-            servicesMenu ? "w-[360px]" : groups === 1 ? "w-72" : groups === 2 ? "w-[520px]" : "w-[860px]",
+            servicesMenu ? "w-[400px]" : groups === 1 ? "w-72" : groups === 2 ? "w-[520px]" : "w-[860px]",
           )}
           dir={locale === "fa" ? "rtl" : "ltr"}
         >
-          {servicesMenu ? <ServicesMenu locale={locale} onClose={onClose} /> : <div
+          {servicesMenu ? <ServicesMenu locale={locale} pathname={pathname} onClose={onClose} /> : <div
             className={cn(
-              "grid max-h-[min(70vh,560px)] gap-6 overflow-y-auto rounded-xl border border-border bg-surface p-6 text-foreground shadow-[0_20px_60px_rgba(0,0,0,0.14)]",
+              "rycode-submenu-surface grid gap-4",
               groups === 1
                 ? "grid-cols-1"
                 : groups === 2
@@ -300,18 +304,18 @@ function DesktopNavItem({
                 </p>}
                 <ul
                   className={
-                    group.id === "service-resources" ? "flex flex-wrap gap-2" : "space-y-2"
+                    group.id === "service-resources" ? "flex flex-wrap gap-2" : "rycode-submenu-list"
                   }
                 >
                   {group.items.map((child, index) => (
                     <li key={`${child.id ?? child.href}-${child.label}-${index}`}>
-                      <Link
+                      <SubmenuLink
                         href={child.href}
                         onClick={onClose}
-                        className="block rounded-lg px-2 py-2 text-xs leading-5 text-foreground/80 transition-colors hover:bg-brand-soft hover:text-brand-foreground focus-visible:bg-brand-soft focus-visible:outline-2 focus-visible:outline-brand"
+                        current={pathname === child.href}
                       >
                         {child.label}
-                      </Link>
+                      </SubmenuLink>
                     </li>
                   ))}
                 </ul>
@@ -324,15 +328,46 @@ function DesktopNavItem({
   );
 }
 
-function ServicesMenu({ locale, onClose, mobile = false }: {
+const submenuIcons: Record<string, LucideIcon> = {
+  "/services/web-development": ScanLine,
+  "/services/seo-growth": ChartNoAxesCombined,
+  "/services/custom-software": CodeXml,
+  "/services/project-rescue": Wrench,
+  "/services/api-integration": Bot,
+  "/services/data-analytics": FileSpreadsheet,
+  "/services/ongoing-support": Headset,
+  "/about": UsersRound,
+  "/about#approach": ShieldCheck,
+  "/about#process": Route,
+  "/about#technology": Blocks,
+  "/faq": CircleHelp,
+};
+
+function SubmenuLink({ href, children, onClick, current, className }: {
+  href: PrimaryNavItem["href"];
+  children: ReactNode;
+  onClick: () => void;
+  current: boolean;
+  className?: string;
+}) {
+  const Icon = submenuIcons[href] ?? ArrowRight;
+  return <Link href={href} onClick={onClick} aria-current={current ? "page" : undefined} className={cn("rycode-submenu-link", className)}>
+    <span className="rycode-submenu-icon" aria-hidden="true"><Icon size={18} strokeWidth={1.65} /></span>
+    <span className="rycode-submenu-label">{children}</span>
+    <ArrowRight className="rycode-submenu-arrow" size={14} aria-hidden="true" />
+  </Link>;
+}
+
+function ServicesMenu({ locale, pathname, onClose, mobile = false }: {
   locale: Locale;
+  pathname: string;
   onClose: () => void;
   mobile?: boolean;
 }) {
-  return <div className={cn("rycode-services-menu", mobile && "rycode-services-menu-mobile")}>
+  return <div className={cn("rycode-submenu-surface rycode-services-menu", mobile && "rycode-services-menu-mobile")}>
     <ul className="rycode-services-menu-list">
       {serviceHighlights.map(service => <li key={service.id}>
-        <Link href={`/services/${service.slug}`} onClick={onClose} className="rycode-services-menu-link">{service.title[locale]}</Link>
+        <SubmenuLink href={`/services/${service.slug}`} onClick={onClose} current={pathname === `/services/${service.slug}`} className="rycode-services-menu-link">{service.title[locale]}</SubmenuLink>
       </li>)}
     </ul>
   </div>;
@@ -525,25 +560,25 @@ function MobileMenu({
                       id={`mobile-submenu-${index}`}
                       hidden={expanded !== item.href}
                       className={cn(
-                        "mb-3 mt-1 gap-4 rounded-xl border border-border bg-transparent p-3",
+                        "rycode-mobile-submenu mb-3 mt-1 gap-4 rounded-xl border border-border bg-transparent p-2",
                         expanded === item.href ? "grid" : "hidden",
                       )}
                     >
-                      {item.href === "/services" ? <ServicesMenu locale={locale} onClose={onClose} mobile /> : item.menu.map((group) => (
+                      {item.href === "/services" ? <ServicesMenu locale={locale} pathname={pathname} onClose={onClose} mobile /> : item.menu.map((group) => (
                         <div key={group.title}>
                           {group.id !== "about-links" && <p className="mb-2 text-xs font-semibold text-foreground dark:text-foreground">
                             {group.title}
                           </p>}
-                          <ul className="space-y-1">
+                          <ul className="rycode-submenu-list">
                             {group.items.map((child, childIndex) => (
                               <li key={`${child.id ?? child.href}-${child.label}-${childIndex}`}>
-                                <Link
+                                <SubmenuLink
                                   href={child.href}
                                   onClick={onClose}
-                                  className="block rounded-md px-2 py-2 text-sm leading-6 text-foreground/80 transition-colors hover:bg-surface hover:text-foreground"
+                                  current={pathname === child.href}
                                 >
                                   {child.label}
-                                </Link>
+                                </SubmenuLink>
                               </li>
                             ))}
                           </ul>
