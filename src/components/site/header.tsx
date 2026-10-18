@@ -66,7 +66,7 @@ export function SiteHeader({ locale }: { locale: Locale }) {
           "rycode-header fixed inset-x-0 top-0 z-50 border-b backdrop-blur-xl transition-shadow duration-300",
           overlay
             ? "reference-overlay-header border-white/15 bg-black/15 text-white"
-            : "border-border bg-surface/95 text-foreground",
+            : "border-border bg-surface text-foreground",
           elevated ? "shadow-[0_5px_20px_rgba(0,0,0,0.04)]" : "shadow-none",
         )}
       >

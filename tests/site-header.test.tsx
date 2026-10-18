@@ -50,6 +50,30 @@ afterEach(() => {
 });
 
 describe("site navigation", () => {
+  it.each(["fa", "en"] as const)("keeps the header opaque after scrolling and on inner pages for %s", (locale) => {
+    vi.spyOn(window, "scrollY", "get").mockReturnValue(0);
+    route.pathname = "/";
+    const { container, rerender } = render(<SiteHeader locale={locale} />);
+    const header = container.querySelector("header")!;
+    expect(header.classList.contains("reference-overlay-header")).toBe(true);
+    vi.spyOn(window, "scrollY", "get").mockReturnValue(100);
+    fireEvent.scroll(window);
+    expect(header.classList.contains("reference-overlay-header")).toBe(false);
+    expect(header.classList.contains("bg-surface")).toBe(true);
+    expect(header.classList.contains("bg-surface/95")).toBe(false);
+    vi.spyOn(window, "scrollY", "get").mockReturnValue(0);
+    fireEvent.scroll(window);
+    expect(header.classList.contains("reference-overlay-header")).toBe(true);
+    route.pathname = "/services";
+    rerender(<SiteHeader locale={locale} />);
+    expect(header.classList.contains("reference-overlay-header")).toBe(false);
+    expect(header.classList.contains("bg-surface")).toBe(true);
+    document.documentElement.classList.add("dark");
+    fireEvent.scroll(window);
+    expect(header.classList.contains("bg-surface")).toBe(true);
+    vi.restoreAllMocks();
+  });
+
   it("keeps a closing dropdown mounted for its fade but immediately removes interaction", () => {
     const { container } = render(<SiteHeader locale="fa" />);
     const trigger = screen.getByRole("button", { name: "زیرمنوی خدمات" });
