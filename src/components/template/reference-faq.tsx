@@ -16,7 +16,7 @@ export default function FAQ({ items, heading, id = "faq" }: {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const reduceMotion = useReducedMotion();
   return (
-    <BrandText><section id={id} className="faq-section" aria-labelledby={`${id}-title`}>
+    <BrandText><section id={id} className="faq-section" dir={locale === "fa" ? "rtl" : "ltr"} aria-labelledby={`${id}-title`}>
       <div className="faq-container">
         <motion.h2
           id={`${id}-title`}

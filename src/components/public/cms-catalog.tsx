@@ -1,11 +1,7 @@
 import { ArrowUpLeft, ArrowUpRight } from "lucide-react";
 import { BrandText } from "@/components/site/brand-text";
-import Image from "next/image";
 import Link from "next/link";
-import type { CSSProperties } from "react";
-
-import { catalogContextVariant } from "@/components/site/context-visual";
-import { Container } from "@/components/site/primitives";
+import Image from "next/image";
 import {
   catalogPath,
   getCatalogVisual,
@@ -15,37 +11,66 @@ import {
 } from "@/content/catalog";
 import type { Locale } from "@/i18n/routing";
 import type { PublicCatalogEntry } from "@/server/queries/public-content";
-
-import { ActionLink, FinalBand, localizedHref, PageHero } from "./shared";
-import { ServiceContext } from "./service-context";
-import { ServiceShowcase } from "@/components/home/service-showcase";
 import { serviceFamilies, serviceExampleEntries } from "@/content/service-model";
 import { BlogIndex } from "./blog";
 import type { BlogQuery } from "./blog-model";
+import { ServiceContext } from "./service-context";
+import { localizedHref } from "./shared";
+import { InnerHero, InnerLink, InnerEndnote, cleanInnerTitle, servicePageImage } from "./inner-ui";
 
-export function PublicContentCards({ locale, entries }: { locale: Locale; entries: PublicCatalogEntry[] }) {
-  if (!entries.length) return <BrandText><div className="archive-empty"><p>{locale === "fa" ? "محتوایی برای نمایش وجود ندارد" : "No content is available yet"}</p></div></BrandText>;
-  return <BrandText><div className="insights-grid archive-grid">
-    {entries.map(({ entry }) => {
-      const visual = getCatalogVisual(entry);
-      const id = `catalog-${entry.kind}-${entry.slug}`;
-      return <article className="insight-article" key={id}>
-        <Link className="insight-card" href={localizedHref(locale, catalogPath(entry.kind, entry.slug))} aria-labelledby={id}>
-          <div className="insight-photo">
-            <img src={visual?.src ?? "/images/editorial/web-experience.png"} width={1024} height={683} alt={visual ? localize(visual.alt, locale) : ""} loading="lazy" />
-          </div>
-          <div className="insight-content">
-            <h3 id={id}>{localize(entry.title, locale)}</h3>
-            <div className="insight-meta">
-              <span className="insight-author"><img src="/coorda-template/rycode-black.svg" width={44} height={28} alt="" /><span>{localize(entry.eyebrow, locale)}</span></span>
-              {entry.conceptual && <><span className="insight-divider" aria-hidden="true" /><span>{locale === "fa" ? "مطالعه مفهومی" : "Concept study"}</span></>}
-            </div>
-            <p className="reference-card-summary">{localize(entry.summary, locale)}</p>
-          </div>
-        </Link>
-      </article>;
-    })}
-  </div></BrandText>;
+export function PublicContentCards({
+  locale,
+  entries,
+  layout = "grid",
+}: {
+  locale: Locale;
+  entries: PublicCatalogEntry[];
+  layout?: "grid" | "work" | "related";
+}) {
+  if (!entries.length)
+    return (
+      <p className="inner-help-empty">
+        {locale === "fa" ? "محتوایی برای نمایش وجود ندارد" : "No content is available yet"}
+      </p>
+    );
+  const Heading = layout === "related" ? "h3" : "h2";
+  return (
+    <BrandText>
+      <div className={`inner-catalog-grid ${layout === "work" ? "inner-work-grid" : ""}`}>
+        {entries.map(({ entry }) => {
+          const visual = getCatalogVisual(entry);
+          return (
+            <article className="inner-catalog-card" key={`${entry.kind}-${entry.slug}`}>
+              <Link href={localizedHref(locale, catalogPath(entry.kind, entry.slug))}>
+                <Image
+                  src={
+                    visual?.src ??
+                    servicePageImage(entry.kind === "services" ? entry.slug : "custom-software")
+                  }
+                  width={1024}
+                  height={683}
+                  sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 400px"
+                  alt={visual ? localize(visual.alt, locale) : ""}
+                />
+                <div className="inner-catalog-card-copy">
+                  <p className="inner-eyebrow">{localize(entry.eyebrow, locale)}</p>
+                  <Heading>{cleanInnerTitle(localize(entry.title, locale))}</Heading>
+                  <p>{localize(entry.summary, locale)}</p>
+                  {entry.conceptual && (
+                    <span className="inner-disclosure">
+                      {locale === "fa"
+                        ? "مطالعهٔ مفهومی، نه پروژهٔ واقعی"
+                        : "Concept scenario, not client work"}
+                    </span>
+                  )}
+                </div>
+              </Link>
+            </article>
+          );
+        })}
+      </div>
+    </BrandText>
+  );
 }
 
 export function PublicCatalogHub({
@@ -65,147 +90,169 @@ export function PublicCatalogHub({
   projects?: PublicCatalogEntry[];
   blogQuery?: BlogQuery;
 }) {
-  if (kind === "blog") return <BlogIndex locale={locale} entries={entries} query={blogQuery ?? {}} />;
+  if (kind === "blog")
+    return <BlogIndex locale={locale} entries={entries} query={blogQuery ?? {}} />;
+  const fa = locale === "fa";
   const copy = kindCopy[kind];
+  const services = kind === "services";
   const examples = serviceExampleEntries(projects.map(({ entry }) => entry));
+  const Arrow = fa ? ArrowUpLeft : ArrowUpRight;
   return (
-    <BrandText><>
-      <PageHero
-        locale={locale}
-        eyebrow={localize(copy.eyebrow, locale)}
-        title={localize(copy.title, locale)}
-        lead={localize(copy.lead, locale)}
-        visualVariant={catalogContextVariant(kind, "")}
-        aside={
-          kind === "services" ? <div className="reference-service-start">
-            <p>{locale === "fa" ? "هنوز نمی‌دانی کدام خدمت مناسب توست؟ از وضعیت فعلی‌ات شروع کن" : "Not sure which service fits? Start with where you are today."}</p>
-            <div>
-              <ActionLink locale={locale} href="/start-project" secondary>{locale === "fa" ? "یک پروژهٔ تازه دارم" : "I have a new project"}</ActionLink>
-              <ActionLink locale={locale} href="/technical-review" secondary>{locale === "fa" ? "پروژه‌ام نیاز به بررسی دارد" : "My project needs a review"}</ActionLink>
-              <ActionLink locale={locale} href="/seo-audit" secondary>{locale === "fa" ? "می‌خواهم سایتم بهتر دیده شود" : "I want my site to get found"}</ActionLink>
-            </div>
-          </div> : <>
-            <span className="meta-label block text-foreground">
-              {String(entries.length).padStart(2, "0")} / {kind.toUpperCase()}
-            </span>
-            <Link
-              className="mt-4 inline-flex font-semibold text-white/80 transition-colors hover:text-foreground"
-              href={localizedHref(locale, "/search")}
-            >
-              {locale === "fa" ? "جست‌وجوی سایت" : "Search the site"}
-            </Link>
-          </>
-        }
-      />
-      <section
-        id={kind === "services" ? "services" : undefined}
-        className="insights-archive section-space"
-      >
-        <Container>
-          <div className="relative">
-            {kind === "services" && (
+    <BrandText>
+      <div className={`rycode-inner inner-hub inner-hub-${kind}`} dir={fa ? "rtl" : "ltr"}>
+        <InnerHero
+          locale={locale}
+          eyebrow={localize(copy.eyebrow, locale)}
+          title={localize(copy.title, locale)}
+          lead={localize(copy.lead, locale)}
+          layout={services ? "split" : "center"}
+          {...(services ? { image: "/images/services/business-site.png" } : {})}
+        >
+          {services ? (
+            <>
+              <InnerLink locale={locale} href="/start-project">
+                {fa ? "یک پروژهٔ تازه دارم" : "I have a new project"}
+              </InnerLink>
+              <InnerLink locale={locale} href="/technical-review" secondary>
+                {fa ? "پروژه‌ام نیاز به بررسی دارد" : "My project needs a review"}
+              </InnerLink>
+              <InnerLink locale={locale} href="/seo-audit" secondary>
+                {fa ? "می‌خواهم سایتم بهتر دیده شود" : "I want my site to get found"}
+              </InnerLink>
+            </>
+          ) : (
+            <InnerLink locale={locale} href="/services" secondary>
+              {fa ? "خدمات مرتبط را ببین" : "Explore our services"}
+            </InnerLink>
+          )}
+        </InnerHero>
+        <section id={services ? "services" : undefined} className="inner-directory inner-container">
+          {services ? (
+            <>
               <nav
-                aria-label={locale === "fa" ? "بخش‌های خدمات" : "Service sections"}
-                className="mb-8 flex flex-wrap gap-2"
+                className="inner-directory-nav"
+                aria-label={fa ? "بخش‌های خدمات" : "Service sections"}
               >
                 {[
                   ...serviceFamilies.map((family) => ({
                     id: family.id,
-                    label: family.title[locale],
+                    title: family.title[locale],
                     available: entries.some(({ entry }) =>
                       (family.slugs as readonly string[]).includes(entry.slug),
                     ),
                   })),
                   {
                     id: "solutions",
-                    label: locale === "fa" ? "سیستم‌های قابل ساخت" : "Systems we build",
+                    title: fa ? "سیستم‌های قابل ساخت" : "Systems we build",
                     available: solutions.length > 0,
                   },
                   {
                     id: "industries",
-                    label: locale === "fa" ? "برای کسب‌وکار شما" : "For your business",
+                    title: fa ? "برای کسب‌وکار شما" : "For your business",
                     available: industries.length > 0,
                   },
                 ]
                   .filter((item) => item.available)
                   .map((item) => (
-                    <a
-                      key={item.id}
-                      href={`#${item.id}`}
-                      className="rounded-full border border-border bg-surface px-4 py-2 text-sm font-medium text-foreground transition-colors hover:border-brand hover:bg-brand-soft"
-                    >
-                      {item.label}
+                    <a key={item.id} href={`#${item.id}`}>
+                      {item.title}
                     </a>
                   ))}
               </nav>
-            )}
-            {kind === "services" ? (
-              <>
-                {serviceFamilies.map((family) => {
-                  const familyEntries = family.slugs.flatMap((slug) => {
-                    const found = entries.find(({ entry }) => entry.slug === slug);
-                    return found ? [found] : [];
-                  });
-                  return familyEntries.length > 0 ? (
-                    <section
-                      key={family.id}
-                      id={family.id}
-                      className="services-family-block"
-                      style={{ "--family-accent": family.accent } as CSSProperties}
-                      aria-labelledby={`family-${family.id}-title`}
-                    >
-                      <div className="services-family-heading">
-                        <div>
-                          <span className="studio-label">{family.tagline[locale]}</span>
-                          <h2 id={`family-${family.id}-title`}>{family.title[locale]}</h2>
-                        </div>
-                        <div className="reference-family-copy">
-                          <p className="studio-body">{family.description[locale]}</p>
-                          <p className="reference-family-scope">{family.scope[locale]}</p>
+              {serviceFamilies.map((family) => {
+                const familyEntries = family.slugs.flatMap((slug) => {
+                  const found = entries.find(({ entry }) => entry.slug === slug);
+                  return found ? [found] : [];
+                });
+                if (!familyEntries.length) return null;
+                const associated = projects.filter(({ entry }) =>
+                  family.slugs.some((slug) =>
+                    examples[slug]?.some((example) => example.slug === entry.slug),
+                  ),
+                );
+                return (
+                  <section
+                    className="services-family-block"
+                    id={family.id}
+                    key={family.id}
+                    aria-labelledby={`family-${family.id}-title`}
+                  >
+                    <div className="inner-family-layout">
+                      <div className="inner-family-copy">
+                        <p className="inner-eyebrow">{family.tagline[locale]}</p>
+                        <h2 id={`family-${family.id}-title`}>{family.title[locale]}</h2>
+                        <p>{family.description[locale]}</p>
+                        <p className="inner-family-scope">{family.scope[locale]}</p>
+                      </div>
+                      <div>
+                        <Image
+                          className="inner-family-image"
+                          src={servicePageImage(familyEntries[0]!.entry.slug)}
+                          alt=""
+                          width={1024}
+                          height={576}
+                          sizes="(max-width: 767px) 100vw, 600px"
+                        />
+                        <div className="inner-service-links">
+                          {familyEntries.map(({ entry }) => (
+                            <Link
+                              href={localizedHref(locale, catalogPath("services", entry.slug))}
+                              key={entry.slug}
+                            >
+                              <div>
+                                <h3>{cleanInnerTitle(localize(entry.title, locale))}</h3>
+                                <p>{localize(entry.summary, locale)}</p>
+                              </div>
+                              <Arrow size={20} aria-hidden />
+                            </Link>
+                          ))}
                         </div>
                       </div>
-                      <PublicContentCards locale={locale} entries={familyEntries} />
-                      {family.slugs.some(slug => examples[slug]?.length) && (
-                        <div className="reference-family-examples">
-                          <h3>{locale === "fa" ? "این خدمت در یک سناریوی مفهومی" : "This service in a concept study"}</h3>
-                          <PublicContentCards locale={locale} entries={projects.filter(({entry}) => family.slugs.some(slug => examples[slug]?.some(example => example.slug === entry.slug)))} />
-                        </div>
-                      )}
-                    </section>
-                  ) : null;
-                })}
-                {entries.some(
-                  ({ entry }) =>
-                    !serviceFamilies.some((family) =>
-                      (family.slugs as readonly string[]).includes(entry.slug),
-                    ),
-                ) && (
-                  <section className="services-family-block">
-                    <h2 className="display-2 mb-6">
-                      {locale === "fa" ? "خدمات دیگر" : "More services"}
-                    </h2>
-                    <PublicContentCards
-                      locale={locale}
-                      entries={entries.filter(
-                        ({ entry }) =>
-                          !serviceFamilies.some((family) =>
-                            (family.slugs as readonly string[]).includes(entry.slug),
-                          ),
-                      )}
-                    />
+                    </div>
+                    {associated.length > 0 && (
+                      <div className="inner-family-examples">
+                        <h3>
+                          {fa ? "این خدمت در یک سناریوی مفهومی" : "This service in a concept study"}
+                        </h3>
+                        <PublicContentCards locale={locale} entries={associated} layout="related" />
+                      </div>
+                    )}
                   </section>
-                )}
-              </>
-            ) : (
-              <PublicContentCards locale={locale} entries={entries} />
-            )}
-          </div>
-        </Container>
-      </section>
-      {kind === "services" && (
-        <ServiceContext locale={locale} solutions={solutions} industries={industries} />
-      )}
-      <FinalBand locale={locale} />
-    </></BrandText>
+                );
+              })}
+              {entries.some(
+                ({ entry }) =>
+                  !serviceFamilies.some((family) =>
+                    (family.slugs as readonly string[]).includes(entry.slug),
+                  ),
+              ) && (
+                <section className="services-family-block">
+                  <h2>{fa ? "خدمات دیگر" : "More services"}</h2>
+                  <PublicContentCards
+                    locale={locale}
+                    entries={entries.filter(
+                      ({ entry }) =>
+                        !serviceFamilies.some((family) =>
+                          (family.slugs as readonly string[]).includes(entry.slug),
+                        ),
+                    )}
+                  />
+                </section>
+              )}
+            </>
+          ) : (
+            <PublicContentCards
+              locale={locale}
+              entries={entries}
+              layout={kind === "projects" ? "work" : "grid"}
+            />
+          )}
+        </section>
+        {services && (
+          <ServiceContext locale={locale} solutions={solutions} industries={industries} />
+        )}
+        <InnerEndnote locale={locale} />
+      </div>
+    </BrandText>
   );
 }

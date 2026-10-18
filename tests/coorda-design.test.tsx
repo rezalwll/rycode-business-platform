@@ -114,6 +114,8 @@ describe("Coorda adaptation invariants", () => {
       "grid-cols-[1fr_auto_1fr]",
     );
     expect(container.querySelector(".coorda-footer-wordmark")?.textContent).toBe("RYCODE");
+    expect(container.querySelector(".coorda-footer-wordmark img")).toBeNull();
+    expect(container.querySelector(".coorda-footer-identity .coorda-footer-mark")).toBeTruthy();
     expect(container.querySelector("footer .coorda-footer-wordmark")?.getAttribute("class")).toBe(
       "coorda-footer-wordmark",
     );
@@ -141,15 +143,16 @@ describe("Coorda adaptation invariants", () => {
     for (const locale of ["fa", "en"] as const) {
       for (const slug of ["privacy", "terms"] as const) {
         const html = renderToStaticMarkup(await CompanyPage({ locale, slug }));
-        expect(html).toContain("legal-content");
-        expect(html).toContain("legal-abstract");
+        expect(html).toContain("inner-document-grid");
+        expect(html).toContain("inner-hero-document");
         expect(
-          new DOMParser().parseFromString(html, "text/html").querySelectorAll(".legal-document > section")
-            .length,
+          new DOMParser()
+            .parseFromString(html, "text/html")
+            .querySelectorAll(".inner-document > section").length,
         ).toBeGreaterThanOrEqual(5);
       }
       const html = renderToStaticMarkup(await CompanyPage({ locale, slug: "faq" }));
-      expect(html).toContain('class="faq-card"');
+      expect(html).toContain('class="inner-help-card"');
       expect(html).toContain('aria-controls="faq-answer-0"');
       expect(html).toContain('"@type":"FAQPage"');
     }
@@ -167,7 +170,9 @@ describe("Coorda adaptation invariants", () => {
       );
       const doc = new DOMParser().parseFromString(html, "text/html");
       expect(doc.querySelectorAll("h1")).toHaveLength(1);
-      expect(doc.querySelector(".contact-panel")).toBeTruthy();
+      expect(doc.querySelector(".inner-contact-copy")).toBeTruthy();
+      expect(doc.querySelector(".inner-contact-form")).toBeTruthy();
+      expect(doc.querySelector(".inner-contact-copy img")).toBeNull();
       expect(doc.querySelector("form")?.getAttribute("data-kind")).toBe(kind);
       expect(doc.querySelector("form")?.getAttribute("data-source")).toBe(path);
       expect(doc.querySelector('[aria-current="page"]')?.getAttribute("href")).toBe(`/en${path}`);

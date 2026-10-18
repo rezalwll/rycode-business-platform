@@ -119,7 +119,9 @@ describe("Paknevis blog structure adapted to RYCODE", () => {
       expect(doc.querySelector(".photo-hero")).toBeTruthy();
       expect(doc.querySelector(".reference-page-intro")).toBeNull();
       expect(doc.querySelector(".pn-archive.section-space > .page-container")).toBeTruthy();
-      expect(doc.querySelector(".community-cta")).toBeTruthy();
+      expect(doc.querySelector(".inner-endnote a")?.getAttribute("href")).toBe(
+        locale === "fa" ? "/start-project" : "/en/start-project",
+      );
       expect(doc.querySelector(".pn-archive h1")).toBeNull();
       expect(doc.body.textContent).not.toContain("پاک‌نویس");
     }
@@ -155,6 +157,11 @@ describe("Paknevis blog structure adapted to RYCODE", () => {
       for (const item of section.items ?? []) expect(article.textContent).toContain(item.fa);
     }
     expect(article.querySelector("figure.pn-single-hero")).toBeTruthy();
+    expect(article.querySelector(".inner-article-layout")).toBeTruthy();
+    for (const link of article.querySelectorAll<HTMLAnchorElement>(".inner-toc a")) {
+      expect(article.querySelector(link.getAttribute("href")!)).toBeTruthy();
+    }
+    expect(article.querySelectorAll(".inner-toc a")).toHaveLength(entry.sections.length);
     expect(article.querySelector("time")?.getAttribute("datetime")).toBe(cms.publishedAt);
     expect(doc.querySelectorAll(".pn-download-banner a")).toHaveLength(2);
     expect(doc.querySelectorAll(".pn-related-posts .pn-card")).toHaveLength(2);
@@ -191,5 +198,9 @@ describe("Paknevis blog structure adapted to RYCODE", () => {
     expect(css).toContain("var(--action)");
     expect(css).toContain("var(--detail-purple)");
     expect(css).not.toMatch(/(?:^|\n)(?:body|html|:root|\*)\s*\{/u);
+    const internalCss = readFileSync(resolve("src/components/public/inner-pages.css"), "utf8");
+    expect(internalCss).toContain(".coorda-reference .rycode-inner.rycode-blog");
+    expect(internalCss).toContain("--pn-bg: var(--inner-surface)");
+    expect(internalCss).toContain(".inner-article-layout");
   });
 });

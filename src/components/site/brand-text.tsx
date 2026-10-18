@@ -33,7 +33,15 @@ export function colorBrandText(node: ReactNode): ReactNode {
   }
   if (Array.isArray(node)) {
     const children = node.map(colorBrandText);
-    return children.some((child, index) => child !== node[index]) ? children : node;
+    if (!children.some((child, index) => child !== node[index])) return node;
+    // Cloning turns JSX's static children into a dynamic array. Preserve supplied
+    // keys/refs and key only unkeyed siblings so the brand pass does not warn or
+    // destabilize reconciliation of the new internal-page composition.
+    return children.map((child, index) =>
+      isValidElement(child) && child.key === null
+        ? cloneElement(child, { key: `brand-child-${index}` })
+        : child,
+    );
   }
   if (
     !isValidElement<{

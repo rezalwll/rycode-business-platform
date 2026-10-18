@@ -1,20 +1,17 @@
-import { CheckCircle2, Plus, ShieldCheck } from "lucide-react";
+import { CheckCircle2, ShieldCheck } from "lucide-react";
 import { BrandText } from "@/components/site/brand-text";
-import Image from "next/image";
 import Link from "next/link";
 
-import type { ContextVisualVariant } from "@/components/site/context-visual";
 import { Container } from "@/components/site/primitives";
-import { ProductScene } from "@/components/site/product-scene";
 import type { LeadKind } from "@/features/leads/schema";
 import type { Locale } from "@/i18n/routing";
 import { listPublicFaqs } from "@/server/queries/public-content";
 
-import { ActionLink, FinalBand, JsonLd, localizedHref, PageHero } from "./shared";
+import { JsonLd, localizedHref } from "./shared";
 import { LeadForm } from "./lead-form";
-import ReferenceAboutContent from "@/components/template/reference-about-content";
-import ReferenceFAQ from "@/components/template/reference-faq";
 import { serviceFAQs } from "@/content/service-model";
+import { InnerHero, InnerLink, InnerEndnote, cleanInnerTitle } from "./inner-ui";
+import { InnerHelp } from "./inner-help";
 
 export const companyPageSlugs = [
   "about",
@@ -320,7 +317,7 @@ const pages: Record<CompanyPageSlug, PageCopy> = {
       fa: "از هزینه و تحویل کد تا پشتیبانی و سئو؛ جواب سؤال‌های رایج اینجاست. اگر سؤال تو فرق دارد، درباره‌اش با ما حرف بزن",
       en: "Cost, code handover, support and SEO: find answers to common questions here. If yours is different, let’s talk about it.",
     },
-    sections: serviceFAQs.map(item => ({ title: item.question, body: item.answer })),
+    sections: serviceFAQs.map((item) => ({ title: item.question, body: item.answer })),
   },
 };
 
@@ -330,40 +327,110 @@ function t(value: LocalText, locale: Locale): string {
 
 function AboutOverview({ locale }: { locale: Locale }) {
   const page = pages.about;
-  return <BrandText><>
-    <PageHero locale={locale} eyebrow={t(page.eyebrow, locale)} title={t(page.title, locale)} lead={t(page.lead, locale)} imageSrc="/coorda-template/about-hero.png" imageAlt="" />
-    <ReferenceAboutContent />
-    <section className="legal-content section-space" aria-label={t(page.title, locale)}>
-      <div className="legal-document">
-        {page.sections.map(section => <section key={section.title.en}>
-          <h2>{t(section.title, locale)}</h2><p>{t(section.body, locale)}</p>
-          {section.items && <ul>{section.items.map(item => <li key={item.en}>{t(item, locale)}</li>)}</ul>}
-        </section>)}
-        {(["why-rycode", "process", "technologies"] as const).map((slug, index) => <section id={["approach", "process", "technology"][index]} key={slug}>
-          <h2>{t(pages[slug].title, locale)}</h2><p>{t(pages[slug].lead, locale)}</p>
-          {pages[slug].sections.map(section => <section key={section.title.en}>
-            <h3>{t(section.title, locale)}</h3><p>{t(section.body, locale)}</p>
-            {section.items && <ul>{section.items.map(item => <li key={item.en}>{t(item, locale)}</li>)}</ul>}
-          </section>)}
-        </section>)}
+  return (
+    <BrandText>
+      <div className="rycode-inner inner-about" dir={locale === "fa" ? "rtl" : "ltr"}>
+        <InnerHero
+          locale={locale}
+          eyebrow={t(page.eyebrow, locale)}
+          title={t(page.title, locale)}
+          lead={t(page.lead, locale)}
+          image="/images/services/web-platform.png"
+        >
+          <InnerLink locale={locale} href="/contact">
+            {locale === "fa" ? "با هم آشنا شویم" : "Let’s get acquainted"}
+          </InnerLink>
+          <InnerLink locale={locale} href="#process" secondary>
+            {locale === "fa" ? "مسیر همکاری" : "Our process"}
+          </InnerLink>
+        </InnerHero>
+        <section className="inner-section inner-container" aria-label={t(page.title, locale)}>
+          <div className="inner-story">
+            <div>
+              <p className="inner-eyebrow">{locale === "fa" ? "نگاه ما" : "OUR PERSPECTIVE"}</p>
+              <h2>{t(page.sections[0]!.title, locale)}</h2>
+              <p>{t(page.sections[0]!.body, locale)}</p>
+            </div>
+            <div>
+              {page.sections.slice(1).map((section) => (
+                <section key={section.title.en}>
+                  <h3>{t(section.title, locale)}</h3>
+                  <p>{t(section.body, locale)}</p>
+                  {section.items && (
+                    <ul className="inner-list">
+                      {section.items.map((item) => (
+                        <li key={item.en}>{t(item, locale)}</li>
+                      ))}
+                    </ul>
+                  )}
+                </section>
+              ))}
+            </div>
+          </div>
+        </section>
+        {(["why-rycode", "process", "technologies"] as const).map((slug, index) => (
+          <section
+            className="inner-section inner-container inner-chapter"
+            id={["approach", "process", "technology"][index]}
+            key={slug}
+          >
+            <div className="inner-section-heading">
+              <h2>{cleanInnerTitle(t(pages[slug].title, locale))}</h2>
+            </div>
+            <p>{t(pages[slug].lead, locale)}</p>
+            {slug === "process" ? (
+              <ol className="inner-timeline">
+                {pages[slug].sections.map((section, step) => (
+                  <li key={section.title.en}>
+                    <span className="inner-step-number" aria-hidden>
+                      {String(step + 1).padStart(2, "0")}
+                    </span>
+                    <h3>{t(section.title, locale)}</h3>
+                    <p>{t(section.body, locale)}</p>
+                    {section.items && (
+                      <ul className="inner-list">
+                        {section.items.map((item) => (
+                          <li key={item.en}>{t(item, locale)}</li>
+                        ))}
+                      </ul>
+                    )}
+                  </li>
+                ))}
+              </ol>
+            ) : (
+              <div className="inner-values">
+                {pages[slug].sections.map((section, position) => (
+                  <section className="inner-value" key={section.title.en}>
+                    <span aria-hidden>{String(position + 1).padStart(2, "0")}</span>
+                    <h3>{t(section.title, locale)}</h3>
+                    <p>{t(section.body, locale)}</p>
+                    {section.items && (
+                      <ul className="inner-list">
+                        {section.items.map((item) => (
+                          <li key={item.en}>{t(item, locale)}</li>
+                        ))}
+                      </ul>
+                    )}
+                  </section>
+                ))}
+              </div>
+            )}
+          </section>
+        ))}
+        <InnerEndnote locale={locale} />
       </div>
-    </section>
-    <FinalBand locale={locale} />
-  </></BrandText>;
+    </BrandText>
+  );
 }
 
 export async function CompanyPage({ locale, slug }: { locale: Locale; slug: CompanyPageSlug }) {
-  if (slug === "about") return <BrandText><AboutOverview locale={locale} /></BrandText>;
+  if (slug === "about")
+    return (
+      <BrandText>
+        <AboutOverview locale={locale} />
+      </BrandText>
+    );
   const page = pages[slug];
-  const companyVisual: Record<CompanyPageSlug, ContextVisualVariant> = {
-    about: "connected",
-    "why-rycode": "software",
-    process: "ordering",
-    technologies: "integration",
-    faq: "support",
-    terms: "article",
-    privacy: "support",
-  };
   const isFaq = slug === "faq";
   const managedFaqs = isFaq ? await listPublicFaqs(locale) : [];
   const sections: RenderedSection[] = managedFaqs.length
@@ -375,41 +442,79 @@ export async function CompanyPage({ locale, slug }: { locale: Locale; slug: Comp
       }));
 
   return (
-    <BrandText><>
-      {isFaq && (
-        <JsonLd
-          value={{
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            mainEntity: sections.map((section) => ({
-              "@type": "Question",
-              name: section.title,
-              acceptedAnswer: { "@type": "Answer", text: section.body },
-            })),
-          }}
-        />
-      )}
-      <PageHero
-        locale={locale}
-        eyebrow={t(page.eyebrow, locale)}
-        title={t(page.title, locale)}
-        lead={t(page.lead, locale)}
-        visualVariant={companyVisual[slug]}
-        tone={isFaq || slug === "terms" || slug === "privacy" ? "abstract" : "photo"}
-      />
-      {isFaq ? <ReferenceFAQ items={sections.map(section => ({question:section.title, answer:section.body}))} /> : (
-        <section className="legal-content section-space" aria-label={t(page.title, locale)}>
-          <div className="legal-document">
-            <p className="legal-intro">{t(page.lead, locale)}</p>
-            {sections.map(section => <section key={section.title}>
-              <h2>{section.title}</h2><p>{section.body}</p>
-              {section.items && <ul>{section.items.map(item => <li key={item}>{item}</li>)}</ul>}
-            </section>)}
-          </div>
-        </section>
-      )}
-      <FinalBand locale={locale} />
-    </></BrandText>
+    <BrandText>
+      <div className="rycode-inner inner-company" dir={locale === "fa" ? "rtl" : "ltr"}>
+        {isFaq && (
+          <JsonLd
+            value={{
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              mainEntity: sections.map((section) => ({
+                "@type": "Question",
+                name: section.title,
+                acceptedAnswer: { "@type": "Answer", text: section.body },
+              })),
+            }}
+          />
+        )}
+        {isFaq ? (
+          <InnerHelp
+            locale={locale}
+            title={t(page.title, locale)}
+            lead={t(page.lead, locale)}
+            items={sections}
+          />
+        ) : (
+          <>
+            <InnerHero
+              locale={locale}
+              eyebrow={t(page.eyebrow, locale)}
+              title={t(page.title, locale)}
+              lead={t(page.lead, locale)}
+              layout="document"
+            />
+            <section
+              className="inner-section inner-container inner-document-grid"
+              aria-label={t(page.title, locale)}
+            >
+              <nav
+                className="inner-toc"
+                aria-label={locale === "fa" ? "فهرست این صفحه" : "On this page"}
+              >
+                <p>{locale === "fa" ? "در این صفحه" : "ON THIS PAGE"}</p>
+                <ol>
+                  {sections.map((section, index) => (
+                    <li key={section.title}>
+                      <a href={`#document-${index}`}>{section.title}</a>
+                    </li>
+                  ))}
+                </ol>
+              </nav>
+              <div className="inner-document">
+                {sections.map((section, index) => (
+                  <section
+                    id={`document-${index}`}
+                    className="reference-content-section"
+                    key={section.title}
+                  >
+                    <h2>{cleanInnerTitle(section.title)}</h2>
+                    <p>{section.body}</p>
+                    {section.items && (
+                      <ul className="inner-list">
+                        {section.items.map((item) => (
+                          <li key={item}>{item}</li>
+                        ))}
+                      </ul>
+                    )}
+                  </section>
+                ))}
+              </div>
+            </section>
+          </>
+        )}
+        <InnerEndnote locale={locale} />
+      </div>
+    </BrandText>
   );
 }
 
@@ -490,84 +595,85 @@ export function InstallmentPage({ locale }: { locale: Locale }) {
   const copy = installmentCopy;
 
   return (
-    <BrandText><>
-      <PageHero
-        locale={locale}
-        eyebrow={t(copy.eyebrow, locale)}
-        title={t(copy.title, locale)}
-        lead={t(copy.lead, locale)}
-        aside={t(copy.aside, locale)}
-        visualVariant="dashboard"
-        visualItems={[
-          locale === "fa" ? "دامنه روشن" : "Clear scope",
-          locale === "fa" ? "خروجی قابل بررسی" : "Reviewable output",
-          locale === "fa" ? "پرداخت مرحله‌ای" : "Staged payment",
-        ]}
-      />
+    <BrandText>
+      <div className="rycode-inner inner-installment" dir={locale === "fa" ? "rtl" : "ltr"}>
+        <InnerHero
+          locale={locale}
+          eyebrow={t(copy.eyebrow, locale)}
+          title={t(copy.title, locale)}
+          lead={t(copy.lead, locale)}
+          image="/images/services/reporting-dashboard.png"
+        >
+          <InnerLink locale={locale} href="#payment-stages">
+            {locale === "fa" ? "ببین چطور پیش می‌رویم" : "See how it works"}
+          </InnerLink>
+        </InnerHero>
 
-      <section className="coorda-installment-section">
-        <Container>
-          <div className="coorda-installment-grid">
-            {copy.steps.map((step, index) => (
-              <article key={step.title.en} className="coorda-installment-card">
-                <span className="coorda-eyebrow">
-                  {String(index + 1).padStart(2, "0")} / RYCODE
-                </span>
-                <h2>{t(step.title, locale)}</h2>
-                <p>{t(step.body, locale)}</p>
-              </article>
-            ))}
-          </div>
-
-          <div className="coorda-installment-conditions">
-            <div>
-              <span className="meta-label text-foreground">
-                {locale === "fa" ? "شرایط بررسی" : "ELIGIBILITY"}
-              </span>
-              <h2 className="mt-5 text-2xl font-bold leading-9 sm:text-3xl">
-                {locale === "fa"
-                  ? "چه پروژه‌هایی مناسب این مسیرند؟"
-                  : "Which projects fit this path?"}
-              </h2>
-              <p className="mt-4 text-sm leading-8 text-muted-foreground">
-                {locale === "fa"
-                  ? "به‌جای قول ثابت برای همه، شرایط را بر اساس وضعیت واقعی پروژه مشخص می‌کنیم."
-                  : "Instead of making a fixed promise for every project, we assess the real situation first."}
-              </p>
-            </div>
-            <ul className="grid gap-3">
-              {copy.conditions.map((condition) => (
-                <li
-                  key={condition.en}
-                  className="flex items-start gap-3 rounded-xl border border-foreground/10 bg-surface p-4 text-sm leading-7 text-muted-foreground"
-                >
-                  <CheckCircle2 className="mt-1 size-4 shrink-0 text-foreground" aria-hidden />
-                  {t(condition, locale)}
-                </li>
+        <section id="payment-stages" className="inner-section">
+          <Container>
+            <p className="inner-payment-note">{t(copy.aside, locale)}</p>
+            <div className="inner-timeline inner-payment-stages">
+              {copy.steps.map((step, index) => (
+                <article key={step.title.en} className="coorda-installment-card inner-value">
+                  <span className="inner-eyebrow">
+                    {String(index + 1).padStart(2, "0")} / RYCODE
+                  </span>
+                  <h2>{t(step.title, locale)}</h2>
+                  <p>{t(step.body, locale)}</p>
+                </article>
               ))}
-            </ul>
-          </div>
+            </div>
 
-          <div className="coorda-installment-notes">
-            {copy.notes.map((note) => (
-              <p key={note.en} className="rounded-xl bg-surface p-4">
-                {t(note, locale)}
-              </p>
-            ))}
-          </div>
+            <div className="inner-payment-conditions">
+              <div>
+                <span className="meta-label text-foreground">
+                  {locale === "fa" ? "شرایط بررسی" : "ELIGIBILITY"}
+                </span>
+                <h2 className="mt-5 text-2xl font-bold leading-9 sm:text-3xl">
+                  {locale === "fa"
+                    ? "چه پروژه‌هایی مناسب این مسیرند؟"
+                    : "Which projects fit this path?"}
+                </h2>
+                <p className="mt-4 text-sm leading-8 text-muted-foreground">
+                  {locale === "fa"
+                    ? "به‌جای قول ثابت برای همه، شرایط را بر اساس وضعیت واقعی پروژه مشخص می‌کنیم."
+                    : "Instead of making a fixed promise for every project, we assess the real situation first."}
+                </p>
+              </div>
+              <ul className="grid gap-3">
+                {copy.conditions.map((condition) => (
+                  <li
+                    key={condition.en}
+                    className="flex items-start gap-3 rounded-xl border border-foreground/10 bg-surface p-4 text-sm leading-7 text-muted-foreground"
+                  >
+                    <CheckCircle2 className="mt-1 size-4 shrink-0 text-foreground" aria-hidden />
+                    {t(condition, locale)}
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-          <div className="relative mt-10 flex flex-wrap items-center gap-4">
-            <ActionLink locale={locale} href="/start-project">
-              {locale === "fa" ? "درخواست بررسی شرایط" : "Request an eligibility review"}
-            </ActionLink>
-            <ActionLink locale={locale} href="/contact" secondary>
-              {locale === "fa" ? "سؤال دارید؟ تماس بگیرید" : "Have a question? Contact us"}
-            </ActionLink>
-          </div>
-        </Container>
-      </section>
-      <FinalBand locale={locale} />
-    </></BrandText>
+            <div className="inner-payment-notes">
+              {copy.notes.map((note) => (
+                <p key={note.en} className="rounded-xl bg-surface p-4">
+                  {t(note, locale)}
+                </p>
+              ))}
+            </div>
+
+            <div className="relative mt-10 flex flex-wrap items-center gap-4">
+              <InnerLink locale={locale} href="/start-project">
+                {locale === "fa" ? "درخواست بررسی شرایط" : "Request an eligibility review"}
+              </InnerLink>
+              <InnerLink locale={locale} href="/contact" secondary>
+                {locale === "fa" ? "سؤال دارید؟ تماس بگیرید" : "Have a question? Contact us"}
+              </InnerLink>
+            </div>
+          </Container>
+        </section>
+        <InnerEndnote locale={locale} />
+      </div>
+    </BrandText>
   );
 }
 
@@ -658,23 +764,53 @@ export function PublicLeadPage({
     { kind: "contact", href: "/contact", fa: "یک سؤال دارم", en: "General enquiry" },
   ];
   return (
-    <BrandText><section id="top" className="contact-section" aria-labelledby="contact-title">
-      <div className="page-container">
-        <nav className="coorda-request-nav" aria-label={locale === "fa" ? "موضوع گفت‌وگو" : "Conversation topic"}>
-          {requests.map(request => <Link key={request.kind} href={localizedHref(locale,request.href)} aria-current={request.kind === kind ? "page" : undefined}>{request[locale]}</Link>)}
-        </nav>
-        <div className="contact-grid">
-          <div className="contact-panel">
-            <img src={kind === "seo_audit" ? "/images/editorial/seo-growth-workspace.png" : "/images/editorial/rycode-hero-poster.jpg"} alt="" fetchPriority="high" />
-            <div className="contact-intro">
-              <h1 id="contact-title">{t(page.title,locale)}</h1>
-              <p>{t(page.lead,locale)}</p>
+    <BrandText>
+      <div
+        className={`rycode-inner inner-lead-page inner-lead-${kind}`}
+        dir={locale === "fa" ? "rtl" : "ltr"}
+      >
+        <section id="top" className="inner-contact" aria-labelledby="contact-title">
+          <div className="inner-container">
+            <nav
+              className="inner-request-nav"
+              aria-label={locale === "fa" ? "موضوع گفت‌وگو" : "Conversation topic"}
+            >
+              {requests.map((request) => (
+                <Link
+                  key={request.kind}
+                  href={localizedHref(locale, request.href)}
+                  aria-current={request.kind === kind ? "page" : undefined}
+                >
+                  {request[locale]}
+                </Link>
+              ))}
+            </nav>
+            <div className="inner-contact-grid">
+              <div className="inner-contact-copy">
+                <p className="inner-eyebrow">{t(page.eyebrow, locale)}</p>
+                <h1 id="contact-title">{t(page.title, locale)}</h1>
+                <p>{t(page.lead, locale)}</p>
+                <div className="inner-contact-note">
+                  <ShieldCheck aria-hidden />
+                  <p>{t(page.note, locale)}</p>
+                </div>
+              </div>
+              <div className="inner-contact-form">
+                <h2>
+                  {locale === "fa"
+                    ? kind === "contact"
+                      ? "پیامت را بنویس"
+                      : "کمی از پروژه‌ات بگو"
+                    : kind === "contact"
+                      ? "Send a message"
+                      : "Tell us about your project"}
+                </h2>
+                <LeadForm locale={locale} kind={kind} sourcePath={sourcePath} />
+              </div>
             </div>
-            <div className="contact-links reference-contact-note"><ShieldCheck aria-hidden/><p>{t(page.note,locale)}</p></div>
           </div>
-          <div className="contact-form"><LeadForm locale={locale} kind={kind} sourcePath={sourcePath}/></div>
-        </div>
+        </section>
       </div>
-    </section></BrandText>
+    </BrandText>
   );
 }

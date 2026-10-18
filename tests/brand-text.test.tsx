@@ -1,4 +1,4 @@
-import { createRef } from "react";
+import { createRef, isValidElement, type ReactNode } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
@@ -70,6 +70,19 @@ describe("blue brand names throughout public copy", () => {
     expect(styled.key).toBe(node.key);
     expect(styled.props.ref).toBe(ref);
     expect(colorBrandText(styled)).toBe(styled);
+  });
+
+  it("keys newly cloned static siblings without replacing existing list keys or refs", () => {
+    const ref = createRef<HTMLParagraphElement>();
+    const nodes = [<p ref={ref}>RYCODE</p>, <p key="existing">دربارهٔ رایکد</p>, "plain text"];
+    const transformed = colorBrandText(nodes) as ReactNode[];
+    expect(isValidElement(transformed[0]) && transformed[0].key).toBe("brand-child-0");
+    expect(isValidElement(transformed[1]) && transformed[1].key).toBe("existing");
+    expect(transformed[2]).toBe("plain text");
+    expect(isValidElement<{ ref: typeof ref }>(transformed[0]) && transformed[0].props.ref).toBe(
+      ref,
+    );
+    expect(colorBrandText(transformed)).toBe(transformed);
   });
 
   it("covers translated home headings and dynamic public page titles on the server", () => {

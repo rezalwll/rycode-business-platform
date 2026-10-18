@@ -1,11 +1,24 @@
 /* Only branding, language, integration and explicit user exceptions.
    Layout and animation values live in the directly transplanted stylesheet. */
 .coorda-reference {
-  --coorda-font: "Open Runde", Arial, Helvetica, sans-serif;
+  --coorda-font: var(--font-sans);
   font-family: var(--coorda-font);
 }
-[lang="fa"] .coorda-reference {
-  --coorda-font: "IRANYekan", ui-sans-serif, system-ui, sans-serif;
+.coorda-reference :is(.article-byline, .insight-author) .rycode-logo-mark {
+  width: 28px;
+  height: 32px;
+  border-radius: 0;
+  object-fit: contain;
+}
+.coorda-reference .impact-member-top .impact-brand-logo {
+  width: 28px;
+  height: 36px;
+  object-fit: contain;
+}
+.coorda-reference .desktop-sidebar-logo.rycode-logo-mark {
+  width: 24px;
+  height: 30px;
+  object-fit: contain;
 }
 /* Source rounded paper panels assumed a charcoal section would follow.
    Public pages also end these panels above light content/the retained footer:

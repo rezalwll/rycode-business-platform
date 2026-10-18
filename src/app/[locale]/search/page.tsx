@@ -3,8 +3,8 @@ import { notFound } from "next/navigation";
 
 import { PublicContentCards } from "@/components/public/cms-catalog";
 import { SearchTracker } from "@/components/analytics/search-tracker";
-import { localizedHref, PageHero } from "@/components/public/shared";
-import { Container } from "@/components/site/primitives";
+import { localizedHref } from "@/components/public/shared";
+import { InnerHero } from "@/components/public/inner-ui";
 import { SiteShell } from "@/components/site/site-shell";
 import { isLocale } from "@/i18n/routing";
 import { normalizePublicSearch, searchPublicCatalog } from "@/server/queries/public-content";
@@ -34,31 +34,26 @@ export default async function SearchPage({ params, searchParams }: Props) {
   const entries = ready ? await searchPublicCatalog(query, locale) : [];
   return (
     <SiteShell locale={locale}>
-      <PageHero
-        locale={locale}
-        eyebrow="RYCODE / SEARCH"
-        title={locale === "fa" ? "دنبال چه می‌گردید؟" : "What are you looking for?"}
-        lead={
-          locale === "fa"
-            ? "در خدمات، راهکارها و مطالب رای‌کد جست‌وجو کنید."
-            : "Find services, solutions and articles from RYCODE."
-        }
-        visualVariant="article"
-      />
-      <section className="coorda-search">
-        <Container>
-          {ready && <SearchTracker queryLength={query.length} resultCount={entries.length} />}
+      <div className="rycode-inner inner-search-page" dir={locale === "fa" ? "rtl" : "ltr"}>
+        <InnerHero
+          locale={locale}
+          eyebrow="RYCODE / SEARCH"
+          title={locale === "fa" ? "دنبال چه می‌گردید؟" : "What are you looking for?"}
+          lead={
+            locale === "fa"
+              ? "در خدمات، راهکارها و مطالب رای‌کد جست‌وجو کنید."
+              : "Find services, solutions and articles from RYCODE."
+          }
+          layout="center"
+        >
           <form
             action={localizedHref(locale, "/search")}
             method="get"
             role="search"
-            className="relative mb-12 flex max-w-3xl flex-wrap items-end gap-3 rounded-2xl border border-foreground/12 bg-white/80 p-5 shadow-[0_14px_44px_rgba(0,0,0,0.07)] backdrop-blur-sm sm:p-7"
+            className="inner-search-form"
             data-analytics-form="site-search"
           >
-            <label
-              className="grid min-w-64 flex-1 gap-2 text-sm font-semibold"
-              htmlFor="site-search"
-            >
+            <label className="inner-search-label" htmlFor="site-search">
               {locale === "fa" ? "عبارت جست‌وجو" : "Search term"}
               <input
                 id="site-search"
@@ -68,13 +63,16 @@ export default async function SearchPage({ params, searchParams }: Props) {
                 maxLength={120}
                 defaultValue={query}
                 required
-                className="min-h-12 rounded-xl border border-foreground/14 bg-surface-2 px-4 text-base font-normal outline-none transition-[border-color,box-shadow] focus:border-brand/70 focus:ring-4 focus:ring-ring/12"
+                className="inner-search-input"
               />
             </label>
-            <button className="coorda-button" type="submit">
+            <button className="inner-button" type="submit">
               {locale === "fa" ? "جست‌وجو" : "Search"}
             </button>
           </form>
+        </InnerHero>
+        <section className="inner-section inner-container">
+          {ready && <SearchTracker queryLength={query.length} resultCount={entries.length} />}
           {ready ? (
             <>
               <p role="status" className="mb-6 text-sm text-muted-foreground">
@@ -91,8 +89,8 @@ export default async function SearchPage({ params, searchParams }: Props) {
               {locale === "fa" ? "دست‌کم دو حرف وارد کنید." : "Enter at least two characters."}
             </p>
           )}
-        </Container>
-      </section>
+        </section>
+      </div>
     </SiteShell>
   );
 }

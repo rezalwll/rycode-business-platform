@@ -21,6 +21,7 @@ import {
 import type { ReactNode } from "react";
 
 import { Link } from "@/i18n/navigation";
+import { Logo } from "@/components/site/logo";
 import type { Locale } from "@/i18n/routing";
 import { hasPermission, type Actor, type Permission } from "@/server/auth/permissions";
 
@@ -186,7 +187,7 @@ export function PortalShell({
             href={kind === "admin" ? "/admin" : "/dashboard"}
             className="text-xl font-black tracking-[-.04em]"
           >
-            RY<span className="text-[#5fe1d5]">CODE</span>
+            <Logo variant="light" />
           </Link>
           <span className="meta-label text-white/40">{kind === "admin" ? "OPS" : "CLIENT"}</span>
         </div>

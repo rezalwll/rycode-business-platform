@@ -15,6 +15,11 @@ export default function proxy(request: NextRequest) {
   const url = request.nextUrl.clone();
   const { pathname } = url;
 
+  // Generated brand metadata routes are global, not localized public pages.
+  if (pathname === "/icon" || pathname === "/apple-icon") {
+    return NextResponse.next();
+  }
+
   if (pathname === "/fa" || pathname.startsWith("/fa/")) {
     url.pathname = pathname === "/fa" ? "/" : pathname.slice(3);
     return NextResponse.redirect(url, 308);

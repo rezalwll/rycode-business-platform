@@ -1831,38 +1831,11 @@
   }
 }
 
-/* Local IranYekan — no external font service. */
+/* One local IranYekan face for Persian, Latin and numbers across the app. */
 @font-face {
   font-family: "IRANYekan";
   src: url("/fonts/iranyekan/iranyekan.ttf") format("truetype");
-  font-weight: 100 900;
-  font-style: normal;
-  font-display: swap;
-  /* Keep Latin glyphs on Space Grotesk, including inside Persian sentences. */
-  unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF;
-}
-
-/* Local Space Grotesk — English interface and RYCODE wordmark only. */
-@font-face {
-  font-family: "Space Grotesk";
-  src: url("/fonts/space-grotesk/space-grotesk-400.woff2") format("woff2");
   font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Space Grotesk";
-  src: url("/fonts/space-grotesk/space-grotesk-500.woff2") format("woff2");
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Space Grotesk";
-  src: url("/fonts/space-grotesk/space-grotesk-700.woff2") format("woff2");
-  font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
@@ -1881,14 +1854,11 @@
   --radius-3xl: calc(var(--radius) + 12px);
   --radius-4xl: calc(var(--radius) + 16px);
 
-  --font-sans:
-    "IRANYekan", "Space Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    ui-sans-serif, system-ui, sans-serif;
-  --font-display:
-    "IRANYekan", "Space Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI Semibold", Roboto,
-    ui-sans-serif, sans-serif;
-  --font-logo: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
-  --font-latin: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "IRANYekan", ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-sans);
+  --font-logo: var(--font-sans);
+  --font-latin: var(--font-sans);
+  --font-mono: var(--font-sans);
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -2098,16 +2068,20 @@
     -webkit-font-smoothing: antialiased;
   }
 
-  html[lang="en"] {
-    --font-sans: var(--font-latin);
-    --font-display: var(--font-latin);
-  }
-
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
     font-family: var(--font-sans);
     font-feature-settings: "ss01";
+  }
+
+  button,
+  input,
+  textarea,
+  select,
+  option,
+  optgroup {
+    font-family: inherit;
   }
 
   [dir="rtl"] body {

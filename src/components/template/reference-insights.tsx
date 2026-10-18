@@ -1,5 +1,6 @@
 "use client";
 import { BrandText } from "@/components/site/brand-text";
+import { LogoMark } from "@/components/site/logo";
 
 import { useReferenceLocale } from "./reference-locale";
 import { motion, useReducedMotion } from "motion/react";
@@ -10,7 +11,6 @@ const articles = [
     image: "insight-city.png",
     imageAlt: "Illustrative guide image",
     author: "RYCODE",
-    avatar: "rycode-black.svg",
     date: "RYCODE guide",
     dateTime: "technical-review",
     slug: "technical-review",
@@ -21,7 +21,6 @@ const articles = [
     image: "insight-cafe.png",
     imageAlt: "Illustrative guide image",
     author: "RYCODE",
-    avatar: "rycode-black.svg",
     date: "RYCODE guide",
     dateTime: "stalled-project",
     slug: "stalled-project",
@@ -32,7 +31,6 @@ const articles = [
     image: "insight-event.png",
     imageAlt: "Illustrative guide image",
     author: "RYCODE",
-    avatar: "rycode-black.svg",
     date: "RYCODE guide",
     dateTime: "disconnected-systems",
     slug: "disconnected-systems",
@@ -86,13 +84,7 @@ export default function Insights() {
                     <h3 id={`insight-title-${article.dateTime}`}>{copyText(article.title)}</h3>
                     <div className="insight-meta">
                       <span className="insight-author">
-                        <img
-                          src={`/coorda-template/${article.avatar}`}
-                          width={44}
-                          height={28}
-                          alt=""
-                          loading="lazy"
-                        />
+                        <LogoMark alt="" />
                         <span>{copyText(article.author)}</span>
                       </span>
                       <span className="insight-divider" aria-hidden="true" />

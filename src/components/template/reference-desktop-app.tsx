@@ -1,5 +1,6 @@
 "use client";
 import { BrandText } from "@/components/site/brand-text";
+import { LogoMark } from "@/components/site/logo";
 
 import { useReferenceLocale } from "./reference-locale";
 import { motion, useReducedMotion } from "motion/react";
@@ -147,7 +148,7 @@ function DesktopWindow() {
         <div className="desktop-window-body">
           <div className="desktop-sidebar">
             <div>
-              <PreviewPhoto file="rycode-black.svg" className="desktop-sidebar-logo" />
+              <LogoMark className="desktop-sidebar-logo" alt="" />
               <div className="desktop-sidebar-items">
                 {copyText(
                   sidebar.map(({ label, Icon }, index) => (

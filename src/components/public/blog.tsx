@@ -10,7 +10,7 @@ import {
 } from "@/content/catalog";
 import type { Locale } from "@/i18n/routing";
 import type { PublicCatalogEntry, PublicContent } from "@/server/queries/public-content";
-import { FinalBand, JsonLd, localizedHref } from "./shared";
+import { JsonLd, localizedHref } from "./shared";
 import ReferencePhotoHero from "@/components/template/reference-photo-hero";
 import {
   blogArchive,
@@ -21,6 +21,7 @@ import {
   type BlogQuery,
 } from "./blog-model";
 import "./blog.css";
+import { InnerEndnote } from "./inner-ui";
 
 const cleanTitle = (title: string) => title.trimEnd().replace(/[.。]+$/, "");
 const blogImage = (entry: CatalogEntry) =>
@@ -113,7 +114,7 @@ export function BlogIndex({
     .sort((a, b) => a - b);
   return (
     <BrandText>
-      <div className="rycode-blog" dir={fa ? "rtl" : "ltr"}>
+      <div className="rycode-blog rycode-inner inner-blog-archive" dir={fa ? "rtl" : "ltr"}>
         <ReferencePhotoHero
           className="pn-blog-hero"
           title={fa ? "بلاگ رایکد" : "RYCODE blog"}
@@ -252,7 +253,7 @@ export function BlogIndex({
             )}
           </div>
         </section>
-        <FinalBand locale={locale} />
+        <InnerEndnote locale={locale} />
       </div>
     </BrandText>
   );
@@ -277,7 +278,7 @@ export function BlogArticle({
   const Arrow = fa ? ArrowRight : ArrowLeft;
   return (
     <BrandText>
-      <div className="rycode-blog" dir={fa ? "rtl" : "ltr"}>
+      <div className="rycode-blog rycode-inner inner-blog-article" dir={fa ? "rtl" : "ltr"}>
         <JsonLd
           value={{
             "@context": "https://schema.org",
@@ -328,24 +329,44 @@ export function BlogArticle({
                   </span>
                 </div>
               </header>
-              <div className="pn-single-content">
-                <p className="pn-article-lead">{localize(entry.summary, locale)}</p>
-                {entry.sections.map((section, index) => (
-                  <section className="reference-content-section" key={`${entry.slug}-${index}`}>
-                    <h2>{cleanTitle(localize(section.title, locale))}</h2>
-                    {section.body &&
-                      localize(section.body, locale)
-                        .split(/\n\s*\n/u)
-                        .map((paragraph, p) => <p key={p}>{paragraph}</p>)}
-                    {section.items && (
-                      <ul>
-                        {section.items.map((item, i) => (
-                          <li key={i}>{localize(item, locale)}</li>
-                        ))}
-                      </ul>
-                    )}
-                  </section>
-                ))}
+              <div className={entry.sections.length ? "inner-article-layout" : ""}>
+                {entry.sections.length > 0 && (
+                  <nav className="inner-toc" aria-label={fa ? "فهرست مطلب" : "Article contents"}>
+                    <p>{fa ? "در این مطلب" : "IN THIS ARTICLE"}</p>
+                    <ol>
+                      {entry.sections.map((section, index) => (
+                        <li key={index}>
+                          <a href={`#article-section-${index}`}>
+                            {cleanTitle(localize(section.title, locale))}
+                          </a>
+                        </li>
+                      ))}
+                    </ol>
+                  </nav>
+                )}
+                <div className="pn-single-content">
+                  <p className="pn-article-lead">{localize(entry.summary, locale)}</p>
+                  {entry.sections.map((section, index) => (
+                    <section
+                      className="reference-content-section"
+                      id={`article-section-${index}`}
+                      key={`${entry.slug}-${index}`}
+                    >
+                      <h2>{cleanTitle(localize(section.title, locale))}</h2>
+                      {section.body &&
+                        localize(section.body, locale)
+                          .split(/\n\s*\n/u)
+                          .map((paragraph, p) => <p key={p}>{paragraph}</p>)}
+                      {section.items && (
+                        <ul>
+                          {section.items.map((item, i) => (
+                            <li key={i}>{localize(item, locale)}</li>
+                          ))}
+                        </ul>
+                      )}
+                    </section>
+                  ))}
+                </div>
               </div>
             </article>
             <section className="pn-download-banner" aria-labelledby="blog-cta-title">

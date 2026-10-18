@@ -14,6 +14,14 @@ import ReferenceFAQ from "@/components/template/reference-faq";
 import ReferenceInsights from "@/components/template/reference-insights";
 import ReferenceMoments from "@/components/template/reference-moments";
 
+// Temporarily hidden at the owner's request; keep the components/content so
+// each section can be restored independently without rebuilding its design.
+const homeSectionVisibility = {
+  stories: false,
+  pricing: false,
+  testimonials: false,
+};
+
 export function CoordaHome({ locale }: { locale: Locale }) {
   return (
     <ReferenceLocale locale={locale}>
@@ -25,9 +33,9 @@ export function CoordaHome({ locale }: { locale: Locale }) {
         <ReferenceCommunityCTA />
         <ReferenceDesktopApp />
         <ReferenceNativeFeatures />
-        <ReferenceStories />
-        <ReferencePricing />
-        <ReferenceTestimonials />
+        {homeSectionVisibility.stories && <ReferenceStories />}
+        {homeSectionVisibility.pricing && <ReferencePricing />}
+        {homeSectionVisibility.testimonials && <ReferenceTestimonials />}
         <ReferenceFAQ />
         <ReferenceInsights />
         <ReferenceMoments />

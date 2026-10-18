@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { BRAND_ICON_SRC } from "@/lib/brand";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
@@ -9,6 +10,6 @@ export default function manifest(): MetadataRoute.Manifest {
     display: "standalone",
     background_color: "#f2f2f2",
     theme_color: "#f2f2f2",
-    icons: [{ src: "/brand/rycode-favicon.png", sizes: "512x512", type: "image/png" }],
+    icons: [{ src: BRAND_ICON_SRC, sizes: "512x512", type: "image/png", purpose: "any" }],
   };
 }

@@ -28,6 +28,7 @@ import { resolve } from "node:path";
 import { getCatalogEntries, getCatalogEntry } from "@/content/catalog";
 import { serviceFAQs } from "@/content/service-model";
 import { serviceCards } from "@/content/service-cards";
+import postcss from "postcss";
 
 beforeEach(() => {
   vi.stubGlobal("IntersectionObserver", class {
@@ -44,6 +45,8 @@ describe("Coorda-inspired public experience with RYCODE content", () => {
   it("gives every service card useful copy and makes app, data and project rescue reachable", () => {
     for (const locale of ["fa", "en"] as const) {
       const { container, unmount } = render(<StudioHome locale={locale} />);
+      for (const id of ["stories", "pricing", "testimonials"]) expect(container.querySelector(`#${id}`)).toBeNull();
+      expect(container.querySelector(".impact-testimonials-link")?.getAttribute("href")).toBe(`${locale === "en" ? "/en" : ""}/about#approach`);
       const cards = container.querySelectorAll(".features-ticker-group:first-child .feature-card");
       expect(cards).toHaveLength(serviceCards.length);
       cards.forEach((card, index) => {
@@ -70,13 +73,13 @@ describe("Coorda-inspired public experience with RYCODE content", () => {
       unmount();
     }
   });
-  it("mounts the supplied homepage sections in their original order, with restored hero and all card loops", () => {
+  it("keeps the visible homepage sections in order and omits the three temporarily hidden sections", () => {
     const {container} = render(<StudioHome locale="fa"/>);
     expect(screen.getAllByRole("heading",{level:1})).toHaveLength(1);
     expect(screen.getByRole("heading",{level:1}).getAttribute("aria-label")).toBe("ایده‌ها، از دل سکوت به واقعیت می‌رسند");
     expect(container.querySelector(".hero-video")?.getAttribute("src")).toBe("/videos/rycode-hero.mp4");
     expect([...container.querySelectorAll(".coorda-home > section")].map(section => section.classList[0])).toEqual([
-      "hero", "features", "app-showcase", "impact", "community-cta", "desktop-app-section", "native-features", "stories-section", "pricing-section", "testimonials-section", "faq-section", "insights-section", "moments-section"
+      "hero", "features", "app-showcase", "impact", "community-cta", "desktop-app-section", "native-features", "faq-section", "insights-section", "moments-section"
     ]);
     expect(container.querySelectorAll(".hero-brands-group")).toHaveLength(0);
     expect(container.querySelectorAll(".features-ticker-group .feature-card")).toHaveLength(serviceCards.length * 2);
@@ -84,19 +87,23 @@ describe("Coorda-inspired public experience with RYCODE content", () => {
     expect(container.querySelectorAll(".showcase-screen")).toHaveLength(4);
     expect(container.querySelectorAll(".impact-topic-group")).toHaveLength(4);
     expect(container.querySelectorAll(".native-card")).toHaveLength(4);
-    expect(container.querySelectorAll(".pricing-card")).toHaveLength(3);
-    expect(container.querySelectorAll(".testimonial-card")).toHaveLength(10);
+    expect(container.querySelectorAll(".pricing-card")).toHaveLength(0);
+    expect(container.querySelectorAll(".testimonial-card")).toHaveLength(0);
+    for (const id of ["stories", "pricing", "testimonials"]) expect(container.querySelector(`#${id}`)).toBeNull();
     expect(container.querySelectorAll(".insight-card")).toHaveLength(3);
     expect(container.querySelector(".expertise-selector")).toBeNull();
   });
 
-  it("preserves service destinations and explicitly identifies placeholder work and principles", () => {
+  it("preserves service destinations and links principles to the visible about page", () => {
     const {container}=render(<StudioHome locale="fa"/>);
     const links=[...container.querySelectorAll<HTMLAnchorElement>('a[href^="/services/"]')];
     expect(links.length).toBeGreaterThanOrEqual(6);
     for(const link of links)expect(getCatalogEntry("services",link.getAttribute("href")!.split("/")[2]!)).toBeTruthy();
-    expect(container.textContent).toContain("طرح مفهومی وب");
-    expect(container.textContent).toContain("نه نقل‌قول مشتریان");
+    expect(container.textContent).not.toContain("چیزی که می‌شود ساخت");
+    expect(container.textContent).not.toContain("مسیرت را پیدا کن");
+    expect(container.textContent).not.toContain("نه نقل‌قول مشتریان");
+    expect(container.querySelector(".impact-testimonials-link")?.getAttribute("href")).toBe("/about#approach");
+    expect(container.querySelector('a[href="#testimonials"]')).toBeNull();
     expect(container.textContent).not.toContain("50K+");
     expect(container.textContent).not.toContain("960+");
   });
@@ -157,6 +164,33 @@ describe("Coorda-inspired public experience with RYCODE content", () => {
     expect(buttons[0]!.getAttribute("aria-expanded")).toBe("false");
     expect(buttons[1]!.getAttribute("aria-expanded")).toBe("true");
     expect(container.querySelectorAll("button button, button a")).toHaveLength(0);
+  });
+
+  it("right-aligns Persian FAQs and puts toggles at the logical end without breaking English", () => {
+    for (const locale of ["fa", "en"] as const) {
+      const { container, unmount } = render(<StudioHome locale={locale} />);
+      const faq = container.querySelector("#faq")!;
+      expect(faq.getAttribute("dir")).toBe(locale === "fa" ? "rtl" : "ltr");
+      const button = within(faq as HTMLElement).getAllByRole("button")[0]!;
+      expect(button.querySelector(".faq-toggle")?.getAttribute("aria-hidden")).toBe("true");
+      fireEvent.click(button);
+      expect(faq.querySelector(".faq-answer")?.textContent).toBe(serviceFAQs[0]!.answer[locale]);
+      fireEvent.click(button);
+      expect(button.getAttribute("aria-expanded")).toBe("false");
+      unmount();
+    }
+    const css = postcss.parse(readFileSync(resolve(process.cwd(), "src/components/site/coorda-reference.css"), "utf8"));
+    const declarations = (selector: string) => {
+      const values: Record<string, string> = {};
+      css.walkRules(selector, rule => { rule.walkDecls(decl => { values[decl.prop] = decl.value; }); });
+      return values;
+    };
+    expect(declarations('.coorda-reference .faq-section[dir="rtl"] .faq-container h2')["text-align"]).toBe("start");
+    expect(declarations(".coorda-reference .faq-question")["text-align"]).toBe("start");
+    expect(declarations(".coorda-reference .faq-question")["padding-inline-end"]).toBe("78px");
+    expect(declarations(".coorda-reference .faq-toggle")["inset-inline-end"]).toBe("0");
+    expect(declarations(".coorda-reference .faq-toggle").right).toBeUndefined();
+    expect(declarations(".coorda-reference .faq-answer")["text-align"]).toBe("start");
   });
 
   it("keeps published catalog entries and summaries intact in the showcase", () => {

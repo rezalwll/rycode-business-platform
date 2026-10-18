@@ -1,22 +1,7 @@
-@font-face {
-  font-family: "Open Runde";
-  src: url("/coorda-template/open-runde-regular.woff2") format("woff2");
-  font-style: normal; font-weight: 400; font-display: swap;
-}
-@font-face {
-  font-family: "Open Runde";
-  src: url("/coorda-template/open-runde-medium.woff2") format("woff2");
-  font-style: normal; font-weight: 500; font-display: swap;
-}
-@font-face {
-  font-family: "Open Runde";
-  src: url("/coorda-template/open-runde-semibold.woff2") format("woff2");
-  font-style: normal; font-weight: 600; font-display: swap;
-}
 .coorda-reference { color-scheme: light; --foreground: #1a1a1a; }
 .coorda-reference * { box-sizing: border-box; }
 .coorda-reference { scroll-behavior: smooth; }
-.coorda-reference { margin: 0; color: var(--foreground); background: #f2f2f2; font-family: "Open Runde", Arial, Helvetica, sans-serif; }
+.coorda-reference { margin: 0; color: var(--foreground); background: #f2f2f2; font-family: var(--font-sans); }
 .coorda-reference a, .coorda-reference button { -webkit-tap-highlight-color: transparent; }
 .coorda-reference button { cursor: pointer; }
 
@@ -282,7 +267,7 @@
 .coorda-reference .showcase-heading h2 { width: 500px; max-width: 100%; margin: 0; font-size: 42px; font-weight: 500; line-height: 1.4; letter-spacing: -.01em; }
 .coorda-reference .showcase-heading mark { display: inline-block; padding: 6px 8px; border-radius: 12px; color: #1a1a1a; background: white; line-height: 1; }
 .coorda-reference .showcase-navigation { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; }
-.coorda-reference .showcase-navigation button { padding: 8px 12px; border: 0; border-radius: 8px; background: transparent; color: rgb(255 255 255 / 65%); font: 400 16px/1.4 "Open Runde", Arial, sans-serif; letter-spacing: -.03em; text-align: left; transition: color .25s, background .25s; }
+.coorda-reference .showcase-navigation button { padding: 8px 12px; border: 0; border-radius: 8px; background: transparent; color: rgb(255 255 255 / 65%); font: 400 16px/1.4 var(--font-sans); letter-spacing: -.03em; text-align: left; transition: color .25s, background .25s; }
 .coorda-reference .showcase-navigation button:hover { color: #fff; background: rgb(255 255 255 / 4%); }
 .coorda-reference .showcase-navigation button[aria-current="step"] { box-shadow: inset 0 0 0 1px rgb(255 255 255 / 4%); background: rgb(255 255 255 / 6%); color: #fff; font-weight: 500; }
 .coorda-reference .showcase-navigation button:focus-visible { outline: 2px solid white; outline-offset: 4px; }
@@ -356,12 +341,12 @@
 .coorda-reference .impact-events-label h3 { margin: 0; font-size: 18px; line-height: 1.4; font-weight: 500; letter-spacing: -.02em; }
 .coorda-reference .impact-events-number { margin: 0; font-size: 42px; line-height: 1.2; font-weight: 500; letter-spacing: -.02em; }
 .coorda-reference .impact-events-description { margin: 0; font-size: 18px; line-height: 1.4; font-weight: 500; letter-spacing: -.02em; color: #424242; text-wrap: balance; }
-.coorda-reference .impact-topics-card { position: relative; flex: 1 0 0; min-height: 0; padding: 32px; border-radius: 24px; background: #fff; overflow: hidden; }
-.coorda-reference .impact-topic-tickers { position: absolute; top: 50%; left: 0; width: 100%; display: flex; flex-direction: column; gap: 16px; transform: translateY(-50%); }
-.coorda-reference .impact-topic-row { width: 100%; overflow: hidden; }
-.coorda-reference .impact-topic-track { display: flex; width: max-content; animation: impact-topics-scroll 32s linear infinite; }
+.coorda-reference .impact-topics-card { position: relative; display: flex; align-items: center; flex: 1 0 0; min-height: 148px; padding: 24px 0; border-radius: 24px; background: #fff; overflow: hidden; }
+.coorda-reference .impact-topic-tickers { width: 100%; display: flex; flex-direction: column; gap: 16px; }
+.coorda-reference .impact-topic-row { display: flex; direction: ltr; width: 100%; overflow: hidden; }
+.coorda-reference .impact-topic-track { display: flex; flex: 0 0 auto; direction: ltr; width: max-content; animation: impact-topics-scroll 32s linear infinite; }
 .coorda-reference .impact-topic-row-reverse .impact-topic-track { animation-direction: reverse; animation-duration: 36s; }
-.coorda-reference .impact-topic-group { display: flex; gap: 12px; margin: 0; padding: 0 12px 0 0; list-style: none; }
+.coorda-reference .impact-topic-group { display: flex; flex: 0 0 auto; min-width: var(--impact-topic-viewport, 0px); justify-content: space-between; gap: 12px; margin: 0; padding: 0 12px 0 0; list-style: none; }
 .coorda-reference .impact-topic-group li { display: flex; align-items: center; white-space: nowrap; }
 .coorda-reference .impact-topic-group li > span:first-child { padding: 8px 16px; border-radius: 100px; background: #f2f2f2; color: #707070; font-size: 16px; line-height: 1.4; font-weight: 500; letter-spacing: -.03em; }
 .coorda-reference .impact-topic-plus { display: grid; place-items: center; width: 42px; height: 42px; border-radius: 50%; background: #f2f2f2; color: #909090; }
@@ -506,20 +491,21 @@
 .coorda-reference .faq-section { padding: 120px 40px; background: #f2f2f2; color: #1a1a1a; scroll-margin-top: 20px; }
 .coorda-reference .faq-container { display: flex; flex-direction: column; align-items: center; gap: 42px; width: 100%; max-width: 1440px; margin: 0 auto; }
 .coorda-reference .faq-container h2 { width: 100%; max-width: 500px; margin: 0; text-align: center; font-size: 42px; font-weight: 500; line-height: 1.3; letter-spacing: -.01em; text-wrap: balance; }
+.coorda-reference .faq-section[dir="rtl"] .faq-container h2 { max-width: 600px; text-align: start; }
 .coorda-reference .faq-container h2 > span { display: inline-block; padding: 6px 8px; border-radius: 12px; background: #fff; line-height: 1; }
 .coorda-reference .faq-list { display: flex; flex-direction: column; gap: 8px; width: 100%; max-width: 600px; }
 .coorda-reference .faq-card { padding: 24px; border-radius: 24px; background: #fff; }
 .coorda-reference .faq-card h3 { margin: 0; }
-.coorda-reference .faq-question { position: relative; display: flex; align-items: center; width: 100%; min-height: 28px; padding: 0 78px 0 0; border: 0; background: transparent; color: inherit; text-align: left; font-family: inherit; font-size: 18px; font-weight: 500; line-height: 1.4; letter-spacing: -.02em; cursor: pointer; }
+.coorda-reference .faq-question { position: relative; display: flex; align-items: center; width: 100%; min-height: 28px; padding: 0; padding-inline-end: 78px; border: 0; background: transparent; color: inherit; text-align: start; font-family: inherit; font-size: 18px; font-weight: 500; line-height: 1.4; letter-spacing: -.02em; cursor: pointer; }
 .coorda-reference .faq-question > span:first-child { flex: 1; min-width: 0; }
 .coorda-reference .faq-question:focus-visible { outline: 2px solid #1a1a1a; outline-offset: 8px; border-radius: 4px; }
 .coorda-reference .faq-card[data-open="true"] .faq-question { min-height: 0; }
-.coorda-reference .faq-toggle { position: absolute; top: 50%; right: 0; transform: translateY(-50%); width: 36px; height: 28px; border-radius: 40px; background: #1a1a1a; }
+.coorda-reference .faq-toggle { position: absolute; top: 50%; inset-inline-end: 0; transform: translateY(-50%); width: 36px; height: 28px; border-radius: 40px; background: #1a1a1a; }
 .coorda-reference .faq-card[data-open="true"] .faq-toggle { top: 0; transform: none; }
 .coorda-reference .faq-toggle-horizontal, .coorda-reference .faq-toggle-vertical { position: absolute; top: 13px; left: 12px; width: 12px; height: 2px; border-radius: 1px; background: #fff; }
 .coorda-reference .faq-toggle-vertical { transform: rotate(90deg); transition: transform .3s, opacity .3s; }
 .coorda-reference .faq-card[data-open="true"] .faq-toggle-vertical { transform: rotate(0); opacity: 0; }
-.coorda-reference .faq-answer { width: calc(100% - 78px); max-width: 400px; overflow: hidden; }
+.coorda-reference .faq-answer { width: calc(100% - 78px); max-width: 400px; margin-inline-start: 0; margin-inline-end: auto; text-align: start; overflow: hidden; }
 .coorda-reference .faq-answer p { margin: 0; padding-top: 12px; color: #707070; font-size: 16px; font-weight: 500; line-height: 1.4; letter-spacing: -.03em; }
 @media (min-width: 810px) and (max-width: 1199px) {
   .coorda-reference .faq-section { padding: 100px 30px; }

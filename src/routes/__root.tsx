@@ -14,6 +14,7 @@ import { SiteHeader } from "@/components/site/header";
 import { SiteFooter } from "@/components/site/footer";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { dirFor, useLocale } from "@/lib/i18n";
+import { BRAND_APPLE_ICON_SRC, BRAND_ICON_SRC } from "@/lib/brand";
 
 function NotFoundComponent() {
   return (
@@ -108,7 +109,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         rel: "stylesheet",
         href: appCss,
       },
-      { rel: "icon", href: "/brand/rycode-favicon.png", type: "image/png" },
+      { rel: "icon", href: BRAND_ICON_SRC, type: "image/png" },
+      { rel: "apple-touch-icon", href: BRAND_APPLE_ICON_SRC, type: "image/png" },
     ],
   }),
   shellComponent: RootShell,

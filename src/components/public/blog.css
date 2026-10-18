@@ -503,7 +503,7 @@
   font-size: 0.9rem;
 }
 .rycode-blog .pn-single-content code {
-  font-family: Consolas, Monaco, monospace;
+  font-family: var(--font-mono);
   font-size: 0.9em;
 }
 .rycode-blog .pn-download-banner {

@@ -4,6 +4,7 @@ import type { ReactNode } from "react";
 
 import { AnalyticsProvider } from "@/components/analytics/analytics-provider";
 import { isLocale, localeDirection, routing } from "@/i18n/routing";
+import { BRAND_APPLE_ICON_SRC, BRAND_ICON_SRC } from "@/lib/brand";
 
 import "@/styles.css";
 
@@ -62,8 +63,8 @@ export async function generateMetadata({
     twitter: { card: "summary_large_image", title, description },
     robots: { index: true, follow: true },
     icons: {
-      icon: [{ url: "/brand/rycode-favicon.png", type: "image/png", sizes: "512x512" }],
-      apple: "/brand/rycode-favicon.png",
+      icon: [{ url: BRAND_ICON_SRC, type: "image/png", sizes: "512x512" }],
+      apple: [{ url: BRAND_APPLE_ICON_SRC, type: "image/png", sizes: "180x180" }],
     },
   };
 }
@@ -81,6 +82,13 @@ export default async function LocaleLayout({
   return (
     <html lang={locale} dir={localeDirection(locale)} suppressHydrationWarning>
       <head>
+        <link
+          rel="preload"
+          href="/fonts/iranyekan/iranyekan.ttf"
+          as="font"
+          type="font/ttf"
+          crossOrigin="anonymous"
+        />
         <script
           dangerouslySetInnerHTML={{
             __html:
