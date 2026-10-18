@@ -1,181 +1,75 @@
 "use client";
-import { BrandText } from "@/components/site/brand-text";
 
+import Image from "next/image";
+import { ArrowUpRight } from "lucide-react";
+import { useRef } from "react";
+import { motion, useReducedMotion, useScroll, useTransform, type MotionStyle } from "motion/react";
+import { BrandText } from "@/components/site/brand-text";
+import { getCatalogEntries, getCatalogVisual, type CatalogEntry } from "@/content/catalog";
 import { useReferenceLocale } from "./reference-locale";
-import { useEffect, useRef, useState } from "react";
-import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
-const screens = [
-  {
-    id: "meet",
-    label: "Your website and app",
-    file: "showcase-people.webp",
-    alt: "Concept interface preview",
-  },
-  {
-    id: "events",
-    label: "Connected systems",
-    file: "showcase-events.png",
-    alt: "Concept interface preview",
-  },
-  {
-    id: "activity",
-    label: "Search and content",
-    file: "showcase-activity.png",
-    alt: "Concept interface preview",
-  },
-  {
-    id: "messages",
-    label: "Support and development",
-    file: "showcase-messages.png",
-    alt: "Concept interface preview",
-  },
-];
-function ShowcaseScreen({ screen }: { screen: (typeof screens)[number] }) {
+import "./project-studies.css";
+
+const categories: Record<string, { fa: string; en: string }> = {
+  "dealer-ordering-concept": { fa: "نرم‌افزار اختصاصی", en: "Custom software" },
+  "ecommerce-redesign-concept": { fa: "فروشگاه اینترنتی", en: "Ecommerce" },
+  "after-sales-concept": { fa: "خدمات پس از فروش", en: "After-sales service" },
+};
+
+function ProjectStudy({ project }: { project: CatalogEntry }) {
+  const { locale, href, text } = useReferenceLocale();
   const frameRef = useRef<HTMLElement>(null);
   const reduceMotion = useReducedMotion();
+  // Measure a stable wrapper, never the transformed card. The reference tilts
+  // on both entry and exit; the local clone only implemented the first half.
   const { scrollYProgress } = useScroll({ target: frameRef, offset: ["start end", "end start"] });
-  const scale = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0.7, 1, 1, 0.7]);
-  const opacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0.7, 1, 1, 0.7]);
+  const rotation = useTransform(scrollYProgress, [0, .5, 1], [-1, 0, 1]);
+  const edge = useTransform(scrollYProgress, [0, .5, 1], [1, 0, 1]);
+  const visual = getCatalogVisual(project);
+  if (!visual) return null;
+  const titleId = `study-${project.slug}-title`;
+  const summaryId = `study-${project.slug}-summary`;
+  const style = {
+    "--case-rotation": reduceMotion ? 0 : rotation,
+    "--case-edge": reduceMotion ? 0 : edge,
+  } as MotionStyle;
+
   return (
-    <BrandText><motion.figure
-      ref={frameRef}
-      id={`showcase-${screen.id}`}
-      className="showcase-screen"
-      aria-label={screen.label}
-      {...(reduceMotion ? {} : { style: { scale, opacity } })}
-    >
-      {/* The original assets include the device frame and the complete app interface. */}
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src={`/coorda-template/${screen.file}`}
-        width={280}
-        height={565}
-        alt={screen.alt}
-        loading="lazy"
-        draggable={false}
-      />
-    </motion.figure></BrandText>
+    <article ref={frameRef} className="project-study-item" id={`study-${project.slug}`}>
+      <motion.div className="project-study-motion" style={style}>
+        <a className="project-study-card" href={href(`/projects/${project.slug}`)} aria-labelledby={titleId} aria-describedby={summaryId}>
+          <Image className="project-study-image" src={visual.src} alt={visual.alt[locale]} fill sizes="(max-width: 809px) calc(100vw - 40px), (max-width: 1259px) calc(100vw - 60px), 1200px" />
+          <div className="project-study-content">
+            <span className="project-study-category">{categories[project.slug]?.[locale] ?? project.eyebrow[locale]}</span>
+            <h3 id={titleId}>{project.title[locale]}</h3>
+            <p id={summaryId}>{project.summary[locale]}</p>
+          </div>
+          <span className="project-study-arrow" aria-hidden="true"><ArrowUpRight size={20} strokeWidth={1.7} /></span>
+        </a>
+      </motion.div>
+      {project.conceptual && <span className="sr-only">{text("مطالعهٔ مفهومی، نه پروژهٔ یک مشتری واقعی", "Concept study, not a real client project")}</span>}
+    </article>
   );
 }
+
 export default function AppShowcase() {
-  const { copyText, href } = useReferenceLocale();
-  const [active, setActive] = useState(0);
-  const sectionRef = useRef<HTMLElement>(null);
-  const buttonRefs = useRef<(HTMLButtonElement | null)[]>([]);
-  const reduceMotion = useReducedMotion();
-  useEffect(() => {
-    const frames = sectionRef.current?.querySelectorAll<HTMLElement>(".showcase-screen");
-    if (!frames) return;
-    const visibleFrames = new Set<HTMLElement>();
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) visibleFrames.add(entry.target as HTMLElement);
-          else visibleFrames.delete(entry.target as HTMLElement);
-        });
-        // Prefer the frame nearest the middle of the viewport when two are visible.
-        const closest = [...visibleFrames].sort((a, b) => {
-          const center = window.innerHeight / 2;
-          const ar = a.getBoundingClientRect();
-          const br = b.getBoundingClientRect();
-          return (
-            Math.abs(ar.top + ar.height / 2 - center) - Math.abs(br.top + br.height / 2 - center)
-          );
-        })[0]!;
-        if (closest)
-          setActive(screens.findIndex((screen) => closest.id === `showcase-${screen.id}`));
-      },
-      { rootMargin: "-35% 0px -35% 0px", threshold: 0 },
-    );
-    frames.forEach((frame) => observer.observe(frame));
-    return () => observer.disconnect();
-  }, []);
-  const select = (index: number, focus = false) => {
-    const frame = sectionRef.current?.querySelector<HTMLElement>(`#showcase-${screens[index]!.id}`);
-    if (!frame) return;
-    setActive(index);
-    if (focus) buttonRefs.current[index]!?.focus({ preventScroll: true });
-    // offsetTop uses the unscaled layout, so scroll animations don't move the destination.
-    const column = frame.parentElement!;
-    const top = column.getBoundingClientRect().top + window.scrollY + frame.offsetTop - 96;
-    window.scrollTo({ top, behavior: reduceMotion ? "instant" : "smooth" });
-  };
+  const { locale, href, text } = useReferenceLocale();
+  const projects = getCatalogEntries("projects");
   return (
-    <BrandText><section
-      ref={sectionRef}
-      id="app-showcase"
-      className="app-showcase"
-      aria-labelledby="showcase-title"
-    >
-      <div className="showcase-container">
-        <div className="showcase-copy">
-          <div className="showcase-sticky">
-            <div className="showcase-heading">
-              <motion.h2
-                id="showcase-title"
-                initial={reduceMotion ? false : { opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.65 }}
-              >
-                {copyText("Your product,")}
-                <br />
-                <mark>{copyText("built around")}</mark>
-                {copyText(" the way")}
-                <br />
-                {copyText("you work")}
-              </motion.h2>
-              <nav className="showcase-navigation" aria-label="Service areas">
-                {copyText(
-                  screens.map((screen, index) => (
-                    <button
-                      key={screen.id}
-                      ref={(element) => {
-                        buttonRefs.current[index] = element;
-                      }}
-                      type="button"
-                      aria-controls={`showcase-${screen.id}`}
-                      {...(active === index ? { "aria-current": "step" } : {})}
-                      onClick={() => select(index)}
-                      onKeyDown={(event) => {
-                        let next: number | undefined;
-                        if (event.key === "ArrowDown" || event.key === "ArrowRight")
-                          next = (index + 1) % screens.length;
-                        if (event.key === "ArrowUp" || event.key === "ArrowLeft")
-                          next = (index + screens.length - 1) % screens.length;
-                        if (event.key === "Home") next = 0;
-                        if (event.key === "End") next = screens.length - 1;
-                        if (next !== undefined) {
-                          event.preventDefault();
-                          select(next, true);
-                        }
-                      }}
-                    >
-                      {copyText(screen.label)}
-                    </button>
-                  )),
-                )}
-              </nav>
-            </div>
-            <div className="showcase-cta">
-              <p>
-                {copyText("Websites, software and apps.")}
-                <br />
-                {copyText("Connected into a useful product.")}
-              </p>
-              <a href={href("/projects")} className="hero-cta">
-                <span className="hero-cta-label">{copyText("Project studies")}</span>
-                <span className="hero-cta-label hero-cta-label-copy" aria-hidden="true">
-                  {copyText("Project studies")}
-                </span>
-              </a>
-            </div>
+    <BrandText>
+      <section id="app-showcase" className="project-studies" dir={locale === "fa" ? "rtl" : "ltr"} aria-labelledby="showcase-title">
+        <div className="project-studies-container">
+          <header className="project-studies-heading">
+            <span className="project-studies-eyebrow">{text("نمونه‌ها و مطالعات", "Work & studies")}</span>
+            <h2 id="showcase-title">{text("از یک نیاز واقعی", "From a real need")}<br />{text("تا یک ", "to a ")}<span>{text("محصول کاربردی", "useful product")}</span></h2>
+            <p>{text("از سفارش‌گیری و فروش آنلاین تا خدمات پس از فروش؛ ببین برای هر نیاز، چه راهکاری می‌شه ساخت", "From ordering and online sales to after-sales service. Explore how a business need can become a useful product.")}</p>
+            {projects.length > 0 && projects.every(project => project.conceptual) && <small>{text("این نمونه‌ها، مطالعات مفهومی‌اند؛ نه پروژه یا نتیجهٔ منتسب به مشتری واقعی", "These are concept studies, not claims about real clients or delivered results")}</small>}
+          </header>
+          <div className="project-studies-list">
+            {projects.map(project => <ProjectStudy key={project.slug} project={project} />)}
           </div>
+          <a href={href("/projects")} className="project-studies-all">{text("همهٔ نمونه‌ها و مطالعات", "All work & studies")}<ArrowUpRight size={18} aria-hidden="true" /></a>
         </div>
-        <div className="showcase-visuals">
-          {copyText(screens.map((screen) => <ShowcaseScreen key={screen.id} screen={screen} />))}
-        </div>
-      </div>
-    </section></BrandText>
+      </section>
+    </BrandText>
   );
 }

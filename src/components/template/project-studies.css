@@ -1,0 +1,60 @@
+/* ImpactFlow's full-bleed perspective studies, using RYCODE's own content. */
+.coorda-reference .project-studies { padding: 104px 30px 96px; background: #fff; color: #1a1a1a; scroll-margin-top: 88px; }
+.coorda-reference .project-studies-container { width: 100%; max-width: 1200px; margin-inline: auto; }
+.coorda-reference .project-studies-heading { display: flex; flex-direction: column; align-items: center; gap: 18px; margin-bottom: 48px; text-align: center; }
+.coorda-reference .project-studies-eyebrow { display: inline-flex; align-items: center; gap: 8px; color: #286ca8; font-size: 13px; font-weight: 500; }
+.coorda-reference .project-studies-eyebrow::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: #66c0ff; }
+.coorda-reference .project-studies-heading h2 { margin: 0; max-width: 780px; font-size: clamp(30px, 3.5vw, 46px); font-weight: 500; line-height: 1.5; letter-spacing: -.025em; text-wrap: balance; }
+.coorda-reference .project-studies-heading h2 > span { color: #286ca8; }
+.coorda-reference .project-studies-heading > p { max-width: 650px; margin: 0; color: #666; font-size: 15px; line-height: 1.9; text-wrap: pretty; }
+.coorda-reference .project-studies-heading small { max-width: 650px; color: #707070; font-size: 11px; line-height: 1.8; }
+.coorda-reference .project-studies-list { display: flex; flex-direction: column; gap: 20px; }
+.coorda-reference .project-study-item { min-width: 0; scroll-margin-top: 88px; }
+.coorda-reference .project-study-motion {
+  --case-tilt: 50deg;
+  --case-shrink: .2;
+  transform: perspective(2000px) scale(calc(1 - var(--case-edge, 0) * var(--case-shrink))) rotateX(calc(var(--case-rotation, 0) * var(--case-tilt)));
+  transform-origin: center;
+}
+.coorda-reference .project-study-card { position: relative; display: flex; align-items: flex-end; isolation: isolate; width: 100%; aspect-ratio: 2 / 1; border-radius: 24px; overflow: clip; background: #102c3b; color: #fff; text-decoration: none; }
+.coorda-reference .project-study-card::after { content: ""; position: absolute; z-index: 0; inset: 0; pointer-events: none; background: linear-gradient(180deg, transparent 28%, #08151d38 52%, #08151de8 100%); }
+.coorda-reference .project-study-image { object-fit: cover; object-position: center; transition: transform 600ms cubic-bezier(.22, 1, .36, 1); }
+.coorda-reference .project-study-content { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: flex-start; gap: 10px; width: 100%; padding: 36px 40px; padding-inline-end: 104px; }
+.coorda-reference .project-study-category { padding: 5px 12px; border: 1px solid #ffffff80; border-radius: 99px; background: #fff; color: #1a1a1a; font-size: 11px; line-height: 1.7; font-weight: 500; }
+.coorda-reference .project-study-content h3 { max-width: 900px; margin: 0; color: #fff; font-size: clamp(23px, 2.6vw, 34px); font-weight: 500; line-height: 1.5; text-wrap: balance; }
+.coorda-reference .project-study-content p { max-width: 800px; margin: 0; color: #ffffffde; font-size: 15px; font-weight: 400; line-height: 1.85; text-wrap: pretty; }
+.coorda-reference .project-study-arrow { position: absolute; z-index: 1; inset-inline-end: 40px; bottom: 40px; display: grid; place-items: center; width: 44px; height: 44px; border: 1px solid #ffffff66; border-radius: 50%; background: #ffffff14; color: #fff; transition: background-color 280ms ease, color 280ms ease; }
+.coorda-reference .project-studies[dir="rtl"] :is(.project-study-arrow, .project-studies-all) svg { scale: -1 1; }
+.coorda-reference .project-study-card:is(:hover, :focus-visible) .project-study-image { transform: scale(1.025); }
+.coorda-reference .project-study-card:is(:hover, :focus-visible) .project-study-arrow { background: #66c0ff; border-color: #66c0ff; color: #102c3b; }
+.coorda-reference .project-study-card:focus-visible { outline: 3px solid #286ca8; outline-offset: 5px; }
+.coorda-reference .project-studies-all { display: flex; align-items: center; justify-content: center; gap: 14px; width: fit-content; min-height: 46px; margin: 40px auto 0; padding: 10px 20px; border: 1px solid #d2e8f7; border-radius: 99px; background: #fff; color: #286ca8; font-size: 13px; font-weight: 500; line-height: 1.8; text-decoration: none; transition: background-color 280ms ease, border-color 280ms ease; }
+.coorda-reference .project-studies-all:is(:hover, :focus-visible) { background: #f1f8fd; border-color: #66c0ff; }
+.coorda-reference .project-studies-all:focus-visible { outline: 2px solid #286ca8; outline-offset: 4px; }
+@media (max-width: 1199px) and (min-width: 810px) {
+  .coorda-reference .project-studies { padding-block: 88px; }
+  .coorda-reference .project-study-content { padding: 28px; padding-inline-end: 92px; }
+  .coorda-reference .project-study-content p { font-size: 13px; }
+  .coorda-reference .project-study-arrow { inset-inline-end: 28px; bottom: 28px; }
+}
+@media (max-width: 809px) {
+  .coorda-reference .project-studies { padding: 72px 20px; }
+  .coorda-reference .project-studies-heading { gap: 14px; margin-bottom: 32px; }
+  .coorda-reference .project-studies-heading h2 { font-size: clamp(27px, 6.5vw, 36px); }
+  .coorda-reference .project-studies-heading > p { font-size: 13px; }
+  .coorda-reference .project-studies-heading small { font-size: 10px; }
+  .coorda-reference .project-study-motion { --case-tilt: 30deg; --case-shrink: .1; }
+  .coorda-reference .project-study-card { height: 450px; aspect-ratio: auto; border-radius: 20px; }
+  .coorda-reference .project-study-card::after { background: linear-gradient(180deg, transparent 15%, #08151d22 35%, #08151df5 100%); }
+  .coorda-reference .project-study-image { object-position: 62% center; }
+  .coorda-reference .project-study-content { gap: 10px; padding: 22px; padding-bottom: 76px; }
+  .coorda-reference .project-study-content h3 { font-size: 23px; }
+  .coorda-reference .project-study-content p { font-size: 12px; line-height: 1.9; }
+  .coorda-reference .project-study-arrow { inset-inline-end: 22px; bottom: 22px; width: 36px; height: 36px; }
+  .coorda-reference .project-studies-all { margin-top: 28px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .coorda-reference .project-study-motion { transform: none; }
+  .coorda-reference .project-study-image, .coorda-reference .project-study-arrow, .coorda-reference .project-studies-all { transition: none; }
+  .coorda-reference .project-study-card:is(:hover, :focus-visible) .project-study-image { transform: none; }
+}

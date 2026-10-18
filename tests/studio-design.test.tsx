@@ -79,12 +79,13 @@ describe("Coorda-inspired public experience with RYCODE content", () => {
     expect(screen.getByRole("heading",{level:1}).getAttribute("aria-label")).toBe("ایده‌ها، از دل سکوت به واقعیت می‌رسند");
     expect(container.querySelector(".hero-video")?.getAttribute("src")).toBe("/videos/rycode-hero.mp4");
     expect([...container.querySelectorAll(".coorda-home > section")].map(section => section.classList[0])).toEqual([
-      "hero", "features", "app-showcase", "impact", "community-cta", "desktop-app-section", "native-features", "faq-section", "insights-section", "moments-section"
+      "hero", "features", "project-studies", "impact", "community-cta", "desktop-app-section", "native-features", "faq-section", "insights-section", "moments-section"
     ]);
     expect(container.querySelectorAll(".hero-brands-group")).toHaveLength(0);
     expect(container.querySelectorAll(".features-ticker-group .feature-card")).toHaveLength(serviceCards.length * 2);
     expect(container.querySelectorAll(".features-slider .feature-card")).toHaveLength(serviceCards.length);
-    expect(container.querySelectorAll(".showcase-screen")).toHaveLength(4);
+    expect(container.querySelectorAll(".showcase-screen")).toHaveLength(0);
+    expect(container.querySelectorAll(".project-study-card")).toHaveLength(getCatalogEntries("projects").length);
     expect(container.querySelectorAll(".impact-topic-group")).toHaveLength(4);
     expect(container.querySelectorAll(".native-card")).toHaveLength(4);
     expect(container.querySelectorAll(".pricing-card")).toHaveLength(0);
