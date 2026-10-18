@@ -265,10 +265,7 @@ function DesktopNavItem({
           aria-hidden={!open}
           inert={!open ? true : undefined}
           data-state={open ? "open" : "closed"}
-          className={cn(
-            "rycode-desktop-submenu absolute right-0 top-full z-50 max-w-[calc(100vw-3rem)] pt-2",
-            servicesMenu ? "w-[400px]" : groups === 1 ? "w-72" : groups === 2 ? "w-[520px]" : "w-[860px]",
-          )}
+          className="rycode-desktop-submenu absolute right-0 top-full z-50 w-max max-w-[calc(100vw-3rem)] pt-2"
           dir={locale === "fa" ? "rtl" : "ltr"}
         >
           {servicesMenu ? <ServicesMenu locale={locale} pathname={pathname} onClose={onClose} /> : <div

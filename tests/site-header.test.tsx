@@ -138,10 +138,18 @@ describe("site navigation", () => {
       expect(within(header).getByRole("link", {name: locale === "fa" ? "نمونه‌کارها" : "Work"}).getAttribute("href")).toBe("/projects");
       fireEvent.click(screen.getByRole("button", {name: locale === "fa" ? "زیرمنوی خدمات" : "Services submenu"}));
       const panel = screen.getByRole("region", {name: locale === "fa" ? "زیرمنوی خدمات" : "Services submenu"});
+      expect(panel.classList.contains("w-max")).toBe(true);
+      expect(panel.className).not.toMatch(/w-\[\d+px\]|\bw-72\b/);
       expect(within(panel).getAllByRole("link")).toHaveLength(7);
       expect(panel.querySelector("img, aside, h3, p, .rycode-services-menu-related")).toBeNull();
       expect(panel.querySelectorAll(".rycode-submenu-icon svg")).toHaveLength(7);
       expect(panel.querySelectorAll('.rycode-submenu-arrow[aria-hidden="true"]')).toHaveLength(7);
+      for (const link of panel.querySelectorAll(".rycode-submenu-link")) {
+        expect(link.children).toHaveLength(3);
+        ["rycode-submenu-icon", "rycode-submenu-label", "rycode-submenu-arrow"].forEach((className, index) => {
+          expect(link.children[index]?.classList.contains(className)).toBe(true);
+        });
+      }
       fireEvent.click(screen.getByRole("button", {name: locale === "fa" ? "باز کردن منو" : "Open menu"}));
       const dialog = screen.getByRole("dialog");
       expect(within(dialog).getByRole("link", {name: locale === "fa" ? /نمونه‌کارها/ : /Work/}).getAttribute("href")).toBe("/projects");
@@ -267,7 +275,7 @@ describe("site navigation", () => {
     const panel = screen.getByRole("region", { name: "About us submenu" });
     expect(panel.getAttribute("dir")).toBe("ltr");
     expect(panel.className).toContain("right-0");
-    expect(panel.className).toContain("w-72");
+    expect(panel.classList.contains("w-max")).toBe(true);
     fireEvent.click(within(panel).getByRole("link", { name: "FAQ" }));
     expect(trigger.getAttribute("aria-expanded")).toBe("false");
   });
